@@ -1,11 +1,21 @@
 {
   "name": "ClearTax Global E-Invoicing",
-  "initialRoute": "e-invoicing-ksa/overview",
+  "initialRoute": "introduction",
   "navigation": {
     "tabs": [
       {
         "tab": "Documentation",
         "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "Introduction",
+                "path": "introduction"
+              }
+            ]
+          },
           {
             "group": "E-Invoicing KSA",
             "icon": "file-text",
