@@ -1,123 +1,44 @@
 {
-  "name": "Clear",
-  "colors": {
-    "light": {
-      "brand": "#3B82F6"
-    },
-    "dark": {
-      "brand": "#87B1F6"
-    }
-  },
+  "name": "ClearTax Global E-Invoicing",
+  "initialRoute": "e-invoicing-ksa/overview",
   "navigation": {
     "tabs": [
       {
         "tab": "Documentation",
-        "icon": "book",
         "groups": [
           {
-            "group": "Getting Started",
-            "icon": "rocket",
+            "group": "E-Invoicing KSA",
+            "icon": "file-text",
             "pages": [
               {
-                "title": "Introduction",
-                "path": "introduction",
-                "icon": "home"
+                "title": "Overview",
+                "path": "e-invoicing-ksa/overview"
               },
               {
-                "title": "Quickstart",
-                "path": "quickstart",
-                "icon": "zap"
+                "title": "Code Lists",
+                "path": "e-invoicing-ksa/api-reference/code-lists"
               }
             ]
           },
           {
-            "group": "Core Concepts",
-            "icon": "layers",
+            "group": "E-Invoicing Oman",
+            "icon": "file-text",
             "pages": [
               {
-                "title": "Features",
-                "path": "features",
-                "icon": "star"
+                "title": "Overview",
+                "path": "e-invoicing-oman/overview"
               }
             ]
           },
           {
-            "group": "Advanced",
-            "icon": "settings",
+            "group": "E-Invoicing Qatar",
+            "icon": "file-text",
             "pages": [
               {
-                "title": "Integrations",
-                "path": "integrations",
-                "icon": "plug"
+                "title": "Overview",
+                "path": "e-invoicing-qatar/overview"
               }
             ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "icon": "code",
-        "groups": [
-          {
-            "group": "Endpoints",
-            "icon": "terminal",
-            "openapi": "api-reference/openapi.yaml",
-            "pages": []
-          }
-        ]
-      },
-      {
-        "tab": "Help Center",
-        "icon": "help-circle",
-        "pages": [
-          {
-            "title": "Help Center",
-            "path": "help-center",
-            "icon": "home"
-          },
-          {
-            "group": "FAQs",
-            "icon": "help-circle",
-            "expandable": false,
-            "pages": [
-              {
-                "title": "Getting Started",
-                "path": "help-center/faq/getting-started"
-              }
-            ]
-          },
-          {
-            "group": "Troubleshooting",
-            "icon": "alert-circle",
-            "expandable": false,
-            "pages": [
-              {
-                "title": "Cannot Login",
-                "path": "help-center/troubleshooting/cannot-login"
-              }
-            ]
-          },
-          {
-            "group": "Guides",
-            "icon": "book-open",
-            "expandable": false,
-            "pages": [
-              {
-                "title": "Organize Projects",
-                "path": "help-center/guides/organize-projects"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Changelog",
-        "icon": "clock",
-        "pages": [
-          {
-            "title": "Release History",
-            "path": "changelog",
-            "icon": "history"
           }
         ]
       }

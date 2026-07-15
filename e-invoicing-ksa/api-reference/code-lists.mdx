@@ -1,0 +1,122 @@
+---
+title: "Code Lists"
+description: "VAT category codes, unit of measure codes, payment means, and party identification codes for ZATCA e-invoicing"
+---
+
+## Unit of Measure
+
+Codes for Units of Measure used in international trade — Revision 16 (UNECE/CEFACT Trade Facilitation Recommendation No.20).
+
+Please refer to Annexes I, II, and III in the UNECE Recommendation No.20 document.
+
+<Callout kind="info">
+The full list of UOMs supported by ClearTax for e-invoice generation is inline with UN/ECE standard codes for Units of Measure used in international trade. Contact support if you need a UOM code not listed in the standard set.
+</Callout>
+
+## VAT Categories Code
+
+A subset of values from [UN/CEFACT code list 5305, D.16B](https://www.unece.org/fileadmin/DAM/trade/untdid/d16b/tred/tred5305.htm) shall be used.
+
+The valid values for KSA are listed in the table below:
+
+| Code | Description | Tax Exemption Reason Code | Tax Exemption Reason (EN) | Tax Exemption Reason (AR) |
+|------|-------------|--------------------------|---------------------------|---------------------------|
+| S | Standard rate | NA | NA | NA |
+| E | Exempt from Tax | VATEX-SA-29 | Financial services mentioned in Article 29 of the VAT Regulations. | الخدمات المالية |
+| E | Exempt from Tax | VATEX-SA-29-7 | Life insurance services mentioned in Article 29 of the VAT Regulations. | عقد تأمين على الحياة |
+| E | Exempt from Tax | VATEX-SA-30 | Real estate transactions mentioned in Article 30 of the VAT Regulations. | التوريدات العقارية المعفاة من الضريبة |
+| Z | Zero rated goods | VATEX-SA-32 | Export of goods. | صادرات السلع من المملكة |
+| Z | Zero rated goods | VATEX-SA-33 | Export of services. | صادرات الخدمات من المملكة |
+| Z | Zero rated goods | VATEX-SA-34-1 | The international transport of Goods. | النقل الدولي للسلع |
+| Z | Zero rated goods | VATEX-SA-34-2 | International transport of passengers. | النقل الدولي للركاب |
+| Z | Zero rated goods | VATEX-SA-34-3 | Services directly connected and incidental to a Supply of international passenger transport. | الخدمات المرتبطة مباشرة أو عرضياً بتوريد النقل الدولي للركاب |
+| Z | Zero rated goods | VATEX-SA-34-4 | Supply of a qualifying means of transport. | توريد وسائل النقل المؤهلة |
+| Z | Zero rated goods | VATEX-SA-34-5 | Any services relating to Goods or passenger transportation, as defined in article 25 of these Regulations. | الخدمات ذات الصلة بنقل السلع أو الركاب |
+| Z | Zero rated goods | VATEX-SA-35 | Medicines and medical equipment. | الأدوية والمعدات الطبية |
+| Z | Zero rated goods | VATEX-SA-36 | Qualifying metals. | المعادن المؤهلة |
+| Z | Zero rated goods | VATEX-SA-EDU | Private education to citizen. | الخدمات التعليمية الخاصة للمواطنين |
+| Z | Zero rated goods | VATEX-SA-HEA | Private healthcare to citizen. | الخدمات الصحية الخاصة للمواطنين |
+| Z | Zero rated goods | VATEX-SA-MLTRY | Supply of qualified military goods. | توريد السلع العسكرية المؤهلة |
+| Z | Zero rated goods | VATEX-SA-ROYALDECREE | Supply on which the Government bears the VAT. | العرض الذي تتحمل الحكومة ضريبة القيمة المضافة عليه |
+| Z | Zero rated goods | VATEX-SA-32(bis) | Supply under Customs Suspension Arrangement. | التوريد بموجب ترتيب تعليق الجمارك |
+| O | Not subject to VAT | VATEX-SA-OOS | Free text reason provided by the taxpayer on a case-by-case basis. | السبب يتم تزويده من قبل المكلف على أساس كل حالة على حدة |
+
+## Payment Means Type Code
+
+A subset of values from [UN/CEFACT code list 4461, D.16B](https://www.unece.org/fileadmin/DAM/trade/untdid/d16b/tred/tred4461.htm) shall be used for the payment means code.
+
+| Code | Description |
+|------|-------------|
+| 10 | Cash |
+| 30 | Credit transfer |
+| 42 | Payment to bank account |
+| 48 | Bank card |
+| 1 | Not defined |
+
+## Reason for Allowances in an Invoice
+
+A subset of values from [UNTDID 5189 Code List](https://unece.org/fileadmin/DAM/trade/untdid/d16b/tred/tred5189.htm) shall be used.
+
+| Code | Description |
+|------|-------------|
+| 41 | Bonus for works ahead of schedule |
+| 42 | Other bonus |
+| 60 | Manufacturer's consumer discount |
+| 62 | Due to military status |
+| 63 | Due to work accident |
+| 64 | Special agreement |
+| 65 | Production error discount |
+| 66 | New outlet discount |
+| 67 | Sample discount |
+| 68 | End-of-range discount |
+| 70 | Incoterm discount |
+| 71 | Point of sales threshold allowance |
+| 88 | Material surcharge/deduction |
+| 95 | Discount |
+| 100 | Special rebate |
+| 102 | Fixed long term |
+| 103 | Temporary |
+| 104 | Standard |
+| 105 | Yearly turnover |
+
+## Reason for Charges in an Invoice
+
+A subset of values from [UNTDID 7161 Code List](https://unece.org/fileadmin/DAM/trade/untdid/d16b/tred/tred7161.htm) shall be used.
+
+| Code | Description |
+|------|-------------|
+| AA | Advertising |
+| AAA | Telecommunication |
+| ABK | Miscellaneous |
+| ABL | Additional packaging |
+| ADR | Other services |
+| ADT | Pick-up |
+| FC | Freight service |
+| FI | Financing |
+| LA | Labelling |
+| PC | Packing |
+
+## Seller Party Identification Code
+
+| Code | Description |
+|------|-------------|
+| CRN | Commercial registration number |
+| MOM | Momra license |
+| MLS | MLSD license |
+| SAG | Sagia license |
+| OTH | Other ID |
+
+## Buyer Party Identification Code
+
+| Code | Description |
+|------|-------------|
+| NAT | National ID |
+| TIN | Tax Identification Number |
+| IQA | Iqama Number |
+| PAS | Passport ID |
+| CRN | Commercial registration number |
+| MOM | Momra license |
+| MLS | MLSD license |
+| SAG | Sagia license |
+| GCC | GCC ID |
+| OTH | Other ID |
