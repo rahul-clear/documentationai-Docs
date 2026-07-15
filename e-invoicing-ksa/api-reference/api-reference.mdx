@@ -1,0 +1,58 @@
+---
+title: "E-Invoicing KSA API Reference"
+description: "API URLs, hostnames, IPs, ports, and SSL/TLS certificate details for ZATCA e-invoicing integration"
+---
+
+## 1. API URLs to be used/whitelisted
+
+For API requests, use the below information.
+
+### 1.1 Sandbox Environment (QA, Testing)
+
+| API Type | Hostname | IP | Port |
+|----------|----------|----|------|
+| API | https://api-sandbox.cleartax.com | 193.122.66.8, 84.8.110.211 | 443 |
+
+Please whitelist both the IPs on sandbox if it is required in your network environment or ERP.
+
+**Base URL**:
+
+```
+https://api-sandbox.cleartax.com/middle-east/ksa/einvoicing
+```
+
+<Callout kind="info">
+Please note that the above URL is for API requests only. The corresponding frontend web application URL where you can log in and verify the data is [https://app-sandbox.cleartax.com/middle-east/ksa/einvoicing/](https://app-sandbox.cleartax.com/middle-east/ksa/einvoicing/)
+</Callout>
+
+### 1.2 Production Environment (Prod)
+
+| API Type | Hostname | IP | Port |
+|----------|----------|----|------|
+| API | https://api.cleartax.com | 150.230.55.2 | 443 |
+
+**Base URL**:
+
+```
+https://api.cleartax.com/middle-east/ksa/einvoicing
+```
+
+<Callout kind="info">
+Please note that the above URL is for API requests only. The corresponding frontend web application URL where you can log in and verify the data is [https://app.cleartax.com/middle-east/ksa/einvoicing/](https://app.cleartax.com/middle-east/ksa/einvoicing/)
+</Callout>
+
+## 2. SSL/TLS Certificate to be downloaded and installed
+
+<Callout kind="info">
+**Note**: This is a multidomain SAN (Subject Alternative Name) certificate, utilized across all products within the Clear ecosystem and is common for both sandbox and production environments.
+</Callout>
+
+| For Hostname | Applicable Up to |
+|--------------|-------------------|
+| *.cleartax.com | 24th February 2027 |
+| Intermediate | 3rd May 2031 |
+| Root | 1st Jan 2031 |
+
+**TLS Versions Supported:** TLS 1.2
+
+For detailed information on how to download the host, intermediate, and root certificates, refer to the "How to get SSL Certificate" guide, or download the certificates directly from your ClearTax account team.

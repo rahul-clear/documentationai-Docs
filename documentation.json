@@ -25,6 +25,18 @@
                 "path": "e-invoicing-ksa/overview"
               },
               {
+                "title": "Introduction to E-Invoicing KSA API",
+                "path": "e-invoicing-ksa/introduction-to-e-invoicing-ksa-api"
+              },
+              {
+                "title": "Learn E-Invoicing KSA API Basics",
+                "path": "e-invoicing-ksa/learn-e-invoicing-ksa-api-basics"
+              },
+              {
+                "title": "API Reference",
+                "path": "e-invoicing-ksa/api-reference/api-reference"
+              },
+              {
                 "title": "Code Lists",
                 "path": "e-invoicing-ksa/api-reference/code-lists"
               }
