@@ -1,0 +1,137 @@
+---
+title: Changelog
+description: Version history of Clear with details on recent updates, new features, and fixes.
+---
+
+## Recent Updates
+
+Stay informed about the latest improvements to Clear. Check this page regularly for new releases.
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Added real-time collaboration support for shared documents.
+- Introduced webhook endpoints for custom event notifications.
+
+## Improvements
+
+- Enhanced dashboard performance with optimized data loading.
+
+## Bug Fixes
+
+- Fixed authentication redirect issues after token refresh.
+- Resolved API rate limiting edge cases during high traffic.
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Launched dark mode with automatic system preference detection.
+- Added advanced search filters for project documentation.
+
+## Improvements
+
+- Streamlined onboarding flow with interactive tutorials.
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["breaking", "feature"]}>
+
+## Initial Release
+
+- Core documentation management system.
+- User authentication and role-based access control.
+- Basic API for programmatic access.
+
+## Breaking Changes
+
+- Updated default API base URL to `https://api.example.com/v1`.
+
+</Update>
+
+## Upgrading to the Latest Version
+
+Follow these steps to upgrade Clear smoothly.
+
+<Steps>
+  <Step title="Backup Your Data" icon="database">
+    Export your current configuration and documents to avoid data loss.
+
+    <Callout kind="tip">
+      Use the export API endpoint: `https://api.example.com/v1/export`.
+    </Callout>
+  </Step>
+  <Step title="Update Package" icon="download">
+    <CodeGroup tabs="npm,yarn">
+      ````bash
+      npm install clear@latest
+      ````
+
+      ````bash
+      yarn add clear@latest
+      ````
+    </CodeGroup>
+  </Step>
+  <Step title="Run Migrations" icon="settings">
+    Execute database migrations if applicable.
+
+    ````bash
+    clear migrate
+    ````
+  </Step>
+  <Step title="Restart Service" icon="refresh-cw">
+    Restart your Clear instance and verify functionality.
+  </Step>
+</Steps>
+
+## Upcoming Changes
+
+Track upcoming features and improvements in our roadmap.
+
+<Board title="Q4 2024 Roadmap">
+  <BoardColumn title="Planned" color="0" icon="calendar">
+    <BoardCard
+      title="AI-powered search"
+      description="Natural language queries for documents"
+      icon="search"
+      dueDate="2024-12-15"
+    />
+    <BoardCard
+      title="Version control"
+      description="Git-like history for docs"
+      icon="git-branch"
+    />
+  </BoardColumn>
+  <BoardColumn title="In Progress" color="1" icon="loader-2">
+    <BoardCard
+      title="Mobile app"
+      description="iOS and Android clients"
+      icon="smartphone"
+      author="Mobile Team"
+    />
+  </BoardColumn>
+  <BoardColumn title="Backlog" color="2" icon="package">
+    <BoardCard title="Plugin system" />
+    <BoardCard title="Advanced analytics" />
+  </BoardColumn>
+</Board>
+
+## Stay Updated
+
+<Callout kind="info">
+  Subscribe to our RSS feed or join the community Discord for instant notifications on new releases. Enable auto-updates in your settings for seamless deployments.
+</Callout>
+
+## Explore More
+
+<Columns cols={2}>
+  <Card title="Quickstart" icon="book-open" href="/quickstart">
+    Get started with Clear in minutes.
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference">
+    Full API documentation and examples.
+  </Card>
+</Columns>

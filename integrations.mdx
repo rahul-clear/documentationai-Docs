@@ -1,0 +1,140 @@
+---
+title: Integrations
+description: Connect Clear to external tools via integrations, webhooks, and APIs for seamless workflows.
+---
+
+## Overview
+
+Connect Clear to your favorite tools to automate workflows and extend functionality. Use built-in integrations for popular apps, set up webhooks for real-time events, access the REST API for custom solutions, or export data for analysis.
+
+<Callout kind="info">
+  All integrations require a valid API key from your Clear dashboard at `https://dashboard.example.com`.
+</Callout>
+
+## Popular Integrations
+
+Clear supports one-click connections to leading third-party services.
+
+<Columns cols={3}>
+  <Card title="Slack" icon="message-circle" href="https://slack.com" target="_blank">
+    Send notifications for project updates and alerts directly to your Slack channels.
+  </Card>
+  <Card title="GitHub" icon="github" href="https://github.com" target="_blank">
+    Sync repositories, automate PR reviews, and trigger builds on Clear events.
+  </Card>
+  <Card title="Zapier" icon="zap" href="https://zapier.com" target="_blank">
+    Build no-code automations connecting Clear to 5000+ apps.
+  </Card>
+  <Card title="Google Sheets" icon="file-spreadsheet" href="https://sheets.google.com" target="_blank">
+    Export reports and data logs to spreadsheets for easy sharing.
+  </Card>
+  <Card title="Airtable" icon="database" href="https://airtable.com" target="_blank">
+    Mirror Clear records in your Airtable bases for advanced querying.
+  </Card>
+  <Card title="Segment" icon="activity" href="https://segment.com" target="_blank">
+    Route event data to analytics tools via Segment.
+  </Card>
+</Columns>
+
+## Webhook Setup
+
+Webhooks enable real-time data delivery to your endpoint on Clear events like task completion or user signups.
+
+<Steps>
+  <Step title="Create Webhook" icon="plus">
+    Navigate to Settings > Webhooks in your dashboard. Click "New Webhook" and enter your endpoint URL.
+  </Step>
+  <Step title="Select Events" icon="zap">
+    Choose events such as `project.updated` or `user.created`. Test the configuration.
+  </Step>
+  <Step title="Verify Endpoint" icon="check-circle">
+    Clear sends a challenge payload. Respond with the `challenge` value in plain text to verify.
+  </Step>
+</Steps>
+
+Example incoming webhook payload:
+
+<CodeGroup tabs="JSON">
+  ```json
+  {
+    "event": "project.updated",
+    "data": {
+      "id": "proj_123",
+      "name": "Q4 Roadmap",
+      "status": "in-progress"
+    },
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+  ```
+</CodeGroup>
+
+## API Access
+
+Integrate programmatically using Clear's REST API at `https://api.example.com/v1`.
+
+<Tabs>
+  <Tab title="JavaScript" icon="code">
+    ```javascript
+    const response = await fetch('https://api.example.com/v1/projects', {
+      headers: {
+        'Authorization': `Bearer ${YOUR_API_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    const projects = await response.json();
+    console.log(projects);
+    ```
+  </Tab>
+  <Tab title="Python" icon="python">
+    ```python
+    import requests
+    headers = {
+        'Authorization': f'Bearer {YOUR_API_KEY}',
+        'Content-Type': 'application/json'
+    }
+    response = requests.get('https://api.example.com/v1/projects', headers=headers)
+    projects = response.json()
+    print(projects)
+    ```
+  </Tab>
+</Tabs>
+
+<ParamField path="projects" param-type="GET" required="true">
+  List all projects. Returns array of project objects.
+</ParamField>
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Bearer token for authentication.
+</ParamField>
+
+## Export Options
+
+Export data via CSV, JSON, or direct API for backups and migrations.
+
+<Expandable title="Advanced Webhook Filtering" default-open="false">
+  Use query parameters to filter events:
+
+  ```
+  https://your-webhook-url.com/webhook?event=project.updated&status=completed
+  ```
+
+  This delivers payloads only for completed projects.
+</Expandable>
+
+<Board title="Integration Workflow">
+  <BoardColumn title="Connect" color="0" icon="plug">
+    <BoardCard title="Slack Notifications" description="Real-time alerts" icon="bell" />
+    <BoardCard title="Zapier Zaps" description="No-code automations" icon="zap" />
+  </BoardColumn>
+  <BoardColumn title="Automate" color="1" icon="settings">
+    <BoardCard title="GitHub Actions" description="CI/CD triggers" dueDate="2024-12-31" />
+  </BoardColumn>
+  <BoardColumn title="Analyze" color="2" icon="bar-chart">
+    <BoardCard title="Google Sheets Export" createdAt="2024-12-01" />
+    <BoardCard title="Segment Events" />
+  </BoardColumn>
+</Board>
+
+<Callout kind="tip">
+  Monitor integration logs in your dashboard for troubleshooting. Contact support for custom integrations.
+</Callout>
