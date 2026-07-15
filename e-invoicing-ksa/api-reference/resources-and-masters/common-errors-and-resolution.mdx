@@ -1,0 +1,38 @@
+---
+title: "Common Errors and Resolution"
+description: "List of common E-invoice generation error messages for KSA, their cause, and resolution"
+---
+
+List of common E-invoice generation error messages, their cause, and resolutions.
+
+## Error Source - ClearTax
+
+| Error Message | Error Cause | Resolution |
+|---|---|---|
+| Supply date cannot be after the end date. Please correct the supply/end date. | The supply end date is later than the supply date. | Check the supply date & end date and modify one of those so that the dates are correct. |
+| Street name in address is mandatory for seller. Please supply the street name. | Street name is not provided in seller details. | Check the invoice details & provide seller street name details. |
+| A Device ID already exist with same VAT and EGS serial number. | EGS serial number used is already present in the system. | Check device details and use an EGS serial number that doesn't match the already existing one. |
+| Billing reference is mandatory if invoice type is Credit/Debit note. Please supply billing reference. | Previous billing reference ID is not provided. | Provide reference to the original invoice number while generating credit/debit note. |
+| Building number is mandatory for buyer if Country code is SA. Please supply building number. | Building number is not provided in invoice details. | Provide building number in buyer details. |
+| Buyer country code must be SA if invoice transaction type is other than export. | If the invoice type is not export then country code must be SA. | Check & provide the country as 'SA' if the invoice is not an export invoice. |
+| Debit and credit note must contain the reason for this invoice type issuance. Please supply issuance reason for CREDIT/DEBIT note. | Reason for issuance of credit/debit note is not provided. | Provide the reason for issuance of credit/debit note as this is required. |
+| For the given country code 'SA' the buyer postal code should be 5 digits long. Please correct postal code. | Given buyer's postal code is not 5 digits long. | Check to see if the buyer postal code is provided and is 5 digits long when the country code is SA. |
+| One of Group VAT number or buyer VAT number must be provided, both fields can not be empty. Please supply VAT Number. | VAT or group VAT is not provided. | Provide either VAT or Group VAT if the invoice is a standard invoice. |
+| If it is an export invoice, the buyer VAT registration number and the buyer group VAT registration number must not exist in the invoice. | For export invoices, Buyer VAT or Group VAT is given which is not expected. | Check and remove the buyer VAT or group VAT if it exists in the invoice details. |
+| Incorrect VAT Exemption reason code for provided VAT category code. Please correct the values. | Provided exemption reason code is incorrect for the VAT category code. | Provide an exemption reason code that is acceptable as per ZATCA. |
+| Invalid amount specified for `<field>`, please correct the amount. | Calculated amount for the mentioned field is not correct. | Check the calculations and provide the correct value. |
+| Invalid Currency Code for `<field>`, currency code must be the same as document currency code. | The currency ID doesn't match with the document currency. | Provide a currency ID in the field which matches the document currency. |
+| Line amount inclusive of VAT for line `<n>` is not correct. Please correct. | Calculation of line amount inclusive of VAT is not correct. | Check if line amount inclusive of VAT equals Invoice line net Amount + VAT line amount. |
+| Recipient VAT Number must have 15 digits. The first and the last digits must be "3". Please supply correct VATNumber. | Given recipient VAT number is not correct. | Recipient group VAT number or VAT number must have 15 digits. The first and last digits must be "3", the eleventh digit must be "1" in case of Group VAT. |
+
+## Error Source - ZATCA
+
+| Error Message | Error Cause | Resolution |
+|---|---|---|
+| VAT line amount for line is not correct. Please correct. | Calculated VAT line amount is not correct. | Check if Invoice line net amount × Invoiced item VAT rate = VAT Line Amount. |
+| Unable to execute Business Rules validation. | Some of the mandatory fields are missing in the request body, or the request body contains additional values that are not expected. | Check if all the mandatory fields are present and as per the guidelines in the request payload. |
+| Each VAT breakdown (BG-23) shall have a VAT category tax amount (BT-117). | VAT tax amount is missing for one of the category codes. | Check to see if VAT category tax amount is provided for all the relevant category codes provided in the request payload. |
+| Each VAT breakdown (BG-23) shall have a VAT category taxable amount (BT-116). | VAT taxable amount should be provided for each category code. | Check to see if VAT category taxable amount is provided for the relevant category provided in the request. |
+| Schema validation failed; XML does not comply with UBL 2.1 standards in line with ZATCA specifications. | Schema of the XML is incorrect and doesn't comply with ZATCA standards. | One or more mandatory tags is missing in the request payload. Check the XML schema from the sample and correct it. |
+| The buyer name (BT-44) must be present in the tax invoice and associated credit notes and debit notes (KSA-2, position 1 and 2). | Buyer name is not present in the tax invoice. | Provide the buyer name in the tax invoice. |
+| The VAT category tax amount (BT-117) in a VAT breakdown (BG-23) where the VAT category code (BT-118) equals "Exempt from VAT" shall equal 0 (zero). | VAT category tax amount is given as non-zero while zero is expected for exempt transactions. | When VAT category code is exempt from tax for the line item, check whether the VAT tax amount is zero. Exempt line items should have a zero tax amount. |

@@ -1,0 +1,93 @@
+---
+title: "Renew PCSID"
+description: "Renew the Production Cryptographic Stamp Identifier (PCSID) for an existing Device ID"
+---
+
+Renews PCSID for an existing Device ID.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/onboarding/renew-pcsid
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty. | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| DeviceId | String | Cannot be empty. | Mandatory. The Device ID of the EGS Unit. |
+| Otp | String | Should be a valid OTP. | Mandatory. The one-time password generated on the ZATCA portal, valid for 1 hour. |
+
+### Sample Request
+
+```json
+{
+    "DeviceId": "2de86546-2b63-48a4-a81f-2b6d492aa261",
+    "Otp": "123345"
+}
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For a successful PCSID renewal. |
+| 400 | For any kind of validation issues. |
+| 401 | If the user is not authenticated for the operation. |
+| 403 | If the user is not authorized for the operation. |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Status | String | Enum: GENERATED, FAILED | Mandatory. GENERATED on success, FAILED on validation issues. |
+| DeviceId | String | MaxLength: 36 | Mandatory. UUID identifying the device. Present on success; absent on failure. |
+| ErrorList | Array | NA | Optional. Array of [Error Details objects](/e-invoicing-ksa/api-reference/resources-and-masters/error-details-object). Empty array if no errors. |
+
+### Sample Response
+
+Success - HTTP Status Code - 200
+
+```json
+{
+    "Status": "GENERATED",
+    "DeviceId": "eb645fd8-ee2e-4bdd-82b6-b69c91c9178d",
+    "ErrorList": []
+}
+```
+
+Error - HTTP Status Code - 400
+
+```json
+{
+    "Status": "FAILED",
+    "DeviceId": "72c6ab4f-c0bd-4ccf-b857-f12efd22b41a",
+    "ErrorList": [
+        { "ErrorCode": "6003", "ErrorMessage": "First time generation of PCSID was not completed", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+### API Validations
+
+1. The `DeviceId` for which the PCSID is being renewed should already have an existing PCSID.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+2. If the auth token is valid, but the user does not have the authorization to generate device ID, then the API will return HTTP Status Code 403. The user, whose auth token is used, should have an Admin role for the particular VAT used in the request.

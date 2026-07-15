@@ -1,0 +1,134 @@
+---
+title: "Get E-Invoice PDF/A-3 with PDF API"
+description: "Convert a non-PDF/A3 invoice PDF you already have into a PDF/A-3 with embedded XML, using invoice identifiers of data already sent to Clear"
+---
+
+Get the PDF/A3 version of an E-Invoice with the XML attached by sending the non-PDF/A3 version and the invoice identifiers of the invoice data already sent to Clear earlier.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/v2/einvoices/embeddedpdf
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+<Callout kind="alert">
+Rate Limit: 150 API requests per minute
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+| branch | String | Should be a valid branch from the user account | Optional. Branch name (store name) added in the user account which maps to a VAT or Group VAT of the entity. |
+
+### Request Query Params
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| invoiceNumber | String | - | Mandatory. Document Number. |
+| invoiceType | String | Enum: INV, CRN, DBN, RECEIPT | Mandatory. Document Type. |
+| issueDate | String | YYYY-MM-DD | Mandatory. Document Date. |
+| vat | String | - | Mandatory. TaxPayer/VAT Number. |
+| pdfTypeResponse | String | Enum: PDF_BASE64, PDF_FILE | Optional. Defaults to PDF_FILE if not passed. |
+
+<Callout kind="info">
+All query parameters should be URL encoded.
+</Callout>
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| file | form-data | Content type: application/pdf | Optional. Human readable PDF file with all fields as per ZATCA compliance requirements, including the QR Code. |
+| base64EncodedPdfFile | form-data | application/json | Optional. Base64 encoded content of the PDF file, in double quotes. |
+
+<Callout kind="info">
+You must pass either the PDF file or its base64-encoded value — at least one is required.
+</Callout>
+
+### Sample Request
+
+Request URL:
+
+```
+https://api-sandbox.cleartax.com/middle-east/ksa/einvoicing/v2/einvoices/embeddedpdf?invoiceNumber=MULTIUPLEVAT009&invoiceType=CRN&vat=300474179900003&issueDate=2022-05-31
+```
+
+Request body (base64-encoded PDF, truncated for brevity):
+
+```json
+{ "base64EncodedPdfFile": "JVBERi0xLjMNCiXi48/T...==" }
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For a successful retrieval |
+| 400 | For any kind of validation issues |
+| 401 | If the user is not authenticated for the operation |
+| 403 | If the user is not authorized for the operation |
+| 404 | If the data is not present |
+| 429 | Too many requests |
+| 5XX | Unhandled exception |
+
+### Response Schema
+
+The response is a PDF/A3 file with embedded XML, or a base64-encoded PDF/A-3, depending on `pdfTypeResponse`. In case of an error, the response is an array of [Error Details objects](/e-invoicing-ksa/api-reference/resources-and-masters/error-details-object).
+
+### Sample Response (Success)
+
+HTTP Status Code - 200. Response body is `<filename>.pdf`, or with base64 encoding:
+
+```json
+{
+    "pdfDataBase64": "JVBERi0xLjcKJfbk...==",
+    "responseContentType": "application/pdf",
+    "fileName": "312345678900003_20231017T171524_Sample001.pdf"
+}
+```
+
+### Sample Response (Error)
+
+HTTP Status Code - 400 (invalid or missing PDF):
+
+```json
+{
+    "ErrorList": [
+        { "ErrorCode": "300114", "ErrorMessage": "Please supply a valid PDF file. Supplied file content type is : null , and file name is: ", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+HTTP Status Code - 404 (no matching document):
+
+```json
+{
+    "ErrorList": [
+        { "ErrorCode": "300102", "ErrorMessage": "You don't have any data present for the selected Document Details", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+### API Validations
+
+1. The file in the request should be a valid PDF file or base64-encoded PDF file.
+2. `invoiceNumber`, `invoiceType`, `issueDate`, and `vat` should be valid, and the invoice data must be present in Clear.
+3. You must pass either the PDF file or its base64-encoded value — without at least one, the API will not work.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If not present or invalid, returns HTTP Status Code 401.
+2. Each customer is allowed to send a limited number of requests per minute to prevent server overload. Exceeding the limit returns 429.
+3. If the token is valid but the user does not have the authorization to download the invoice, returns HTTP Status Code 403.
+4. If data is not present in Clear, returns HTTP Status Code 404.

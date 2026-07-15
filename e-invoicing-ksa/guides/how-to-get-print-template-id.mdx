@@ -1,0 +1,13 @@
+---
+title: "How to get Print Template ID?"
+description: "Where the print template ID is used and how to get a custom one for KSA e-invoice PDF generation"
+---
+
+<Callout kind="info">
+The source page for this guide does not yet contain step-by-step content beyond the title. This page reflects what's documented elsewhere in the API reference about print template IDs.
+</Callout>
+
+The print template ID controls which invoice PDF layout is used when calling [Get E-Invoice PDF](/e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf) or [Send E-Invoice via Email](/e-invoicing-ksa/api-reference/api-lists/send-e-invoice-via-email).
+
+- If the `templateId` parameter is not passed, ClearTax defaults to `"39"` (Standard Invoice Template).
+- If you are using a custom print template built for you by ClearTax, reach out to your Customer Success Manager (CSM) or ClearTax support to get the corresponding print template ID for your account.

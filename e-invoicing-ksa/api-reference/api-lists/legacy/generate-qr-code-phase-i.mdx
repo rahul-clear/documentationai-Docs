@@ -1,0 +1,66 @@
+---
+title: "Generate QR Code (Phase I) — Legacy"
+description: "Deprecated Phase I standalone QR code generation endpoint, superseded by Generate E-Invoice"
+---
+
+<Callout kind="alert">
+**A new version is available.** This API is valid only for Phase I requirements of ZATCA. If you are implementing Phase II, use the current [Generate E-Invoice](/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice) API, which generates the QR code as part of invoice generation.
+</Callout>
+
+You can generate the QR code by sending a `POST` request to the Generate QR Code API.
+
+### Request URL
+
+```
+https://api-demo.cleartax.com/middle-east/ksa/einvoicing/v1/b2c/qrcode/generate
+```
+
+### Request Headers
+
+```
+x-cleartax-auth-token: {{USER_AUTH_TOKEN}}
+Content-Type: application/json
+owner_id: {{OWNER_ID}}
+vat: {{VAT}}
+```
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Accept | String | Cannot be empty | Mandatory. Always "application/json". |
+| X-Cleartax-Auth-Token | String | Cannot be empty | Mandatory. Auth token generated from the ClearTax user ID and password. |
+| Content-Type | String | Cannot be empty | Mandatory. Always "application/json". |
+| branch | String | Should be a valid branch from the user account | Optional. Branch name (store name) added in the user account which maps to a VAT or Group VAT of the entity. |
+
+### Request Parameters
+
+| Param Name | Type | Description |
+|---|---|---|
+| InvoiceTotalAmt | Numeric | |
+| SellerName | String | |
+| TimeStampInvoice | String | |
+| VatNumber | Numeric | |
+| VatTotalAmt | Numeric | |
+
+### Request Payload
+
+```json
+{
+    "InvoiceTotalAmt": "200",
+    "SellerName": "test1",
+    "TimeStampInvoice": "2021-11-12 20:30:30",
+    "VatNumber": 300459803800003,
+    "VatTotalAmt": 100
+}
+```
+
+### Sample Response
+
+Valid Response (200):
+
+```json
+{
+    "Id": null,
+    "QrCode": "iVBORw0KGgoAAAANSUhEUgAAAcIAAAHCAQAAAABUY/T...",
+    "RawQrCode": "AQV0ZXN0MQIPMzAwNTIwOTUyNjAwMDAzAxMyMDIxLTExLTE3IDEyOjM2OjAwBAMyMDAFAzEwMA=="
+}
+```

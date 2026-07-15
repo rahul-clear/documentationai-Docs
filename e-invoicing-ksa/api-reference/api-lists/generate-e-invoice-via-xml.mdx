@@ -1,0 +1,195 @@
+---
+title: "Generate E-Invoice via XML"
+description: "Generate a valid E-Invoice with an XML file and send it to ZATCA for clearance or reporting"
+---
+
+Generate a valid E-Invoice with an XML file and send it to ZATCA for clearance or reporting.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/v2/einvoices/generate-with-file
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+<Callout kind="alert">
+Rate Limit: 1000 API requests per minute
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty. | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+| branch | String | Should be a valid branch from the user account. | Optional. Branch name (store name) added in the user account which maps to a VAT or Group VAT of the entity. |
+| accept-language | String | Enum: ar, en | Optional. Language of error message from ZATCA. Default: en. |
+| device-id | String | MaxLength: 36 | Mandatory. The Device ID registered with ClearTax. See [How to register a device for a VAT?](/e-invoicing-ksa/guides/how-to-register-a-device-for-a-vat) |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| file | form-data | NA | Mandatory. |
+
+#### Requirement of Critical Fields
+
+Same as [Generate E-Invoice API](/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice#requirement-of-critical-fields).
+
+### Sample Request
+
+**Standard Tax Invoice XML**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <cbc:ProfileID>reporting:1.0</cbc:ProfileID>
+    <cbc:ID>KSAINV-002</cbc:ID>
+    <cbc:UUID>8d487816-70b8-4ade-a618-9d620b73814a</cbc:UUID>
+    <cbc:IssueDate>2022-04-07</cbc:IssueDate>
+    <cbc:IssueTime>12:21:28</cbc:IssueTime>
+    <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
+    <cbc:TaxCurrencyCode>SAR</cbc:TaxCurrencyCode>
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>ICV</cbc:ID>
+        <cbc:UUID>23</cbc:UUID>
+    </cac:AdditionalDocumentReference>
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>PIH</cbc:ID>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject mimeCode="text/plain">NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==</cbc:EmbeddedDocumentBinaryObject>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <cac:Signature>
+        <cbc:ID>urn:oasis:names:specification:ubl:signature:Invoice</cbc:ID>
+        <cbc:SignatureMethod>urn:oasis:names:specification:ubl:dsig:enveloped:xades</cbc:SignatureMethod>
+    </cac:Signature>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="MLS">123457890</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>King Abdulaziz Road</cbc:StreetName>
+                <cbc:BuildingNumber>8228</cbc:BuildingNumber>
+                <cbc:PlotIdentification>2121</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>Al Amal</cbc:CitySubdivisionName>
+                <cbc:CityName>Riyadh</cbc:CityName>
+                <cbc:PostalZone>12643</cbc:PostalZone>
+                <cbc:CountrySubentity>Riyadh Region</cbc:CountrySubentity>
+                <cac:Country><cbc:IdentificationCode>SA</cbc:IdentificationCode></cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>300188493300003</cbc:CompanyID>
+                <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity><cbc:RegistrationName>Al Salam Supplies Co. LTD</cbc:RegistrationName></cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyIdentification><cbc:ID schemeID="SAG">123C12345678</cbc:ID></cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>King Abdullah Road</cbc:StreetName>
+                <cbc:BuildingNumber>3709</cbc:BuildingNumber>
+                <cbc:PlotIdentification>1004</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>Al Mursalat</cbc:CitySubdivisionName>
+                <cbc:CityName>Riyadh</cbc:CityName>
+                <cbc:PostalZone>11564</cbc:PostalZone>
+                <cbc:CountrySubentity>Riyadh Region</cbc:CountrySubentity>
+                <cac:Country><cbc:IdentificationCode>SA</cbc:IdentificationCode></cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cac:TaxScheme><cbc:CompanyID>310175397400003</cbc:CompanyID><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity><cbc:RegistrationName>AL KAWTHAR MARKETS</cbc:RegistrationName></cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery><cbc:ActualDeliveryDate>2022-09-07</cbc:ActualDeliveryDate></cac:Delivery>
+    <cac:PaymentMeans><cbc:PaymentMeansCode>10</cbc:PaymentMeansCode></cac:PaymentMeans>
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="SAR">0.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">S</cbc:ID>
+            <cbc:Percent>15</cbc:Percent>
+            <cac:TaxScheme><cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID></cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal><cbc:TaxAmount currencyID="SAR">0.6</cbc:TaxAmount></cac:TaxTotal>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="SAR">0.6</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="SAR">4.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="SAR">0.60</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">S</cbc:ID>
+                <cbc:Percent>15.00</cbc:Percent>
+                <cac:TaxScheme><cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID></cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="SAR">4.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="SAR">4.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="SAR">4.60</cbc:TaxInclusiveAmount>
+        <cbc:AllowanceTotalAmount currencyID="SAR">0.00</cbc:AllowanceTotalAmount>
+        <cbc:PrepaidAmount currencyID="SAR">0.00</cbc:PrepaidAmount>
+        <cbc:PayableAmount currencyID="SAR">4.60</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="PCE">2.000000</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="SAR">4.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="SAR">0.60</cbc:TaxAmount>
+            <cbc:RoundingAmount currencyID="SAR">4.60</cbc:RoundingAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Name>قلم رصاص</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>15.00</cbc:Percent>
+                <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="SAR">2.00</cbc:PriceAmount>
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>
+                <cbc:Amount currencyID="SAR">0.00</cbc:Amount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
+```
+
+The Simplified Tax Invoice XML is structurally identical, except `InvoiceTypeCode name="0200000"` and the seller `PartyTaxScheme` typically omits `CompanyID` for B2C transactions.
+
+<Callout kind="info">
+An additional sample XML with all fields for Simplified (B2C) invoices is available from ClearTax support — it was hosted as a downloadable file in the source documentation and could not be migrated as inline content.
+</Callout>
+
+### Response Status Codes, Response Schema, and Sample Response
+
+Same as [Generate E-Invoice API](/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice). Refer to the corresponding sections.
+
+### API Validations
+
+Same as [Generate E-Invoice API](/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice). Refer to the corresponding section.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+2. Each customer is allowed to send a limited number of requests per minute to prevent server overload. If the limit is exceeded, the server will respond with a 429 Too Many Requests status code.
+3. If the auth token is valid, but the user does not have the authorization to generate device ID, then the API will return HTTP Status Code 403. The user, whose auth token is used, should have an Admin role for the particular VAT used in the request.

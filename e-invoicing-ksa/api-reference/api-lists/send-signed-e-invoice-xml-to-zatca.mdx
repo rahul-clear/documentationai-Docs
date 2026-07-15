@@ -1,0 +1,147 @@
+---
+title: "Send Signed E-Invoice XML To ZATCA"
+description: "Send a valid, already-signed E-Invoice XML file to ZATCA for clearance or reporting (offline signing flow)"
+---
+
+Send a valid signed E-Invoice XML file to ZATCA for clearance or reporting.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/v2/einvoices/generate-with-file-offline
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+<Callout kind="alert">
+Rate Limit: 1000 API requests per minute
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty | Mandatory. User auth token. |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+| device-id | String | MaxLength: 36 | Mandatory. The Device ID registered with ClearTax. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| file | form-data | NA | Mandatory. The XML file as per ZATCA specification. |
+
+#### Requirement of Critical Fields
+
+| Fields | Comments |
+|---|---|
+| UUID | **Mandatory.** A Universal Unique Identifier is a 128-bit value used to uniquely identify an object or entity on the internet. |
+| ICV | **Mandatory.** This is an atomically increasing counter. |
+| PIH | **Mandatory.** Previous Invoice Hash — hash code of the previous invoice must be sent. |
+| InvoiceHash | **Mandatory.** Hash value of the current invoice XML with `<ext:UBLExtensions>` and `<cac:AdditionalDocumentReference:QRCode>` removed. |
+
+Unlike [Generate E-Invoice via XML](/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-via-xml), this endpoint expects the XML to already be fully signed and to already carry these fields — ClearTax does not generate them for you.
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For any complete operation — pass / warning / error |
+| 400 | - |
+| 401 | If the user is not authenticated for the operation |
+| 403 | If the user is not authorized for the operation |
+| 429 | Too Many Requests |
+| 5xx | Unhandled exception |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| validationResults | Object | Cannot be null | See below. |
+| clearedInvoice | String | - | For clearance, a base64-encoded cleared XML as a string. Null for reporting. |
+| clearanceStatus | String | REPORTED / NOT_REPORTED / ACCEPTED_WITH_WARNING / CLEARED / NOT_CLEARED / PENDING | For clearance: CLEARED, NOT_CLEARED, ACCEPTED_WITH_WARNING, PENDING. For reported: REPORTED, NOT_REPORTED, ACCEPTED_WITH_WARNING, PENDING. |
+
+#### Validation Results Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| infoMessages | Array of Object | Cannot be null or empty | Always has some info. |
+| warningMessages | Array of Object | Cannot be null or empty | Non-empty if there's a warning at the time of reporting/clearance. |
+| errorMessages | Array of Object | Cannot be null or empty | Non-empty if there's an error at the time of reporting/clearance. |
+| status | String | PASS / WARNING / ERROR | Overall response status of the API call. |
+
+#### infoMessages / warningMessages / errorMessages Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| type | String | INFO / WARNING / ERROR | Type of the message object. |
+| code | String | Cannot be null | ZATCA-specific code identifying the message. |
+| category | String | Cannot be null | ZATCA-specific category. |
+| message | String | Cannot be null | ZATCA-specific message. |
+| status | String | PASS / WARNING / ERROR | PASS → infoMessages, WARNING → warningMessages, ERROR → errorMessages. |
+
+### Sample Response (Success with warning)
+
+```json
+{
+    "validationResults": {
+        "infoMessages": [
+            { "type": "INFO", "code": "XSD_ZATCA_VALID", "category": "XSD validation", "message": "Complied with UBL 2.1 standards in line with ZATCA specifications", "status": "PASS" }
+        ],
+        "warningMessages": [
+            { "type": "WARNING", "code": "BR-KSA-37", "category": "KSA", "message": "The seller address building number must contain 4 digits.", "status": "WARNING" },
+            { "type": "WARNING", "code": "BR-KSA-64", "category": "KSA", "message": "Seller Address Additional number (KSA-23) must be 4 digits.", "status": "WARNING" }
+        ],
+        "errorMessages": [],
+        "status": "WARNING"
+    },
+    "clearedInvoice": null,
+    "clearanceStatus": "REPORTED"
+}
+```
+
+### Sample Response (Client Error)
+
+```json
+{
+    "validationResults": {
+        "infoMessages": [
+            { "type": "INFO", "code": "XSD_ZATCA_VALID", "category": "XSD validation", "message": "Complied with UBL 2.1 standards in line with ZATCA specifications", "status": "PASS" }
+        ],
+        "warningMessages": [],
+        "errorMessages": [
+            { "type": "ERROR", "code": "BR-KSA-64", "category": "KSA", "message": "Seller Address Additional number (KSA-23) must be 4 digits.", "status": "ERROR" },
+            { "type": "ERROR", "code": "invoiceHash_QRCODE_INVALID", "category": "QRCODE_VALIDATION", "message": "Invoice xml hash does not match with qr code invoice xml hash", "status": "ERROR" }
+        ],
+        "status": "ERROR"
+    },
+    "clearedInvoice": null,
+    "clearanceStatus": "NOT_REPORTED"
+}
+```
+
+### Sample Response (Server Error) - status code 500
+
+```json
+{
+    "ErrorList": [
+        { "ErrorCode": "30040102", "ErrorMessage": "Was not able to report the invoice. Please try again later", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+### API Validations
+
+There are no validations from Clear for this API.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the token is not present or is invalid, the API will return HTTP Status Code 401.
+2. Each customer is allowed to send a limited number of requests per minute to prevent server overload. If the limit is exceeded, the server will respond with a 429 Too Many Requests status code.
+3. If the token is valid, but the user does not have the authorization to generate device ID, the API will return HTTP Status Code 403. The user, whose token is used, should have an "Admin" role for the particular VAT used in the request.

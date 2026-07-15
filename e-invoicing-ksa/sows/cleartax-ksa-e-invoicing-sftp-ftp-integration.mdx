@@ -1,0 +1,48 @@
+---
+title: "ClearTax KSA E-Invoicing SFTP/FTP Integration"
+description: "Statement of Work for SFTP/FTP-based integration with ClearTax KSA E-Invoicing"
+---
+
+## (A) Scope of Services
+
+* Pull the files from the customer's SFTP/FTP server at regular intervals.
+* Pick input files from the customer's SFTP/FTP server and upload to ClearTax APIs.
+* Email notification to admin in case of failure.
+
+**Integration Post Go-Live Support** — ClearTax will provide one-month post go-live support to the customer from the production go-live date of integration. Such support includes fixing any breakages in functionality only with respect to the original scope of work for integration. It excludes:
+
+* Additional features or enhancements which are not contained in the original scope of work for integration.
+* Breakages in functionality arising out of any subsequent changes (including but not limited to changes in APIs / schema fields) stipulated by the government after the initially agreed scope of work.
+
+## (B) Customer Dependencies
+
+* Extract required data from ERP/source billing system and place it on the customer's SFTP/FTP server in an Excel or CSV file (input file for ClearTax).
+* Pick up data in Excel or CSV file (output file from ClearTax) from customer's SFTP/FTP server and consume it.
+* Error handling and retry for errors in the response file.
+* Provide:
+  * SFTP/FTP server hosted in the Customer environment.
+  * SFTP/FTP details to be provided to ClearTax:
+    * SFTP/FTP Host, Port, Protocol
+    * SFTP/FTP Username, Password
+    * Directory paths as per the structure defined by ClearTax.
+    * Files as per the file naming convention must be as defined by ClearTax.
+* The customer shall formulate an internal team with:
+  * 1 Project POC for overall internal project management and handling ClearTax interactions throughout the integration.
+  * Bandwidth of System architect/Senior IT stakeholder to review and finalize tech architecture along with ClearTax integration team.
+  * Functional stakeholders (Finance, Compliance) for UAT and overall compliance related query resolution.
+  * IT, DB, Infra/Network team members to work with ClearTax integration team on a day-to-day basis.
+* The Customer shall share appropriate Business Requirement/functional documentation about the system configuration with the consulting team for study and understanding.
+* The customer shall complete testing of the integration flow in stipulated timelines to ensure timely go-live.
+
+## (C) Integration Scope Limitations
+
+* The scope of integration is limited to the SFTP/FTP integration method only.
+* The Customer must prepare invoice data as per ClearTax defined format (in alignment with ZATCA guidelines).
+* ClearTax integration consultation team will provide consultation remotely.
+* Consultation related to the following items will be out of scope for ClearTax:
+  * Any consultation or configuration at network, firewall, Operating System, Basis level, or IT infrastructure level.
+  * Any modifications required in the Customer's internal ERP or PoS system to comply with prohibited functionalities by ZATCA.
+  * Any customized reports or data analytics.
+  * Any data cleaning/correction within the Customer's ERP/PoS systems.
+  * Any additional features or enhancements which are not contained in the original scope of work for integration.
+  * Any changes arising due to changes in ERP/Database systems, system upgrades, or data schema changes by the customer or third parties onboarded by the customer (post UAT sign-off on original scope).

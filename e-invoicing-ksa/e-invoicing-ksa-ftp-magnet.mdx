@@ -1,0 +1,38 @@
+---
+title: "E-Invoicing KSA FTP Magnet"
+description: "Middleware to export invoice data from your ERP to ClearTax E-Invoicing KSA via FTP"
+---
+
+FTP Magnet is a middleware application between your FTP server and the ClearTax E-Invoicing KSA application. You can export data from your ERP to your own FTP server. As part of onboarding, ClearTax configures its FTP Magnet to connect to your FTP server. The FTP Magnet reads the input files from your FTP server and uploads them to the ClearTax E-Invoicing KSA application. Once the uploaded files are processed, it writes the response back to your FTP server.
+
+## Downloads
+
+<Callout kind="info">
+The specification document, project plan, and sample templates are hosted as downloadable files in the source documentation and could not be migrated as inline content. Contact ClearTax support for the latest copies.
+</Callout>
+
+### Sample templates for various actions
+
+<Callout kind="info">
+For files in `INPUT/INIT`, download a ClearTax template for reference from your ClearTax account's "Import" tab. Files in `INPUT/UPLOAD_ERROR` use the same template with an added "Error" column at the end.
+</Callout>
+
+#### GENERATE_EINV
+
+| Directory | Standard template name |
+|---|---|
+| INPUT/INIT | E-INVOICE-GCC-Standard |
+| OUTPUT/UPLOAD_ERROR | E-INVOICE-GCC-Standard |
+| OUTPUT/GENERATION_ERROR | E-INVOICE-GCC-Standard |
+| OUTPUT/SUCCESS | E-INVOICE-GCC-Standard |
+
+<Callout kind="warning">
+These template names and samples apply only if you're using ClearTax's standard templates. If you have custom templates, names and headers may vary based on your customizations. The success and error file templates are also subject to change — map the output flexibly rather than relying on a fixed header order.
+</Callout>
+
+## Security
+
+Incoming requests from ClearTax to your FTP server are sent from the following IPs:
+
+- Sandbox: `150.230.54.220`
+- Production: `144.24.210.78`

@@ -1,0 +1,161 @@
+---
+title: "Get PCSID Generation Status"
+description: "Poll the status of a PCSID generation activity started by Register Device"
+---
+
+Gets status of the PCSID generation activity.
+
+### Request Method
+
+`GET`
+
+### Request URL
+
+```
+{{BASE_URL}}/onboarding/{ActivityId}/pcsid-status
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty. | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+
+### Request Path Params
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| ActivityId | String | UUID | Mandatory. The `PcsidGenerationActivityId` received from [Register Device](/e-invoicing-ksa/api-reference/api-lists/register-device). |
+
+### Sample Request
+
+```
+https://api-sandbox.cleartax.com/middle-east/ksa/einvoicing/onboarding/628f37b61ed71a6638b848e4/pcsid-status
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For a successful status retrieval. |
+| 400 | For any kind of validation issues. |
+| 401 | If the user is not authenticated for the operation. |
+| 403 | If the user is not authorized for the operation. |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| ActivityType | String | NA | Mandatory. Always `ZATCA_COMPLIANCE_INVOICE`. |
+| Status | String | Enum: IN_PROGRESS, SUCCEEDED, FAILED | Mandatory. Status of the entire async activity. |
+| CreatedAt | String | Timestamp (UTC) | Mandatory. When the async activity was created. |
+| UpdatedAt | String | Timestamp (UTC) | Mandatory. When the async activity was last updated. |
+| CompletedAt | String | Timestamp (UTC) | Mandatory. When the async activity was completed. Null while IN_PROGRESS. |
+| RequestMetaInfo | Object | NA | Request Meta Info Object. |
+| ResponseInfo | Object | NA | Response Info Object. |
+| ErrorList | Array | NA | Optional. Array of [Error Details objects](/e-invoicing-ksa/api-reference/resources-and-masters/error-details-object). |
+
+#### Request Meta Info Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| TotalCount | Number | NA | Mandatory. Always 6 — the number of compliance checks performed. |
+| SuccessCount | Number | ≤ TotalCount | Mandatory. Number of compliance checks that passed. Updated only once the activity completes. |
+| FailureCount | Number | ≤ TotalCount | Mandatory. Number of compliance checks that failed (server 5xx or compliance/4xx failures). Updated only once the activity completes. |
+
+#### Response Info Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| ResponseMetaData | Object | NA | Optional. Null while activity is IN_PROGRESS. |
+
+#### Response Metadata Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| PcsidGenerated | String | Enum: GENERATED, FAILED | Mandatory. Final PCSID generation status, dependent on the 6 compliance checks below. |
+| StandardTaxInvoice | String | SUCCEEDED / comma-separated error messages | Optional. Compliance check for Standard Tax Invoice. |
+| StandardTaxInvoiceCredit | String | SUCCEEDED / comma-separated error messages | Optional. Compliance check for Standard Tax Invoice - Credit Note. |
+| StandardTaxInvoiceDebit | String | SUCCEEDED / comma-separated error messages | Optional. Compliance check for Standard Tax Invoice - Debit Note. |
+| SimplifiedTaxInvoice | String | SUCCEEDED / comma-separated error messages | Optional. Compliance check for Simplified Tax Invoice. |
+| SimplifiedTaxInvoiceCredit | String | SUCCEEDED / comma-separated error messages | Optional. Compliance check for Simplified Tax Invoice - Credit Note. |
+| SimplifiedTaxInvoiceDebit | String | SUCCEEDED / comma-separated error messages | Optional. Compliance check for Simplified Tax Invoice - Debit Note. |
+
+### Sample Response
+
+In Progress - HTTP Status Code - 200
+
+```json
+{
+    "ActivityType": "ZATCA_COMPLIANCE_INVOICE",
+    "Status": "IN_PROGRESS",
+    "CreatedAt": "2022-05-20 18:56:11",
+    "UpdatedAt": "2022-05-20 18:56:11",
+    "CompletedAt": null,
+    "RequestMetaInfo": { "TotalCount": 6, "SuccessCount": null, "FailureCount": null },
+    "ResponseInfo": { "ResponseMetaData": null }
+}
+```
+
+Succeeded - HTTP Status Code - 200
+
+```json
+{
+    "ActivityType": "ZATCA_COMPLIANCE_INVOICE",
+    "Status": "SUCCEEDED",
+    "CreatedAt": "2022-05-20 18:56:11",
+    "UpdatedAt": "2022-05-20 18:56:20",
+    "CompletedAt": "2022-05-20 18:56:20",
+    "RequestMetaInfo": { "TotalCount": 6, "SuccessCount": 6, "FailureCount": 0 },
+    "ResponseInfo": {
+        "ResponseMetaData": {
+            "PcsidGenerated": "GENERATED",
+            "StandardTaxInvoice": "SUCCEEDED",
+            "StandardTaxInvoiceCredit": "SUCCEEDED",
+            "StandardTaxInvoiceDebit": "SUCCEEDED",
+            "SimplifiedTaxInvoice": "SUCCEEDED",
+            "SimplifiedTaxInvoiceCredit": "SUCCEEDED",
+            "SimplifiedTaxInvoiceDebit": "SUCCEEDED"
+        }
+    }
+}
+```
+
+Failed - HTTP Status Code - 500
+
+```json
+{
+    "ActivityType": "ZATCA_COMPLIANCE_INVOICE",
+    "Status": "FAILED",
+    "CreatedAt": "2022-06-01 14:46:49",
+    "UpdatedAt": "2022-06-01 14:46:49",
+    "CompletedAt": "2022-06-01 14:46:49",
+    "RequestMetaInfo": { "TotalCount": 6, "SuccessCount": 0, "FailureCount": 6 },
+    "ResponseInfo": { "ResponseMetaData": null }
+}
+```
+
+Error - HTTP Status Code - 400
+
+```json
+{
+    "Status": "FAILED",
+    "ErrorList": [
+        { "ErrorCode": "6003", "ErrorMessage": "The async activity was not found", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+### API Validations
+
+1. The `ActivityId` should be valid and must relate to PCSID generation only.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+2. If the auth token is valid, but the user does not have the authorization to generate device ID, then the API will return HTTP Status Code 403. The user, whose auth token is used, should have an Admin role for the particular VAT used in the request.

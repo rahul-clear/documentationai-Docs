@@ -17,7 +17,7 @@
             ]
           },
           {
-            "group": "E-Invoicing KSA",
+            "group": "E-Invoicing KSA API",
             "icon": "file-text",
             "pages": [
               {
@@ -29,36 +29,92 @@
                 "path": "e-invoicing-ksa/introduction-to-e-invoicing-ksa-api"
               },
               {
-                "title": "Learn E-Invoicing KSA API Basics",
-                "path": "e-invoicing-ksa/learn-e-invoicing-ksa-api-basics"
+                "group": "Learn E-Invoicing KSA API Basics",
+                "pages": [
+                  "e-invoicing-ksa/learn-e-invoicing-ksa-api-basics",
+                  "e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token",
+                  "e-invoicing-ksa/guides/how-to-add-a-vat-number-to-ksa-e-invoicing-account",
+                  "e-invoicing-ksa/guides/how-to-add-branch-for-existing-vat-to-ksa-e-invoicing-account",
+                  "e-invoicing-ksa/guides/how-to-register-a-device-for-a-vat",
+                  "e-invoicing-ksa/guides/how-to-generate-otp-on-erad-portal",
+                  "e-invoicing-ksa/guides/how-to-get-print-template-id",
+                  "e-invoicing-ksa/guides/ksa-e-invoicing-integration-architecture"
+                ]
               },
               {
-                "title": "API Reference",
-                "path": "e-invoicing-ksa/api-reference/api-reference"
+                "group": "E-Invoicing KSA API Reference",
+                "pages": [
+                  "e-invoicing-ksa/api-reference/api-reference",
+                  "e-invoicing-ksa/api-reference/authentication",
+                  "e-invoicing-ksa/api-reference/generate-access-token-api",
+                  {
+                    "group": "Resources and Masters",
+                    "pages": [
+                      "e-invoicing-ksa/api-reference/resources-and-masters/resources-and-masters",
+                      "e-invoicing-ksa/api-reference/resources-and-masters/uat-checklist",
+                      "e-invoicing-ksa/api-reference/resources-and-masters/e-invoice-object",
+                      "e-invoicing-ksa/api-reference/resources-and-masters/error-details-object",
+                      "e-invoicing-ksa/api-reference/resources-and-masters/data-types",
+                      "e-invoicing-ksa/api-reference/code-lists",
+                      "e-invoicing-ksa/api-reference/resources-and-masters/common-errors-and-resolution"
+                    ]
+                  },
+                  {
+                    "group": "API Lists",
+                    "pages": [
+                      "e-invoicing-ksa/api-reference/api-lists/api-lists",
+                      "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice",
+                      "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice/additional-standard-b2b-e-invoice-examples",
+                      "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice/additional-simplified-b2c-e-invoice-examples",
+                      "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-async",
+                      "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-via-xml",
+                      "e-invoicing-ksa/api-reference/api-lists/send-signed-e-invoice-xml-to-zatca",
+                      "e-invoicing-ksa/api-reference/api-lists/register-device",
+                      "e-invoicing-ksa/api-reference/api-lists/get-pcsid-generation-status",
+                      "e-invoicing-ksa/api-reference/api-lists/renew-pcsid",
+                      "e-invoicing-ksa/api-reference/api-lists/get-invoice",
+                      "e-invoicing-ksa/api-reference/api-lists/get-bulk-invoice-lite",
+                      "e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf",
+                      "e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf-a-3-with-pdf-api",
+                      "e-invoicing-ksa/api-reference/api-lists/send-e-invoice-via-email",
+                      "e-invoicing-ksa/api-reference/api-lists/add-business-units-api",
+                      {
+                        "group": "Legacy (Phase I)",
+                        "pages": [
+                          "e-invoicing-ksa/api-reference/api-lists/legacy/generate-e-invoice-phase-i",
+                          "e-invoicing-ksa/api-reference/api-lists/legacy/generate-qr-code-phase-i",
+                          "e-invoicing-ksa/api-reference/api-lists/legacy/generate-device-id",
+                          "e-invoicing-ksa/api-reference/api-lists/legacy/generate-csid-and-pcsid"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               },
               {
-                "title": "Code Lists",
-                "path": "e-invoicing-ksa/api-reference/code-lists"
-              }
-            ]
-          },
-          {
-            "group": "E-Invoicing Oman",
-            "icon": "file-text",
-            "pages": [
+                "title": "E-Invoicing KSA FTP Magnet",
+                "path": "e-invoicing-ksa/e-invoicing-ksa-ftp-magnet"
+              },
               {
-                "title": "Overview",
-                "path": "e-invoicing-oman/overview"
-              }
-            ]
-          },
-          {
-            "group": "E-Invoicing Qatar",
-            "icon": "file-text",
-            "pages": [
+                "title": "E-Invoicing KSA XML Reporting FTP Magnet",
+                "path": "e-invoicing-ksa/e-invoicing-ksa-xml-reporting-ftp-magnet"
+              },
               {
-                "title": "Overview",
-                "path": "e-invoicing-qatar/overview"
+                "group": "SOWs",
+                "pages": [
+                  "e-invoicing-ksa/sows/sows",
+                  "e-invoicing-ksa/sows/cleartax-ksa-e-invoicing-sftp-ftp-integration",
+                  "e-invoicing-ksa/sows/cleartax-saudi-arabia-e-invoicing",
+                  "e-invoicing-ksa/sows/e-invoicing-onboarding-ksa",
+                  "e-invoicing-ksa/sows/e-invoicing-api-integration-development-ksa",
+                  "e-invoicing-ksa/sows/annual-maintenance-customer-erp-pos-ksa",
+                  "e-invoicing-ksa/sows/custom-invoice-print-template-ksa",
+                  "e-invoicing-ksa/sows/e-invoicing-api-integration-consultation-ksa",
+                  "e-invoicing-ksa/sows/cleartax-e-invoice-hypercare-support",
+                  "e-invoicing-ksa/sows/data-archival",
+                  "e-invoicing-ksa/sows/email-apis",
+                  "e-invoicing-ksa/sows/google-translation-api"
+                ]
               }
             ]
           }

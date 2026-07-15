@@ -1,0 +1,174 @@
+---
+title: "Generate E-Invoice (Phase I) — Legacy"
+description: "Deprecated Phase I invoice generation endpoint, superseded by Generate E-Invoice"
+---
+
+<Callout kind="alert">
+**A new version is available.** This API is valid only for Phase I requirements of ZATCA. If you are implementing Phase II, use the current [Generate E-Invoice](/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice) API.
+</Callout>
+
+You can generate the E-Invoice by sending a `POST` request to the E-Invoicing KSA API.
+
+### Request Headers
+
+```
+x-cleartax-auth-token: {{USER_AUTH_TOKEN}}
+Content-Type: application/json
+owner_id: {{OWNER_ID}}
+vat: {{VAT}}
+```
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| X-Cleartax-Auth-Token | String | Cannot be empty. | Mandatory. The auth token generated from the ClearTax user ID and password. |
+| Content-Type | String | Cannot be empty. | Mandatory. Always "application/json". |
+| vat | String | Cannot be empty. | TIN (VAT Number) for which you are generating the E-Invoice. |
+| branch | String | Should be a valid branch from the user account | Optional. Branch name (store name) added in the user account which maps to a VAT or Group VAT of the entity. |
+
+### Request URL
+
+```
+POST: https://api-demo.cleartax.com/middle-east/ksa/einvoicing/v2/einvoices/generate
+```
+
+### Request Parameters
+
+| Param Name | Type | Validation | Description |
+|---|---|---|---|
+| EInvoice | Object | | Mandatory. [E-Invoice object](/e-invoicing-ksa/api-reference/resources-and-masters/e-invoice-object) |
+| CustomFields | Object | | Custom Fields object |
+
+### Sample Request
+
+```json
+{
+    "EInvoice": {
+        "UBLVersionID": "2.1",
+        "ProfileID": "reporting:1.0",
+        "ID": { "en": "K01082K5", "ar": "K01082K5" },
+        "InvoiceTypeCode": { "name": "0101000", "value": "388" },
+        "IssueDate": "2021-08-14",
+        "IssueTime": "15:44:20",
+        "Delivery": [ { "ActualDeliveryDate": "2021-08-14", "LatestDeliveryDate": "2021-08-14" } ],
+        "DocumentCurrencyCode": "SAR",
+        "TaxCurrencyCode": "SAR",
+        "AccountingSupplierParty": {
+            "Party": {
+                "PartyLegalEntity": { "RegistrationName": { "en": "Gulf Arabian Equipment Co", "ar": "شركة الخليج العربية للمعدات" } },
+                "PartyTaxScheme": { "CompanyID": "310387374800003", "TaxScheme": { "ID": "VAT" } },
+                "PartyIdentification": { "ID": { "value": "312345678914443", "schemeID": "CRN" } },
+                "PostalAddress": {
+                    "StreetName": { "en": "Abdelrahman Road", "ar": "طريق عبد الرحمن" },
+                    "BuildingNumber": { "en": "2021", "ar": "2021" },
+                    "PlotIdentification": { "en": "2347", "ar": "2347" },
+                    "CitySubDivisionName": { "en": "Abqaiq", "ar": "بقيق" },
+                    "CityName": { "en": "Al-Baḥah", "ar": "الباءة" },
+                    "PostalZone": "33502",
+                    "CountrySubentity": { "en": "Al-Jawf", "ar": "الجوف" },
+                    "Country": { "IdentificationCode": "SA" }
+                }
+            }
+        },
+        "AccountingCustomerParty": {
+            "Party": {
+                "PartyLegalEntity": { "RegistrationName": { "en": "AL Amal Specialized Hospital", "ar": "مستشفى الامل التخصصى" } },
+                "PartyTaxScheme": { "CompanyID": "300761193700003", "TaxScheme": { "ID": "VAT" } },
+                "PartyIdentification": { "ID": { "value": "300761193710003", "schemeID": "NAT" } },
+                "PostalAddress": {
+                    "StreetName": { "en": "Abdelrahman Road", "ar": "طريق عبد الرحمن" },
+                    "BuildingNumber": { "en": "2119", "ar": "2119" },
+                    "PlotIdentification": { "en": "2345", "ar": "2345" },
+                    "CitySubDivisionName": { "en": "Abqaiq", "ar": "بقيق" },
+                    "CityName": { "en": "Khobhar", "ar": "الخبر" },
+                    "PostalZone": "31952",
+                    "CountrySubentity": { "en": "Riyadh", "ar": "الرياض" },
+                    "Country": { "IdentificationCode": "SA" }
+                }
+            }
+        },
+        "InvoiceLine": [
+            {
+                "ID": "1",
+                "Item": { "Name": { "en": "Cable", "ar": "كابل" }, "ClassifiedTaxCategory": { "ID": "S", "Percent": "15", "TaxScheme": { "ID": "VAT" } } },
+                "Price": {
+                    "PriceAmount": { "currencyID": "SAR", "value": "9000" },
+                    "BaseQuantity": { "unitCode": "MTR", "value": "10" },
+                    "AllowanceCharge": { "ChargeIndicator": "false", "BaseAmount": { "currencyID": "SAR", "value": "10000" }, "Amount": { "currencyID": "SAR", "value": "1000" } }
+                },
+                "InvoicedQuantity": { "unitCode": "MTR", "value": "10" },
+                "AllowanceCharge": [
+                    { "ChargeIndicator": "false", "BaseAmount": { "currencyID": "SAR", "value": "9000" }, "MultiplierFactorNumeric": "10", "Amount": { "currencyID": "SAR", "value": "900" }, "AllowanceChargeReason": { "ar": "خصم", "en": "Discount" }, "AllowanceChargeReasonCode": null }
+                ],
+                "LineExtensionAmount": { "currencyID": "SAR", "value": "8100" },
+                "TaxTotal": { "TaxAmount": { "currencyID": "SAR", "value": "1215" }, "RoundingAmount": { "currencyID": "SAR", "value": "9315" } }
+            }
+        ],
+        "AllowanceCharge": [
+            { "BaseAmount": { "currencyID": "SAR", "value": "10000" }, "MultiplierFactorNumeric": "5", "Amount": { "currencyID": "SAR", "value": "500" }, "TaxCategory": { "ID": "S", "Percent": "15", "TaxScheme": { "ID": "VAT" } } }
+        ],
+        "TaxTotal": [
+            { "TaxAmount": { "currencyID": "SAR", "value": "1140" }, "TaxSubtotal": [ { "TaxableAmount": { "currencyID": "SAR", "value": "7600" }, "TaxAmount": { "currencyID": "SAR", "value": "1140" }, "TaxCategory": { "ID": "S", "Percent": "15", "TaxScheme": { "ID": "VAT" } } } ] }
+        ],
+        "LegalMonetaryTotal": {
+            "LineExtensionAmount": { "currencyID": "SAR", "value": "8100" },
+            "AllowanceTotalAmount": { "currencyID": "SAR", "value": "500" },
+            "TaxExclusiveAmount": { "currencyID": "SAR", "value": "7600" },
+            "TaxInclusiveAmount": { "currencyID": "SAR", "value": "8740" },
+            "PrepaidAmount": { "currencyID": "SAR", "value": "0" },
+            "PayableAmount": { "currencyID": "SAR", "value": "8740" }
+        },
+        "PaymentMeans": [ { "PaymentMeansCode": "10", "InstructionNote": { "en": "10", "ar": "" }, "PayeeFinancialAccount": { "PaymentNote": { "en": "", "ar": "" } } } ]
+    },
+    "CustomFields": { "additionalProp1": "string" }
+}
+```
+
+### Response Parameters
+
+Successful request — HTTP Status 200:
+
+| Parameter | Type | Description |
+|---|---|---|
+| QRCode | String | Rendered QR Code image in base64-encoded PNG format. |
+| RawQRCode | String | QR Code payload in base64-encoded TLV format. |
+| SellerVatNumber | String | Seller VAT identification number. |
+| BuyerVatNumber | String | Buyer VAT identification number. |
+| Status | String | "Generated" if the request is successful. |
+| InvoiceType | String | Document Type: INV-INVOICE, CRN-CREDIT NOTE, DBN-DEBIT NOTE. |
+| InvoiceNumber | String | Invoice number. |
+| InvoiceDate | String | Format YYYY-MM-DD. Invoice date. |
+
+Failed request — HTTP Status 400:
+
+| Parameter | Type | Description |
+|---|---|---|
+| ErrorList | Array of Error Detail | Details of all errors |
+
+**Error Details**: `ErrorCode`, `ErrorMessage`, `ErrorSource`, `Path` (field throwing the error).
+
+### Sample Response
+
+Valid Response (200):
+
+```json
+{
+    "QRCode": "iVBORw0KGgoAAAANSUhEUgAAAcIAAAHCAQAAAABUY/T...",
+    "RawQRCode": "ARlHdWxmIEFyYWJpYW4gRXF1aXBtZW50IENvAg8zMDA0NTk4MDM4MDAwMDMDEzIwMjEtMDgtMTQgMTU6NDQ6MjAEBDg3NDAFBDExNDA=",
+    "SellerVatNumber": "300459803800003",
+    "BuyerVatNumber": "300761193700003",
+    "Status": "GENERATED",
+    "InvoiceType": "INV",
+    "InvoiceNumber": "K01082K5",
+    "InvoiceDate": "2021-08-14"
+}
+```
+
+Invalid Response (400):
+
+```json
+{
+    "ErrorList": [
+        { "ErrorCode": "6002", "ErrorMessage": "Invalid value for the field EInvoice.TaxTotal. Send the correct the value and try again", "ErrorSource": "CLEARTAX", "Path": "EInvoice.TaxTotal" }
+    ]
+}
+```

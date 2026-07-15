@@ -1,0 +1,31 @@
+---
+title: "Error Details Object"
+description: "Shape of the Error Details object returned by the ClearTax E-Invoicing KSA API"
+---
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| ErrorCode | String | Enum: 5002, 4040, 6002, 6003, 8001 | Mandatory. A code to identify the error. 5002 - User not found. 4040 - Unhandled Exception. 6002 - User Input Exception. 6003 - Resource Not Found. 8001 - Zatca Validation Exception. |
+| ErrorMessage | String | Cannot be empty. | Mandatory. Human readable error message. |
+| ErrorSource | String | Enum: ZATCA, CLEARTAX | Mandatory. Source of the error. ZATCA - Error message is from ZATCA. CLEARTAX - Error message is from ClearTax. |
+| Path | String | NA | Optional. If it is a validation error of a request data, it will point to the request data field. |
+
+### 401 Unauthorized
+
+```json
+{
+    "ErrorCode":"100401",
+    "ErrorMessage":"Authentication Failed",
+    "ErrorSource":"CLEARTAX"
+}
+```
+
+### 403 Forbidden
+
+```json
+{
+    "ErrorCode":"100403",
+    "ErrorMessage":"Authorization Failed",
+    "ErrorSource":"CLEARTAX"
+}
+```

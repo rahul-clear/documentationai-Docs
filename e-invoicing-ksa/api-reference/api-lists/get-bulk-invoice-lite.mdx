@@ -1,0 +1,137 @@
+---
+title: "Get Bulk Invoice Lite"
+description: "Get the status and error details in bulk for up to 500 invoices per request"
+---
+
+Get the E-Invoice status and error message details in bulk for invoices using unique identifiers of the invoice.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/v3/einvoices/get-bulk
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+<Callout kind="alert">
+Rate Limit: 10 API requests per minute
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty | Mandatory. User auth token. |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Invoices | List | Maximum invoice list can be up to 500 | Mandatory. List of Invoice objects. |
+| methodOfGeneration | String | Enum: ONLINE, OFFLINE | Optional. Default is both OFFLINE and ONLINE. |
+
+#### Invoices Object
+
+Send either `uniqueId`, or all four invoice parameters (`invoiceNumber`, `invoiceType`, `issueDate`, `vat`).
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| uniqueId | String | Should be present if the next 4 parameters are absent | Conditional. Concat of seller VAT + invoice ID + invoice type code + issue year, underscore-separated. |
+| invoiceNumber | String | NA | Conditional. Document Number (Invoice Reference Number). |
+| invoiceType | String | Enum: INV, CRN, DBN | Conditional. INV - Invoice, CRN - Credit Note, DBN - Debit Note |
+| issueDate | String | yyyy-mm-dd | Conditional. Document Date |
+| vat | String | NA | Conditional. VAT Number. |
+
+### Sample Request
+
+Without `methodOfGeneration`:
+
+```json
+{
+    "Invoices": [
+        { "invoiceNumber": "RR-INV-0001", "invoiceType": "INV", "issueDate": "2022-08-13", "vat": "12345678901234" },
+        { "uniqueId": "12345678901234_RR-INV-0002_388_2022" },
+        { "uniqueId": "12345678901234_RR-INV-0013_388_2022" }
+    ]
+}
+```
+
+With `methodOfGeneration` (optional, but speeds up lookup):
+
+```json
+{
+    "Invoices": [
+        { "invoiceNumber": "RR-INV-0001", "invoiceType": "INV", "issueDate": "2022-08-13", "vat": "12345678901234" },
+        { "uniqueId": "12345678901234_RR-INV-0002_388_2022" },
+        { "uniqueId": "12345678901234_RR-INV-0013_388_2022" }
+    ],
+   "methodOfGeneration": "ONLINE"
+}
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For successful retrieval |
+| 401 | If the user is not authenticated for the operation |
+| 403 | If the user is not authorized for the operation |
+| 429 | Too many requests |
+| 5XX | Unhandled exception |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| invoiceNumber | String | Cannot be null | Mandatory. Invoice number (ID) as per input. |
+| einvoiceStatus | Object | PENDING / REPORTED / NOT_REPORTED / ACCEPTED_WITH_WARNING / CLEARED / NOT_CLEARED | For clearance: CLEARED, NOT_CLEARED, ACCEPTED_WITH_WARNING. For reported: REPORTED, NOT_REPORTED, ACCEPTED_WITH_WARNING. |
+| errorCode | String | Can be empty if no error | Error code, when present. Error source may be ClearTax/ZATCA. |
+| errorMessage | String | Can be empty if no error | Human readable error message, when present. |
+
+### Sample Response (Success)
+
+```json
+[
+    { "invoiceNumber": "INVKSA2218811366", "einvoiceStatus": "CLEARED", "errorCode": "", "errorMessage": "" }
+]
+```
+
+```json
+[
+    {
+        "invoiceNumber": "13",
+        "einvoiceStatus": "NOT_REPORTED",
+        "errorCode": "BR-KSA-17, BR-CO-15",
+        "errorMessage": "Debit and credit note (invoice type code (BT-3) is equal to 383 or 381) must contain the reason (KSA-10) for this invoice type issuing., Invoice total amount with VAT (BT-112) = Invoice total amount without VAT (BT-109) + Invoice total VAT amount (BT-110)."
+    }
+]
+```
+
+### Sample Response (Error)
+
+```json
+[
+    { "invoiceNumber": "RR-INV-0001", "einvoiceStatus": "FAILED", "errorCode": "300102", "errorMessage": "You don't have any data present for the selected Document Details" }
+]
+```
+
+### API Validations
+
+1. The `uniqueId` passed in request params should be valid and must be present in ClearTax's data store.
+2. The four invoice info fields, or the `uniqueId`, must belong to the requesting user.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+2. Each customer is allowed to send a limited number of requests per minute to prevent server overload. If the limit is exceeded, the server will respond with a 429 Too Many Requests status code.
+3. The API accepts up to 500 invoices per request, with 10 threads running in parallel — so up to 5000 invoices can be requested concurrently.
+4. The API works only for invoices present in the ClearTax data store.
+5. Plan this API call 1 hour after sending the invoice to ClearTax. If still pending, plan subsequent calls at 2, 4, 8, 16, and 30 hours. An invoice will reach a terminal 'Failed' status by 30 hours at the latest if ZATCA remains non-responsive.
+6. If the auth token is valid, but the user does not have the authorization to fetch invoice details, the API will return HTTP Status Code 403 — the user must have an "Admin" role for the particular VAT used in the request.

@@ -1,0 +1,134 @@
+---
+title: "Send E-Invoice via Email"
+description: "Send generated E-Invoices to your customers via email"
+---
+
+You can use this API to send E-Invoices to your customers via email.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/v1/emails
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+<Callout kind="alert">
+Rate Limit: 10 API requests per minute
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty | Mandatory. User auth token. |
+| VAT | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+| branch | String | Should be a valid branch from the user account | Optional. Branch name (store name) added in the user account which maps to a VAT or Group VAT of the entity. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Attachments | Object | Cannot be null | Mandatory. Attachment Details Object. |
+| PreviewDetails | Object | Cannot be null | Mandatory. Communication details like Template Type and Email information. |
+
+#### Attachment Details Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| documentDetails | List\<Object\> | | Mandatory. Invoice details for which the e-Invoice is to be sent as an attachment. |
+| printTemplateId | String | | Mandatory. Template ID of the e-Invoice template to send, e.g. "39" (Standard Invoice Template). |
+| documentType | String | Enum: EINVOICE | Mandatory. Type of document to print. |
+
+**Document Details Object**
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| InvoiceNumber | String | | Mandatory. Invoice Number (Invoice Reference Number). |
+| IssueDate | String | YYYY-MM-DD | Mandatory. |
+| InvoiceType | String | Enum: INV, CRN, DBN | Mandatory. INV - Invoice, CRN - Credit Note, DBN - Debit Note. |
+| Seller VAT | String | | Mandatory. Must match the header VAT. |
+
+#### Preview Details Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| EmailTemplate | Object | Cannot be null. | Mandatory. Subject/template used in the email. |
+| CounterPartyDetails | List\<Object\> | Cannot be null. | Mandatory. |
+
+**Email Template Object**
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Type | String | Enum: INVOICE_GENERATED, INVOICE_PAYMENT_REMINDER | |
+
+**Counterparty Details Object**
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| ContactDetails | List\<Object\> | Cannot be Null | Mandatory. Email recipients — you can send to multiple recipients. |
+
+**Contact Details Object**
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Email | String | | |
+| EmailRecipientType | String | Enum: TO, CC, BCC | Mandatory. |
+
+### Sample Request
+
+```json
+{
+   "Attachments": {
+       "documentDetails": [
+           { "IssueDate": "2022-07-20", "InvoiceNumber": "2056", "InvoiceType": "INV", "Vat": "300492946900003" }
+       ],
+       "documentType": "EINVOICE",
+       "printTemplateId": "40"
+   },
+   "PreviewDetails": {
+       "Template": { "Type": "INVOICE_GENERATED" },
+       "CounterParties": [
+           { "Contacts": [ { "Email": "dharmendra.maurya@cleartax.in", "EmailRecipientType": "TO" } ] }
+       ]
+   }
+}
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For a successful retrieval, or if the invoice is not present / validation errors occur. |
+| 401 | If the user is not authenticated for the operation. |
+| 403 | If the user is not authorized for the operation. |
+| 429 | Too many requests |
+| 5XX | Unhandled exception. |
+
+### Sample Response (Error)
+
+HTTP Status Code - 200
+
+```json
+{
+   "ErrorList": [
+       { "ErrorCode": "6002", "ErrorMessage": "Document Number cannot be empty", "ErrorSource": "CLEARTAX", "Path": "attachments.documentDetails[0].documentNumber" }
+   ]
+}
+```
+
+### API Validations
+
+1. All documents given should be present in the ClearTax system.
+2. `printTemplateId` should be present in the ClearTax system.
+
+### API Constraints
+
+1. All documents given should be in generated or failed state (e.g. "CT QR Code status = GENERATED").
+2. Each customer is allowed to send a limited number of requests per minute to prevent server overload. If the limit is exceeded, the server will respond with a 429 Too Many Requests status code.

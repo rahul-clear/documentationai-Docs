@@ -1,0 +1,141 @@
+---
+title: "Register Device"
+description: "Generate a Device ID in ClearTax and generate the CSID and PCSID from ZATCA in a single request"
+---
+
+Generates Device ID in ClearTax and generates the CSID and PCSID from ZATCA.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/onboarding/register-device
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty. | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| DeviceDetails | Object | NA | Mandatory. Device Details Object |
+| OrganizationDetails | Object | NA | Mandatory. Organization Details Object. |
+| Otp | String | Should be a valid OTP. | Mandatory. The one-time password generated on ZATCA. Valid for 1 hour. |
+
+#### Device Details Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| CommonName | String | Cannot be empty. | Mandatory. Name or Asset Tracking Number used by the taxpayer for the Solution Unit being onboarded. |
+| EgsSerialNumber | String | RegEx: `^1-(?<manufacturer>[a-zA-Z0-9]+)[\|]2-(?<model>[a-zA-Z0-9]+)[\|]3-(?<serial>[a-zA-Z0-9]+)$` | Mandatory. Manufacturer/Solution Provider Name, Model/Version, and Serial Number. |
+| Location | String | Cannot be empty. | Mandatory. Address of the branch/location where the device is primarily situated. |
+| Industry | String | Cannot be empty. | Mandatory. Industry or sector for which the device will generate invoices. |
+| InvoiceType | String | RegEx: `^(?!0{4})[01]{2}[00]{2}$` | Optional. Document types the solution unit will generate, in "TSXY" format — T = Standard Tax Invoice, S = Simplified Tax Invoice, X/Y = reserved (set to 0). E.g. `1000` = Standard only, `0100` = Simplified only, `1100` = both. Default: 1100. |
+
+#### Organization Details Object
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Vat | String | 15 digits, starting and ending with 3 | Mandatory. VAT or Group VAT Registration Number. |
+| OrganizationName | String | Cannot be empty | Mandatory. Taxpayer/Organization Name. |
+| OrganizationUnitName | String | Free text if 11th digit of VAT ≠ 1; a 10-digit number if 11th digit = 1 | Mandatory. Branch name of the taxpayer, or the 10-digit TIN of the individual group member for Group VAT. |
+| CountryCode | String | 2-letter country code (ISO 3166 Alpha-2) | Mandatory. Country Code. |
+
+### Sample Request
+
+```json
+{
+    "DeviceDetails": {
+        "CommonName": "116.197.153.161",
+        "EgsSerialNumber": "egs013",
+        "Location": "loc",
+        "Industry": "industry",
+        "InvoiceType": "1100"
+    },
+    "OrganizationDetails": {
+        "Vat": "454345233",
+        "OrganizationName": "BMA",
+        "OrganizationUnitName": "Jeddah Branch 1234",
+        "CountryCode": "SA"
+    },
+    "Otp": "123345"
+}
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For a successful CSR/DeviceId generation. |
+| 400 | For any kind of validation issues. |
+| 401 | If the user is not authenticated for the operation. |
+| 403 | If the user is not authorized for the operation. |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Status | String | Enum: GENERATED, FAILED | Mandatory. Status of CSID Generation. |
+| DeviceId | String | NA | Mandatory. The Device ID that was generated in ClearTax. |
+| PcsidGenerationActivityId | String | NA | Optional. ID of the async activity generating the PCSID in the background. Save this to poll status via [Get PCSID Generation Status](/e-invoicing-ksa/api-reference/api-lists/get-pcsid-generation-status). |
+| ErrorList | Array | NA | Optional. Array of [Error Details objects](/e-invoicing-ksa/api-reference/resources-and-masters/error-details-object). |
+
+### Sample Response
+
+Success - HTTP Status Code - 200
+
+```json
+{
+    "Status": "GENERATED",
+    "DeviceId": "bcc98fdf-0867-4122-b530-e538a2f9e9c4",
+    "PcsidGenerationActivityId": "628f37b61ed71a6638b848e4",
+    "ErrorList": []
+}
+```
+
+Success — idempotent response - HTTP Status Code - 200
+
+```json
+{
+    "Status": "GENERATED",
+    "DeviceId": "6491cefa-f39e-46ab-a609-efa37b723bde",
+    "ErrorList": [
+        { "ErrorCode": "6002", "ErrorMessage": "A Device ID already exist with same VAT and EGS serial number", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+Error - HTTP Status Code - 400
+
+```json
+{
+    "Status": "FAILED",
+    "DeviceId": null,
+    "ErrorList": [
+        { "ErrorCode": "6002", "ErrorMessage": "Invalid country code", "ErrorSource": "CLEARTAX", "Path": "OrganizationDetails.CountryCode" },
+        { "ErrorCode": "6002", "ErrorMessage": "Invalid country code length, please provide a valid country code", "ErrorSource": "CLEARTAX", "Path": "OrganizationDetails.CountryCode" }
+    ]
+}
+```
+
+### API Validations
+
+1. The VAT for which the device is being registered needs to already be present in ClearTax before making this API request.
+2. There can be only one CSR against the `Vat` and `EgsSerialNumber` combination. A duplicate request returns the existing `DeviceId` along with Error Details (treat as a warning).
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+2. If the auth token is valid, but the user does not have the authorization to generate device ID, then the API will return HTTP Status Code 403. The user, whose auth token is used, should have an Admin role for the particular VAT used in the request.

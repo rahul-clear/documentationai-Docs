@@ -1,0 +1,89 @@
+---
+title: "Add Business units API"
+description: "Add a VAT and/or branch to your account's business hierarchy in a single API request"
+---
+
+Add VAT and/or Branch to the business hierarchy of your account in a single request.
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/v1/businessHierarchy
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty | Mandatory. User auth token. |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Vat | String | Must contain 15 digits. First and last digits must be "3". | Mandatory. |
+| VatDisplayName | String | NA | Optional. Registered business name of the VAT, visible on the web portal and for device registration. |
+| Branch | String | NA | Optional. Name of the branch/store to add under this VAT. |
+| OrganizationUnitName | String | If the 11th digit of VAT = 1, must be a TIN. Otherwise free text. | Optional. Branch name of the taxpayer, or the 10-digit TIN for Group VATs. |
+
+### Sample Request
+
+```json
+{
+   "Vat": "300492946901103",
+   "VatDisplayName": "vatName",
+   "Branch": "branchName",
+   "OrganizationUnitName": "legalName"
+}
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For successful retrieval. |
+| 400 | Bad request — unable to process JSON. |
+| 401 | If the user is not authenticated for the operation. |
+| 5XX | Unhandled exception. |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validation | Description |
+|---|---|---|---|
+| success | Boolean | NA | True or false |
+| Vat | String | NA | VAT registration number. |
+| VatDisplayName | String | NA | |
+| Branch | String | NA | If given. |
+| OrganizationUnitName | String | NA | |
+
+### Sample Response
+
+```json
+{
+   "Success": true,
+   "Vat": "300492946901103",
+   "VatDisplayName": "vatName",
+   "Branch": "branchName",
+   "OrganizationUnitName": "legalName"
+}
+```
+
+### API Validations
+
+- Only VAT is validated against GCC rules.
+- VAT should be a 15-digit number.
+- Only numeric values are allowed.
+
+### API Constraints
+
+- This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+- If the user wants to add a Branch, the "Branch" field must be present in the request — otherwise it will throw an error for an already existing VAT.

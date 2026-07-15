@@ -1,0 +1,46 @@
+---
+title: "How to register a device for a VAT?"
+description: "Step-by-step guide to onboard and register a device (Invoice Generation Solution Unit) for a VAT in ClearTax E-Invoicing KSA"
+---
+
+<Steps>
+  <Step title="Generate OTP from the ERAD portal" icon="key">
+    To register a device for a VAT, you first need to generate the OTP from the ERAD portal. Before generating the OTP, select the environment for which you want to register the device (Simulation / Production). See [How to generate OTP on ERAD Portal?](/e-invoicing-ksa/guides/how-to-generate-otp-on-erad-portal)
+
+    Save the OTP for further processing.
+  </Step>
+
+  <Step title="Log in to your ClearTax E-Invoicing account" icon="log-in">
+    Sandbox Account Link - [https://app-sandbox.cleartax.com/middle-east/ksa/einvoicing](https://app-sandbox.cleartax.com/middle-east/ksa/einvoicing)
+
+    Production Account Link - [https://app.cleartax.com/middle-east/ksa/einvoicing](https://app.cleartax.com/middle-east/ksa/einvoicing/)
+  </Step>
+
+  <Step title="Open Settings" icon="settings">
+    On the bottom left corner, click on “Settings”.
+  </Step>
+
+  <Step title="Switch to Phase II" icon="toggle-right">
+    On the sidebar menu, click on “Switch to phase II” and enable Phase 2 if it is not already enabled.
+  </Step>
+
+  <Step title="Add a new device" icon="plus">
+    On the sidebar, click on Devices, then select “ONLINE DEVICES”, then click on “Add new devices”.
+  </Step>
+
+  <Step title="Add device details" icon="edit">
+    Add a unique Common Name/Device Name, Industry, EGS serial number, and Location. Select Invoice Type as per your requirement (Standard / Simplified / Both).
+
+    Example EGS Number format: `1-TEST|2-CT|3-101`
+
+    After filling in all the details, click on “Save and Continue”.
+  </Step>
+
+  <Step title="Enter the OTP" icon="lock">
+    Enter the OTP saved from the ERAD Portal in step 1. The OTP must be entered within one hour of generation — after one hour it expires.
+  </Step>
+
+  <Step title="Save and continue" icon="check">
+    Click on “Save and Continue”. The registered devices list will show the status of each device (active or failed).
+  </Step>
+</Steps>

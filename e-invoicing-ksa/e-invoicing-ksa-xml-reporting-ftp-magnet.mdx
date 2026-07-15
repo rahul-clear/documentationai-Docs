@@ -1,0 +1,27 @@
+---
+title: "E-Invoicing KSA XML Reporting FTP Magnet"
+description: "Middleware to load signed XML invoices from your POS/store servers into ClearTax E-Invoicing KSA via FTP"
+---
+
+FTP Magnet is a middleware application between your FTP server and the ClearTax E-Invoicing KSA application. You can load signed XMLs generated at your POS/store servers into your own FTP server. As part of onboarding, ClearTax configures its FTP Magnet to connect to your FTP server. The FTP Magnet reads the input XML files from your FTP server and uploads them to the ClearTax E-Invoicing KSA application. Once the uploaded files are processed, it writes the response back to your FTP server.
+
+## Downloads
+
+<Callout kind="info">
+The specification document and typical project plan are hosted as a downloadable file in the source documentation and could not be migrated as inline content. Contact ClearTax support for the latest copy.
+</Callout>
+
+### Sample Request
+
+Request body: a signed reporting XML, structurally the same as the input to [Send Signed E-Invoice XML To ZATCA](/e-invoicing-ksa/api-reference/api-lists/send-signed-e-invoice-xml-to-zatca).
+
+<Callout kind="info">
+The success and error file templates are subject to change — both headers and column order may change. Map the output with flexible options to add or change headers in the future.
+</Callout>
+
+## Security
+
+Incoming requests from ClearTax to your FTP server are sent from the following IPs:
+
+- Sandbox: `150.230.54.220`
+- Production: `144.24.210.78`

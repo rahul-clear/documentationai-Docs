@@ -1,0 +1,101 @@
+---
+title: "Get E-Invoice PDF"
+description: "Get the PDF/A3 version of an E-Invoice with the XML attached, using invoice identifiers of data already sent to ClearTax"
+---
+
+Get the PDF/A3 version of an E-Invoice with the XML attached based on the invoice identifiers of the invoice data already sent to Clear earlier.
+
+### Request Method
+
+`GET`
+
+### Request URL
+
+```
+{{BASE_URL}}/v2/einvoices/print
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+<Callout kind="alert">
+Rate Limit: 1000 API requests per minute
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty. | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+| branch | String | Should be a valid branch from the user account | Optional. Branch name (store name) added in the user account which maps to a VAT or Group VAT of the entity. |
+
+### Request Query Params
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| invoiceNumber | String | NA | Mandatory. Document Number (Invoice Reference Number). |
+| issueDate | String | yyyy-mm-dd | Mandatory. Document Date |
+| invoiceType | String | Enum: INV, CRN, DBN, RECEIPT | Mandatory. INV - Invoice, CRN - Credit Note, DBN - Debit Note, RECEIPT - Receipt |
+| vat | String | NA | Mandatory. VAT Number |
+| templateId | String | NA | Optional. Default is "39" (Standard Invoice Template). See [How to get print template ID?](/e-invoicing-ksa/guides/how-to-get-print-template-id) |
+
+### Request Body
+
+There is no request body for this API.
+
+### Sample Request
+
+```
+https://api-sandbox.cleartax.com/middle-east/ksa/einvoicing/v2/einvoices/print?documentNumber=A0108211/01&documentType=INV&taxpayerId=300459805100003&documentDate=2021-11-12
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For successfully printed |
+| 400 | For any Clear validation error |
+| 401 | If the user is not authenticated for the operation |
+| 403 | If the user is not authorized for the operation |
+| 404 | If data is not present |
+| 429 | Too many requests |
+| 5XX | Unhandled exception |
+
+### Response Schema
+
+The response is a PDF file for a successful scenario. In case of an error, the response is an array of [Error Details objects](/e-invoicing-ksa/api-reference/resources-and-masters/error-details-object).
+
+### Sample Response (Success)
+
+HTTP Status Code - 200
+
+Response Body:
+
+```
+<filename>.pdf
+```
+
+### Sample Response (Error)
+
+HTTP Status Code - 404
+
+```json
+{
+    "ErrorList": [
+        { "ErrorCode": "300102", "ErrorMessage": "You don't have any data present for the selected Document Details", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+### API Validations
+
+1. `invoiceNumber`, `invoiceType`, `issueDate`, and `vat` should be valid, and the invoice data for this document must be present in Clear.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the authentication token is not present or is invalid, the API will return HTTP Status Code 401.
+2. Each customer is allowed to send a limited number of requests per minute to prevent server overload. If the limit is exceeded, the server will respond with a 429 Too Many Requests status code.
+3. If the authentication token is valid, but the user does not have the authorization to print the E-Invoice, the API will return HTTP Status Code 403.
+4. If the data is not present in Clear, the API will return HTTP Status Code 404.

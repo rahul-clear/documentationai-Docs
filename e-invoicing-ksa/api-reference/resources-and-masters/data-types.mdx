@@ -1,0 +1,32 @@
+---
+title: "Data Types"
+description: "Shared data types used across the ClearTax E-Invoicing KSA API, including the Dual String object"
+---
+
+## Dual String Object
+
+To comply with ZATCA guidelines, Clear provides an option to send String data in both Arabic (`ar`) and English (`en`).
+
+While the Arabic version is mandatory, the English version is optional. However, Clear recommends sending both versions, as it can be used to print the human-readable version of the invoice in the PDF/A3 document.
+
+A dual string object type is defined as below:
+
+```json
+{
+    "ar": "string",
+    "en": "string"
+}
+```
+
+### Example
+
+In the [E-Invoice object](/e-invoicing-ksa/api-reference/resources-and-masters/e-invoice-object), `Note` is a dual string object. It is annotated as shown below:
+
+```json
+{
+    "Note": {
+        "ar": ".هذه ملاحظة",
+        "en": "This is a note."
+    }
+}
+```

@@ -1,0 +1,100 @@
+---
+title: "Generate CSID and PCSID — Legacy"
+description: "Deprecated two-step CSID/PCSID generation endpoint, superseded by Register Device"
+---
+
+<Callout kind="alert">
+**A new version is available.** You can generate a Device ID, CSID, and PCSID all in one go with the current [Register Device](/e-invoicing-ksa/api-reference/api-lists/register-device) API.
+</Callout>
+
+Generates CSID and PCSID from ZATCA for a given Device ID (previously created via [Generate Device ID](/e-invoicing-ksa/api-reference/api-lists/legacy/generate-device-id)).
+
+### Request Method
+
+`POST`
+
+### Request URL
+
+```
+{{BASE_URL}}/onboarding/generate-csid
+```
+
+<Callout kind="info">
+Replace `{{BASE_URL}}` with the sandbox or production base URL from the [API Reference](/e-invoicing-ksa/api-reference/api-reference).
+</Callout>
+
+### Request Headers
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| x-cleartax-auth-token | String | Cannot be empty. | Mandatory. [User auth token](/e-invoicing-ksa/guides/how-to-get-e-invoicing-ksa-auth-token). |
+| vat | String | Cannot be empty | Mandatory. VAT or Group VAT of the entity. |
+
+### Request Body
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| DeviceId | String | Cannot be empty. | Mandatory. The Device ID received from the Generate Device ID API. |
+| Otp | String | Should be a valid OTP. | Mandatory. The one-time password generated on the ZATCA portal, valid for 1 hour. |
+
+### Sample Request
+
+```json
+{
+    "DeviceId": "4f190640-9b36-42e9-88d1-0c31a961898d",
+    "Otp": "123345"
+}
+```
+
+### Response Status Codes
+
+| HTTP Status Code | Description |
+|---|---|
+| 200 | For a successful CSID generation and PCSID generation trigger. |
+| 400 | For any kind of validation issues. |
+| 401 | If the user is not authenticated for the operation. |
+| 403 | If the user is not authorized for the operation. |
+
+### Response Schema
+
+| Parameter | Data Type | Field Validations | Description |
+|---|---|---|---|
+| Status | String | Enum: GENERATED, FAILED | Mandatory. CSID generation status. |
+| DeviceId | String | NA | Mandatory. Device ID sent in the request. |
+| PcsidGenerationActivityId | String | MaxLength: 24 | Optional. PCSID Generation Activity ID — save this to poll status via the Get PCSID Generation Status API. |
+| ErrorList | Array | NA | Optional. Array of [Error Details objects](/e-invoicing-ksa/api-reference/resources-and-masters/error-details-object). |
+
+### Sample Response
+
+Success - HTTP Status Code - 200
+
+```json
+{
+    "DeviceId": "e0649f12-011c-47ac-a867-651f38426450",
+    "Status": "GENERATED",
+    "PcsidGenerationActivityId": "62972e815bc1fa6cd2835c41",
+    "ErrorList": []
+}
+```
+
+Error - HTTP Status Code - 400
+
+```json
+{
+    "DeviceId": "dac1aa05-92ba-4bd6-a834-b665e8f89930",
+    "Status": "FAILED",
+    "ErrorList": [
+        { "ErrorCode": "6002", "ErrorMessage": "Production CSID already generated for device", "ErrorSource": "CLEARTAX" }
+    ]
+}
+```
+
+### API Validations
+
+1. A PCSID should not have already been generated for the Device ID. This API is not idempotent — a duplicate request throws an exception.
+2. A CSR should have already been created for the Device ID in ClearTax.
+
+### API Constraints
+
+1. This API needs to be authenticated with a valid user authentication token. If the auth token is not present or is invalid, the API will return HTTP Status Code 401.
+2. If the auth token is valid, but the user does not have the authorization to generate device ID, then the API will return HTTP Status Code 403. The user, whose auth token is used, should have an Admin role for the particular VAT used in the request.

@@ -1,0 +1,43 @@
+---
+title: "How to generate OTP on ERAD Portal?"
+description: "Step-by-step guide to generate a one-time password (OTP) on ZATCA's ERAD portal for device onboarding"
+---
+
+<Steps>
+  <Step title="Log in to the Taxation Portal (ERAD)" icon="log-in">
+    Go to the Taxation Portal (ERAD) at [https://login.gazt.gov.sa/irj/portal](https://login.gazt.gov.sa/irj/portal?ume.logon.locale=en&login=X) and log in using your ERAD credentials.
+  </Step>
+
+  <Step title="Review the main landing page" icon="layout">
+    The main landing page has the following sections:
+
+    - Onboard new solution unit/device
+    - Renew existing Cryptographic Stamp Identifier (CSID)
+    - View list of solutions and devices
+    - Onboarding API documentation
+  </Step>
+
+  <Step title="Onboard a new solution unit/device" icon="plus">
+    Click on the “Onboard new solution unit/device” tile.
+  </Step>
+
+  <Step title="Generate the OTP(s)" icon="key">
+    Choose to generate OTP(s) for a single device or multiple devices. Based on the number of devices you want to register, enter "1" or more (up to 100 per request), then click on “Generate OTP Code”.
+
+    <Callout kind="info">
+    To generate more than 100 OTPs, request them in batches of 100.
+    </Callout>
+  </Step>
+
+  <Step title="Save the OTP(s)" icon="save">
+    The E-invoicing Onboarding and Management Portal will generate the OTP(s) and display them on the portal. Copy or download them to a file so you can use them to register the device on ClearTax later.
+
+    <Callout kind="alert">
+    Once an OTP is generated, it is valid for 1 hour only. You need to register the device within 1 hour of generation.
+    </Callout>
+  </Step>
+
+  <Step title="Register the device" icon="check">
+    To register the device, paste the copied OTP into the ClearTax portal or use it in the Register Device API.
+  </Step>
+</Steps>

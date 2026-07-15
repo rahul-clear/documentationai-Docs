@@ -1,0 +1,63 @@
+---
+title: "API Lists"
+description: "Full list of ClearTax E-Invoicing KSA API endpoints for onboarding, invoice generation, and retrieval"
+---
+
+Endpoints for device onboarding, invoice generation (JSON and XML), retrieval, printing, and email delivery. Phase I-only endpoints are listed separately under Legacy — use the current endpoints below for new integrations.
+
+## Current
+
+<Columns cols="2">
+  <Card title="Generate E-Invoice" href="/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice" icon="file-plus">
+    Generate a Standard or Simplified E-Invoice via JSON and send it to ZATCA for clearance or reporting.
+  </Card>
+  <Card title="Generate E-Invoice Async" href="/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-async" icon="clock">
+    Generate a Simplified (B2C) E-Invoice synchronously, report to ZATCA asynchronously.
+  </Card>
+  <Card title="Generate E-Invoice via XML" href="/e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-via-xml" icon="file-code">
+    Generate an E-Invoice from an unsigned XML file.
+  </Card>
+  <Card title="Send Signed E-Invoice XML To ZATCA" href="/e-invoicing-ksa/api-reference/api-lists/send-signed-e-invoice-xml-to-zatca" icon="send">
+    Submit an already-signed E-Invoice XML for clearance or reporting.
+  </Card>
+  <Card title="Register Device" href="/e-invoicing-ksa/api-reference/api-lists/register-device" icon="smartphone">
+    Generate a Device ID and its CSID/PCSID from ZATCA in one call.
+  </Card>
+  <Card title="Get PCSID Generation Status" href="/e-invoicing-ksa/api-reference/api-lists/get-pcsid-generation-status" icon="activity">
+    Poll the status of an async PCSID generation activity.
+  </Card>
+  <Card title="Renew PCSID" href="/e-invoicing-ksa/api-reference/api-lists/renew-pcsid" icon="refresh-cw">
+    Renew the PCSID for an existing Device ID.
+  </Card>
+  <Card title="Get Invoice" href="/e-invoicing-ksa/api-reference/api-lists/get-invoice" icon="file-search">
+    Fetch full e-Invoice details for a single invoice.
+  </Card>
+  <Card title="Get Bulk Invoice Lite" href="/e-invoicing-ksa/api-reference/api-lists/get-bulk-invoice-lite" icon="list">
+    Fetch status and error details in bulk, up to 500 invoices per request.
+  </Card>
+  <Card title="Get E-Invoice PDF" href="/e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf" icon="file-text">
+    Get a PDF/A3 rendering of a previously generated invoice.
+  </Card>
+  <Card title="Get E-Invoice PDF/A-3 with PDF API" href="/e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf-a-3-with-pdf-api" icon="file-text">
+    Convert your own PDF into a PDF/A-3 with embedded XML.
+  </Card>
+  <Card title="Send E-Invoice via Email" href="/e-invoicing-ksa/api-reference/api-lists/send-e-invoice-via-email" icon="mail">
+    Email a generated E-Invoice to your customer.
+  </Card>
+  <Card title="Add Business units API" href="/e-invoicing-ksa/api-reference/api-lists/add-business-units-api" icon="briefcase">
+    Add a VAT and/or branch to your account hierarchy.
+  </Card>
+</Columns>
+
+## Legacy (Phase I)
+
+<Callout kind="alert">
+These endpoints are valid only for ZATCA Phase I. For Phase II integrations, use the current endpoints above.
+</Callout>
+
+<Columns cols="2">
+  <Card title="Generate E-Invoice (Phase I)" href="/e-invoicing-ksa/api-reference/api-lists/legacy/generate-e-invoice-phase-i" icon="archive" />
+  <Card title="Generate QR Code (Phase I)" href="/e-invoicing-ksa/api-reference/api-lists/legacy/generate-qr-code-phase-i" icon="archive" />
+  <Card title="Generate Device ID" href="/e-invoicing-ksa/api-reference/api-lists/legacy/generate-device-id" icon="archive" />
+  <Card title="Generate CSID and PCSID" href="/e-invoicing-ksa/api-reference/api-lists/legacy/generate-csid-and-pcsid" icon="archive" />
+</Columns>
