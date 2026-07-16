@@ -91,126 +91,126 @@
               {
                 "title": "Generate Access Token API",
                 "path": "e-invoicing-ksa/api-reference/generate-access-token-api"
-              }
-            ]
-          },
-          {
-            "group": "Resources and Masters",
-            "icon": "database",
-            "pages": [
-              {
-                "title": "Resources and Masters",
-                "path": "e-invoicing-ksa/api-reference/resources-and-masters/resources-and-masters"
               },
               {
-                "title": "UAT Checklist",
-                "path": "e-invoicing-ksa/api-reference/resources-and-masters/uat-checklist"
+                "group": "Resources and Masters",
+                "icon": "database",
+                "pages": [
+                  {
+                    "title": "Resources and Masters",
+                    "path": "e-invoicing-ksa/api-reference/resources-and-masters/resources-and-masters"
+                  },
+                  {
+                    "title": "UAT Checklist",
+                    "path": "e-invoicing-ksa/api-reference/resources-and-masters/uat-checklist"
+                  },
+                  {
+                    "title": "E-Invoice Object",
+                    "path": "e-invoicing-ksa/api-reference/resources-and-masters/e-invoice-object"
+                  },
+                  {
+                    "title": "Error Details Object",
+                    "path": "e-invoicing-ksa/api-reference/resources-and-masters/error-details-object"
+                  },
+                  {
+                    "title": "Data Types",
+                    "path": "e-invoicing-ksa/api-reference/resources-and-masters/data-types"
+                  },
+                  {
+                    "title": "Code Lists",
+                    "path": "e-invoicing-ksa/api-reference/code-lists"
+                  },
+                  {
+                    "title": "Common Errors and Resolution",
+                    "path": "e-invoicing-ksa/api-reference/resources-and-masters/common-errors-and-resolution"
+                  }
+                ]
               },
               {
-                "title": "E-Invoice Object",
-                "path": "e-invoicing-ksa/api-reference/resources-and-masters/e-invoice-object"
-              },
-              {
-                "title": "Error Details Object",
-                "path": "e-invoicing-ksa/api-reference/resources-and-masters/error-details-object"
-              },
-              {
-                "title": "Data Types",
-                "path": "e-invoicing-ksa/api-reference/resources-and-masters/data-types"
-              },
-              {
-                "title": "Code Lists",
-                "path": "e-invoicing-ksa/api-reference/code-lists"
-              },
-              {
-                "title": "Common Errors and Resolution",
-                "path": "e-invoicing-ksa/api-reference/resources-and-masters/common-errors-and-resolution"
-              }
-            ]
-          },
-          {
-            "group": "API Lists",
-            "icon": "list",
-            "pages": [
-              {
-                "title": "API Lists",
-                "path": "e-invoicing-ksa/api-reference/api-lists/api-lists"
-              },
-              {
-                "title": "Generate E-Invoice",
-                "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice"
-              },
-              {
-                "title": "Additional Standard (B2B) E-Invoice Examples",
-                "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice/additional-standard-b2b-e-invoice-examples"
-              },
-              {
-                "title": "Additional Simplified (B2C) E-Invoice Examples",
-                "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice/additional-simplified-b2c-e-invoice-examples"
-              },
-              {
-                "title": "Generate E-Invoice Async",
-                "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-async"
-              },
-              {
-                "title": "Generate E-Invoice via XML",
-                "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-via-xml"
-              },
-              {
-                "title": "Send Signed E-Invoice XML To ZATCA",
-                "path": "e-invoicing-ksa/api-reference/api-lists/send-signed-e-invoice-xml-to-zatca"
-              },
-              {
-                "title": "Register Device",
-                "path": "e-invoicing-ksa/api-reference/api-lists/register-device"
-              },
-              {
-                "title": "Get PCSID Generation Status",
-                "path": "e-invoicing-ksa/api-reference/api-lists/get-pcsid-generation-status"
-              },
-              {
-                "title": "Renew PCSID",
-                "path": "e-invoicing-ksa/api-reference/api-lists/renew-pcsid"
-              },
-              {
-                "title": "Get Invoice",
-                "path": "e-invoicing-ksa/api-reference/api-lists/get-invoice"
-              },
-              {
-                "title": "Get Bulk Invoice Lite",
-                "path": "e-invoicing-ksa/api-reference/api-lists/get-bulk-invoice-lite"
-              },
-              {
-                "title": "Get E-Invoice PDF",
-                "path": "e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf"
-              },
-              {
-                "title": "Get E-Invoice PDF/A-3 with PDF API",
-                "path": "e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf-a-3-with-pdf-api"
-              },
-              {
-                "title": "Send E-Invoice via Email",
-                "path": "e-invoicing-ksa/api-reference/api-lists/send-e-invoice-via-email"
-              },
-              {
-                "title": "Add Business units API",
-                "path": "e-invoicing-ksa/api-reference/api-lists/add-business-units-api"
-              },
-              {
-                "title": "Generate E-Invoice (Phase I) — Legacy",
-                "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-e-invoice-phase-i"
-              },
-              {
-                "title": "Generate QR Code (Phase I) — Legacy",
-                "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-qr-code-phase-i"
-              },
-              {
-                "title": "Generate Device ID — Legacy",
-                "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-device-id"
-              },
-              {
-                "title": "Generate CSID and PCSID — Legacy",
-                "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-csid-and-pcsid"
+                "group": "API Lists",
+                "icon": "list",
+                "pages": [
+                  {
+                    "title": "API Lists",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/api-lists"
+                  },
+                  {
+                    "title": "Generate E-Invoice",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice"
+                  },
+                  {
+                    "title": "Additional Standard (B2B) E-Invoice Examples",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice/additional-standard-b2b-e-invoice-examples"
+                  },
+                  {
+                    "title": "Additional Simplified (B2C) E-Invoice Examples",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice/additional-simplified-b2c-e-invoice-examples"
+                  },
+                  {
+                    "title": "Generate E-Invoice Async",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-async"
+                  },
+                  {
+                    "title": "Generate E-Invoice via XML",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/generate-e-invoice-via-xml"
+                  },
+                  {
+                    "title": "Send Signed E-Invoice XML To ZATCA",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/send-signed-e-invoice-xml-to-zatca"
+                  },
+                  {
+                    "title": "Register Device",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/register-device"
+                  },
+                  {
+                    "title": "Get PCSID Generation Status",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/get-pcsid-generation-status"
+                  },
+                  {
+                    "title": "Renew PCSID",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/renew-pcsid"
+                  },
+                  {
+                    "title": "Get Invoice",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/get-invoice"
+                  },
+                  {
+                    "title": "Get Bulk Invoice Lite",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/get-bulk-invoice-lite"
+                  },
+                  {
+                    "title": "Get E-Invoice PDF",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf"
+                  },
+                  {
+                    "title": "Get E-Invoice PDF/A-3 with PDF API",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/get-e-invoice-pdf-a-3-with-pdf-api"
+                  },
+                  {
+                    "title": "Send E-Invoice via Email",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/send-e-invoice-via-email"
+                  },
+                  {
+                    "title": "Add Business units API",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/add-business-units-api"
+                  },
+                  {
+                    "title": "Generate E-Invoice (Phase I) — Legacy",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-e-invoice-phase-i"
+                  },
+                  {
+                    "title": "Generate QR Code (Phase I) — Legacy",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-qr-code-phase-i"
+                  },
+                  {
+                    "title": "Generate Device ID — Legacy",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-device-id"
+                  },
+                  {
+                    "title": "Generate CSID and PCSID — Legacy",
+                    "path": "e-invoicing-ksa/api-reference/api-lists/legacy/generate-csid-and-pcsid"
+                  }
+                ]
               }
             ]
           },
