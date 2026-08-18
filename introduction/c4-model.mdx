@@ -1,0 +1,46 @@
+---
+title: "C4 Model"
+description: "The 4-corner decentralised e-invoicing framework exchanging invoices via certified Access Points"
+---
+
+The 4-corner model is a decentralised e-invoicing framework that facilitates the exchange of structured invoices between suppliers and buyers through certified intermediaries known as Access Points, without a tax authority as a direct party to the exchange. It standardises communication protocols and data formats, letting businesses transact with any number of trading partners through a single connection instead of maintaining separate direct integrations with each one.
+
+## The four corners
+
+- **Corner 1 - Supplier (sender)** - initiates the transaction by producing the structured invoice; accuracy here is critical since it drives all downstream automation.
+- **Corner 2 - Supplier's Access Point (e.g. ClearTax)** - the supplier's certified gateway to the network; authenticates, validates, and forwards the invoice to the correct destination.
+- **Corner 3 - Buyer's Access Point** - the buyer's certified representative; verifies the invoice, enforces compliance checks, and makes it compatible with the buyer's systems.
+- **Corner 4 - Buyer (receiver)** - accepts the invoice and processes it internally, including validation, purchase-order reconciliation, and payment.
+
+## How the transaction flows
+
+1. **Invoice creation** - the supplier generates a structured invoice aligned with the relevant standard (e.g. EN 16931 in Europe), ensuring cross-system compatibility.
+2. **Submission to the sending Access Point** - the invoice is transmitted to the supplier's Access Point, where format validation and basic compliance checks are performed before forwarding.
+3. **Intelligent routing across the network** - the Access Point identifies the recipient's endpoint using the network's discovery infrastructure, removing the need for manual configuration or prior system alignment.
+4. **Validation at the receiving Access Point** - the buyer's Access Point performs additional verification, ensuring the invoice meets required standards and is free of structural or data errors.
+5. **Delivery and system integration** - the invoice is delivered directly into the buyer's ERP or accounting system, enabling automated matching, approval, and payment workflows.
+
+## Why it matters
+
+- **Regulatory compliance** - aligns structured invoice exchange with national and regional standards as more markets move toward mandatory e-invoicing.
+- **Simplified integration landscape** - replaces the need for separate connections per trading partner with a single connection that supports multiple relationships.
+- **Operational efficiency** - automates the invoicing lifecycle from validation to posting, minimising delays and manual intervention.
+- **Cost optimisation** - reduces the overhead of maintaining multiple integrations and manual processes by standardising communication.
+- **Enhanced auditability** - every transaction is recorded and traceable across the network, easing audits and long-term record-keeping.
+- **ERP and system impact** - connects directly with ERP systems for real-time invoice processing, more accurate reporting, and faster reconciliation.
+
+## How it compares
+
+- **vs. the 5-corner (C5) model** - the 4-corner model links businesses through Access Points only; the 5-corner model adds the tax authority as a fifth corner for real-time reporting and compliance monitoring.
+
+## Example: Germany
+
+Germany's move to mandatory e-invoicing uses the Peppol 4-corner model as its backbone, requiring invoices to be exchanged as structured data (e.g. EN 16931-aligned) between certified Access Points rather than as PDFs or paper documents.
+
+<Image src="/images/introduction/c4-model-germany.png" alt="Diagram of Germany's Peppol 4-corner e-invoicing model" />
+
+<Callout kind="info">
+**Live in** → Belgium, Germany, Croatia
+
+**Coming Soon** → Norway
+</Callout>

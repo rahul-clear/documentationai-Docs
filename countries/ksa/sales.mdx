@@ -1,0 +1,43 @@
+---
+title: "KSA — Sales"
+description: "Sales-side e-invoicing flow for KSA: B2B standard invoices and B2C simplified invoices"
+---
+
+## Sales Side Flow
+
+<Expandable title="B2B - Standard Invoices" default-open="true">
+
+Standard invoices apply to company-to-company transactions.
+
+1. Your ERP builds the invoice
+2. ClearTax generates the e-invoice via the **Generate E-Invoice** API (JSON) or **Generate E-Invoice via XML** (from an unsigned XML file) - or, if you sign the XML yourself, submit it directly via **Send Signed E-Invoice XML to ZATCA**
+3. ClearTax signs and clears it with ZATCA in real time
+4. A QR code and cleared XML are returned to you, and can be fetched anytime via **Get Invoice** / **Get Bulk Invoice Lite**, or rendered as a PDF/A-3 via **Get E-Invoice PDF**
+
+The buyer's VAT number is required whenever the buyer is VAT-registered.
+
+<Callout kind="info">
+  <Image src="/images/ksa/b2b-callout.png" alt="B2B standard invoice clearance flow" />
+</Callout>
+
+</Expandable>
+
+<Expandable title="B2C - Simplified Invoices" default-open="true">
+
+Simplified invoices apply to individual (non-VAT-registered) buyers.
+
+- A QR code is always required
+- Invoices are *reported* to ZATCA rather than cleared in real time, and can be generated via **Generate E-Invoice Async** - the invoice is created synchronously, and reporting to ZATCA happens asynchronously in the background
+- Reporting status can be checked and PDFs/bulk statuses retrieved via the same **Get Invoice**, **Get Bulk Invoice Lite**, and **Get E-Invoice PDF** endpoints used for B2B
+
+**Device onboarding** (required once, before either flow can be used):
+
+1. Generate an OTP on the ERAD portal
+2. Register your device via the **Register Device** API to receive a Device ID, CSID, and PCSID in one call
+3. PCSID status can be polled via **Get PCSID Generation Status**, and renewed via **Renew PCSID** ahead of expiry
+
+<Callout kind="info">
+  <Image src="/images/ksa/b2c-callout.png" alt="B2C simplified invoice reporting flow" />
+</Callout>
+
+</Expandable>

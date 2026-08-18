@@ -1,0 +1,26 @@
+---
+title: "SOW — Core — Belgium"
+description: "Statement of Work for ClearTax's core Belgium e-invoicing platform access"
+---
+
+Access to the ClearTax Belgium e-invoicing platform to send, receive, and report invoices via ClearTax's certified Peppol Access Point (AP), keeping you compliant with the FPS Finance (FOD Financiën) e-invoicing mandate.
+
+**Regulatory basis** — Structured e-invoicing for domestic B2B transactions between VAT-registered businesses is mandatory from 1 January 2026, overseen by FPS Finance, using the Peppol network in EN 16931-compliant formats (UBL 2.1 or CII). A three-month tolerance period on penalties ended 31 March 2026. Source: [FPS Finance - E-invoicing](https://finance.belgium.be/en/enterprises/vat/e-invoicing)
+
+## Scope
+
+1. **Onboarding** — ClearTax registers your Belgian Enterprise Number (KBO/BCE) and VAT number in the global Peppol Directory, so buyers and suppliers across Europe can discover your endpoint automatically
+2. **Type of transactions covered (AP and AR side)**
+   1. B2B
+3. **Type of documents covered** — invoices, credit notes, debit notes, issued in standard Peppol BIS Billing 3.0 (UBL 2.1) format, plus self-billed invoicing under the Peppol BIS Self-Billing specification
+4. **Govt reporting** — not applicable; Belgium's mandate runs on peer-to-peer Peppol exchange rather than direct government reporting
+5. **Lifecycle management** — invoice statuses and responses (Acknowledgement, Acceptance, Rejection) are communicated with counterparties using standard Peppol BIS Invoice Response 3.0 messages
+6. **SLAs** — not applicable; no mandated reporting SLA under the current Belgian mandate
+7. **RBAC** — role-based access control lets your workspace administrator assign users to roles with different permissions, controlling who can view, create, approve, or act on invoices within your workspace, in line with your internal segregation-of-duties requirements
+
+## Channels supported
+
+1. **API** — REST endpoints for sending invoices, checking network delivery status, querying documents, processing invoice response messages, and managing data workflows
+2. **Manual Ingestion** — direct upload via the ClearTax web platform
+3. **SFTP** — standard Excel or CSV files
+- **Belgian National & Peppol business scenarios** — ClearTax supports the standard range of business scenarios and syntax rules defined under OpenPEPPOL and Belgian national extensions (standard VAT treatments, reverse charges, zero-rated sales, intra-community transactions, and commercial discounts).

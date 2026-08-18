@@ -1,0 +1,188 @@
+---
+title: "UAE — Setup & Reference"
+description: "UAE API documentation and invoice status lifecycle reference"
+---
+
+## API Documentation
+
+<Callout kind="alert">
+Coming soon
+</Callout>
+
+## Invoice Status Lifecycle
+
+### 5 Corner Peppol Exchange Network
+
+The UAE has adopted the 5 Corner Peppol model for exchanging invoices. The network is used for:
+
+- Exchanging of invoices between Seller and Buyer
+- Reporting of invoices to FTA
+
+A brief snapshot of the invoice exchange process and the role of all stakeholders is as follows. The 5 corners are:
+
+- C1 - The Seller
+- C2 - Seller's Access Point
+- C3 - Buyer's Access Point
+- C4 - Buyer
+- C5 - FTA
+
+Reporting to FTA happens in the form of a Tax Data Document (TDD), which is a subset of the fields of the invoice.
+
+ClearTax could act as either Access Point, or both, depending on the taxpayer's selection of ASPs.
+
+### Document and Government Reporting Status
+
+There are two statuses available in the ClearTax e-invoicing product:
+
+- **Document Status** - for tracking invoice exchange between sender and recipient
+- **Government Reporting Status** - for tracking invoice data (Tax Data Document) reporting to FTA
+
+**Document Status** values:
+
+- **Pending** - the invoice has not been sent to C2
+- **Submitted to Exchange Network** - the invoice has been received by C2 after successfully clearing all validations as per Pint AE and UAE e-Invoicing/VAT guidelines
+- **Delivered to Buyer Network** - the invoice has been successfully sent by C2 and has been received by C3 for validation
+- **Delivered to Buyer** - the invoice has been validated by C3 and has been delivered to the buyer's system
+- **Failed** - the invoice delivery to the buyer has failed. Possible reasons:
+  - Syntax/business rule validation failed at C2
+  - C3 is down for an extended period due to which automatic retries are exhausted
+  - Syntax/business rule validation failed at C3
+  - C4 is permanently not reachable
+
+**Government Reporting Status** values:
+
+- **Not Submitted** - the TDD has not been sent to C5
+- **Processing** - the TDD has been received by C5
+- **Accepted** - the TDD has been validated successfully by C5
+- **Withdrawn** - the TDD has been withdrawn from C5's records due to failure of invoice exchange
+
+### Scenario: Happy Case
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validated by C2 | Pending | Not Submitted |
+| 3 | TDD Created | Pending | Not Submitted |
+| 4 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 6 | TDD Received by C5 | Delivered to Buyer Network | Processing |
+| 7 | Invoice Received by C4 | Delivered to Buyer | Processing |
+| 8 | TDD Validated by C5 | Delivered to Buyer | Accepted |
+
+### Scenario: Invoice Validation Failed at C2
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validation Failed by C2 | Failed | Not Submitted |
+
+**Next steps for the user/taxpayer:** User to check the failure reason and modify the invoice accordingly and attempt again.
+
+### Scenario: Invoice Validation Failed at C3
+
+Invoices could fail validation at C3 in the following cases:
+
+- Discrepancies between validation rules at C2 and C3 due to updates from the FTA
+- Invoices sent to C3 get corrupted in transit
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validated by C2 | Pending | Not Submitted |
+| 3 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 4 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Validation Failed by C3 | Failed | Processing |
+| 6 | TDD Received by C5 | Failed | Processing |
+| 7 | TDD Validated by C5 | Failed | Accepted |
+| 8 | TDD Withdrawn from C5 | Failed | Withdrawn |
+
+**Next steps for the user/taxpayer:** User to check the failure reason and modify the invoice accordingly and attempt again.
+
+### Scenario: Buyer's Access Point Temporarily Unavailable
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validated by C2 | Pending | Not Submitted |
+| 3 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 4 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Reception Failure by C3 (1/3 Retry) | Submitted to Exchange Network | Not Submitted |
+| 6 | TDD Received by C5 | Submitted to Exchange Network | Processing |
+| 7 | Invoice Reception Failure by C3 (2/3 Retry) | Submitted to Exchange Network | Processing |
+| 8 | TDD Validated by C5 | Submitted to Exchange Network | Accepted |
+| 9 | Invoice Reception Failure by C3 (3/3 Retry) | Failed | Accepted |
+| 10 | TDD Withdrawn from C5 | Failed | Withdrawn |
+
+**Next steps for the user/taxpayer:** Retry the invoice at a later point in time without changing any part of the invoice data.
+
+### Scenario: FTA Validation Issue on the TDD
+
+This can happen if the TDD extracted from an invoice doesn't pass validation at the FTA, or the TDD is corrupted in transit.
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validated by C2 | Pending | Not Submitted |
+| 3 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 4 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 6 | TDD Received by C5 | Delivered to Buyer Network | Processing |
+| 7 | Invoice Received by C4 | Delivered to Buyer | Processing |
+| 8 | TDD validation issue flagged by C5 | Delivered to Buyer | Processing |
+
+**Next steps for the user/taxpayer:** No action needed - ClearTax automatically corrects the TDD and resubmits it to the FTA. This typically resolves within one business day and does not affect your invoice's delivery.
+
+### Scenario: FTA Reporting System Temporarily Unavailable
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validated by C2 | Pending | Not Submitted |
+| 3 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 4 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 6 | TDD Reception Failure by C5 (1/3 Retry) | Delivered to Buyer Network | Processing |
+| 7 | Invoice Received by C4 | Delivered to Buyer | Processing |
+| 8 | TDD Reception Failure by C5 (2/3 Retry) | Delivered to Buyer Network | Processing |
+| 9 | TDD Reception Failure by C5 (3/3 Retry) | Delivered to Buyer Network | Processing |
+
+**Next steps for the user/taxpayer:** No action needed - ClearTax automatically retries the TDD submission until it reaches Accepted status.
+
+### Scenario: Buyer's System Permanently Unreachable
+
+| SNo | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice Ingestion Success | Pending | Not Submitted |
+| 2 | Invoice Validated by C2 | Pending | Not Submitted |
+| 3 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 4 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 6 | TDD Received by C5 | Delivered to Buyer Network | Processing |
+| 7 | Invoice Reception Failure by C4 | Failed | Processing |
+| 8 | TDD Validated by C5 | Failed | Accepted |
+| 9 | TDD Withdrawn from C5 | Failed | Withdrawn |
+
+**Next steps for the user/taxpayer:** Contact the buyer offline and request them to share the correct Peppol endpoint that can actively receive invoices. Do not send any fresh invoices to the endpoint that has been marked as permanently unavailable.
+
+### MLS (Message Level Status)
+
+- MLS is the Peppol-defined mechanism through which both C3 and C5 report the outcome of delivering the invoice and TDD back to C2
+- It is the underlying signal that drives most of the Document Status and Government Reporting Status transitions described in the scenarios above
+- Each time C2 receives an MLS it also gets a Response Code along with it:
+
+| Response Code | Meaning |
+| --- | --- |
+| AP | Delivered successfully with Confirmation |
+| AB | Delivered/forwarded without Confirmation |
+| RE | Rejection |
+
+MLS-RE is accompanied by a Reason Code:
+
+| Reason Code | Meaning |
+| --- | --- |
+| SV | XML schema validation error |
+| BV | Business rule / standards violation |
+| BW | Business rule / standards warning (non-fatal) |
+| FD | Failure of Delivery - Endpoint unreachable |
+
+If C4 is permanently down, C3 will return MLS-RE (FD) to C2.

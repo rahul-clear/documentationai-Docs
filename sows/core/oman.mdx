@@ -1,0 +1,42 @@
+---
+title: "SOW — Core — Oman"
+description: "Statement of Work for ClearTax's core Oman e-invoicing platform access"
+---
+
+Access to the ClearTax Oman e-invoicing platform to send, receive, and report invoices via ClearTax's accreditation as an Oman Tax Authority (OTA)-recognised Service Provider, keeping you compliant with the Fawtara e-invoicing mandate.
+
+**Regulatory basis** — Fawtara is Oman's national e-invoicing programme, run by the OTA on a five-corner Peppol model. Rollout is phased, beginning with an initial wave of larger taxpayers and extending over subsequent years to cover all taxpayers within scope. Source: [Oman Tax Authority - Fawtara](https://fawtara.taxoman.gov.om/)
+
+## Scope
+
+1. **Onboarding** — ClearTax registers your VATIN-based Peppol participant ID (scheme 0248) on the OTA's centralised SMP within 3 working days of your consent on the Fawtara Portal
+2. **Type of transactions covered (AP and AR side)**
+   1. B2B
+   2. B2C
+   3. B2G
+3. **Type of documents covered** — invoice, credit note, debit note, and self-billing variants (full PINT-OM document set)
+4. **Govt reporting** — TDDs are submitted within the mandated SLA (15 minutes for B2B, 30 minutes for B2C from validation), with MLS acknowledgement tracked back to your workspace
+5. **Lifecycle management** — invoices sent to buyers are validated against the PINT-OM schema before delivery; invoices received from suppliers are normalised into a common representation and made available on the platform
+6. **SLAs** — 15 minutes (B2B) / 30 minutes (B2C) from validation for government reporting
+7. **RBAC** — role-based access control lets your workspace administrator assign users to roles with different permissions, controlling who can view, create, approve, or act on invoices within your workspace, in line with your internal segregation-of-duties requirements
+
+## Channels supported
+
+1. **API** — REST endpoints for sending invoices, checking status, querying documents, and retrieving PDFs/XMLs
+2. **Manual Ingestion** — direct upload via the ClearTax web platform (Excel template, with separate B2B and B2C tabs)
+3. **SFTP** — batch ingestion
+
+### B2C QR Code Generation
+
+Oman's mandate requires every B2C sale to be accompanied by a human-readable receipt carrying a QR code that ties it back to the invoice reported to the OTA.
+
+ClearTax supports two deployment modes for QR generation and reporting, both producing identical OTA-compliant output:
+
+- **Online (cloud)** — your POS or ERP sends each invoice to ClearTax over API/SFTP; ClearTax generates the Seller UUID and QR code, returns them for printing, and reports the invoice to the OTA in the background. Best suited for modern ERP/ecommerce setups with reliable connectivity and enterprise-range invoice volumes.
+- **Offline (SDK)** — ClearTax distributes a Java SDK deployed on your POS terminals. The SDK generates the QR code and Seller UUID locally with no network call required; invoice XMLs are queued locally and submitted to the OTA whenever the device next reaches connectivity. Best suited for high-volume, multi-store retail (50+ POS terminals, unreliable connectivity, or >1M invoices/month) where checkout latency cannot be tolerated.
+
+A single seller can mix both modes — for example, SDK at remote retail stores and cloud API at head office/ecommerce.
+
+ClearTax's SDK/API encapsulates the full QR encoding logic — TLV tag ordering, UTF-8 byte handling, and UUIDv5 hashing against the OTA namespace — so your systems never need to implement this directly, avoiding a known source of compliance failure.
+
+The QR payload (Base64-encoded TLV, ≤700 characters) embeds Seller Name, Seller VATIN, invoice date/timestamp, invoice/VAT totals, and the deterministic Seller UUID, with the field set varying by invoice type (standard B2C vs. profit-margin scheme).

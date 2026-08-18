@@ -1,0 +1,26 @@
+---
+title: "SOW — Core — UAE"
+description: "Statement of Work for ClearTax's core UAE e-invoicing platform access"
+---
+
+Access to the ClearTax UAE e-invoicing platform to send, receive, and report invoices via ClearTax's accreditation as an FTA-recognised Accredited Service Provider (ASP), keeping you compliant with the UAE e-invoicing mandate.
+
+**Regulatory basis** — Federal Decree-Law No. 16 of 2024 (amending the VAT Law) recognises e-invoices as valid tax documents, with the Federal Tax Authority (FTA) as the competent authority. Rollout is phased: voluntary adoption from 1 July 2026, mandatory from 1 January 2027 for taxpayers with annual revenue of AED 50 million or more, and from 1 July 2027 for all remaining taxpayers. Source: [FTA - e-Invoicing](https://tax.gov.ae/en/taxes/Vat/uae.einvoicing.aspx)
+
+## Scope
+
+1. **Onboarding** — registration as a linked entity with the FTA under ClearTax's ASP accreditation; ClearTax operates as your Peppol Access Point (C2/C3) and registers your TRN under its decentralised SMP (Service Metadata Publisher)
+2. **Type of transactions covered (AP and AR side)** — covers the UAE mandate which is B2B and B2G; B2C remains outside the statutory e-invoicing scope
+   1. B2B
+   2. B2G
+3. **Type of documents covered** — Tax Invoices, Simplified Tax Invoices, Credit Notes, Debit Notes, and their self-billing variants
+4. **Govt reporting** — the Tax Data Document (TDD) is submitted to the FTA within the mandated SLA (15 minutes from validation), with MLS acknowledgement tracked back to your workspace
+5. **Lifecycle management** — invoices sent to buyers are validated against the PINT-AE schema before delivery; invoices received from suppliers are normalised into a common representation and made available on the platform
+6. **SLAs** — 15-minute FTA reporting SLA from invoice validation, for both domestic and cross-border exchanges
+7. **RBAC** — role-based access control lets your workspace administrator assign users to roles with different permissions, controlling who can view, create, approve, or act on invoices within your workspace, in line with your internal segregation-of-duties requirements
+
+## Channels supported
+
+1. **API** — REST endpoints for sending invoices, checking status, querying documents, and retrieving PDFs/XMLs
+2. **Manual Ingestion** — direct upload via the ClearTax web platform (Excel template)
+3. **SFTP** — batch ingestion

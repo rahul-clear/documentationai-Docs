@@ -1,0 +1,35 @@
+---
+title: "Integration"
+description: "Web-hook notifications, SFTP integration, custom ingestion templates, and AP routing"
+---
+
+## Web-hook Notifications
+
+Real-time push notifications for e-invoicing and e-reporting events, delivered to an endpoint you provide - so your AP automation, ERP, or downstream systems stay in sync without polling ClearTax APIs.
+
+- Event types span both e-invoicing and e-reporting flows: invoice lifecycle changes, filing outcomes, delivery status updates, and payment reporting confirmations.
+- Failed deliveries are retried per ClearTax's retry policy.
+
+## SFTP Integration
+
+Accepts invoice data from your systems in XML (or other non-standard formats) via SFTP, transforms it into the mandate-compliant representation, and processes it through the standard e-invoicing and e-reporting flows. Response and output files are returned to your SFTP server in CSV format for downstream consumption.
+
+- **Setup** - a one-time transformation mapping is built between your source format and the mandate-compliant representation.
+- **Ongoing operation** - ClearTax pulls input files from your SFTP server on the agreed frequency, applies the transformation, submits each invoice through the standard flows, and places output files (status responses, error reports, delivery confirmations) back on the SFTP server.
+
+## Custom Ingestion Template
+
+- Your team can create a custom ingestion template directly through workspace settings.
+- The platform automatically maps standard recognised fields, with a self-service interface for your team to manually map any remaining custom fields.
+- Template configurations can be categorised and filtered by business parameters, including business entity or TRN/TIN.
+- This is a self-serve tool - your team can independently manage, validate, and update template configurations without needing ongoing custom development or manual technical intervention.
+- Saved templates also appear in the relevant modules during ingestion.
+
+## AP routing
+
+- ClearTax can deliver received invoices to an email inbox designated by your team for automated ingestion into your AP automation tools.
+- Each delivery includes the invoice PDF as an email attachment.
+- Delivery is triggered as soon as ClearTax makes the received invoice available on the platform.
+- The recipient email address, sender name, and subject-line format are configured during onboarding.
+- Delivery failures are retried per ClearTax's standard email delivery policy.
+- Delivery status is visible on your dashboard and audit trail.

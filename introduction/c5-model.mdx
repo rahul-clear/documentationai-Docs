@@ -1,0 +1,60 @@
+---
+title: "C5 Model"
+description: "The 5-corner decentralised e-invoicing framework used across C5-based mandates"
+---
+
+The 5-corner model is a decentralised digital invoicing framework used across C5-based e-invoicing mandates, where five interconnected parties collaborate to validate, transmit, and monitor electronic invoices. It marks a shift to decentralized digital tax compliance, ensuring secure invoice exchange, real-time validation, and visibility for the tax authority.
+
+## The five corners
+
+- **Corner 1 - Supplier** - creates and issues the structured e-invoice.
+- **Corner 2 - Supplier's Access Point (e.g. ClearTax)** - validates, formats, and transmits the invoice in the standard digital format.
+- **Corner 3 - Buyer's Access Point** - receives, verifies, and delivers the invoice to the buyer.
+- **Corner 4 - Buyer** - accepts and processes the invoice into their accounting/ERP systems.
+- **Corner 5 - Tax Authority platform** - monitors transactions for audit and compliance (e.g. the FTA in the UAE).
+
+## How the transaction flows
+
+1. **Invoice generation** - the supplier creates the invoice in the prescribed electronic format.
+2. **Validation and transmission** - the supplier's Access Point confirms the structure and sends it via secure channels.
+3. **Reception and verification** - the buyer's Access Point receives and validates the document.
+4. **Buyer acceptance** - the buyer electronically accepts the invoice.
+5. **Real-time reporting** - critical invoice data is transmitted to the tax authority platform simultaneously.
+
+## Key technical features
+
+- **Decentralised architecture** - the network runs through accredited service providers that facilitate data exchange, allowing secure transactions without overloading a single central authority.
+- **Continuous Transaction Control (CTC)** - every invoice submitted through the system is authenticated, traceable, and reportable to the tax authority in near real-time.
+- **Accredited Service Providers (ASPs)** - only certified ASPs can participate in invoice exchange, ensuring reliability, data integrity, and compliance with the tax authority's technical and security standards.
+- **Structured invoice format** - invoices are generated in a structured format, typically XML or JSON, adhering to the country's standardised schema, eliminating ambiguity and supporting seamless system integration.
+- **Peppol framework integration** - the model leverages the Peppol interoperability network, maintaining consistency with international invoicing standards and facilitating cross-border digital trade.
+- **Two-way acknowledgment mechanism** - both supplier and buyer receive status notifications (submission, acceptance, delivery confirmation), ensuring end-to-end traceability.
+- **Data security and encryption** - all transmissions are encrypted and validated, in line with applicable cybersecurity laws and data protection protocols.
+
+## Benefits for businesses
+
+- **Automation and efficiency** - electronic exchange minimises manual entry, duplication, and reconciliation errors.
+- **Faster invoice lifecycle** - real-time transmission speeds up validation, approval, and payment.
+- **Accuracy of data** - structured digital formats support error-free tax reporting.
+- **Reduced compliance costs** - centralised systems reduce administrative overhead and audit risk.
+- **Improved cash flow** - real-time invoice status supports better financial planning.
+- **Global interoperability** - alignment with global interoperability systems facilitates invoicing and trade across borders.
+
+## Benefits for tax authorities
+
+- **Real-time compliance monitoring** - direct access to transaction data helps identify anomalies and curb tax evasion and fraud.
+- **Better policy insight** - aggregated data supports fiscal and economic decision-making.
+- **Streamlined VAT administration** - automated data collection simplifies audit trails and reconciliations.
+- **Accelerated digital transformation** - builds national infrastructure for future regulatory innovation.
+
+## Example: the UAE's 5-corner model (DCTCE)
+
+The UAE frames its implementation as a Decentralised Continuous Transaction Control and Exchange (DCTCE) model, requiring all VAT-registered entities engaged in B2B and B2G transactions to adopt it, rolled out in phases starting with pilot testing before mandatory compliance (smaller entities included in later phases). It runs on the Peppol framework, and every invoice submitted is authenticated, traceable, and reportable to the Federal Tax Authority (FTA) in near real-time.
+
+<Image src="/images/introduction/c5-model-uae-dctce.png" alt="Diagram of the UAE's 5-corner DCTCE e-invoicing model" />
+
+<Callout kind="info">
+**Live in** → UAE, Oman, France
+
+**Coming Soon** → Czech Republic, Singapore, Spain
+</Callout>

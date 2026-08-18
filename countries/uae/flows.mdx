@@ -1,0 +1,33 @@
+---
+title: "UAE — Flows"
+description: "UAE e-invoicing sales and purchase side flows through ClearTax"
+---
+
+## Sales Side Flow
+
+<Expandable title="B2B" default-open="true">
+As **Corner 2** (the seller's Access Point), ClearTax handles:
+
+- Data validation and enrichment (including UUID generation)
+- Validating the buyer's Peppol ID
+- Delivery to the buyer's Access Point
+- Tracking responses from the government and the buyer/buyer's Access Point
+- Archival storage and retrieval
+- Reconciliation and VAT filing summary preparation
+</Expandable>
+
+<Expandable title="B2C" default-open="false">
+<Callout kind="info">
+B2C is out of scope for the UAE's current e-invoicing mandate - only B2B and B2G transactions are covered.
+</Callout>
+</Expandable>
+
+## Purchase Side Flow
+
+As **Corner 3** (the buyer's Access Point), ClearTax handles the receiving side of the same 5-corner model used for sales:
+
+- Invoices arriving from your suppliers' Access Points are accepted in the PINT-AE format and normalised into a common representation, made available on the platform.
+- Inbound invoices are validated against PINT-AE schema and business rules before being made available for action.
+- Your team is notified of new invoices, and can accept or reject them.
+- Accepted invoices can be validated and reconciled against the corresponding purchase order.
+- Accounting entries are made available for your ERP, along with archival storage and retrieval of all purchase documents.

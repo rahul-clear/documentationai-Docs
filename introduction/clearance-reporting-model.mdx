@@ -1,0 +1,42 @@
+---
+title: "Clearance + Reporting Model"
+description: "The centralised e-invoicing framework where the tax authority sits directly in the transaction path"
+---
+
+This model is a centralised e-invoicing framework where the tax authority sits directly in the transaction path rather than being looped in via a Peppol network. Unlike the C5/C4 models, there's no Access Point-to-Access Point exchange - instead, the seller's solution submits invoices straight to the tax authority's platform, which either clears the invoice before it reaches the buyer or receives it for reporting shortly after issuance, depending on the transaction type.
+
+## The parties involved
+
+- **Seller** - generates the invoice through their ERP/POS or billing system.
+- **Seller's solution/ASP (e.g. ClearTax)** - converts the invoice into the mandated structured format, submits it to the tax authority, and returns the cleared/reported result (QR code, signature, reference number) to the seller.
+- **Tax authority platform** - validates the invoice against schema and business rules, and either clears it (B2B) or logs it for reporting (B2C).
+- **Buyer** - receives the invoice (with QR code) only after the relevant clearance or reporting step has completed.
+
+## Two paths depending on transaction type
+
+- **Clearance (typically B2B)** - the invoice is validated and digitally cleared by the tax authority *before* it can be legally issued to the buyer; the seller's solution submits the invoice, the tax authority signs/validates it in real time, and only then is the cleared invoice (with QR code) delivered to the buyer.
+- **Reporting (typically B2C)** - the invoice is issued to the buyer immediately with a QR code embedded, and the transaction details are reported to the tax authority afterward, within a mandated time window, rather than being blocked on real-time clearance.
+
+## Key characteristics
+
+- **No peer-to-peer Access Point exchange** - the tax authority's platform is the single integration point for compliance, rather than a network of interoperable Access Points.
+- **Real-time or near-real-time validation** - clearance flows validate before issuance; reporting flows validate shortly after.
+- **QR code as proof of compliance** - every invoice, cleared or reported, carries a QR code tying it back to the authority's record.
+- **Phased rollout** - mandates using this model typically roll out in stages: an initial "generation" phase (structured invoice generation and storage, no authority integration yet) followed by an "integration" phase (live clearance/reporting via API), onboarded in waves across taxpayer segments.
+
+## Example: KSA (ZATCA/FATOORAH)
+
+KSA's e-invoicing mandate rolled out in two phases:
+
+- **Phase 1 (Generation)**, effective December 4, 2021, requiring all taxpayers (except non-residents) to generate and store e-invoices electronically with the mandated fields.
+- **Phase 2 (Integration)**, effective from January 1, 2023 and rolled out in waves with at least six months' advance notice per wave, requiring integration with ZATCA's systems.
+
+Under Phase 2, standard (B2B) tax invoices go through **clearance** with ZATCA before being issued to the buyer, while simplified (B2C) tax invoices are issued directly to the buyer with a QR code and **reported** to ZATCA afterward.
+
+<Image src="/images/introduction/clearance-reporting-ksa.png" alt="Diagram of KSA's ZATCA clearance and reporting e-invoicing model" />
+
+<Callout kind="info">
+**Live in** → KSA, Jordan
+
+**Coming Soon** → Egypt, Qatar, Bahrain
+</Callout>
