@@ -10,10 +10,22 @@
             "group": "Introduction",
             "icon": "rocket",
             "pages": [
-              { "title": "Introduction", "path": "introduction/overview" },
-              { "title": "C5 Model", "path": "introduction/c5-model" },
-              { "title": "C4 Model", "path": "introduction/c4-model" },
-              { "title": "Clearance + Reporting Model", "path": "introduction/clearance-reporting-model" }
+              {
+                "title": "Introduction",
+                "path": "introduction/overview"
+              },
+              {
+                "title": "C5 Model",
+                "path": "introduction/c5-model"
+              },
+              {
+                "title": "C4 Model",
+                "path": "introduction/c4-model"
+              },
+              {
+                "title": "Clearance + Reporting Model",
+                "path": "introduction/clearance-reporting-model"
+              }
             ]
           },
           {
@@ -24,84 +36,144 @@
                 "group": "UAE",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Overview", "path": "countries/uae/overview" },
-                  { "title": "Flows", "path": "countries/uae/flows" },
-                  { "title": "Setup & Reference", "path": "countries/uae/setup-reference" }
+                  {
+                    "title": "Overview",
+                    "path": "countries/uae/overview"
+                  },
+                  {
+                    "title": "Flows",
+                    "path": "countries/uae/flows"
+                  }
                 ]
               },
               {
                 "group": "Oman",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Overview", "path": "countries/oman/overview" },
-                  { "title": "Flows", "path": "countries/oman/flows" },
-                  { "title": "API Documentation", "path": "countries/oman/api-documentation" }
+                  {
+                    "title": "Overview",
+                    "path": "countries/oman/overview"
+                  },
+                  {
+                    "title": "Flows",
+                    "path": "countries/oman/flows"
+                  }
                 ]
               },
               {
                 "group": "France",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Overview", "path": "countries/france/overview" },
-                  { "title": "Flows", "path": "countries/france/flows" },
-                  { "title": "Setup & Reference", "path": "countries/france/setup-reference" }
+                  {
+                    "title": "Overview",
+                    "path": "countries/france/overview"
+                  },
+                  {
+                    "title": "Flows",
+                    "path": "countries/france/flows"
+                  }
                 ]
               },
               {
                 "group": "Belgium",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Overview", "path": "countries/belgium/overview" },
-                  { "title": "Flows", "path": "countries/belgium/flows" },
-                  { "title": "Setup & Reference", "path": "countries/belgium/setup-reference" }
+                  {
+                    "title": "Overview",
+                    "path": "countries/belgium/overview"
+                  },
+                  {
+                    "title": "Flows",
+                    "path": "countries/belgium/flows"
+                  },
+                  {
+                    "title": "Setup & Reference",
+                    "path": "countries/belgium/setup-reference"
+                  }
                 ]
               },
               {
                 "group": "KSA",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Overview", "path": "countries/ksa/overview" },
-                  { "title": "Sales", "path": "countries/ksa/sales" },
-                  { "title": "Purchase", "path": "countries/ksa/purchase" },
-                  { "title": "API Documentation", "path": "countries/ksa/api-documentation" },
-                  { "title": "Additional Details", "path": "countries/ksa/additional-details" }
+                  {
+                    "title": "Overview",
+                    "path": "countries/ksa/overview"
+                  },
+                  {
+                    "title": "Sales",
+                    "path": "countries/ksa/sales"
+                  },
+                  {
+                    "title": "Purchase",
+                    "path": "countries/ksa/purchase"
+                  },
+                  {
+                    "title": "API Documentation",
+                    "path": "countries/ksa/api-documentation"
+                  },
+                  {
+                    "title": "Additional Details",
+                    "path": "countries/ksa/additional-details"
+                  }
                 ]
               },
               {
                 "group": "Malaysia",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Overview", "path": "countries/malaysia/overview" },
-                  { "title": "Flows", "path": "countries/malaysia/flows" },
-                  { "title": "Setup & Reference", "path": "countries/malaysia/setup-reference" }
+                  {
+                    "title": "Overview",
+                    "path": "countries/malaysia/overview"
+                  },
+                  {
+                    "title": "Flows",
+                    "path": "countries/malaysia/flows"
+                  },
+                  {
+                    "title": "Setup & Reference",
+                    "path": "countries/malaysia/setup-reference"
+                  }
                 ]
               },
               {
                 "group": "Croatia",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Croatia (Coming Soon)", "path": "countries/croatia/coming-soon" }
+                  {
+                    "title": "Croatia (Coming Soon)",
+                    "path": "countries/croatia/coming-soon"
+                  }
                 ]
               },
               {
                 "group": "India",
                 "icon": "flag",
                 "pages": [
-                  { "title": "India (Coming Soon)", "path": "countries/india/coming-soon" }
+                  {
+                    "title": "India (Coming Soon)",
+                    "path": "countries/india/coming-soon"
+                  }
                 ]
               },
               {
                 "group": "Jordan",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Jordan (Coming Soon)", "path": "countries/jordan/coming-soon" }
+                  {
+                    "title": "Jordan (Coming Soon)",
+                    "path": "countries/jordan/coming-soon"
+                  }
                 ]
               },
               {
                 "group": "Poland",
                 "icon": "flag",
                 "pages": [
-                  { "title": "Poland (Coming Soon)", "path": "countries/poland/coming-soon" }
+                  {
+                    "title": "Poland (Coming Soon)",
+                    "path": "countries/poland/coming-soon"
+                  }
                 ]
               }
             ]
@@ -110,17 +182,38 @@
             "group": "Accreditation",
             "icon": "badge-check",
             "pages": [
-              { "title": "Overview", "path": "accreditation/overview" },
-              { "title": "UAE", "path": "accreditation/uae" },
-              { "title": "Oman", "path": "accreditation/oman" },
-              { "title": "France", "path": "accreditation/france" },
+              {
+                "title": "Overview",
+                "path": "accreditation/overview"
+              },
+              {
+                "title": "UAE",
+                "path": "accreditation/uae"
+              },
+              {
+                "title": "Oman",
+                "path": "accreditation/oman"
+              },
+              {
+                "title": "France",
+                "path": "accreditation/france"
+              },
               {
                 "group": "Test Bed Reports",
                 "icon": "file-check",
                 "pages": [
-                  { "title": "UAE", "path": "accreditation/test-bed-reports/uae" },
-                  { "title": "Oman", "path": "accreditation/test-bed-reports/oman" },
-                  { "title": "France", "path": "accreditation/test-bed-reports/france" }
+                  {
+                    "title": "UAE",
+                    "path": "accreditation/test-bed-reports/uae"
+                  },
+                  {
+                    "title": "Oman",
+                    "path": "accreditation/test-bed-reports/oman"
+                  },
+                  {
+                    "title": "France",
+                    "path": "accreditation/test-bed-reports/france"
+                  }
                 ]
               }
             ]
@@ -129,7 +222,10 @@
             "group": "Unified API Docs",
             "icon": "code",
             "pages": [
-              { "title": "Overview", "path": "unified-api/overview" }
+              {
+                "title": "Overview",
+                "path": "unified-api/overview"
+              }
             ]
           },
           {
@@ -140,23 +236,56 @@
                 "group": "Core",
                 "icon": "file-signature",
                 "pages": [
-                  { "title": "UAE", "path": "sows/core/uae" },
-                  { "title": "Oman", "path": "sows/core/oman" },
-                  { "title": "France", "path": "sows/core/france" },
-                  { "title": "Belgium", "path": "sows/core/belgium" },
-                  { "title": "Poland", "path": "sows/core/poland" },
-                  { "title": "Jordan", "path": "sows/core/jordan" }
+                  {
+                    "title": "UAE",
+                    "path": "sows/core/uae"
+                  },
+                  {
+                    "title": "Oman",
+                    "path": "sows/core/oman"
+                  },
+                  {
+                    "title": "France",
+                    "path": "sows/core/france"
+                  },
+                  {
+                    "title": "Belgium",
+                    "path": "sows/core/belgium"
+                  },
+                  {
+                    "title": "Poland",
+                    "path": "sows/core/poland"
+                  },
+                  {
+                    "title": "Jordan",
+                    "path": "sows/core/jordan"
+                  }
                 ]
               },
               {
                 "group": "Platform",
                 "icon": "settings",
                 "pages": [
-                  { "title": "Onboarding with the Tax Authority", "path": "sows/platform/onboarding" },
-                  { "title": "Access & Security", "path": "sows/platform/access-and-security" },
-                  { "title": "Integration", "path": "sows/platform/integration" },
-                  { "title": "Reporting & Analytics", "path": "sows/platform/reporting-and-analytics" },
-                  { "title": "Other Platform Services", "path": "sows/platform/other-services" }
+                  {
+                    "title": "Onboarding with the Tax Authority",
+                    "path": "sows/platform/onboarding"
+                  },
+                  {
+                    "title": "Access & Security",
+                    "path": "sows/platform/access-and-security"
+                  },
+                  {
+                    "title": "Integration",
+                    "path": "sows/platform/integration"
+                  },
+                  {
+                    "title": "Reporting & Analytics",
+                    "path": "sows/platform/reporting-and-analytics"
+                  },
+                  {
+                    "title": "Other Platform Services",
+                    "path": "sows/platform/other-services"
+                  }
                 ]
               }
             ]

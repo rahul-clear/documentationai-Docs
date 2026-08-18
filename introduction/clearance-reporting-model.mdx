@@ -1,9 +1,18 @@
 ---
-title: "Clearance + Reporting Model"
-description: "The centralised e-invoicing framework where the tax authority sits directly in the transaction path"
+title: Clearance + Reporting Model
+description: >-
+  The centralised e-invoicing framework where the tax authority sits directly in
+  the transaction path
 ---
+<Callout kind="info" collapsed="false">
+  **Live in** → KSA, Jordan
+
+  **Coming Soon** → Egypt, Qatar, Bahrain
+</Callout>
 
 This model is a centralised e-invoicing framework where the tax authority sits directly in the transaction path rather than being looped in via a Peppol network. Unlike the C5/C4 models, there's no Access Point-to-Access Point exchange - instead, the seller's solution submits invoices straight to the tax authority's platform, which either clears the invoice before it reaches the buyer or receives it for reporting shortly after issuance, depending on the transaction type.
+
+<Image src="https://blob-cdn.documentation.ai/org-4c540bfd-fe7c-49f5-a524-78126e8835f4/doc-dcac8b0a-766b-4367-8735-93990b42fc9e/1787055644514-84vri31xfvv-pasted-image-1787055642779.png?fm=auto&auto=compress%2Cformat" width="1852" height="838" alt="" />
 
 ## The parties involved
 
@@ -14,7 +23,7 @@ This model is a centralised e-invoicing framework where the tax authority sits d
 
 ## Two paths depending on transaction type
 
-- **Clearance (typically B2B)** - the invoice is validated and digitally cleared by the tax authority *before* it can be legally issued to the buyer; the seller's solution submits the invoice, the tax authority signs/validates it in real time, and only then is the cleared invoice (with QR code) delivered to the buyer.
+- **Clearance (typically B2B)** - the invoice is validated and digitally cleared by the tax authority _before_ it can be legally issued to the buyer; the seller's solution submits the invoice, the tax authority signs/validates it in real time, and only then is the cleared invoice (with QR code) delivered to the buyer.
 - **Reporting (typically B2C)** - the invoice is issued to the buyer immediately with a QR code embedded, and the transaction details are reported to the tax authority afterward, within a mandated time window, rather than being blocked on real-time clearance.
 
 ## Key characteristics
@@ -35,8 +44,3 @@ Under Phase 2, standard (B2B) tax invoices go through **clearance** with ZATCA b
 
 <Image src="/images/introduction/clearance-reporting-ksa.png" alt="Diagram of KSA's ZATCA clearance and reporting e-invoicing model" />
 
-<Callout kind="info">
-**Live in** → KSA, Jordan
-
-**Coming Soon** → Egypt, Qatar, Bahrain
-</Callout>

@@ -1,50 +1,62 @@
 ---
-title: "Oman — Flows"
-description: "Oman Fawtara sales (B2B/B2C) and purchase side flows"
+title: Oman - Flows
+description: Oman Fawtara sales (B2B/B2C) and purchase side flows
 ---
-
 ## Sales Side Flow
 
 Oman's mandate covers B2B alongside B2C, reusing the same underlying reporting framework (accredited service provider, structured XML, real-time reporting).
 
 <Expandable title="B2B" default-open="true">
-As **Corner 2** (the seller's Access Point), ClearTax handles:
+  As **Corner 2** (the seller's Access Point), ClearTax handles:
 
-- Data validation and enrichment (including UUID generation)
-- Validating the buyer's Peppol ID
-- Delivery to the buyer's Access Point
-- Tracking responses from the government and the buyer/buyer's Access Point
-- Archival storage and retrieval
-- Reconciliation and VAT filing summary preparation
+  - Data validation and enrichment (including UUID generation)
+  - Validating the buyer's Peppol ID
+  - Delivery to the buyer's Access Point
+  - Tracking responses from the government and the buyer/buyer's Access Point
+  - Archival storage and retrieval
+  - Reconciliation and VAT filing summary preparation
 
-<Image src="/images/oman/b2b-sales-flow.png" alt="Oman B2B sales side flow diagram" />
+  <Image src="/images/oman/b2b-sales-flow.png" alt="Oman B2B sales side flow diagram" />
 </Expandable>
 
 <Expandable title="B2C" default-open="false">
-If you run a VAT-registered business in Oman and sell to everyday customers, Fawtara applies to you: every consumer sale must be reported to the Tax Authority, and each customer must receive a clear receipt carrying a QR code.
+  If you run a VAT-registered business in Oman and sell to everyday customers, Fawtara applies to you: every consumer sale must be reported to the Tax Authority, and each customer must receive a clear receipt carrying a **QR code.**\
 
-**Documents involved:**
 
-- **Tax Invoice** - the core electronic document reported for every sale. An ordinary consumer sale uses a simplified tax invoice; sales under the profit-margin scheme (e.g. used goods) use a full tax invoice under that scheme.
-- **Credit notes** - issued to refund or correct a sale, referencing the original invoice, and reported the same way.
-- **Receipt with QR code** - given to the customer as proof of purchase. It isn't submitted to the Tax Authority itself, but carries the QR code linking back to the reported invoice.
+  **Documents involved:**\
 
-ClearTax supports two deployment modes for QR generation and reporting - both produce identical, OTA-compliant output:
 
-- **Online (cloud)** - the seller's POS/ERP sends each invoice to ClearTax over API/SFTP; ClearTax generates the Seller UUID and QR, returns them for printing, and reports the invoice to OTA in the background. Best suited to modern ERP/e-commerce setups with reliable internet and enterprise-range volumes.
-- **Offline (SDK)** - a ClearTax Java SDK deployed on the seller's POS terminals generates the QR and UUID locally with no network call; invoice XMLs queue locally and are submitted to OTA whenever connectivity is available. Best suited to high-volume, multi-store setups (50+ POS terminals, >1M invoices/month) or locations with unreliable connectivity - e.g. pharmacy chains, supermarkets, hypermarkets, fast-food chains, fuel retailers.
+  - **Tax Invoice** - the core electronic document reported for every sale. An ordinary consumer sale uses a simplified tax invoice; sales under the profit-margin scheme (e.g. used goods) use a full tax invoice under that scheme.
+  - **Credit notes** - issued to refund or correct a sale, referencing the original invoice, and reported the same way.
+  - **Receipt with QR code** - given to the customer as proof of purchase. It isn't submitted to the Tax Authority itself, but carries the QR code linking back to the reported invoice.
 
-A single seller can mix both modes (e.g. SDK at remote stores, cloud API at head office or SDK to generate QR codes and online APIs for government reporting).
+  \
+  ClearTax supports two deployment modes for QR generation and reporting - both produce identical, OTA-compliant output:\
 
-<Image src="/images/oman/b2c-qr-modes.png" alt="Oman B2C online and offline QR generation modes" />
+
+  - **Online (cloud)** - the seller's POS/ERP sends each invoice to ClearTax over API/SFTP; ClearTax generates the Seller UUID and QR, returns them for printing, and reports the invoice to OTA in the background. Best suited to modern ERP/e-commerce setups with reliable internet and enterprise-range volumes.
+  - **Offline (SDK)** - a ClearTax Java SDK deployed on the seller's POS terminals generates the QR and UUID locally with no network call; invoice XMLs queue locally and are submitted to OTA whenever connectivity is available. Best suited to high-volume, multi-store setups (50+ POS terminals, >1M invoices/month) or locations with unreliable connectivity - e.g. pharmacy chains, supermarkets, hypermarkets, fast-food chains, fuel retailers.
+
+  \
+  A single seller can mix both modes (e.g. SDK at remote stores, cloud API at head office or SDK to generate QR codes and online APIs for government reporting).
+
+  <Image src="/images/oman/b2c-qr-modes.png" alt="Oman B2C online and offline QR generation modes" />
 </Expandable>
 
 ## Purchase Side Flow
 
-As your registered Access Point (Corner 3), ClearTax handles the receiving side of the same 5-corner model used for sales:
+<Expandable title="B2B" default-open="true">
+  As **Corner 2** (the seller's Access Point), ClearTax handles:
 
-- Invoices arriving from your suppliers' Access Points are accepted in the PINT-OM format and normalised into a common representation, made available on the platform.
-- Inbound invoices are validated against PINT-OM schema and business rules before being made available for action.
-- Your team is notified of new invoices, and can accept or reject them.
-- Accepted invoices can be validated and reconciled against the corresponding purchase order.
-- Accounting entries are made available for your ERP, along with archival storage and retrieval of all purchase documents.
+  - Normalisation of inbound invoices from PINT-AE into clear representation on the platform
+  - Validation of inbound invoices against PINT-AE schema and business rules
+  - Notification of new invoices, with acceptance or rejection by your team
+  - Tracking of responses from the government and the seller's Access Point
+  - Accounting entries made available to your ERP
+  - Archival storage and retrieval
+
+  <Image src="/images/oman/b2b-sales-flow.png" alt="Oman B2B sales side flow diagram" />
+</Expandable>
+
+
+
