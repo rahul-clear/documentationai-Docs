@@ -2,9 +2,111 @@
 title: 'SOW - Core: Oman'
 description: Statement of Work for ClearTax's core Oman e-invoicing platform access
 ---
+### 1. Tax Authority On-boarding
 
+Customer starts on ClearTax and completes the ASP association on the Fawtara Portal:
 
-### B2C QR Code Generation
+1. **Connect on Fawtara Portal** - customer logs in to Fawtara, opens the Accredited Service Providers list, selects ClearTax, records the engagement stage (Identify SP → Scope & Commercial Negotiations → Finalized → Agreement Signed), sets the effective date, and submits the connection request
+2. **ClearTax accepts on Fawtara** - ClearTax reviews and accepts the request via the Manage Taxpayers dashboard; customer is notified via email, SMS, on-screen, and portal
+3. **SMP registration** - ClearTax adds the participant to Oman SMP within 3 business days (validated by Fawtara before Approve); SMP pushes the update to SML.
+
+### 2. Off-boarding
+
+Disconnection can be initiated by either party on the Fawtara Portal:
+
+1. **Customer-initiated** - customer opens Manage Service Provider on Fawtara, clicks Disconnect, provides a reason, and submits
+2. **ClearTax-initiated** - ClearTax opens Manage Taxpayers on Fawtara, selects Disconnect with reason; the customer has 3 days to Approve or Reject (no action = auto-cancelled)
+3. **Withdrawal** - either party can withdraw a pending disconnection request before it is actioned
+4. **SMP cleanup** - on successful disconnection, ClearTax has 1 business day to remove the participant from Oman SMP
+5. **Data handover** - in-flight invoices and pending TDDs are drained; archived documents remain accessible for the statutory retention period
+6. **Access revocation** - API keys, SFTP, and UI access are revoked on ClearTax
+
+### 3. eInvoices supported
+
+1. B2B
+2. B2G
+3. B2C - via the Fawtara B2C flow (Seller Receipt UUID, `BTOM-004`)
+
+### 4. Document types
+
+1. Tax Invoice (Commercial Invoice)
+2. Credit Note
+3. Debit Note
+4. Self-Billed Invoice
+5. Self-Billed Credit Note
+6. Prepayment Invoice / Prepayment Receipt
+7. Invoice out of scope of tax
+8. Credit note related to goods or services
+
+### 5. Channels
+
+1. API
+2. UI (manual / bulk upload via Import)
+3. SFTP
+
+### 6. Accounts Receivable (ClearTax as C2 - seller side)
+
+Customer sends eInvoices to buyers:
+
+1. ClearTax ingests invoice data via API, UI, or SFTP
+2. Validates data, enriches it, generates UUID
+3. Looks up buyer's Access Point via Oman's central SMP (SML)
+4. Delivers the invoice to the buyer's AP over AS4
+5. Captures buyer's MLS response and shows status to the seller
+
+### 7. Accounts Payable (ClearTax as C3 - buyer side)
+
+Customer receives eInvoices from suppliers:
+
+1. Accepts inbound invoices from the seller's AP
+2. Validates against PINT-OM schema and business rules
+3. Sends MLS acknowledgement back to the seller's AP
+4. Stores and shares the document via API, UI, and SFTP
+5. Supports accept/reject and PO reconciliation
+
+### 8. Government Reporting (OTA - via TDD)
+
+1. Every exchange is reported to OTA as a TDD, on both seller and buyer sides, within the defined SLA
+2. If the buyer sends MLS = RE (rejection), ClearTax withdraws the TDD from FTA and notifies the seller
+3. Retry and resubmission of TDDs on failure or timeout
+
+### 9. SMP Management
+
+ClearTax manages participants on Oman SMP via API:
+
+1. **Add / Amend / Remove** - participant management API calls to Oman SMP
+2. **Fawtara validation** - every SMP action is validated against Fawtara for an active SP–Taxpayer connection; Approve → applied, Reject → no change
+3. **SML sync** - Oman SMP pushes updates to SML to keep participant metadata consistent across the network
+
+### 10. Statuses
+
+**AR (Seller-side)**
+
+- Pending - queued, awaiting submission
+- Submitted to exchange network - handed off to Peppol
+- Delivered to buyer network - reached buyer's AP (C3)
+- Delivered to buyer - reached buyer's ERP (C4)
+- Failed - validation or delivery failed
+
+**AP (Buyer-side)**
+
+- Received - invoice arrived from supplier
+- Failed - validation failed on receipt
+
+**Government Reporting (FTA)**
+
+- Not Submitted - TDD not yet dispatched
+- Processing - TDD sent, awaiting response
+- Accepted - FTA accepted the TDD
+- Withdrawn - TDD withdrawn (following buyer RE)
+
+**MLS response codes**
+
+- AP - Accepted
+- AB - Accepted with objection
+- RE - Rejected (with reason code: SV syntax / BV business rule / BW warning / FD fraud)
+
+### 11. B2C QR Code Generation
 
 Oman's mandate requires every B2C sale to be accompanied by a human-readable receipt carrying a QR code that ties it back to the invoice reported to the OTA.
 
@@ -17,7 +119,7 @@ A single seller can mix both modes - for example, SDK at remote retail stores an
 
 ClearTax's SDK/API encapsulates the full QR encoding logic - TLV tag ordering, UTF-8 byte handling, and UUIDv5 hashing against the OTA namespace - so your systems never need to implement this directly, avoiding a known source of compliance failure.
 
-### SDK SoW:
+### 12. SDK SoW:
 
 - For high-volume, multi-store retail deployments with non-reliable internet connection, ClearTax provides a self-contained, offline-first Java SDK that generates OTA/PINT-OM-compliant e-invoices, XML, Seller UUID, and QR code → locally at the point of sale, with no network call required for the transaction itself.\
 
