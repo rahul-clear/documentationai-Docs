@@ -2,5 +2,95 @@
 title: 'SOW - Core: UAE'
 description: Statement of Work for ClearTax's core UAE e-invoicing platform access
 ---
+### 1. On-boarding
 
+Two paths, both landing the customer on the ClearTax e-Invoicing dashboard:
+
+1. **Via EmaraTax (FTA portal)** - customer logs in to EmaraTax, selects TIN, picks "Defmacro" (ClearTax) as ASP, gets redirected to ClearTax, verifies email/TIN, and a Peppol ID is generated and registered in the FTA directory.
+2. **Via ClearTax** - customer signs up on ClearTax first, then is routed to EmaraTax to appoint Defmacro as ASP, and returns to ClearTax with TRN and org name prefilled.
+
+Account setup (password, workspace, turnover band, profile) and business profile confirmation happen on ClearTax. Customer lands on the dashboard, ready to exchange invoices.
+
+### 2. Off-boarding
+
+1. Customer delinks ClearTax as ASP on EmaraTax
+2. ClearTax deregisters the Peppol ID from the SMP
+3. In-flight invoices and pending TDDs are drained
+4. Archived documents remain accessible for the statutory retention period (or exported in bulk)
+5. API keys, SFTP, and UI access are revoked
+
+### 3. E-invoices supported
+
+1. B2B
+2. B2G
+3. B2C _(out of scope for Phase 1)_
+
+### 4. Document types supported
+
+1. Tax Invoice
+2. Credit Note
+3. Debit Note
+4. Self-Billed Invoice
+5. Prepayment Invoice
+
+### 5. Channels
+
+1. API
+2. UI (manual / bulk upload)
+3. SFTP
+
+### 6. Accounts Receivable (ClearTax as C2 - seller side)
+
+Customer sends eInvoices to buyers:
+
+1. ClearTax ingests invoice data via API, UI, or SFTP
+2. Validates data, enriches it, generates UUID
+3. Looks up buyer's Access Point via Tickstar's SMP (SML)
+4. Delivers the invoice to the buyer's AP over AS4
+5. Captures buyer's MLS response and shows status to the seller
+
+### 7. Accounts Payable (ClearTax as C3 - buyer side)
+
+Customer receives eInvoices from suppliers:
+
+1. Accepts inbound invoices from the seller's AP
+2. Validates against PINT-AE schema and business rules
+3. Sends MLS acknowledgement back to the seller's AP
+4. Stores and shares the document via API, UI, and SFTP
+5. Supports accept/reject and PO reconciliation
+
+### 8. Government Reporting (FTA - via TDD)
+
+1. Every exchange is reported to FTA as a TDD, on both seller and buyer sides, within the defined SLA
+2. If the buyer sends MLS = RE (rejection), ClearTax withdraws the TDD from FTA and notifies the seller
+3. TDS (value = F) is submitted on C2-side validation failure
+4. Retry and resubmission of TDDs on failure or timeout
+
+### 9. Statuses
+
+**AR (Seller-side)**
+
+- Pending - queued, awaiting submission
+- Submitted to exchange network - handed off to Peppol
+- Delivered to buyer network - reached buyer's AP (C3)
+- Delivered to buyer - reached buyer's ERP (C4)
+- Failed - validation or delivery failed
+
+**AP (Buyer-side)**
+
+- Received - invoice arrived from supplier
+- Failed - validation failed on receipt
+
+**Government Reporting (FTA)**
+
+- Not Submitted - TDD not yet dispatched
+- Processing - TDD sent, awaiting response
+- Accepted - FTA accepted the TDD
+- Withdrawn - TDD withdrawn (following buyer RE)
+
+**MLS response codes**
+
+- AP - Accepted
+- AB - Accepted with objection
+- RE - Rejected (with reason code: SV syntax / BV business rule / BW warning / FD fraud)
 
