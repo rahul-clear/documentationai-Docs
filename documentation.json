@@ -221,12 +221,28 @@
                     "path": "sows/core/belgium"
                   },
                   {
-                    "title": "Poland",
-                    "path": "sows/core/poland"
+                    "title": "KSA",
+                    "path": "sows/core/ksa"
+                  },
+                  {
+                    "title": "Malaysia",
+                    "path": "sows/core/malaysia"
+                  },
+                  {
+                    "title": "Croatia",
+                    "path": "sows/core/croatia"
+                  },
+                  {
+                    "title": "India",
+                    "path": "sows/core/india"
                   },
                   {
                     "title": "Jordan",
                     "path": "sows/core/jordan"
+                  },
+                  {
+                    "title": "Poland",
+                    "path": "sows/core/poland"
                   }
                 ]
               },
@@ -239,20 +255,68 @@
                     "path": "sows/platform/onboarding"
                   },
                   {
-                    "title": "Access & Security",
-                    "path": "sows/platform/access-and-security"
+                    "title": "RBAC",
+                    "path": "sows/platform/rbac"
                   },
                   {
-                    "title": "Integration",
-                    "path": "sows/platform/integration"
+                    "title": "Audit Trail",
+                    "path": "sows/platform/audit-trail"
                   },
                   {
-                    "title": "Reporting & Analytics",
-                    "path": "sows/platform/reporting-and-analytics"
+                    "title": "Email",
+                    "path": "sows/platform/email"
                   },
                   {
-                    "title": "Other Platform Services",
-                    "path": "sows/platform/other-services"
+                    "title": "Customer Print Template",
+                    "path": "sows/platform/customer-print-template"
+                  },
+                  {
+                    "title": "Data Archival",
+                    "path": "sows/platform/data-archival"
+                  },
+                  {
+                    "title": "AMC",
+                    "path": "sows/platform/amc"
+                  },
+                  {
+                    "title": "License",
+                    "path": "sows/platform/license"
+                  },
+                  {
+                    "title": "Sales Reconciliation",
+                    "path": "sows/platform/sales-reconciliation"
+                  },
+                  {
+                    "title": "GL VAT Automation",
+                    "path": "sows/platform/gl-vat-automation"
+                  },
+                  {
+                    "title": "Reports",
+                    "path": "sows/platform/reports"
+                  },
+                  {
+                    "title": "MIS Dashboard",
+                    "path": "sows/platform/mis-dashboard"
+                  },
+                  {
+                    "title": "XML Download",
+                    "path": "sows/platform/xml-download"
+                  },
+                  {
+                    "title": "Web-hook Notifications",
+                    "path": "sows/platform/webhook-notifications"
+                  },
+                  {
+                    "title": "SFTP Integration",
+                    "path": "sows/platform/sftp-integration"
+                  },
+                  {
+                    "title": "Custom Ingestion Template",
+                    "path": "sows/platform/custom-ingestion-template"
+                  },
+                  {
+                    "title": "AP Routing",
+                    "path": "sows/platform/ap-routing"
                   }
                 ]
               }

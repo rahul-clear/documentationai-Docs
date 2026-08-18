@@ -1,27 +1,6 @@
 ---
 title: "SOW — Core — Jordan"
-description: "Statement of Work for ClearTax's core Jordan e-invoicing platform access"
+description: "Coming soon"
 ---
 
-Access to the ClearTax Jordan e-invoicing platform to submit invoices to JoFotara, keeping you compliant with the ISTD e-invoicing mandate.
-
-**Regulatory basis** — JoFotara, Jordan's national e-invoicing system, is run by the Income and Sales Tax Department (ISTD) with the Ministry of Digital Economy and Entrepreneurship, under the Amended Billing and Control Regulation No. 2 of 2025 (effective 1 April 2025). Invoices not issued through JoFotara or an integrated system are not recognised as tax-deductible. Source: [ISTD - National E-Invoicing System](https://istd.gov.jo/EN)
-
-## Scope
-
-1. **Onboarding** — invoices are submitted using your own JoFotara credentials (Client-Id and Secret-Key), generated per branch on the JoFotara portal; ClearTax does not need its own registration or accreditation on JoFotara
-2. **Type of transactions covered (AP and AR side)** — covers both cash and account-receivable (A/R), domestic and export transactions
-   1. Income Bill
-   2. General Sales
-   3. Special Sales
-3. **Type of documents covered** — Standard Invoice (388) and Credit Note (381)
-4. **Govt reporting** — an invoice only becomes legally valid once JoFotara returns a SUBMITTED status, together with a signed invoice and a QR code, which ClearTax embeds in the invoice PDF
-5. **Lifecycle management** — send invoices to JoFotara, retry failed submissions, and edit-and-resubmit invoices still in Pending or Failed status; once confirmed Valid, an invoice cannot be edited or cancelled — corrections must be issued as a Credit Note (381)
-6. **SLAs** — buyer name and buyer ID are mandatory for all receivable invoices (sub-types 021, 022, 023) and for cash invoices above JOD 10,000, enforced via pre-validation before submission
-7. **RBAC** — role-based access control lets your workspace administrator assign users to roles with different permissions, controlling who can view, create, approve, or act on invoices within your workspace, in line with your internal segregation-of-duties requirements
-
-## Channels supported
-
-1. **API** — a unified REST API built to the ISTD UBL 2.1 schema, with field-level validation errors returned before submission (JoFotara provides no status-check, cancellation, or bulk-submission APIs, so invoices are submitted one at a time and tracked within ClearTax)
-2. **Manual Ingestion** — direct upload via the ClearTax web platform
-3. **SFTP** — deprioritized, available on request
+Coming soon.
