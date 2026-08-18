@@ -79,16 +79,8 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Overview",
-                    "path": "countries/belgium/overview"
-                  },
-                  {
-                    "title": "Flows",
-                    "path": "countries/belgium/flows"
-                  },
-                  {
-                    "title": "Setup & Reference",
-                    "path": "countries/belgium/setup-reference"
+                    "title": "Belgium (Coming Soon)",
+                    "path": "countries/belgium/coming-soon"
                   }
                 ]
               },
@@ -97,24 +89,8 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Overview",
-                    "path": "countries/ksa/overview"
-                  },
-                  {
-                    "title": "Sales",
-                    "path": "countries/ksa/sales"
-                  },
-                  {
-                    "title": "Purchase",
-                    "path": "countries/ksa/purchase"
-                  },
-                  {
-                    "title": "API Documentation",
-                    "path": "countries/ksa/api-documentation"
-                  },
-                  {
-                    "title": "Additional Details",
-                    "path": "countries/ksa/additional-details"
+                    "title": "KSA (Coming Soon)",
+                    "path": "countries/ksa/coming-soon"
                   }
                 ]
               },
@@ -123,16 +99,8 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Overview",
-                    "path": "countries/malaysia/overview"
-                  },
-                  {
-                    "title": "Flows",
-                    "path": "countries/malaysia/flows"
-                  },
-                  {
-                    "title": "Setup & Reference",
-                    "path": "countries/malaysia/setup-reference"
+                    "title": "Malaysia (Coming Soon)",
+                    "path": "countries/malaysia/coming-soon"
                   }
                 ]
               },
