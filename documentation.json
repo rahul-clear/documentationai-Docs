@@ -275,10 +275,6 @@
                     "path": "sows/platform/data-archival"
                   },
                   {
-                    "title": "AMC",
-                    "path": "sows/platform/amc"
-                  },
-                  {
                     "title": "License",
                     "path": "sows/platform/license"
                   },
@@ -317,6 +313,10 @@
                   {
                     "title": "AP Routing",
                     "path": "sows/platform/ap-routing"
+                  },
+                  {
+                    "title": "AMC",
+                    "path": "sows/platform/amc"
                   }
                 ]
               }
