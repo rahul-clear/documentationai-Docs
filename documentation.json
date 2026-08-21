@@ -43,6 +43,28 @@
                   {
                     "title": "Flows",
                     "path": "countries/uae/flows"
+                  },
+                  {
+                    "group": "End User Onboarding",
+                    "icon": "user-check",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/uae/end-user-onboarding/overview"
+                      },
+                      {
+                        "title": "Onboarding via EmaraTax",
+                        "path": "countries/uae/end-user-onboarding/onboarding-via-emaratax"
+                      },
+                      {
+                        "title": "Onboarding via ClearTax",
+                        "path": "countries/uae/end-user-onboarding/onboarding-via-cleartax"
+                      },
+                      {
+                        "title": "Error Scenarios",
+                        "path": "countries/uae/end-user-onboarding/error-scenarios"
+                      }
+                    ]
                   }
                 ]
               },
