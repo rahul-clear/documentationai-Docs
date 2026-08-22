@@ -1,0 +1,316 @@
+---
+title: Oman Delta Schema
+description: 'How the Base Schema changes for Oman e-invoicing (PINT-OM)'
+---
+
+This page documents how each Base Schema business group (BG) changes for Oman's e-invoicing requirements. Only fields that differ from the Base Schema are listed here — see the Base Schema reference for the full field set.
+
+## BG-1. Invoice Information
+
+**New Mandatory Fields:**
+- `uuid` — A UUIDv4/UUIDv5-format universally unique identifier assigned to the invoice
+- `issueTime` — The time the invoice was issued (e.g., `14:30:00`)
+- `profileExecutionID` — Invoice transaction type with text label (e.g., "Tax Invoice")
+
+**Changed Status (Conditional Mandatory → Optional):**
+- `dueDate` — Invoice due date
+- `buyerReference` — Buyer's internal reference identifier
+
+**New Conditional Mandatory Fields:**
+- Prepayment references (`originatorDocumentReference`) — required when paid amounts exist
+- Profit margin fields — required when profit margin totals are provided
+- Supporting document UUID — required for export invoices with specific VAT exemptions
+- Tax exchange rate fields — required when invoice currency differs from OMR
+
+**New Optional Fields:**
+- `paymentTerms.paymentMeansID` — Payment instructions identifier
+- `prepaidPayment` block — Prepayment tracking (ID, amount, date, type)
+- `paymentTerms.installmentDueDate` — Instalment due dates
+
+<Callout kind="info" collapsed="false">
+  The schema introduces specialized references through `additionalDocumentReference[]` occurrences with fixed document type codes (e.g. "130" for invoiced objects, "PM_TOTAL" for profit margins) to manage syntax binding requirements.
+</Callout>
+
+## BG-3. Preceding Invoice Reference
+
+| Field | JSON Path | Type | Code | Change from Base |
+|---|---|---|---|---|
+| Preceding Invoice reference | `billingReference[].additionalDocumentReference.id` | Identifier | IBT-025 | Mandatory → Conditional |
+| UUID | `billingReference[].additionalDocumentReference.uuid` | Identifier | BTOM-031 | New Conditional |
+| Issue date | `billingReference[].additionalDocumentReference.issueDate` | Date | IBT-026 | Optional → Conditional |
+| Reason code | `billingReference[].additionalDocumentReference.documentStatusCode` | Code | BTOM-032 | New Conditional |
+
+These fields become mandatory when the invoice type code is `381` (credit note), `383` (debit note), or `261` (corrective invoice), or when the transaction type is a profit margin invoice. The schema adds a UUID field and a reason code field not present in the base schema, requiring the UUID of the preceding (referenced) invoice being credited or debited.
+
+## BG-5. Invoice Period
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| TAX point date code | `invoicePeriod.descriptionCode` | Code | IBT-008 | The code of the date when the VAT becomes accountable for the Seller and for the Buyer. Sample: `3` | New Optional |
+
+## BG-7. Seller
+
+**New Conditional Mandatory Fields:**
+- Seller UUID (BTOM-004) — stored in `additionalAccountID`, required when buyer electronic address is `997770000099`
+- Seller Identifier (textual code) (BTOM-015) — via `schemeName`, required for Special Zone supplies when seller country subdivision differs from `MO`
+- Tax scheme code (SB-AUTO-24) — for seller tax registration, required when tax registration identifier provided
+- Third Party Name / Third Party VATIN (BTOM-005 to BTOM-006) — for disclosed agent scenarios, required when invoice transaction type is Third-party Invoice
+
+**Changed Status (Optional → Conditional Mandatory):**
+- Scheme identifier (IBT-029-1)
+- Tax scheme code (IBT-031-1)
+- Seller tax registration identifier (IBT-032)
+
+<Callout kind="info" collapsed="false">
+  The Oman schema introduces comprehensive third-party and agent billing support with mandatory address components (street name, additional street name, city, postal code, address line 3, country code) and tax identification when invoice transaction type designates third-party invoicing.
+</Callout>
+
+## BG-8. Seller Postal Address
+
+| Field | JSON Path | Type | BT ID | Description | Change |
+|---|---|---|---|---|---|
+| Seller address line 1 | `accountingSupplierParty.party.postalAddress.streetName` | Text | IBT-035 | The main street address of the seller | Optional → Mandatory |
+| Seller address line 2 | `accountingSupplierParty.party.postalAddress.additionalStreetName` | Text | IBT-036 | Additional street address information | Optional → Mandatory |
+| Seller city | `accountingSupplierParty.party.postalAddress.cityName` | Text | IBT-037 | The city or town of the seller | Optional → Mandatory |
+| Seller post code | `accountingSupplierParty.party.postalAddress.postalZone` | Text | IBT-038 | The postal code of the seller address | Optional → Mandatory |
+| Seller country subdivision code | `accountingSupplierParty.party.postalAddress.countrySubentityCode` | Code | BTOM-024 | Coded value identifying the Seller's country subdivision (governorate) | Conditional Mandatory (new) |
+| Seller address line 3 | `accountingSupplierParty.party.postalAddress.addressLine[].line` | Text | IBT-162 | Seller address line 3 | Optional → Mandatory |
+
+The subdivision code becomes conditionally mandatory when the invoice transaction type is "Special Zone Supplies."
+
+## BG-9. Seller Contact
+
+| Field | JSON Path | Type | BT ID | Description | Change |
+|---|---|---|---|---|---|
+| Seller contact telephone | `accountingSupplierParty.party.contact.telephone` | Text | IBT-042 | The telephone number of the seller contact | Optional → Conditional Mandatory (required when Seller Contact, IBG-06, is provided) |
+
+## BG-10. Buyer
+
+| Field | JSON Path | Type | ID | Change |
+|---|---|---|---|---|
+| Buyer identifier | `accountingCustomerParty.party.partyIdentification[].id.value` | Identifier | IBT-046 | Optional → Conditional Mandatory |
+| Buyer Identifier (textual code) | `accountingCustomerParty.party.partyIdentification[].id.schemeName` | Code | BTOM-018 | New Conditional Mandatory |
+| Buyer VAT identifier | `accountingCustomerParty.party.partyTaxScheme[].companyID` | Identifier | IBT-048 | Optional → Conditional Mandatory |
+| Tax scheme code | `accountingCustomerParty.party.partyTaxScheme[].taxScheme.id` | Text | IBT-048-1 | Optional → Conditional Mandatory |
+
+**Conditional requirements:**
+- Buyer identifier (IBT-046) is required when: (1) Buyer VATIN absent AND invoice transaction type is "Full tax invoice" with third-party, summary, continuous supply, export, profit margin, or e-commerce classifications; or (2) Special Zone supplies with non-MO subdivision codes; or (3) Import transactions.
+- Buyer Identifier textual code (BTOM-018) is newly mandatory for Special Zone supplies (non-MO regions) and import scenarios.
+- Buyer VAT identifier (IBT-048) is required when buyer identifier is unavailable under the specified transaction types, or for self-billed invoices, RCM service imports, profit margin self-invoices, and import of goods.
+
+## BG-11. Buyer Postal Address
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Buyer address line 1 | `accountingCustomerParty.party.postalAddress.streetName` | Text | IBT-050 | Optional → Mandatory |
+| Buyer address line 2 | `accountingCustomerParty.party.postalAddress.additionalStreetName` | Text | IBT-051 | Optional → Mandatory |
+| Buyer city | `accountingCustomerParty.party.postalAddress.cityName` | Text | IBT-052 | Optional → Mandatory |
+| Buyer post code | `accountingCustomerParty.party.postalAddress.postalZone` | Text | IBT-053 | Optional → Mandatory |
+| Buyer address line 3 | `accountingCustomerParty.party.postalAddress.addressLine[].line` | Text | IBT-163 | Optional → Mandatory |
+| Buyer country subdivision code | `accountingCustomerParty.party.postalAddress.countrySubentityCode` | Code | BTOM-026 | Conditional Mandatory — required when Invoice transaction type is Special Zone Supplies. Example: `OM-MA` |
+
+## BG-13. Delivery Information
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Deliver to address line 1 | `delivery.deliveryLocation.address.streetName` | Text | IBT-075 | Optional → Conditional Mandatory |
+| Deliver to address line 2 | `delivery.deliveryLocation.address.additionalStreetName` | Text | IBT-076 | Optional → Conditional Mandatory |
+| Deliver to city | `delivery.deliveryLocation.address.cityName` | Text | IBT-077 | Optional → Conditional Mandatory |
+| Deliver to post code | `delivery.deliveryLocation.address.postalZone` | Text | IBT-078 | Optional → Conditional Mandatory |
+| Deliver to address line 3 | `delivery.deliveryLocation.address.addressLine[].line` | Text | IBT-165 | Optional → Conditional Mandatory |
+| Deliver to party name | `delivery.deliveryParty.partyName.name` | Text | IBT-070 | Optional → Conditional Mandatory |
+| Incoterms | `deliveryTerms.id` | Code | BTOM-022 | New Conditional Mandatory |
+| Scheme identifier | `deliveryTerms.schemeID` | Text | SB-AUTO-53 | New Conditional Mandatory |
+| Customs Declaration number | `delivery.shipment.id` | Text | BTOM-021 | New Conditional Mandatory |
+| Import date | `delivery.shipment.delivery.actualDeliveryDate` | Date | BTOM-020 | New Conditional Mandatory |
+
+Address fields are mandatory when Invoice transaction type is "E-commerce supplies." Party name is mandatory when DELIVER PARTY is provided. Import-related fields (Incoterms, customs declaration, import date) are mandatory when Invoice transaction type is "Import of Goods."
+
+## BG-14. Additional Supporting Documents
+
+| Field | JSON Path | Type | ID | Change |
+|---|---|---|---|---|
+| Total amount due (profit margin) | `additionalDocumentReference[].documentDescription` | Number | BTOM-20 | New Conditional Mandatory when invoice transaction type is profit margin invoice. Sample: `525.000` |
+| Supporting document reference | `additionalDocumentReference[].id` | Identifier | IBT-122 | Mandatory → Conditional Mandatory — now required only for export invoices with specific VAT exemption codes. Sample: `DOC-2024-01` |
+| Attached document Mime code | `additionalDocumentReference[].attachment.embeddedDocumentBinaryObject.mimeCode` | Code | IBT-125-1 | Optional → Conditional Mandatory when document attachment is provided. Sample: `application/pdf` |
+| Attached document Filename | `additionalDocumentReference[].attachment.embeddedDocumentBinaryObject.filename` | Text | IBT-125-2 | New Conditional Mandatory when attachment is provided. Sample: `Hours-spent.csv` |
+
+## BG-15. Payee
+
+| Field | JSON Path | Type | BT ID | Description | Change |
+|---|---|---|---|---|---|
+| Payee name | `payeeParty.partyName.name` | Text | IBT-059 | The name of the payee party. Sample: `ACME Factoring Ltd` | Mandatory → Conditional Mandatory — required when Payee (IBG-10) is different from the Seller (IBG-04) |
+
+## BG-16. Seller Tax Representative Party
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Seller tax representative name | `taxRepresentativeParty.partyName.name` | Text | IBT-062 | Mandatory → Conditional Mandatory |
+| Tax representative country code | `taxRepresentativeParty.postalAddress.country.identificationCode` | Code | IBT-069 | Mandatory → Conditional Mandatory |
+| Seller tax representative VAT identifier | `taxRepresentativeParty.partyTaxScheme[].companyID` | Identifier | IBT-063 | Mandatory → Optional |
+| Tax scheme code | `taxRepresentativeParty.partyTaxScheme[].taxScheme.id` | Text | IBT-063-1 | Mandatory → Conditional Mandatory |
+
+Name and country code are required when SELLER TAX REPRESENTATIVE PARTY is provided; the tax scheme code remains conditional but requires the VAT identifier as a prerequisite.
+
+## BG-17. Payment Instructions
+
+| Field | JSON Path | Type | BT ID | Description | Delta Change |
+|---|---|---|---|---|---|
+| Payment Instructions ID | `paymentMeans.id` | Identifier | IBT-178 | A textual identifier linking the payment instructions and the invoice | New Optional |
+| Payment means type code | `paymentMeans.paymentMeansCode.value` | Code | IBT-081 | A code specifying the payment means (e.g. 30 = credit transfer, 58 = SEPA credit transfer) | Mandatory → Conditional Mandatory |
+| Mandate reference identifier | `paymentMeans.paymentMandate.id` | Identifier | IBT-089 | Unique identifier assigned by the Payee for referencing the direct debit mandate | New Optional |
+| Debited account identifier | `paymentMeans.paymentMandate.payerFinancialAccount.id` | Identifier | IBT-091 | The account to be debited by the direct debit | New Optional |
+| Terms amount | `paymentTerms.amount.value` | Number | IBT-176 | The amount that applies to the given payment terms, such as an instalment amount | New Optional |
+| Currency code | `paymentTerms.amount.currencyID` | Code | SB-AUTO-61 | ISO 4217 currency code identifying the currency of the associated monetary amount | New Conditional Mandatory |
+
+## BG-18. Credit Transfer
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Payment account identifier | `paymentMeans.payeeFinancialAccount.id.value` | Identifier | IBT-084 | Mandatory → Conditional Mandatory |
+| Scheme identifier | `paymentMeans.payeeFinancialAccount.id.schemeID` | Text | IBT-084-1 | Mandatory → Optional |
+| Account address line 1 | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.streetName` | Text | IBT-169 | New Optional |
+| Account address line 2 | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.additionalStreetName` | Text | IBT-170 | New Optional |
+| Account city | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.cityName` | Text | IBT-171 | New Optional |
+| Account post code | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.postalZone` | Text | IBT-172 | New Optional |
+| Account country subdivision | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.countrySubentity` | Text | IBT-173 | New Optional |
+| Account address line 3 | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.addressLine[].line` | Text | IBT-174 | New Optional |
+| Account country code | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.address.country.identificationCode` | Code | IBT-175 | New Optional |
+
+The account identifier is conditionally mandatory only when CREDIT TRANSFER (IBG-17) is provided.
+
+## BG-19. Payment Card Information
+
+| Field | JSON Path | Type | BT ID | Description | Change |
+|---|---|---|---|---|---|
+| Payment Card Primary Account Number | `paymentMeans.cardAccount.primaryAccountNumberID` | Text | IBT-087 | Only the last 4-6 digits should be shown. Sample: `************1234` | Mandatory → Conditional Mandatory |
+| Network ID | `paymentMeans.cardAccount.networkID` | Text | SB-AUTO-56 | Identifies the financial service network provider (card scheme). Example: `VISA`. Required when the primary account number is provided | New Conditional Mandatory |
+
+## BG-20. Document Level Allowances/Charges
+
+**Allowances (IBG-20):**
+- Charge Indicator (`chargeIndicator`) — Boolean, Optional → Conditional Mandatory when allowances provided
+- Allowance Amount (IBT-092) — Number, amount without VAT, Mandatory → Conditional Mandatory
+- Allowance Base Amount (IBT-093) — Number for percentage calculation, Conditional Mandatory when percentage supplied
+- Allowance Percentage (IBT-094) — Number, Optional → Conditional Mandatory
+- VAT Category Code (IBT-095) — Code identifier, upgraded to Conditional Mandatory
+- VAT Exemption Reason Code (IBT-196) — New Conditional Mandatory when category is `E` or `Z`
+- VAT Exemption Reason Text (IBT-197) — New Conditional Mandatory field for exemption explanation
+
+**Charges (IBG-21):** mirrors the allowance structure — Charge Indicator, Charge Amount (IBT-099), Charge Base Amount (IBT-100), Charge Percentage (IBT-101), VAT Category Code (IBT-102), and new exemption reason fields (IBT-198, IBT-199).
+
+**New Elements:** Currency code fields (SB-AUTO-64, SB-AUTO-65, SB-AUTO-70, SB-AUTO-71) added as Conditional Mandatory when monetary amounts are provided, requiring ISO 4217 alpha-3 codes matching invoice currency.
+
+**Tax Scheme:** fixed value `VAT` required in all cases, upgraded to Conditional Mandatory.
+
+## BG-22. Document Totals
+
+**Cardinality Shifts:**
+- Invoice total TAX amount: Optional → Mandatory
+- Sum of allowances/charges: Optional → Conditional Mandatory (when parent groups exist)
+
+**New Mandatory Fields** (currency codes):
+- `taxTotal[].taxAmount.currencyID`
+- `legalMonetaryTotal.lineExtensionAmount.currencyID`
+- `legalMonetaryTotal.taxExclusiveAmount.currencyID`
+- `legalMonetaryTotal.taxInclusiveAmount.currencyID`
+- `legalMonetaryTotal.payableAmount.currencyID`
+
+**New Conditional Mandatory Fields:**
+- Invoice total VAT in tax accounting currency (when currency differs from OMR)
+- Currency codes for allowances, charges, prepaid, and rounding amounts (when respective amounts provided)
+
+**New Optional Field:** Tax inclusive pricing indicator (`taxIncludedIndicator`)
+
+<Callout kind="info" collapsed="false">
+  All currency codes must use ISO 4217 alpha-3 format and align with invoice currency or tax accounting currency codes where applicable.
+</Callout>
+
+## BG-23. VAT Breakdown
+
+| Field | JSON Path | Type | BT ID | Description | Change Type |
+|---|---|---|---|---|---|
+| VAT category taxable amount | `taxTotal[].taxSubtotal[].taxableAmount.value` | Number | IBT-116 | The total amount subject to this specific VAT category and rate | Mandatory → Conditional Mandatory |
+| Currency code (taxable amount) | `taxTotal[].taxSubtotal[].taxableAmount.currencyID` | Code | SB-AUTO-76 | ISO 4217 currency code matching invoice currency | New Conditional Mandatory |
+| VAT category tax amount | `taxTotal[].taxSubtotal[].taxAmount.value` | Number | IBT-117 | The calculated VAT amount for this category | Mandatory → Conditional Mandatory |
+| Currency code (tax amount) | `taxTotal[].taxSubtotal[].taxAmount.currencyID` | Code | SB-AUTO-77 | ISO 4217 currency code matching invoice currency | New Conditional Mandatory |
+| Tax amount in accounting currency | `taxTotal[].taxSubtotal[].taxAmount` | Number | IBT-190 | VAT amount expressed in accounting currency | New Conditional Mandatory |
+| Currency code (accounting) | `taxTotal[].taxSubtotal[].taxAmount.currencyID` | Code | SB-AUTO-81 | Must match Tax accounting currency (IBT-006) | New Conditional Mandatory |
+| Tax category code (accounting) | `taxTotal[].taxSubtotal[].taxCategory.id` | Code | IBT-192 | Coded identification of the VAT category | New Conditional Mandatory |
+| Tax category rate (accounting) | `taxTotal[].taxSubtotal[].taxCategory.percent` | Number | IBT-193 | VAT rate for accounting currency amount | New Conditional Mandatory |
+
+The delta schema introduces four new conditional mandatory fields related to dual-currency accounting when invoices use non-OMR currencies with standard-rated (S) VAT categories.
+
+## BG-25. Invoice Line
+
+**New Mandatory Fields:**
+
+| Field | JSON Path | Type | ID | Details |
+|---|---|---|---|---|
+| Currency code | `invoiceLine[].lineExtensionAmount.currencyID` | Code | SB-AUTO-91 | ISO 4217 currency code matching invoice currency |
+| Invoice line amount in OMR | `invoiceLine[].itemPriceExtension.amount.value` | Number | BTOM-017 | Net amount re-expressed in OMR when invoice currency differs |
+| Currency code | `invoiceLine[].itemPriceExtension.amount.currencyID` | Code | SB-AUTO-117 | Matches invoice or tax accounting currency |
+
+**New Conditional Mandatory Fields:**
+
+| Field | JSON Path | Type | ID | Details |
+|---|---|---|---|---|
+| Document type code | `invoiceLine[].documentReference.documentTypeCode` | Code | IBT-189 | Required when line document identifier (IBT-188) provided; UNTDID 1001 coded |
+| VAT line amount in OMR | `invoiceLine[].itemPriceExtension.taxTotal.taxAmount.value` | Number | BTOM-016 | Required except for simplified tax invoices or when line tax absent |
+| Currency code | `invoiceLine[].itemPriceExtension.taxTotal.taxAmount.currencyID` | Code | SB-AUTO-119 | Required when VAT line amount (BTOM-016) provided |
+
+**New Optional Fields:** Purchase order reference, despatch advice line/reference, and invoice line document identifier.
+
+## BG-27. Invoice Line Charges/Allowances
+
+- Charge Indicator (`chargeIndicator`) — Boolean toggle distinguishing allowances (`false`) from charges (`true`)
+- Amount fields (allowance/charge) require both a numeric value (without VAT) and a currency code in ISO 4217 format matching invoice currency
+- Base Amount Currency (`baseAmount.currencyID`) — separate currency specification for percentage-based calculations
+
+Several fields are marked New Conditional Mandatory: currency codes became explicit conditional requirements, syntax binding qualifiers are now mandatory technical fields, and amount fields transitioned from Optional to Conditional Mandatory when allowances/charges exist.
+
+## BG-29. Price Details
+
+| Field | JSON Path | Type | BT ID | Key Changes |
+|---|---|---|---|---|
+| Currency code | `invoiceLine[].price.priceAmount.currencyID` | Code | SB-AUTO-112 | New Mandatory — ISO 4217 code matching invoice currency |
+| Syntax binding qualifier | `invoiceLine[].price.allowanceCharge.chargeIndicator` | Boolean | SB-AUTO-114 | New Conditional Mandatory — required when allowance provided |
+| Item price allowance | `invoiceLine[].price.allowanceCharge.amount.value` | Number | IBT-147 | Optional → Conditional Mandatory — discount to gross price |
+| Currency code (allowance) | `invoiceLine[].price.allowanceCharge.amount.currencyID` | Code | SB-AUTO-115 | New Conditional Mandatory — required with allowance |
+| Item gross price | `invoiceLine[].price.allowanceCharge.baseAmount.value` | Number | IBT-148 | New Optional — base amount for calculations |
+| Currency code (gross) | `invoiceLine[].price.allowanceCharge.baseAmount.currencyID` | Code | SB-AUTO-116 | New Conditional Mandatory — required with gross price |
+
+## BG-30. Line VAT Information
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Unit TAX | `invoiceLine[].item.classifiedTaxCategory[].perUnitAmount.value` | Number | IBT-166 | A fixed VAT amount charged per unit of the invoiced item | New Optional |
+| Currency code | `invoiceLine[].item.classifiedTaxCategory[].perUnitAmount.currencyID` | Code | SB-AUTO-110 | ISO 4217 currency identifier matching invoice currency | New Conditional Mandatory |
+| VAT exemption reason code | `invoiceLine[].item.classifiedTaxCategory[].taxExemptionReasonCode` | Code | IBT-186 | A coded statement of the reason why the invoiced item is exempted | New Optional |
+| VAT exemption reason text | `invoiceLine[].item.classifiedTaxCategory[].taxExemptionReason` | Text | IBT-185 | Textual explanation of VAT exemption | New Optional |
+| Tax Scheme | `invoiceLine[].item.classifiedTaxCategory[].taxScheme.id` | Text | IBT-167 | Identifies the tax scheme applicable to the invoiced item's VAT category. Fixed value `VAT` | New Mandatory |
+
+All five fields are new Oman-specific extensions beyond the base schema.
+
+## BG-31. Item Information
+
+| Field | JSON Path | Type | BT ID | Status Change |
+|---|---|---|---|---|
+| Scheme identifier | `invoiceLine[].item.standardItemIdentification.id.schemeID` | Code | IBT-157-1 | Optional → Conditional Mandatory |
+| Item country of origin | `invoiceLine[].item.originCountry.identificationCode` | Code | IBT-159 | Optional → Conditional Mandatory |
+| Item Type | `invoiceLine[].item.commodityClassification[].natureCode` | Code | BTOM-019 | New Conditional Mandatory |
+| Item classification identifier | `invoiceLine[].item.commodityClassification[].itemClassificationCode.value` | Number | IBT-158 | Optional → Conditional Mandatory |
+| Scheme identifier (classification) | `invoiceLine[].item.commodityClassification[].itemClassificationCode.listID` | Code | IBT-158-1 | Optional → Conditional Mandatory |
+| Scheme version identifier | `invoiceLine[].item.commodityClassification[].itemClassificationCode.listVersionID` | Text | IBT-158-2 | Optional |
+
+Item classification becomes mandatory for goods except in simplified invoices or specific transaction types. Country of origin is required for imports; scheme identifiers are mandatory when parent fields are populated.
+
+## BG-32. Item Attributes
+
+| Field | JSON Path | Type | BT ID | Key Difference |
+|---|---|---|---|---|
+| Item attribute name | `invoiceLine[].item.additionalItemProperty[].name` | Text | IBT-160 | Mandatory → Conditional Mandatory |
+| Profit margin item type code | `invoiceLine[].item.additionalItemProperty[].nameCode` | Code | BTOM-025 | New Conditional Mandatory — required when Invoice transaction type is Profit Margin Self-Invoice or Profit margin invoice; requires codes from the Profit Margin Items Codelist |
+| Item attribute value | `invoiceLine[].item.additionalItemProperty[].value` | Text | IBT-161 | Mandatory → Conditional Mandatory |
+
+The name and value fields apply only when ITEM ATTRIBUTES (IBG-32) is provided.

@@ -1,0 +1,734 @@
+---
+title: Oman — Code Lists
+description: 'Code lists referenced by the Oman (PINT-OM) delta schema'
+---
+
+## Tax Category Code
+
+Applies to IBT-118 (VAT category code), IBT-151 (Invoiced item VAT category code), IBT-095 (Document level allowance VAT category code), and IBT-102 (Document level charge VAT category code).
+
+| Code | Name | Description |
+|---|---|---|
+| `S` | Standard rate | Code specifying the standard rate. |
+| `E` | Exempt from tax | Code specifying that taxes are not applicable. |
+| `O` | Services outside scope of tax / Not subject to tax | Code specifying that taxes are not applicable to the services and/or not subject to VAT. |
+| `Z` | Zero rated | Code specifying that the goods and/or services are at a zero rate. |
+
+## Invoice Type Code (IBT-003)
+
+| Code | Name | Description |
+|---|---|---|
+| 388 | Tax invoice | An invoice for tax purposes. |
+| 383 | Debit note | Document/message for providing debit information to the relevant party. |
+| 381 | Credit note | Document/message for providing credit information to the relevant party. |
+| 380 | Commercial invoice | Document/message claiming payment for goods or services supplied under conditions agreed between seller and buyer. |
+| 71 | Request for payment | Document/message issued by a creditor to a debtor to request payment of one or more invoices past due. |
+| 80 | Debit note related to goods or services | Debit information related to a transaction for goods or services to the relevant party. |
+| 82 | Metered services invoice | Document/message claiming payment for the supply of metered services (e.g., gas, electricity, etc.) |
+| 84 | Debit note related to financial adjustments | Document/message for providing debit information related to financial adjustments to the relevant party. |
+| 102 | Tax notification | Used to specify that the message is a tax notification. |
+| 218 | Final payment request based on completion of work | The final payment request of a series submitted upon completion of all the work. |
+| 219 | Payment request for completed units | A request for payment for completed units. |
+| 331 | Commercial invoice which includes a packing list | Commercial transaction (invoice) will include a packing list. |
+| 382 | Commission specification | A seller specifies commission amount, percentage of invoice amount, or calculation basis. |
+| 386 | Prepayment invoice | An invoice to pay amounts for goods and services in advance; subtracted from final invoice. |
+| 393 | Factored invoice | Invoice assigned to a third party for collection. |
+| 395 | Consignment invoice | Commercial invoice that covers a transaction other than one involving a sale. |
+| 480 | Invoice out of scope of tax | Invoice issued by a party outside tax scope who shall not collect tax on the invoice. |
+| 553 | Forwarder's invoice discrepancy report | Document/message reporting invoice discrepancies identified by the forwarder. |
+| 575 | Insurer's invoice | Document/message issued by an insurer specifying insurance cost and claiming payment. |
+| 623 | Forwarder's invoice | Invoice issued by a freight forwarder specifying services rendered and costs incurred. |
+| 780 | Freight invoice | Document/message issued by a transport operation specifying freight costs and charges. |
+| 817 | Claim notification | Document notifying a claim. |
+| 870 | Consular invoice | Document/message to be prepared by an exporter for endorsement by diplomatic representation. |
+| 875 | Partial construction invoice | Partial invoice in the context of a specific construction project. |
+| 876 | Partial final construction invoice | Invoice concluding previous partial construction invoices of a completed partial service. |
+| 877 | Final construction invoice | Invoice concluding all previous partial invoices in a specific construction project. |
+| 81 | Credit note related to goods or services | Document providing credit information related to a transaction for goods or services. |
+| 83 | Credit note related to financial adjustments | Document providing credit information related to financial adjustments, e.g., bonuses. |
+| 396 | Factored credit note | Credit note related to assigned invoice(s). |
+| 532 | Forwarder's credit note | Document/message for providing credit information to the relevant party. |
+
+## Invoice Transaction Type Code (BTOM-001)
+
+A 20-character bitmap; each position independently flags a transaction characteristic.
+
+| Bit pattern | Name | Description |
+|---|---|---|
+| `1XXXXXXXXXXXXXXXXXXX` | Full Tax Invoice | A standard tax invoice issued in accordance with Oman VAT regulations. |
+| `X1XXXXXXXXXXXXXXXXXX` | Simplified Tax Invoice | A simplified tax invoice containing a reduced set of data elements, typically issued for B2C transactions. |
+| `XXX1XXXXXXXXXXXXXXXX` | Third-party Invoice | An invoice issued by an authorised third party on behalf of the supplier. |
+| `XXXX1XXXXXXXXXXXXXXX` | Summary Invoice | An invoice issued to a single customer covering multiple transactions within a calendar month. |
+| `XXXXX1XXXXXXXXXXXXXX` | Continuous Supply | An invoice issued for supplies made on a continuous or recurring basis. |
+| `XXXXXX1XXXXXXXXXXXXX` | Export Invoice | An invoice issued for supplies to customers outside Oman, including direct, indirect, or re-export of goods and export of services. |
+| `XXXXXXX1XXXXXXXXXXXX` | Deemed Supply Invoice | An invoice issued for supplies made without consideration, in accordance with deemed supply rules. |
+| `XXXXXXXX1XXXXXXXXXXX` | Import of Services (RCM) | An invoice issued by the recipient of services under the Reverse Charge Mechanism (RCM). |
+| `XXXXXXXXX1XXXXXXXXXX` | Profit Margin Invoice | An invoice issued for supplies of goods under the profit margin scheme. |
+| `XXXXXXXXXX1XXXXXXXXX` | Profit Margin Self-Invoice | A self-billed invoice issued by the buyer on behalf of a non-VAT registered supplier for goods sold under the profit margin scheme. |
+| `XXXXXXXXXXX1XXXXXXXX` | E-commerce Transaction | An invoice issued for supplies conducted through electronic commerce platforms. |
+| `XXXXXXXXXXXX1XXXXXXX` | Import of Goods | An invoice issued by the importer for goods imported into Oman. |
+| `XXXXXXXXXXXXX1XXXXXX` | Special Zone Supplies | Supplies involving Special Zones (within, between, or across mainland/zones). |
+| `XXXXXXXXXXXXXX1XXXXX` | Prepayment Invoice | An invoice issued to request or document an advance payment, deposit, or instalment for a future supply. |
+
+<Callout kind="info" collapsed="false">
+  Source page indicates 20 bit positions total; only the positions with documented meanings are listed above. See [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/invoice-transaction-type-code) for any remaining reserved/unused positions.
+</Callout>
+
+## Document/Line Level Allowance Reason Code
+
+| Code | Name | Description |
+|---|---|---|
+| 41 | Bonus for works ahead of schedule | Bonus for completing work ahead of schedule. |
+| 42 | Other bonus | Bonus earned for other reasons. |
+| 60 | Manufacturer's consumer discount | A discount given by the manufacturer which should be passed on to the consumer. |
+| 62 | Due to military status | Allowance granted because of the military status. |
+| 63 | Due to work accident | Allowance granted to a victim of a work accident. |
+| 64 | Special agreement | An allowance or charge as specified in a special agreement. |
+| 65 | Production error discount | A discount given for the purchase of a product with a production error. |
+| 66 | New outlet discount | A discount given at the occasion of the opening of a new outlet. |
+| 67 | Sample discount | A discount given for the purchase of a sample of a product. |
+| 68 | End-of-range discount | A discount given for the purchase of an end-of-range product. |
+| 70 | Incoterm discount | A discount given for a specified Incoterm. |
+| 71 | Point of sales threshold allowance | Allowance for reaching or exceeding an agreed sales threshold at point of sales. |
+| 88 | Material surcharge/deduction | Surcharge/deduction, calculated for higher/lower material's consumption. |
+| 95 | Discount | A reduction from a usual or list price. |
+| 100 | Special rebate | A return of part of an amount paid for goods or services, serving as a reduction or discount. |
+| 102 | Fixed long term | A fixed long term allowance or charge. |
+| 103 | Temporary | A temporary allowance or charge. |
+| 104 | Standard | The standard available allowance or charge. |
+| 105 | Yearly turnover | An allowance or charge based on yearly turnover. |
+
+## Document/Line Level Charge Reason Code
+
+Sourced from UNCL7161 (IBT-105 document level, IBT-145 line level). 152 entries total.
+
+| Code | Name | Description |
+|---|---|---|
+| `AA` | Advertising | The service of providing advertising. |
+| `AAA` | Telecommunication | The service of providing telecommunication activities and/or facilities. |
+| `AAC` | Technical modification | The service of making technical modifications to a product. |
+| `FC` | Freight service | Charge for freight service. |
+| `WH` | Warehousing | Charge for warehousing service. |
+| `LAA` | Labour | Charge for labour. |
+| `PC` | Packing | Charge for packing. |
+| `RAB` | Repacking | Charge for repacking. |
+| `PL` | Palletizing | Charge for palletizing. |
+| `AAT` | Rush delivery | Charge for rush delivery. |
+| `ABD` | Overtime | Charge for overtime. |
+| `CAL` | Payroll payment service | Charge for payroll payment service. |
+| `AEM` | Clerical or administrative services | Charge for clerical or administrative services. |
+| `IS` | Invoicing | Charge for invoicing. |
+| `ZZZ` | Mutually defined | Codes for interim use between trading partners until standardized codes become available. |
+
+<Callout kind="info" collapsed="false">
+  This list contains 152 entries in the full UNCL7161 standard; only representative examples were captured above. See [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/document-level-line-level-charge-reason-code) for the complete alphabetical list.
+</Callout>
+
+## Country Code (ISO 3166-1 alpha-2)
+
+Applies to IBT-040 (Seller country code), IBT-055 (Buyer country code), and related fields. 249 entries.
+
+| Code | Name |
+|---|---|
+| AD | Andorra |
+| AE | United Arab Emirates |
+| AF | Afghanistan |
+| AG | Antigua and Barbuda |
+| AI | Anguilla |
+| AL | Albania |
+| AM | Armenia |
+| AO | Angola |
+| AQ | Antarctica |
+| AR | Argentina |
+| AS | American Samoa |
+| AT | Austria |
+| AU | Australia |
+| AW | Aruba |
+| AX | Åland Islands |
+| AZ | Azerbaijan |
+| BA | Bosnia and Herzegovina |
+| BB | Barbados |
+| BD | Bangladesh |
+| BE | Belgium |
+| BF | Burkina Faso |
+| BG | Bulgaria |
+| BH | Bahrain |
+| BI | Burundi |
+| BJ | Benin |
+| BL | Saint Barthélemy |
+| BM | Bermuda |
+| BN | Brunei Darussalam |
+| BO | Bolivia, Plurinational State of |
+| BQ | Bonaire, Sint Eustatius and Saba |
+| BR | Brazil |
+| BS | Bahamas (The) |
+| BT | Bhutan |
+| BV | Bouvet Island |
+| BW | Botswana |
+| BY | Belarus |
+| BZ | Belize |
+| CA | Canada |
+| CC | Cocos (Keeling) Islands |
+| CD | Congo, the Democratic Republic of the |
+| CF | Central African Republic |
+| CG | Congo |
+| CH | Switzerland |
+| CI | Côte d'Ivoire |
+| CK | Cook Islands |
+| CL | Chile |
+| CM | Cameroon |
+| CN | China |
+| CO | Colombia |
+| CR | Costa Rica |
+| CU | Cuba |
+| CV | Cabo Verde |
+| CW | Curaçao |
+| CX | Christmas Island |
+| CY | Cyprus |
+| CZ | Czechia |
+| DE | Germany |
+| DJ | Djibouti |
+| DK | Denmark |
+| DM | Dominica |
+| DO | Dominican Republic |
+| DZ | Algeria |
+| EC | Ecuador |
+| EE | Estonia |
+| EG | Egypt |
+| EH | Western Sahara |
+| ER | Eritrea |
+| ES | Spain |
+| ET | Ethiopia |
+| FI | Finland |
+| FJ | Fiji |
+| FK | Falkland Islands (Malvinas) |
+| FM | Micronesia, Federated States of |
+| FO | Faroe Islands |
+| FR | France |
+| GA | Gabon |
+| GB | United Kingdom of Great Britain and Northern Ireland |
+| GD | Grenada |
+| GE | Georgia |
+| GF | French Guiana |
+| GG | Guernsey |
+| GH | Ghana |
+| GI | Gibraltar |
+| GL | Greenland |
+| GM | Gambia |
+| GN | Guinea |
+| GP | Guadeloupe |
+| GQ | Equatorial Guinea |
+| GR | Greece |
+| GS | South Georgia and the South Sandwich Islands |
+| GT | Guatemala |
+| GU | Guam |
+| GW | Guinea-Bissau |
+| GY | Guyana |
+| HK | Hong Kong |
+| HM | Heard Island and McDonald Islands |
+| HN | Honduras |
+| HR | Croatia |
+| HT | Haiti |
+| HU | Hungary |
+| ID | Indonesia |
+| IE | Ireland |
+| IL | Israel |
+| IM | Isle of Man |
+| IN | India |
+| IO | British Indian Ocean Territory |
+| IQ | Iraq |
+| IR | Iran, Islamic Republic of |
+| IS | Iceland |
+| IT | Italy |
+| JE | Jersey |
+| JM | Jamaica |
+| JO | Jordan |
+| JP | Japan |
+| KE | Kenya |
+| KG | Kyrgyzstan |
+| KH | Cambodia |
+| KI | Kiribati |
+| KM | Comoros |
+| KN | Saint Kitts and Nevis |
+| KP | Korea, Democratic People's Republic of |
+| KR | Korea, Republic of |
+| KW | Kuwait |
+| KY | Cayman Islands |
+| KZ | Kazakhstan |
+| LA | Lao People's Democratic Republic |
+| LB | Lebanon |
+| LC | Saint Lucia |
+| LI | Liechtenstein |
+| LK | Sri Lanka |
+| LR | Liberia |
+| LS | Lesotho |
+| LT | Lithuania |
+| LU | Luxembourg |
+| LV | Latvia |
+| LY | Libya |
+| MA | Morocco |
+| MC | Monaco |
+| MD | Moldova, Republic of |
+| ME | Montenegro |
+| MF | Saint Martin (French part) |
+| MG | Madagascar |
+| MH | Marshall Islands |
+| MK | Macedonia, the former Yugoslav Republic of |
+| ML | Mali |
+| MM | Myanmar |
+| MN | Mongolia |
+| MO | Macao |
+| MP | Northern Mariana Islands |
+| MQ | Martinique |
+| MR | Mauritania |
+| MS | Montserrat |
+| MT | Malta |
+| MU | Mauritius |
+| MV | Maldives |
+| MW | Malawi |
+| MX | Mexico |
+| MY | Malaysia |
+| MZ | Mozambique |
+| NA | Namibia |
+| NC | New Caledonia |
+| NE | Niger |
+| NF | Norfolk Island |
+| NG | Nigeria |
+| NI | Nicaragua |
+| NL | Netherlands |
+| NO | Norway |
+| NP | Nepal |
+| NR | Nauru |
+| NU | Niue |
+| NZ | New Zealand |
+| OM | Oman |
+| PA | Panama |
+| PE | Peru |
+| PF | French Polynesia |
+| PG | Papua New Guinea |
+| PH | Philippines |
+| PK | Pakistan |
+| PL | Poland |
+| PM | Saint Pierre and Miquelon |
+| PN | Pitcairn |
+| PR | Puerto Rico |
+| PS | Palestine, State of |
+| PT | Portugal |
+| PW | Palau |
+| PY | Paraguay |
+| QA | Qatar |
+| RE | Réunion |
+| RO | Romania |
+| RS | Serbia |
+| RU | Russian Federation |
+| RW | Rwanda |
+| SA | Saudi Arabia |
+| SB | Solomon Islands |
+| SC | Seychelles |
+| SD | Sudan |
+| SE | Sweden |
+| SG | Singapore |
+| SH | Saint Helena, Ascension and Tristan da Cunha |
+| SI | Slovenia |
+| SJ | Svalbard and Jan Mayen |
+| SK | Slovakia |
+| SL | Sierra Leone |
+| SM | San Marino |
+| SN | Senegal |
+| SO | Somalia |
+| SR | Suriname |
+| SS | South Sudan |
+| ST | Sao Tome and Principe |
+| SV | El Salvador |
+| SX | Sint Maarten (Dutch part) |
+| SY | Syrian Arab Republic |
+| SZ | Swaziland |
+| TC | Turks and Caicos Islands |
+| TD | Chad |
+| TF | French Southern Territories |
+| TG | Togo |
+| TH | Thailand |
+| TJ | Tajikistan |
+| TK | Tokelau |
+| TL | Timor-Leste |
+| TM | Turkmenistan |
+| TN | Tunisia |
+| TO | Tonga |
+| TR | Turkey |
+| TT | Trinidad and Tobago |
+| TV | Tuvalu |
+| TW | Taiwan, Province of China |
+| TZ | Tanzania, United Republic of |
+| UA | Ukraine |
+| UG | Uganda |
+| UM | United States Minor Outlying Islands |
+| US | United States of America |
+| UY | Uruguay |
+| UZ | Uzbekistan |
+| VA | Holy See |
+| VC | Saint Vincent and the Grenadines |
+| VE | Venezuela, Bolivarian Republic of |
+| VG | Virgin Islands, British |
+| VI | Virgin Islands, U.S. |
+| VN | Viet Nam |
+| VU | Vanuatu |
+| WF | Wallis and Futuna |
+| WS | Samoa |
+| YE | Yemen |
+| YT | Mayotte |
+| ZA | South Africa |
+| ZM | Zambia |
+| ZW | Zimbabwe |
+| 1A | Kosovo |
+| XI | United Kingdom (Northern Ireland) |
+
+## Currency Codes (ISO 4217)
+
+Applies to IBT-005 (invoice currency code), IBT-006 (VAT accounting currency code), BTOM-028/029 (source/target currency codes). The full list includes 170+ codes.
+
+<Callout kind="info" collapsed="false">
+  Truncated to representative entries — see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/currency-codes) for the complete ISO 4217 list.
+</Callout>
+
+| Code | Name |
+|---|---|
+| AED | UAE Dirham |
+| EUR | Euro |
+| GBP | Pound Sterling |
+| JPY | Yen |
+| OMR | Rial Omani |
+| USD | US Dollar |
+| AFN | Afghani |
+| ZWG | Zimbabwe Gold |
+| XAU | Gold |
+| XTS | Codes specifically reserved for testing purposes |
+
+## Electronic Address Scheme (EAS)
+
+Applies to IBT-034-1 (seller electronic address scheme identifier) and IBT-049-1 (buyer electronic address scheme identifier). 53 entries.
+
+| Code | Name |
+|---|---|
+| 0002 | System Information et Repertoire des Entreprise et des Etablissements: SIRENE |
+| 0007 | Organisationsnummer (Swedish legal entities) |
+| 0009 | SIRET-CODE |
+| 0037 | LY-tunnus |
+| 0060 | Data Universal Numbering System (D-U-N-S Number) |
+| 0088 | EAN Location Code |
+| 0096 | The Danish Business Authority - P-number (DK:P) |
+| 0097 | FTI - Ediforum Italia, (EDIRA compliant) |
+| 0106 | Vereniging van Kamers van Koophandel en Fabrieken in Nederland (Association of Chambers of Commerce and Industry in the Netherlands), Scheme (EDIRA compliant) |
+| 0130 | Directorates of the European Commission |
+| 0135 | SIA Object Identifiers |
+| 0142 | SECETI Object Identifiers |
+| 0151 | Australian Business Number (ABN) Scheme |
+| 0154 | Identification number of economic subjects (ICO) |
+| 0158 | Identification number of economic subject (ICO) Act on State Statistics of 29 November 2001, § 27 |
+| 0177 | Odette International Limited |
+| 0183 | Numéro d'identification suisse des enterprises (IDE), Swiss Unique Business Identification Number (UIDB) |
+| 0184 | DIGSTORG |
+| 0188 | Corporate Number of The Social Security and Tax Number System |
+| 0190 | Dutch Originator's Identification Number |
+| 0191 | Centre of Registers and Information Systems of the Ministry of Justice |
+| 0192 | Enhetsregisteret ved Bronnoysundregisterne |
+| 0193 | UBL.BE party identifier |
+| 0195 | Singapore UEN identifier |
+| 0196 | Kennitala - Iceland legal id for individuals and legal entities |
+| 0198 | ERSTORG |
+| 0199 | Legal Entity Identifier (LEI) |
+| 0200 | Legal entity code (Lithuania) |
+| 0201 | Codice Univoco Unità Organizzativa iPA |
+| 0202 | Indirizzo di Posta Elettronica Certificata |
+| 0204 | Leitweg-ID |
+| 0208 | Numero d'entreprise / ondernemingsnummer / Unternehmensnummer |
+| 0209 | GS1 identification keys |
+| 0210 | CODICE FISCALE |
+| 0211 | PARTITA IVA |
+| 0212 | Finnish Organization Identifier |
+| 0213 | Finnish Organization Value Add Tax Identifier |
+| 0215 | Net service ID |
+| 0216 | OVTcode |
+| 0218 | Unified registration number (Latvia) |
+| 0221 | The registered number of the qualified invoice issuer (Japan) |
+| 0230 | National e-Invoicing Framework (Malaysia) |
+| 0235 | UAE Tax Identification Number (TIN) |
+| 0240 | Register of legal persons (in French, Répertoire des personnes morales) |
+| 0244 | Tax Identification (Tax ID), Nigeria |
+| 9910 | Hungary VAT number |
+| 9913 | Business Registers Network |
+| 9914 | Österreichische Umsatzsteuer-Identifikationsnummer |
+| 9915 | Österreichisches Verwaltungs bzw. Organisationskennzeichen |
+| 9918 | SOCIETY FOR WORLDWIDE INTERBANK FINANCIAL, TELECOMMUNICATION S.W.I.F.T |
+| 9919 | Kennziffer des Unternehmensregisters |
+| 9920 | Agencia Española de Administración Tributaria |
+| 9922 | Andorra VAT number |
+| 9923 | Albania VAT number |
+| 9924 | Bosnia and Herzegovina VAT number |
+| 9925 | Belgium VAT number |
+| 9926 | Bulgaria VAT number |
+| 9927 | Switzerland VAT number |
+| 9928 | Cyprus VAT number |
+| 9929 | Czech Republic VAT number |
+| 9930 | Germany VAT number |
+| 9931 | Estonia VAT number |
+| 9932 | United Kingdom VAT number |
+| 9933 | Greece VAT number |
+| 9934 | Croatia VAT number |
+| 9935 | Ireland VAT number |
+| 9936 | Liechtenstein VAT number |
+| 9937 | Lithuania VAT number |
+| 9938 | Luxemburg VAT number |
+| 9939 | Latvia VAT number |
+| 9940 | Monaco VAT number |
+| 9941 | Montenegro VAT number |
+| 9942 | Macedonia, the former Yugoslav Republic of VAT number |
+| 9943 | Malta VAT number |
+| 9944 | Netherlands VAT number |
+| 9945 | Poland VAT number |
+| 9946 | Portugal VAT number |
+| 9947 | Romania VAT number |
+| 9948 | Serbia VAT number |
+| 9949 | Slovenia VAT number |
+| 9950 | Slovakia VAT number |
+| 9951 | San Marino VAT number |
+| 9952 | Turkey VAT number |
+| 9953 | Holy See (Vatican City State) VAT number |
+| 9957 | French VAT number |
+| 9959 | Employer Identification Number (EIN, USA) |
+
+## Invoiced Object Identifier Scheme (UNCL1153)
+
+Applies to fields that identify referenced documents/objects (e.g. AAA = order acknowledgement, BM = bill of lading number, AWB = air waybill number).
+
+<Callout kind="info" collapsed="false">
+  This is a 500+ entry list (Peppol PINT-OM UNCL1153) spanning transport/logistics, customs/trade, financial services, and government identifiers. Not reproduced in full here — see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/invoiced-object-identifier-scheme).
+</Callout>
+
+## Organization Identifier Scheme Codes (ISO 6523 ICD List)
+
+<Callout kind="info" collapsed="false">
+  This is a 244+ entry list of organization identification schemes used internationally. Not reproduced in full here — see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/organization-identifier-scheme-codes---iso-6523-icd-list).
+</Callout>
+
+| Code | Name | Description |
+|---|---|---|
+| 0002 | SIRENE | French business registration number issued by INSEE. |
+| 0060 | D-U-N-S Number | Worldwide recognition as a means of identifying businesses, by Dun & Bradstreet. |
+| 0088 | EAN Location Code | Issued by EAN International for location identification. |
+| 0192 | Organisasjonsnummer | Norwegian entity identifier from Brønnøysund Register Centre. |
+| 0199 | Legal Entity Identifier (LEI) | Global standard (ISO 17442) for financial entities, governed by GLEIF. |
+| 0235 | UAE Tax Identification Number | Unique tax identifier issued by UAE Federal Tax Authority. |
+
+## Type of Goods or Services (BTOM-019 / Item type)
+
+| Code | Name |
+|---|---|
+| G | Goods |
+| S | Services |
+| B | Both |
+
+## Payment Means Codes (IBT-081)
+
+98 total codes.
+
+<Callout kind="info" collapsed="false">
+  Truncated to representative entries — see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/payment-means-codes) for the complete list.
+</Callout>
+
+| Code | Name | Description |
+|---|---|---|
+| 1 | Instrument not defined | Not defined legally enforceable agreement between two or more parties. |
+| 2 | Automated clearing house credit | Credit transaction via ACH system. |
+| 3 | Automated clearing house debit | Debit transaction via ACH system. |
+| 4 | ACH demand debit reversal | Request to reverse an ACH debit to demand deposit. |
+| 5 | ACH demand credit reversal | Request to reverse ACH credit to demand deposit. |
+| 6 | ACH demand credit | A credit transaction made through the ACH system to a demand deposit account. |
+| 7 | ACH demand debit | Debit transaction via ACH to demand deposit. |
+| 8 | Hold | Bank holds payment for beneficiary collection. |
+| 9 | National or regional clearing | Payment via national/regional clearing. |
+| 10 | In cash | Payment by currency (including bills and coins) in circulation. |
+| 20 | Cheque | Payment by a pre-printed form on which instructions are given. |
+| 30 | Credit transfer | Payment by credit movement of funds from one account to another. |
+| 49 | Direct debit | The amount is to be, or has been, directly debited to the customer's bank account. |
+| 54 | Credit card | Payment made by means of credit card. |
+| 58 | SEPA credit transfer | Credit transfer inside the Single Euro Payment Area (SEPA) system. |
+
+## VAT Exemption / Zero-Rating Reason Code
+
+28 entries across two categories.
+
+### VAT Exemption Codes (VATEX-OM-01 – 12)
+
+| Code | Name | Description |
+|---|---|---|
+| VATEX-OM-01 | Qualifying Financial Services | VAT exemption applicable to qualifying financial services as defined under Oman VAT regulations. |
+| VATEX-OM-02 | Educational Services and Related Goods and Services | VAT exemption applicable to educational services and closely related goods and services. |
+| VATEX-OM-03 | Healthcare Services and Related Goods and Services | VAT exemption applicable to healthcare services and closely related goods and services. |
+| VATEX-OM-04 | Residential Property Rental | VAT exemption applicable to the rental of properties for residential purposes. |
+| VATEX-OM-05 | Local Passenger Transport | VAT exemption applicable to the supply of local passenger transport services. |
+| VATEX-OM-06 | Undeveloped Land | VAT exemption applicable to the supply of undeveloped land (bare land). |
+| VATEX-OM-07 | Resale of Residential Properties | VAT exemption applicable to the resale of residential properties. |
+| VATEX-OM-08 | Diplomatic and International Organizations Imports | VAT exemption applicable to imported goods supplied to diplomatic and consular bodies, international organizations, and their entitled members. |
+| VATEX-OM-09 | Armed Forces and Internal Security Imports | VAT exemption applicable to imports made for the Armed Forces and Internal Security Forces. |
+| VATEX-OM-10 | Non-Profit Charity Imports | VAT exemption applicable to imported supplies for approved non-profit charitable organizations. |
+| VATEX-OM-11 | Returned Goods Imports | VAT exemption applicable to the import of goods that are returned to the country. |
+| VATEX-OM-12 | Exempt or Zero-Rated Destination Imports | VAT exemption applicable to imported goods where the supply of such goods is exempt from VAT or subject to zero percent VAT at the final destination. |
+
+### Zero-Rating Codes (VATZR-OM-01 – 16)
+
+| Code | Name | Description |
+|---|---|---|
+| VATZR-OM-01 | Qualifying Food Items | Zero-rated supply of food items as specified by a decision issued by the competent authority. |
+| VATZR-OM-02 | Medicines and Medical Equipment | Zero-rated supply of qualifying medicines and medical equipment. |
+| VATZR-OM-03 | Investment Precious Metals | Zero-rated supply of investment gold, silver, and platinum. |
+| VATZR-OM-04 | International and Intra-GCC Transport | Zero-rated supply of international and intra-GCC transport of goods or passengers. |
+| VATZR-OM-05 | Transport-Related Services | Zero-rated supply of services directly related to international and intra-GCC transport of goods or passengers. |
+| VATZR-OM-06 | Means of Transport | Zero-rated supply of qualifying air, sea, and land means of transport. |
+| VATZR-OM-07 | Rescue and Assistance Vehicles | Zero-rated supply of rescue aircraft and rescue or assistance boats. |
+| VATZR-OM-08 | Oil, Derivatives, and Natural Gas | Zero-rated supply of oil, oil derivatives, and natural gas. |
+| VATZR-OM-09 | Export of Services | Zero-rated supply of services exported outside Oman. |
+| VATZR-OM-10 | Direct Export of Goods | Zero-rated supply of goods exported directly outside Oman. |
+| VATZR-OM-11 | Indirect Export of Goods | Zero-rated supply of goods exported indirectly outside Oman. |
+| VATZR-OM-12 | Re-export of Goods | Zero-rated supply of goods that are re-exported after import. |
+| VATZR-OM-13 | Special Zone to Special Zone or Within Special Zone | Zero-rated supply of goods between Special Zones or within a Special Zone. |
+| VATZR-OM-14 | Mainland to Special Zone | Zero-rated supply of goods from mainland Oman to a Special Zone. |
+| VATZR-OM-15 | Customs Duty Suspension to Special Zone | Zero-rated supply of goods from Customs Duty Suspension regimes to a Special Zone. |
+| VATZR-OM-16 | Special Zone to Customs Duty Suspension | Zero-rated supply of goods from a Special Zone to Customs Duty Suspension regimes. |
+
+## Invoiced Quantity Unit of Measure Code (UN/ECE Rec 20)
+
+<Callout kind="info" collapsed="false">
+  This list has ~2,000+ codes spanning SI units, imperial measurements, and industry-specific quantities. Not reproduced in full here — see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/invoiced-quantity-unit-of-measure-code).
+</Callout>
+
+Representative categories: quantity units (each, dozen, gross, piece), volume/capacity (litre, gallon (US), barrel (US), cubic metre), mass/weight (kilogram, gram, pound, tonne), length (metre, foot, inch, kilometre), area (square metre, hectare, square foot), and specialized units (TEU, dose, service unit, working day).
+
+## Item Type Identification Code
+
+<Callout kind="info" collapsed="false">
+  This list has 200+ entries covering product identifiers, classification systems, regulatory codes, and industry-specific numbering schemes. Not reproduced in full here — see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/item-type-identification-code).
+</Callout>
+
+| Code | Name | Description |
+|---|---|---|
+| AA | Product version number | Number assigned by manufacturer or seller to identify the release of a product. |
+| AB | Assembly | The item number is that of an assembly. |
+| EN | EAN | Number assigned to a manufacturer's product according to the International Article Numbering Association. |
+| MF | Manufacturer's article number | The number given to an article by its manufacturer. |
+| SN | Serial number | Identification number of an item which distinguishes this specific item out of a number of identical items. |
+| SRV | GS1 Global Trade Item Number | A unique number, up to 14-digits, assigned according to the numbering structure of the GS1 system. |
+| TST | UNSPSC | The UNSPSC commodity classification system. |
+| ZZZ | Mutually defined | Item type identification mutually agreed between interchanging parties. |
+
+## Credit Note Reason Code (BTOM-032)
+
+| Code | Name | Description |
+|---|---|---|
+| CAN | Cancellation or return | Supply has been cancelled or goods have been returned, resulting in a full or partial reversal of the original transaction. |
+| VAT | Change in VAT treatment | Adjustment due to a change in the VAT treatment of the supply, resulting from a reclassification of the nature of the supply. |
+| VAL | Change in value | Adjustment to the value of the supply due to changes in price, discounts, or additional charges. |
+| QTY | Change in quantity | Adjustment to the value of the supply due to changes in the quantity of goods or services originally invoiced. |
+| OTH | Other | Any other reason for issuing a Credit Note or Debit Note not covered by the specified codes. |
+
+## Seller/Buyer Identifier Textual Code
+
+Applies to BTOM-015 (Seller identifier) and BTOM-018 (Buyer identifier).
+
+| Code | Name | Description |
+|---|---|---|
+| CR | Commercial Registration | Identifier assigned to a legal entity through commercial registration with the relevant authority. |
+| TIN | Tax Identification Number | Identifier assigned to a taxable person for VAT or tax purposes. |
+| CID | Civil ID | National identification number issued to individuals. |
+| PASNUM | Passport Number | Passport number used to identify an individual. |
+| OTHID | Other Identifier | Any other identifier not covered by the specified codes. |
+| ICID | Importer Customs ID | Identifier assigned to an importer by customs authorities. |
+| SZLN | Special Zone License Number | License number issued to entities operating within a Special Zone. |
+
+## Country Subdivision Codes
+
+Applies to BTOM-024 (Seller country subdivision code) and BTOM-026 (Buyer country subdivision code).
+
+| Code | Name |
+|---|---|
+| SHRFZ | Sohar Free Zone |
+| SEZAD | Special Economic Zone at Duqm |
+| SLLFZ | Salalah Free Zone |
+| AFZ | Al Mazunah Free Zone |
+| MO | Mainland Oman |
+
+## Delivery Incoterms (BTOM-022)
+
+| Code | Name | Description |
+|---|---|---|
+| EXW | Ex Works | The seller makes the goods available at their premises, and the buyer bears all costs and risks from that point onward. |
+| FCA | Free Carrier | The seller delivers the goods to a carrier or another party nominated by the buyer at an agreed place. |
+| CPT | Carriage Paid To | The seller pays for carriage to the named destination, but risk transfers to the buyer upon delivery to the carrier. |
+| CIP | Carriage and Insurance Paid To | The seller pays for carriage and insurance to the named destination, with risk transferring to the buyer upon delivery to the carrier. |
+| DAP | Delivered At Place | The seller delivers the goods to the named place of destination, with the buyer responsible for import clearance and duties. |
+| DPU | Delivered at Place Unloaded | The seller delivers and unloads the goods at the named place of destination. |
+| DDP | Delivered Duty Paid | The seller delivers the goods to the destination and is responsible for all costs and import duties. |
+| FAS | Free Alongside Ship | The seller delivers the goods alongside the vessel at the named port of shipment. |
+| FOB | Free On Board | The seller delivers the goods on board the vessel at the named port of shipment. |
+| CFR | Cost and Freight | The seller pays for the cost and freight to the destination port, with risk transferring once goods are on board. |
+| CIF | Cost, Insurance, and Freight | The seller pays for cost, insurance, and freight to the destination port, with risk transferring once goods are on board. |
+
+## Profit Margin Scheme Code (BTOM-025)
+
+| Code | Name | Description |
+|---|---|---|
+| VATPM-OM-01 | Tangible Movable Property | Goods consisting of tangible movable property eligible for the profit margin scheme. |
+| VATPM-OM-02 | Antiques | Antique items eligible for the profit margin scheme. |
+| VATPM-OM-03 | Art Works | Works of art eligible for the profit margin scheme. |
+| VATPM-OM-04 | Scientific, Historical, or Archaeological Items | Items of scientific, historical, or archaeological importance eligible for the profit margin scheme. |
+| VATPM-OM-05 | Collectors' Items | Collectors' items eligible for the profit margin scheme. |
+
+## Service Type (UNSPSC) Code — IBT-158
+
+<Callout kind="info" collapsed="false">
+  Top-level UNSPSC segment codes shown; see [source](https://cleartax-unified-api.netlify.app/countries/oman/code-lists/service-type-unspsc-code) for the full commodity classification hierarchy.
+</Callout>
+
+| Code | Name | Description |
+|---|---|---|
+| 64000000 | Financial Instruments, Products, Contracts and Agreements | Services related to financial instruments, financial products, and contractual agreements. |
+| 70000000 | Farming, Fishing, Forestry and Wildlife Services | Services related to agriculture, fishing, forestry, and wildlife activities. |
+| 71000000 | Mining and Oil and Gas Services | Services related to mining operations and oil and gas exploration and production. |
+| 72000000 | Building and Facility Construction and Maintenance Services | Services related to construction, maintenance, and operation of buildings and facilities. |
+| 73000000 | Industrial Production and Manufacturing Services | Services related to industrial production and manufacturing processes. |
+| 76000000 | Industrial Cleaning Services | Services related to industrial cleaning and maintenance activities. |
+| 77000000 | Environmental Services | Services related to environmental protection, management, and sustainability. |
+| 78000000 | Transportation, Storage and Mail Services | Services related to transportation, logistics, storage, and postal services. |
+| 80000000 | Management, Business and Administrative Services | Services related to management consulting, business operations, and administrative support. |
+| 81000000 | Engineering, Research and Technology Services | Services related to engineering, scientific research, and technology-based activities. |
+| 82000000 | Editorial, Design, Graphic and Fine Art Services | Services related to publishing, design, graphic arts, and fine arts. |
+| 83000000 | Public Utilities and Public Sector Services | Services related to public utilities and government or public sector activities. |
+| 84000000 | Financial and Insurance Services | Services related to financial activities and insurance. |
+| 85000000 | Healthcare Services | Services related to medical and healthcare provision. |
+| 86000000 | Education and Training Services | Services related to education, training, and skill development. |
+| 90000000 | Travel, Food, Lodging and Entertainment Services | Services related to travel, hospitality, catering, and entertainment. |
+| 91000000 | Personal and Domestic Services | Services related to personal care and domestic activities. |
+| 92000000 | Defense, Security and Safety Services | Services related to national defense, public order, security, and safety. |
+| 93000000 | Politics and Civic Affairs Services | Services related to political activities and civic administration. |
+| 94000000 | Organizations and Clubs | Services related to associations, organizations, and clubs. |
+
+## Tax Point Date Code (IBT-008)
+
+Derived from UNCL2005.
+
+| Code | Name | Description |
+|---|---|---|
+| 3 | Invoice document issue date time | Date of issue of an invoice. |
+| 35 | Delivery date/time, actual | Date/time when goods or consignment reach their final destination. |
+| 432 | Paid to date | Date through which payments have been received. |
+
+## Attached Document Mime Code (IBT-125-1)
+
+| Code | Name |
+|---|---|
+| `application/pdf` | pdf |
+| `application/vnd.oasis.opendocument.spreadsheet` | vnd.oasis.opendocument.spreadsheet |
+| `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` | vnd.openxmlformats-officedocument.spreadsheetml.sheet |
+| `image/jpeg` | jpeg |
+| `image/png` | png |
+| `text/csv` | csv |
+| `application/xml` | XML |

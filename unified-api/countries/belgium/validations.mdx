@@ -1,0 +1,38 @@
+---
+title: Belgium — Validations
+description: 'Belgium billing and self-billing validation rules for the ClearTax Unified API'
+---
+
+## Billing
+
+| Identifier | Rule |
+|---|---|
+| IBR-008 | An Invoice MUST contain the Seller postal address (ibg-05). |
+| IBR-010 | An Invoice MUST contain the Buyer postal address (ibg-08). |
+| IBR-016 | An Invoice MUST have at least one Invoice line (ibg-25). |
+| IBR-019 | The Seller tax representative postal address (ibg-12) MUST be provided in the Invoice, if the Seller (ibg-04) has a Seller tax representative party (ibg-11). |
+| IBR-066 | An Invoice MUST contain maximum one Payment Card account (ibg-18). |
+| IBR-067 | An Invoice MUST contain maximum one Payment Mandate (ibg-19). |
+| IBR-097 | Invoicing period (ibg-14) MUST occur maximum once. |
+| IBR-107 | Deliver to information (ibg-13) MUST occur maximum once. |
+| IBR-110 | Invoice line period (ibg-26) MUST occur maximum once. |
+| IBR-CL-03 | currencyID MUST be coded using ISO code list 4217 alpha-3. |
+| IBR-SR-45 | Due Date (ibt-009) MUST occur maximum once. |
+| IBR-SR-57 | Company identifier MUST exist in the party tax scheme class. |
+
+## Self-Billing
+
+| Identifier | Rule |
+|---|---|
+| IBR-008 | An Invoice MUST contain the Seller postal address (ibg-05). |
+| IBR-010 | An Invoice MUST contain the Buyer postal address (ibg-08). |
+| IBR-016 | An Invoice MUST have at least one Invoice line (ibg-25). |
+| IBR-019 | The Seller tax representative postal address (ibg-12) MUST be provided in the Invoice, if the Seller (ibg-04) has a Seller tax representative party (ibg-11). |
+| IBR-066 | An Invoice MUST contain maximum one Payment Card account (ibg-18). |
+| IBR-067 | An Invoice MUST contain maximum one Payment Mandate (ibg-19). |
+| IBR-097 | Invoicing period (ibg-14) MUST occur maximum once. |
+| IBR-107 | Deliver to information (ibg-13) MUST occur maximum once. |
+| IBR-110 | Invoice line period (ibg-26) MUST occur maximum once. |
+| IBR-CL-03 | currencyID MUST be coded using ISO code list 4217 alpha-3. |
+| IBR-SR-45 | Due Date (ibt-009) MUST occur maximum once. |
+| IBR-SR-57 | Company identifier MUST exist in the party tax scheme class. |

@@ -215,6 +215,139 @@
               {
                 "title": "Overview",
                 "path": "unified-api/overview"
+              },
+              {
+                "group": "API Endpoints",
+                "icon": "plug",
+                "pages": [
+                  {
+                    "title": "Generate Access Token",
+                    "path": "unified-api/api-endpoints/generate-access-token"
+                  },
+                  {
+                    "title": "Send e-Invoice",
+                    "path": "unified-api/api-endpoints/send-invoice"
+                  },
+                  {
+                    "title": "Status Check",
+                    "path": "unified-api/api-endpoints/status-check"
+                  },
+                  {
+                    "title": "Get Document Numbers",
+                    "path": "unified-api/api-endpoints/get-document-no"
+                  },
+                  {
+                    "title": "Document Details",
+                    "path": "unified-api/api-endpoints/document-details"
+                  },
+                  {
+                    "title": "Get e-Invoice PDF",
+                    "path": "unified-api/api-endpoints/get-invoice-pdf"
+                  },
+                  {
+                    "title": "Send via Email",
+                    "path": "unified-api/api-endpoints/send-invoice-email"
+                  }
+                ]
+              },
+              {
+                "title": "Base Schema",
+                "path": "unified-api/base-schema",
+                "icon": "table"
+              },
+              {
+                "group": "Countries",
+                "icon": "globe",
+                "pages": [
+                  {
+                    "group": "Belgium",
+                    "icon": "flag",
+                    "pages": [
+                      {
+                        "title": "Delta Schema",
+                        "path": "unified-api/countries/belgium/delta-schema"
+                      },
+                      {
+                        "title": "Code Lists",
+                        "path": "unified-api/countries/belgium/code-lists"
+                      },
+                      {
+                        "title": "Validations",
+                        "path": "unified-api/countries/belgium/validations"
+                      },
+                      {
+                        "title": "Sample Payloads",
+                        "path": "unified-api/countries/belgium/sample-payloads"
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Germany",
+                    "icon": "flag",
+                    "pages": [
+                      {
+                        "title": "Delta Schema",
+                        "path": "unified-api/countries/germany/delta-schema"
+                      },
+                      {
+                        "title": "Code Lists",
+                        "path": "unified-api/countries/germany/code-lists"
+                      },
+                      {
+                        "title": "Validations",
+                        "path": "unified-api/countries/germany/validations"
+                      },
+                      {
+                        "title": "Sample Payloads",
+                        "path": "unified-api/countries/germany/sample-payloads"
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Oman",
+                    "icon": "flag",
+                    "pages": [
+                      {
+                        "title": "Delta Schema",
+                        "path": "unified-api/countries/oman/delta-schema"
+                      },
+                      {
+                        "title": "Code Lists",
+                        "path": "unified-api/countries/oman/code-lists"
+                      },
+                      {
+                        "title": "Validations",
+                        "path": "unified-api/countries/oman/validations"
+                      },
+                      {
+                        "title": "Sample Payloads",
+                        "path": "unified-api/countries/oman/sample-payloads"
+                      }
+                    ]
+                  },
+                  {
+                    "group": "UAE",
+                    "icon": "flag",
+                    "pages": [
+                      {
+                        "title": "Delta Schema",
+                        "path": "unified-api/countries/uae/delta-schema"
+                      },
+                      {
+                        "title": "Code Lists",
+                        "path": "unified-api/countries/uae/code-lists"
+                      },
+                      {
+                        "title": "Validations",
+                        "path": "unified-api/countries/uae/validations"
+                      },
+                      {
+                        "title": "Sample Payloads",
+                        "path": "unified-api/countries/uae/sample-payloads"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },

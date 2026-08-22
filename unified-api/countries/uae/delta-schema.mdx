@@ -1,0 +1,328 @@
+---
+title: UAE Delta Schema
+description: 'Field-level differences between the ClearTax base schema and the UAE (PINT-AE) schema'
+---
+
+This page lists, business-group by business-group, how the UAE (PINT-AE) invoice schema differs from the ClearTax base schema — fields added, removed, or changed in mandatory status.
+
+<Callout kind="warning" collapsed="false">
+  Some UAE/PINT-AE-specific fields on the source site did not carry a written description — those are marked below as auto-derived from the field name rather than sourced text. Verify these against the PINT-AE spec before publishing.
+</Callout>
+
+## BG-1: Invoice Information
+
+**New Mandatory Fields**
+- **Uuid** — Unique identifier for UAE/PINT-AE
+- **Profile execution id** — Identifier for profile execution
+- **Source currency code** — Required currency reference
+- **Target currency code** — Required currency reference
+
+**New Optional Fields**
+- **Invoice issue time** — Time component added to issue date (format: `14:30:00`)
+- **Document description** — For contract document references
+- **Value** (Statement document reference) — Identifier field
+- **Terms payment instructions ID** — Links to applicable payment instructions
+- **Terms installment due date** — Due date for installment payments
+
+**New Conditional Mandatory Fields**
+- **Response code** — Required when invoice type is a credit note
+- **Calculation rate** — Required when invoice currency differs from AED (max 6 decimals)
+- **Value** (Buyer ID) — Required for free trade zone transactions
+- **Value** (Seller ID) — Required for disclosed agent billing scenarios
+
+**Modified Fields**
+- **Buyer reference** — Conditional Mandatory → Optional
+- **Payment terms** — Conditional Mandatory → Optional
+- **Invoiced Object Identifier Document Type Code** — Optional → Mandatory (value: `130`)
+
+## BG-3: Preceding Invoice Reference
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Preceding invoice number | `billingReference.invoiceDocumentReference.id` | Identifier | BT-025 | Mandatory → Conditional Mandatory |
+| Preceding invoice issue date | `billingReference.invoiceDocumentReference.issueDate` | Date | BT-026 | Optional → Conditional Mandatory |
+
+Both fields become mandatory when invoice type code (IBT-003) is `381` (Credit note) or `81` (Credit note related to goods/services), except when credit note reason code (BTAE-03) is `VD`.
+
+## BG-4: Invoice Note
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Invoice note | `note.value` | Text | BT-022 | Optional → Conditional Mandatory |
+
+Required in case of a continuous supply transaction. Sample value: `Goods delivered as agreed.`
+
+## BG-5: Invoice Period
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Status |
+|---|---|---|---|---|---|---|
+| Value added tax point date code | `invoicePeriod.descriptionCode` | Code | — | The code of the date when the VAT becomes accountable for the Seller and for the Buyer | `3` | New Optional |
+
+## BG-7: Seller
+
+**Modified Fields**
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Seller identifier | `accountingSupplierParty.party.partyIdentification.id.value` | Identifier | BT-029 | Conditional Mandatory → Optional |
+| Seller Identifier Scheme | `accountingSupplierParty.party.partyIdentification.id.schemeID` | Code | BT-029-1 | Optional → Mandatory (ISO 6523 ICD coding) |
+| Seller legal registration identifier | `accountingSupplierParty.party.partyLegalEntity.companyID.value` | Identifier | BT-030 | Conditional Mandatory → Mandatory |
+
+**New Fields (UAE-specific)**
+
+| Field | JSON Path | Type | Notes |
+|---|---|---|---|
+| Scheme agency id | `accountingSupplierParty.party.partyLegalEntity.companyID.schemeAgencyID` | Text | PINT-AE specific |
+| Scheme agency name | `accountingSupplierParty.party.partyLegalEntity.companyID.schemeAgencyName` | Text | Required when registration type is Commercial/Trade license; conditional for Passport identifiers |
+
+VAT identifier must be 15 digits, starting with `1` and ending in `03`; local tax identifier must be 10 numeric digits in the form `1XXXXXXXXX`; either VAT or tax identifier is required.
+
+## BG-8: Seller Postal Address
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Seller address line 1 | `accountingSupplierParty.party.postalAddress.streetName` | Text | BT-035 | Optional → Mandatory |
+| Seller city | `accountingSupplierParty.party.postalAddress.cityName` | Text | BT-037 | Optional → Mandatory |
+| Seller country subdivision | `accountingSupplierParty.party.postalAddress.countrySubentity` | Text | BT-039 | Optional → Mandatory |
+
+## BG-10: Buyer
+
+**Optional → Conditional Mandatory**
+
+| Field | JSON Path | Type | BT ID | Condition |
+|---|---|---|---|---|
+| Buyer VAT identifier | `accountingCustomerParty.party.partyTaxScheme.companyID` | Identifier | BT-048 | Required when the invoiced item VAT category code is VAT reverse charge, or per scheme/transaction type rules |
+| Buyer identifier | `accountingCustomerParty.party.partyIdentification.id.value` | Identifier | BT-046 | Required based on invoice transaction type and electronic address scheme |
+| Buyer legal registration identifier | `accountingCustomerParty.party.partyLegalEntity.companyID.value` | Identifier | BT-047 | Required for certain invoice types, or when scheme identifier is `0235` |
+
+**Optional → Mandatory**
+
+| Field | JSON Path | Type | BT ID | Sample |
+|---|---|---|---|---|
+| Buyer Tax scheme code | `accountingCustomerParty.party.partyTaxScheme.taxScheme.id.value` | Text | BT-048-1 | `VAT` |
+
+**New UAE/PINT-AE Fields**
+
+| Field | BT ID | Status | Condition |
+|---|---|---|---|
+| Scheme agency id | BTAE-16 | Conditional Mandatory | Required when buyer legal registration identifier is provided with specific scheme rules |
+| Scheme agency name | BTAE-11, BTAE-19 | Conditional Mandatory | Required for commercial licenses or passport identification types |
+
+## BG-11: Buyer Postal Address
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Buyer address line 1 | `accountingCustomerParty.party.postalAddress.streetName` | Text | BT-050 | Optional → Mandatory |
+| Buyer city | `accountingCustomerParty.party.postalAddress.cityName` | Text | BT-052 | Optional → Mandatory |
+| Buyer country subdivision | `accountingCustomerParty.party.postalAddress.countrySubentity` | Text | BT-054 | Optional → Mandatory |
+
+## BG-13: Delivery Information
+
+**New Fields (UAE-specific)**
+
+| Field | JSON Path | Type | Status | Description |
+|---|---|---|---|---|
+| Value | `delivery.deliveryTerms.id.value` | Identifier | Conditional Mandatory | *(auto-derived — not sourced from a fetched spec page)* |
+| Scheme id | `delivery.deliveryTerms.id.schemeID` | Text | Mandatory | *(auto-derived — not sourced from a fetched spec page)* |
+| Value | `delivery.deliveryParty.partyIdentification.id.value` | Identifier | Optional | Delivery party identification value |
+
+**Modified Fields (Optional → Conditional Mandatory)**
+
+| Field | JSON Path | Condition |
+|---|---|---|
+| Deliver to address line 1 | `delivery.deliveryLocation.address.streetName` | Required for e-commerce supplies (`XXXXXX1X`) or exports to non-AE countries (`XXXXXXX1`) |
+| Deliver to city | `delivery.deliveryLocation.address.cityName` | Same conditions as above |
+| Deliver to country subdivision | `delivery.deliveryLocation.address.countrySubentity` | UAE (AE) must use one of: `AUH`, `DXB`, `SHJ`, `UAQ`, `FUJ`, `AJM`, `RAK` |
+
+## BG-14: Additional Supporting Documents
+
+| Field | JSON Path | Type | BT ID | Change | Details |
+|---|---|---|---|---|---|
+| Supporting document description | `additionalDocumentReference.documentDescription` | Text | BT-123 | Optional → Mandatory | Human-readable description now required |
+| Supporting document reference | `additionalDocumentReference.id` | Identifier | BT-122 | Mandatory → Optional | Changed from required to optional |
+| Attached Document Mime Code | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.mimeCode` | Code | BT-125-1 | Optional → Conditional Mandatory | Conditionally required per IBR-CL-24 |
+| Attached document Filename | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.filename` | Text | — | New Conditional Mandatory | Newly added per PINT-COMMON-R016 |
+
+## BG-15: Payee
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Payee name | `payeeParty.partyName.name` | Text | BT-059 | Mandatory → Conditional Mandatory |
+| Payee identifier | `payeeParty.partyIdentification.id.value` | Identifier | BT-060 | Optional → Conditional Mandatory |
+
+## BG-16: Seller Tax Representative Party
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Seller tax representative name | `taxRepresentativeParty.partyName.name` | Text | BT-062 | Mandatory → Conditional Mandatory |
+| Seller tax representative VAT identifier | `taxRepresentativeParty.partyTaxScheme.companyID` | Identifier | BT-063 | Mandatory → Conditional Mandatory |
+| Tax representative address line 1 | `taxRepresentativeParty.postalAddress.streetName` | Text | BT-064 | Optional → Conditional Mandatory |
+| Tax representative city | `taxRepresentativeParty.postalAddress.cityName` | Text | BT-066 | Optional → Conditional Mandatory |
+| Tax representative country subdivision | `taxRepresentativeParty.postalAddress.countrySubentity` | Text | BT-068 | Optional → Conditional Mandatory |
+| Tax representative country code | `taxRepresentativeParty.postalAddress.country.identificationCode.countryCode` | Code | BT-069 | Mandatory → Conditional Mandatory |
+
+VAT identifier should be the TRN (VAT registration number) and must be 15 digits, starting with `1`, ending with `03`.
+
+## BG-17: Payment Instructions
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Change |
+|---|---|---|---|---|---|---|
+| Terms amount | `paymentTerms.amount` | Amount | — | The amount that applies to the given payment terms, such as an instalment amount | `500.00` | New Optional |
+| Payment terms amount currency code | `paymentTerms.amount.currencyID` | Code | — | Currency of the payment terms amount, matching the invoice currency | `EUR` | Optional → Mandatory |
+| Id | `paymentMeans.id` | Identifier | — | Unique identifier for payment means (PINT-AE specific) | `ID-00123` | New Optional |
+| Payment means type code | `paymentMeans.paymentMeansCode.value` | Code | BT-081 | Code specifying the payment means (e.g. 30 = credit transfer, 58 = SEPA credit transfer) | `58` | Mandatory → Conditional Mandatory |
+| Mandate reference identifier | `paymentMeans.paymentMandate.id.value` | Identifier | — | Identifier assigned by the Payee for referencing the direct debit mandate | `MANDATE-123456` | New Optional |
+| Debited account identifier | `paymentMeans.paymentMandate.payerFinancialAccount.id.value` | Identifier | — | The account to be debited by the direct debit | `OM810180000000123456789` | New Optional |
+
+## BG-18: Credit Transfer
+
+**Mandatory → Conditional Mandatory**
+- **Payment account identifier** (`paymentMeans.payeeFinancialAccount.id.value`) — required when payment means type is "credit transfer" per validation rule `ibr-192-ae`.
+
+**Mandatory → Optional**
+- **Payment Account Identifier Scheme Identifier** (`paymentMeans.payeeFinancialAccount.id.schemeID`).
+
+**New Optional Fields** — financial institution branch address details:
+- Account address line 1 (`streetName`)
+- Account address line 2 (`additionalStreetName`)
+- Account city (`cityName`)
+- Account post code (`postalZone`)
+- Account country subdivision (`countrySubentity`)
+- Account address line 3 (`addressLine.line`)
+- Account country code (`countryCode`)
+
+## BG-19: Payment Card Information
+
+| Field | Change |
+|---|---|
+| Payment card primary account number (`paymentMeans.cardAccount.primaryAccountNumberID`) | Mandatory → Conditional Mandatory |
+
+<Callout kind="warning" collapsed="false">
+  PCI compliance constraint: must not show the full card number. Only the last 4–6 digits should be displayed, remainder masked with asterisks (e.g. `************1234`).
+</Callout>
+
+## BG-20: Document Level Allowances/Charges
+
+**Modified**
+- Document Level Allowance Base Amount currency code: Optional → Mandatory
+- Document level allowance/charge amount: Mandatory → Conditional Mandatory
+- Document level allowance/charge VAT category code: → Conditional Mandatory
+
+**New Conditional Mandatory**
+- Document level allowance or charge VAT exemption reason text
+- Document level allowance or charge VAT exemption reason code (e.g. `VATEX-EU-O`)
+
+**Conditional rules**
+- Base amount and percentage must either both exist or neither exist.
+- When base amount and percentage are provided, the allowance/charge amount must equal `base amount × percentage ÷ 100`.
+- For exempt VAT categories, the exemption reason code becomes mandatory.
+
+**Validations**
+- `ibr-115-ae` — Document level allowance tax category code cannot be "Standard rate additional VAT".
+- `ibr-122-ae` — Certain invoice types restrict VAT category codes to Exempt/Not subject/Zero-rated only.
+- Exemption reason text/code limited to a maximum of one occurrence each.
+
+## BG-22: Document Totals
+
+**Optional → Mandatory**
+
+| Field | JSON Path | Type | BT ID |
+|---|---|---|---|
+| Invoice total VAT amount | `taxTotal.taxAmount.value` | Number | BT-110 |
+| VAT amount currency code | `taxTotal.taxAmount.currencyID` | Code | — |
+| Sum of allowances (document level) | `legalMonetaryTotal.allowanceTotalAmount.value` | Number | BT-107 |
+| Allowances currency code | `legalMonetaryTotal.allowanceTotalAmount.currencyID` | Code | — |
+| Sum of charges (document level) | `legalMonetaryTotal.chargeTotalAmount.value` | Number | BT-108 |
+| Charges currency code | `legalMonetaryTotal.chargeTotalAmount.currencyID` | Code | — |
+| Paid amount currency code | `legalMonetaryTotal.prepaidAmount.currencyID` | Code | — |
+| Rounding amount currency code | `legalMonetaryTotal.payableRoundingAmount.currencyID` | Code | — |
+
+**New**
+
+| Field | JSON Path | Type | Status |
+|---|---|---|---|
+| Tax inclusive pricing indicator | `taxTotal.taxIncludedIndicator` | Indicator | New Optional |
+
+## BG-23: VAT Breakdown
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| VAT category rate | `taxTotal.taxSubtotal.taxCategory.percent` | Number | BT-119 | Conditional Mandatory → Mandatory |
+
+## BG-25: Invoice Line
+
+| Field | JSON Path | Type | Status | Description |
+|---|---|---|---|---|
+| Line id | `invoiceLine.orderLineReference.lineId` | Text | New Optional | *(auto-derived — not sourced from a fetched spec page)* |
+| Purchase order reference (line) | `invoiceLine.orderLineReference.orderReference.id` | Identifier | New Optional | Identifier of a referenced purchase order line's parent order, issued by the Buyer |
+| Id | `invoiceLine.despatchLineReference.id` | Identifier | New Optional | Dispatch reference identifier for line items |
+| Tax Amount Value | `invoiceLine.itemPriceExtension.taxTotal.taxAmount.value` | Amount | New Conditional Mandatory | Line VAT amount; subject to validation rules based on VAT category code |
+| Tax Amount Currency | `invoiceLine.itemPriceExtension.taxTotal.taxAmount.currencyID` | Text | New Mandatory | Currency designation for tax amount (e.g. `AED`) |
+| Line Amount Value | `invoiceLine.itemPriceExtension.amount.value` | Amount | New Mandatory | Invoice line amount in AED |
+| Line Amount Currency | `invoiceLine.itemPriceExtension.amount.currencyID` | Text | New Mandatory | Currency designation for line amount (e.g. `AED`) |
+
+Key conditional rules: mandatory zero amounts for reverse-charge categories, and absence of VAT amounts for exempt or non-subject classifications.
+
+## BG-26: Invoice Line Period
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Invoice line period start date | `invoiceLine.invoicePeriod.startDate` | Date | BT-134 | Conditional Mandatory → Optional |
+| Invoice line period end date | `invoiceLine.invoicePeriod.endDate` | Date | BT-135 | Conditional Mandatory → Optional |
+
+## BG-27: Invoice Line Charges/Allowances
+
+| Field | JSON Path | Type | BT ID | Change |
+|---|---|---|---|---|
+| Base Amount | `invoiceLine.allowanceCharge.baseAmount.value` | Number | BT-137/142 | Conditional Mandatory → Optional |
+| Base Amount Currency | `invoiceLine.allowanceCharge.baseAmount.currencyID` | Code | — | Optional → Mandatory |
+| Percentage | `invoiceLine.allowanceCharge.multiplierFactorNumeric` | Number | BT-138/143 | Conditional Mandatory → Optional |
+| Amount Currency | `invoiceLine.allowanceCharge.amount.currencyID` | Code | — | Optional → Mandatory |
+
+## BG-29: Price Details
+
+| Field | JSON Path | Type | Status | Notes |
+|---|---|---|---|---|
+| Quantity | `invoiceLine.price.baseQuantity.quantity` | Decimal | New Mandatory | UAE-specific quantity field |
+| Document level allowance or charge base amount | `invoiceLine.price.allowanceCharge.baseAmount.value` | Amount | New Mandatory | Base amount for calculating allowance/charge |
+| Currency id (base amount) | `invoiceLine.price.allowanceCharge.baseAmount.currencyID` | Text | New Mandatory | Currency identifier for base amount |
+| Item price discount indicator | `invoiceLine.price.allowanceCharge.chargeIndicator` | Boolean | Optional → Mandatory | Indicates the item price AllowanceCharge represents a discount |
+| Item price discount currency code | `invoiceLine.price.allowanceCharge.amount.currencyID` | Code | Optional → Mandatory | Must match invoice currency |
+| Currency id (price amount) | `invoiceLine.price.priceAmount.currencyID` | Text | New Mandatory | UAE-specific currency identifier |
+| Item price base quantity | `invoiceLine.price.baseQuantity.value` | Number (BT-149) | Optional → Mandatory | The quantity to which the price applies (defaults to 1) |
+
+## BG-30: Line VAT Information
+
+| Field | JSON Path | Type | Status | Description |
+|---|---|---|---|---|
+| Lot number id | `invoiceLine.item.itemInstance.lotIdentification.lotNumberId` | Text | New Optional | *(auto-derived — not sourced from a fetched spec page)* |
+| Value | `invoiceLine.item.additionalItemIdentification.id.value` | Identifier | New Conditional Mandatory | *(auto-derived)*. Required when Item type is "Services" or "Both" |
+| Scheme id | `invoiceLine.item.additionalItemIdentification.id.schemeID` | Text | New Mandatory | Identifies the scheme for additional item identification |
+| Scheme version id | `invoiceLine.item.additionalItemIdentification.id.schemeVersionID` | Text | New Conditional Mandatory | *(auto-derived — not sourced from a fetched spec page)* |
+| Invoiced item VAT exemption reason text | `invoiceLine.item.classifiedTaxCategory.taxExemptionReason` | Text | New Conditional Mandatory | Textual statement of the reason why the invoiced item is exempted from VAT |
+| Invoiced item VAT exemption reason code | `invoiceLine.item.classifiedTaxCategory.taxExemptionReasonCode` | Code | New Conditional Mandatory | Coded reason; required when category code is "Exempt from VAT" |
+
+## BG-31: Item Information
+
+| Field | JSON Path | Change Type | Key Details |
+|---|---|---|---|
+| Seller's Item ID | `invoiceLine.item.sellersItemIdentification.id.value` | New Optional | Identifier field for seller reference |
+| Buyer's Item ID | `invoiceLine.item.buyersItemIdentification.id.value` | New Optional | Identifier field for buyer reference |
+| Item Description | `invoiceLine.item.description` | Optional → Mandatory | Changed from optional to required |
+| Commodity Code | `invoiceLine.item.commodityClassification.commodityCode.value` | New Optional | UAE-specific classification field |
+| Nature Code | `invoiceLine.item.commodityClassification.natureCode.value` | New Conditional Mandatory | Required when VAT category is "Reverse charge"; must reference RCM goods/services code list |
+| Classification Identifier | `invoiceLine.item.commodityClassification.itemClassificationCode.value` | Optional → Conditional Mandatory | Required for goods; mandatory for both goods/services |
+| List ID | `invoiceLine.item.commodityClassification.itemClassificationCode.listID` | New Mandatory | Classification scheme identifier |
+| Version ID | `invoiceLine.item.commodityClassification.itemClassificationCode.listVersionID` | New Optional | Scheme version tracking |
+| Standard Item ID | `invoiceLine.item.standardItemIdentification.id.value` | Optional → Conditional Mandatory | Required for reverse charge transactions |
+| Standard ID Scheme | `invoiceLine.item.standardItemIdentification.id.schemeID` | Optional → Conditional Mandatory | Code `0160` required for reverse charge |
+| Classification Scheme | `invoiceLine.item.commodityClassification.itemClassificationCode.schemeID` | Optional → Mandatory | Standardized scheme identifier |
+
+## BG-32: Item Attributes
+
+| Field | JSON Path | Type | BT ID | Description | Change |
+|---|---|---|---|---|---|
+| Item attribute name | `invoiceLine.item.additionalItemProperty.name` | Text | BT-160 | The name of the item attribute (e.g. "Colour", "Size") | Mandatory → Conditional Mandatory |
+| Item attribute value | `invoiceLine.item.additionalItemProperty.value` | Text | BT-161 | The value of the item attribute (e.g. "Red", "XL") | Mandatory → Conditional Mandatory |
+
+Both fields shifted from Mandatory to Conditional Mandatory based on validation rule `IBR-054`, which requires each item attribute to carry both a name and value when present.

@@ -1,0 +1,776 @@
+---
+title: UAE Code Lists
+description: 'Reference code lists used by the UAE (PINT-AE) e-invoicing schema'
+---
+
+<Callout kind="info" collapsed="false">
+  Several lists below (country codes, currency codes, unit-of-measure codes, and the ISO 6523/UNCL1153 identifier scheme lists) run to hundreds of entries and are standard external references. For these, a representative sample plus the total count and source standard is given, with a link to the full list on the source site rather than reproducing it in full.
+</Callout>
+
+## Tax Category Code
+
+Applies to IBT-118, IBT-151, IBT-095, IBT-102.
+
+| Code | Name | Description |
+|---|---|---|
+| `S` | Standard rate | Code specifying the standard rate. |
+| `E` | Exempt from tax | Code specifying that taxes are not applicable. |
+| `O` | Services outside scope of tax / Not subject to tax | Code specifying that taxes are not applicable to the services and/or not subject to VAT. |
+| `AE` | VAT Reverse Charge | Code specifying that the standard VAT rate is levied from the invoicee. |
+| `Z` | Zero rated | Code specifying that the goods and/or services are at a zero rate. |
+| `N` | Standard rate additional VAT | Standard VAT calculated for an additional taxable base when the additional taxable base is not included in the document totals. |
+
+## Invoice Type Code
+
+| Code | Name | Description |
+|---|---|---|
+| `380` | Commercial invoice | Document/message claiming payment for goods or services supplied under conditions agreed between seller and buyer. |
+| `480` | Invoice out of scope of tax | An invoice issued by a party outside tax regulations who should not collect or report tax on the document. |
+| `389` | Self-billed invoice | An invoice the invoicee is producing instead of the seller. |
+| `81` | Credit note related to goods or services | Document message used to provide credit information related to a transaction for goods or services. |
+| `381` | Credit note | Document/message for providing credit information to the relevant party. |
+| `261` | Self billed credit note | A document which indicates that the customer is claiming credit in a self billing environment. |
+
+## Invoice Transaction Type Code
+
+| Code | Name | Description |
+|---|---|---|
+| `00000000` | Standard Invoice | Standard Invoice |
+| `10000000` | Free trade zone | Supply of goods or services in Free trade zone |
+| `01000000` | Deemed supply | Supply of goods or services without consideration |
+| `00100000` | Profit Margin Scheme | Supply of goods under the profit margin scheme |
+| `00010000` | Summary invoice | Taxable person makes more than one supply of Goods or Services to the same person in the same calendar month |
+| `00001000` | Continuous Supply | Supply of goods and/or services made on recurrent basis |
+| `00000100` | Agent billing | Agent who is a registrant makes a supply on behalf of the principal |
+| `00000010` | Supply through E-commerce | Supply of goods or services via E-commerce |
+| `00000001` | Exports | Supply of goods or services outside the country |
+
+## Document/Line Level Allowance Reason Code
+
+| Code | Name | Description |
+|---|---|---|
+| 41 | Bonus for works ahead of schedule | Bonus for completing work ahead of schedule. |
+| 42 | Other bonus | Bonus earned for other reasons. |
+| 60 | Manufacturer's consumer discount | A discount given by the manufacturer which should be passed on to the consumer. |
+| 62 | Due to military status | Allowance granted because of the military status. |
+| 63 | Due to work accident | Allowance granted to a victim of a work accident. |
+| 64 | Special agreement | An allowance or charge as specified in a special agreement. |
+| 65 | Production error discount | A discount given for the purchase of a product with a production error. |
+| 66 | New outlet discount | A discount given at the occasion of the opening of a new outlet. |
+| 67 | Sample discount | A discount given for the purchase of a sample of a product. |
+| 68 | End-of-range discount | A discount given for the purchase of an end-of-range product. |
+| 70 | Incoterm discount | A discount given for a specified Incoterm. |
+| 71 | Point of sales threshold allowance | Allowance for reaching or exceeding an agreed sales threshold at the point of sales. |
+| 88 | Material surcharge/deduction | Surcharge/deduction, calculated for higher/lower material's consumption. |
+| 95 | Discount | A reduction from a usual or list price. |
+| 100 | Special rebate | A return of part of an amount paid for goods or services, serving as a reduction or discount. |
+| 102 | Fixed long term | A fixed long term allowance or charge. |
+| 103 | Temporary | A temporary allowance or charge. |
+| 104 | Standard | The standard available allowance or charge. |
+| 105 | Yearly turnover | An allowance or charge based on yearly turnover. |
+
+## Document/Line Level Charge Reason Code
+
+<Callout kind="info" collapsed="false">
+  This is the full UN/CEFACT 5189 charge reason code list (190+ entries). Reproduced in full below since it was fully captured from the source.
+</Callout>
+
+| Code | Name | Description |
+|---|---|---|
+| `AA` | Advertising | The service of providing advertising. |
+| `AAA` | Telecommunication | The service of providing telecommunication activities and/or facilities. |
+| `AAC` | Technical modification | The service of making technical modifications to a product. |
+| `AAD` | Job-order production | The service of producing to order. |
+| `AAE` | Outlays | The service of providing money for outlays on behalf of a trading partner. |
+| `AAF` | Off-premises | The service of providing services outside the premises of the provider. |
+| `AAH` | Additional processing | The service of providing additional processing. |
+| `AAI` | Attesting | The service of certifying validity. |
+| `AAS` | Acceptance | The service of accepting goods or services. |
+| `AAT` | Rush delivery | The service to provide a rush delivery. |
+| `AAV` | Special construction | The service of providing special construction. |
+| `AAY` | Airport facilities | The service of providing airport facilities. |
+| `AAZ` | Concession | The service allowing a party to use another party's facilities. |
+| `ABA` | Compulsory storage | The service provided to hold a compulsory inventory. |
+| `ABB` | Fuel removal | Remove or off-load fuel from vehicle, vessel or craft. |
+| `ABC` | Into plane | Service of delivering goods to an aircraft from local storage. |
+| `ABD` | Overtime | The service of providing labour beyond the established limit of working hours. |
+| `ABF` | Tooling | The service of providing specific tooling. |
+| `ABK` | Miscellaneous | Miscellaneous services. |
+| `ABL` | Additional packaging | The service of providing additional packaging. |
+| `ABN` | Dunnage | The service of providing additional padding materials required to secure and protect a cargo. |
+| `ABR` | Containerisation | The service of packing items into a container. |
+| `ABS` | Carton packing | The service of packing items into a carton. |
+| `ABT` | Hessian wrapped | The service of hessian wrapping. |
+| `ABU` | Polyethylene wrap packing | The service of packing in polyethylene wrapping. |
+| `ACF` | Miscellaneous treatment | Miscellaneous treatment service. |
+| `ACG` | Enamelling treatment | The service of providing enamelling treatment. |
+| `ACH` | Heat treatment | The service of treating with heat. |
+| `ACI` | Plating treatment | The service of providing plating treatment. |
+| `ACJ` | Painting | The service of painting. |
+| `ACK` | Polishing | The service of polishing. |
+| `ACL` | Priming | The service of priming. |
+| `ACM` | Preservation treatment | The service of preservation treatment. |
+| `ACS` | Fitting | Fitting service. |
+| `ADC` | Consolidation | The service of consolidating multiple consignments into one shipment. |
+| `ADE` | Bill of lading | The service of providing a bill of lading document. |
+| `ADJ` | Airbag | The service of surrounding a product with an air bag. |
+| `ADK` | Transfer | The service of transferring. |
+| `ADL` | Slipsheet | The service of securing a stack of products on a slipsheet. |
+| `ADM` | Binding | Binding service. |
+| `ADN` | Repair or replacement of broken returnable package | The service of repairing or replacing a broken returnable package. |
+| `ADO` | Efficient logistics | A code indicating efficient logistics services. |
+| `ADP` | Merchandising | A code indicating that merchandising services are in operation. |
+| `ADQ` | Product mix | A code indicating that product mixing services are in operation. |
+| `ADR` | Other services | A code indicating that other non-specific services are in operation. |
+| `ADT` | Pick-up | The service of picking up or collection of goods. |
+| `ADW` | Chronic illness | The special services provided due to chronic illness. |
+| `ADY` | New product introduction | A service provided by a buyer when introducing a new product from a suppliers range. |
+| `ADZ` | Direct delivery | Direct delivery service. |
+| `AEA` | Diversion | The service of diverting deliverables. |
+| `AEB` | Disconnect | The service is a disconnection. |
+| `AEC` | Distribution | Distribution service. |
+| `AED` | Handling of hazardous cargo | A service for handling hazardous cargo. |
+| `AEF` | Rents and leases | The service of renting and/or leasing. |
+| `AEH` | Location differential | Delivery to a different location than previously contracted. |
+| `AEI` | Aircraft refueling | Fuel being put into the aircraft. |
+| `AEJ` | Fuel shipped into storage | Fuel being shipped into a storage system. |
+| `AEK` | Cash on delivery | The provision of a cash on delivery (COD) service. |
+| `AEL` | Small order processing service | A service related to the processing of small orders. |
+| `AEM` | Clerical or administrative services | The provision of clerical or administrative services. |
+| `AEN` | Guarantee | The service of providing a guarantee. |
+| `AEO` | Collection and recycling | The service of collection and recycling products. |
+| `AEP` | Copyright fee collection | The service of collecting copyright fees. |
+| `AES` | Veterinary inspection service | The service of providing veterinary inspection. |
+| `AET` | Pensioner service | Special service when the subject is a pensioner. |
+| `AEU` | Medicine free pass holder | Special service when the subject holds a medicine free pass. |
+| `AEV` | Environmental protection service | The provision of an environmental protection service. |
+| `AEW` | Environmental clean-up service | The provision of an environmental clean-up service. |
+| `AEX` | National cheque processing service outside account area | Service of processing a national cheque outside the ordering customer's bank trading area. |
+| `AEY` | National payment service outside account area | Service of processing a national payment to a beneficiary holding an account outside the ordering customer's bank trading area. |
+| `AEZ` | National payment service within account area | Service of processing a national payment to a beneficiary holding an account within the ordering customer's bank trading area. |
+| `AJ` | Adjustments | The service of making adjustments. |
+| `AU` | Authentication | The service of authenticating. |
+| `CA` | Cataloguing | The provision of cataloguing services. |
+| `CAB` | Cartage | Movement of goods by heavy duty cart or vehicle. |
+| `CAD` | Certification | The service of certifying. |
+| `CAE` | Certificate of conformance | The service of providing a certificate of conformance. |
+| `CAF` | Certificate of origin | The service of providing a certificate of origin. |
+| `CAI` | Cutting | The service of cutting. |
+| `CAJ` | Consular service | The service provided by consulates. |
+| `CAK` | Customer collection | The service of collecting goods by the customer. |
+| `CAL` | Payroll payment service | Provision of a payroll payment service. |
+| `CAM` | Cash transportation | Provision of a cash transportation service. |
+| `CAN` | Home banking service | Provision of a home banking service. |
+| `CAO` | Bilateral agreement service | Provision of a service as specified in a bilateral special agreement. |
+| `CAP` | Insurance brokerage service | Provision of an insurance brokerage service. |
+| `CAQ` | Cheque generation | Provision of a cheque generation service. |
+| `CAR` | Preferential merchandising location | Service of assigning a preferential location for merchandising. |
+| `CAS` | Crane | The service of providing a crane. |
+| `CAT` | Special colour service | Providing a colour which is different from the default colour. |
+| `CAU` | Sorting | The provision of sorting services. |
+| `CAV` | Battery collection and recycling | The service of collecting and recycling batteries. |
+| `CAW` | Product take back fee | The fee the consumer must pay the manufacturer to take back the product. |
+| `CAX` | Quality control released | Informs the stockholder it is free to distribute the quality controlled passed goods. |
+| `CAY` | Quality control held | Instructs the stockholder to withhold distribution of the goods until the quality control decision is made. |
+| `CAZ` | Quality control embargo | Instructs the stockholder to withhold distribution of goods which have failed quality control. |
+| `CD` | Car loading | Car loading service. |
+| `CG` | Cleaning | Cleaning service. |
+| `CS` | Cigarette stamping | The service of providing cigarette stamping. |
+| `CT` | Count and recount | The service of doing a count and recount. |
+| `DAB` | Layout/design | The service of providing layout/design. |
+| `DAC` | Assortment allowance | Allowance given when a specific part of a suppliers assortment is purchased. |
+| `DAD` | Driver assigned unloading | The service of unloading by the driver. |
+| `DAF` | Debtor bound | A special allowance or charge applicable to a specific debtor. |
+| `DAG` | Dealer allowance | An allowance offered by a party dealing a certain brand or brands of products. |
+| `DAH` | Allowance transferable to the consumer | An allowance given by the manufacturer which should be transferred to the consumer. |
+| `DAI` | Growth of business | An allowance or charge related to the growth of business over a pre-determined period. |
+| `DAJ` | Introduction allowance | An allowance related to the introduction of a new product to the range of products. |
+| `DAK` | Multi-buy promotion | A code indicating special conditions related to a multi-buy promotion. |
+| `DAL` | Partnership | An allowance or charge related to the establishment and on-going maintenance of a partnership agreement. |
+| `DAM` | Return handling | An allowance or charge related to the handling of returns. |
+| `DAN` | Minimum order not fulfilled charge | Charge levied because the minimum order quantity could not be fulfilled. |
+| `DAO` | Point of sales threshold allowance | Allowance for reaching or exceeding an agreed sales threshold at the point of sales. |
+| `DAP` | Wholesaling discount | A special discount related to the purchase of products through a wholesaler. |
+| `DAQ` | Documentary credits transfer commission | Fee for the transfer of transferable documentary credits. |
+| `DL` | Delivery | The service of providing delivery. |
+| `EG` | Engraving | The service of providing engraving. |
+| `EP` | Expediting | The service of expediting. |
+| `ER` | Exchange rate guarantee | The service of guaranteeing exchange rate. |
+| `FAA` | Fabrication | The service of providing fabrication. |
+| `FAB` | Freight equalization | The service of load balancing. |
+| `FAC` | Freight extraordinary handling | The service of providing freight's extraordinary handling. |
+| `FC` | Freight service | The service of moving goods, by whatever means, from one place to another. |
+| `FH` | Filling/handling | The service of providing filling/handling. |
+| `FI` | Financing | The service of providing financing. |
+| `GAA` | Grinding | The service of grinding. |
+| `HAA` | Hose | The service of providing a hose. |
+| `HD` | Handling | Handling service. |
+| `HH` | Hoisting and hauling | The service of hoisting and hauling. |
+| `IAA` | Installation | The service of installing. |
+| `IAB` | Installation and warranty | The service of installing and providing warranty. |
+| `ID` | Inside delivery | The service of providing delivery inside. |
+| `IF` | Inspection | The service of inspection. |
+| `IR` | Installation and training | The service of providing installation and training. |
+| `IS` | Invoicing | The service of providing an invoice. |
+| `KO` | Koshering | The service of preparing food in accordance with Jewish law. |
+| `L1` | Carrier count | The service of counting by the carrier. |
+| `LA` | Labelling | Labelling service. |
+| `LAA` | Labour | The service to provide required labour. |
+| `LAB` | Repair and return | The service of repairing and returning. |
+| `LF` | Legalisation | The service of legalising. |
+| `MAE` | Mounting | The service of mounting. |
+| `MI` | Mail invoice | The service of mailing an invoice. |
+| `ML` | Mail invoice to each location | The service of mailing an invoice to each location. |
+| `NAA` | Non-returnable containers | The service of providing non-returnable containers. |
+| `OA` | Outside cable connectors | The service of providing outside cable connectors. |
+| `PA` | Invoice with shipment | The service of including the invoice with the shipment. |
+| `PAA` | Phosphatizing (steel treatment) | The service of phosphatizing the steel. |
+| `PC` | Packing | The service of packing. |
+| `PL` | Palletizing | The service of palletizing. |
+| `PRV` | Price variation | Price variation related to energy and or raw materials cost variation. |
+| `RAB` | Repacking | The service of repacking. |
+| `RAC` | Repair | The service of repairing. |
+| `RAD` | Returnable container | The service of providing returnable containers. |
+| `RAF` | Restocking | The service of restocking. |
+| `RE` | Re-delivery | The service of re-delivering. |
+| `RF` | Refurbishing | The service of refurbishing. |
+| `RH` | Rail wagon hire | The service of providing rail wagons for hire. |
+| `RV` | Loading | The service of loading goods. |
+| `SA` | Salvaging | The service of salvaging. |
+| `SAA` | Shipping and handling | The service of shipping and handling. |
+| `SAD` | Special packaging | The service of special packaging. |
+| `SAE` | Stamping | The service of stamping. |
+| `SAI` | Consignee unload | The service of unloading by the consignee. |
+| `SG` | Shrink-wrap | The service of shrink-wrapping. |
+| `SH` | Special handling | The service of special handling. |
+| `SM` | Special finish | The service of providing a special finish. |
+| `SU` | Set-up | The service of setting-up. |
+| `TAB` | Tank renting | The service of providing tanks for hire. |
+| `TAC` | Testing | The service of testing. |
+| `TT` | Transportation - third party billing | The service of providing third party billing for transportation. |
+| `TV` | Transportation by vendor | The service of providing transportation by the vendor. |
+| `V1` | Drop yard | The service of delivering goods at the yard. |
+| `V2` | Drop dock | The service of delivering goods at the dock. |
+| `WH` | Warehousing | The service of storing and handling of goods in a warehouse. |
+| `XAA` | Combine all same day shipment | The service of combining all shipments for the same day. |
+| `YY` | Split pick-up | The service of providing split pick-up. |
+| `ZZZ` | Mutually defined | A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned. |
+
+## Country Code
+
+Source: ISO 3166-1 alpha-2, plus two special entries (Kosovo `1A`, Northern Ireland `XI`). Used for IBT-040 (Seller country), IBT-055 (Buyer country), IBT-069 (Tax representative), IBT-080 (Delivery destination), IBT-159 (Item origin). **251 total entries.**
+
+| Code | Country/Territory |
+|---|---|
+| AD | Andorra |
+| AE | United Arab Emirates |
+| AF | Afghanistan |
+| AG | Antigua and Barbuda |
+| AI | Anguilla |
+| AL | Albania |
+| AM | Armenia |
+| AO | Angola |
+| AQ | Antarctica |
+| AR | Argentina |
+| AS | American Samoa |
+| AT | Austria |
+| AU | Australia |
+| AW | Aruba |
+| AX | Åland Islands |
+
+<Callout kind="info" collapsed="false">
+  Full 251-entry list at [https://cleartax-unified-api.netlify.app/countries/uae/code-lists/country-code](https://cleartax-unified-api.netlify.app/countries/uae/code-lists/country-code).
+</Callout>
+
+## Currency Code
+
+Source: ISO 4217. Used for IBT-005 (Invoice currency code), IBT-006 (VAT accounting currency code). **159 total entries.**
+
+| Code | Name |
+|---|---|
+| AED | UAE Dirham |
+| AFN | Afghani |
+| ALL | Lek |
+| AMD | Armenian Dram |
+| AOA | Kwanza |
+| ARS | Argentine Peso |
+| AUD | Australian Dollar |
+| AWG | Aruban Florin |
+| AZN | Azerbaijan Manat |
+| BAM | Convertible Mark |
+| BBD | Barbados Dollar |
+| BDT | Taka |
+| BHD | Bahraini Dinar |
+| BIF | Burundi Franc |
+| BMD | Bermudian Dollar |
+
+The list extends through less common currencies, commodity codes (`XAU`, `XAG`, `XPT`), and testing codes (`XTS`), ending with regional variants such as `CNH` (offshore Renminbi).
+
+<Callout kind="info" collapsed="false">
+  Full 159-entry list at [https://cleartax-unified-api.netlify.app/countries/uae/code-lists/currency-codes](https://cleartax-unified-api.netlify.app/countries/uae/code-lists/currency-codes).
+</Callout>
+
+## Electronic Address Scheme (EAS)
+
+| Code | Name |
+|---|---|
+| 0002 | Systeme Information et Repertoire des Entreprise et des Etablissements: SIRENE |
+| 0007 | Organisationsnummer (Swedish legal entities) |
+| 0009 | SIRET-CODE |
+| 0037 | LY-tunnus |
+| 0060 | Data Universal Numbering System (D-U-N-S Number) |
+| 0088 | EAN Location Code |
+| 0096 | The Danish Business Authority - P-number (DK:P) |
+| 0097 | FTI - Ediforum Italia, (EDIRA compliant) |
+| 0106 | Vereniging van Kamers van Koophandel en Fabrieken in Nederland (EDIRA compliant) |
+| 0130 | Directorates of the European Commission |
+| 0135 | SIA Object Identifiers |
+| 0142 | SECETI Object Identifiers |
+| 0151 | Australian Business Number (ABN) Scheme |
+| 0154 | Identification number of economic subjects (ICO) |
+| 0158 | Identification number of economic subject (ICO), Act on State Statistics of 29 November 2001, § 27 |
+| 0177 | Odette International Limited |
+| 0183 | Numero d'identification suisse des enterprises (IDE), Swiss Unique Business Identification Number (UIDB) |
+| 0184 | DIGSTORG |
+| 0188 | Corporate Number of The Social Security and Tax Number System |
+| 0190 | Dutch Originator's Identification Number |
+| 0191 | Centre of Registers and Information Systems of the Ministry of Justice |
+| 0192 | Enhetsregisteret ved Bronnoysundregisterne |
+| 0193 | UBL.BE party identifier |
+| 0195 | Singapore UEN identifier |
+| 0196 | Kennitala - Iceland legal id for individuals and legal entities |
+| 0198 | ERSTORG |
+| 0199 | Legal Entity Identifier (LEI) |
+| 0200 | Legal entity code (Lithuania) |
+| 0201 | Codice Univoco Unità Organizzativa iPA |
+| 0202 | Indirizzo di Posta Elettronica Certificata |
+| 0204 | Leitweg-ID |
+| 0208 | Numero d'entreprise / ondernemingsnummer / Unternehmensnummer |
+| 0209 | GS1 identification keys |
+| 0210 | CODICE FISCALE |
+| 0211 | PARTITA IVA |
+| 0212 | Finnish Organization Identifier |
+| 0213 | Finnish Organization Value Add Tax Identifier |
+| 0215 | Net service ID |
+| 0216 | OVTcode |
+| 0218 | Unified registration number (Latvia) |
+| 0221 | The registered number of the qualified invoice issuer (Japan) |
+| 0230 | National e-Invoicing Framework (Malaysia) |
+| 0235 | UAE Tax Identification Number (TIN) |
+| 0240 | Register of legal persons (Répertoire des personnes morales) |
+| 0242 | OpenPeppol Service Provider Identification Scheme (SPIS) |
+| 0244 | Tax Identification (Tax ID), Nigeria |
+| 0245 | Tax identification number (DIC, Slovakia) |
+| 0246 | German Electronic Business Address |
+| 0248 | Oman Value Added Tax Identification Number (VATIN) |
+| 9910 | Hungary VAT number |
+| 9913 | Business Registers Network |
+| 9914 | Osterreichische Umsatzsteuer-Identifikationsnummer |
+| 9915 | Osterreichisches Verwaltungs bzw. Organisationskennzeichen |
+| 9918 | Society for Worldwide Interbank Financial Telecommunication (S.W.I.F.T) |
+| 9919 | Kennziffer des Unternehmensregisters |
+| 9920 | Agencia Espanola de Administracion Tributaria |
+| 9922 | Andorra VAT number |
+| 9923 | Albania VAT number |
+| 9924 | Bosnia and Herzegovina VAT number |
+| 9925 | Belgium VAT number |
+| 9926 | Bulgaria VAT number |
+| 9927 | Switzerland VAT number |
+| 9928 | Cyprus VAT number |
+| 9929 | Czech Republic VAT number |
+| 9930 | Germany VAT number |
+| 9931 | Estonia VAT number |
+| 9932 | United Kingdom VAT number |
+| 9933 | Greece VAT number |
+| 9934 | Croatia VAT number |
+| 9935 | Ireland VAT number |
+| 9936 | Liechtenstein VAT number |
+| 9937 | Lithuania VAT number |
+| 9938 | Luxemburg VAT number |
+| 9939 | Latvia VAT number |
+| 9940 | Monaco VAT number |
+| 9941 | Montenegro VAT number |
+| 9942 | Macedonia (former Yugoslav Republic) VAT number |
+| 9943 | Malta VAT number |
+| 9944 | Netherlands VAT number |
+| 9945 | Poland VAT number |
+| 9946 | Portugal VAT number |
+| 9947 | Romania VAT number |
+| 9948 | Serbia VAT number |
+| 9949 | Slovenia VAT number |
+| 9950 | Slovakia VAT number |
+| 9951 | San Marino VAT number |
+| 9952 | Turkey VAT number |
+| 9953 | Holy See (Vatican City State) VAT number |
+| 9957 | French VAT number |
+| 9959 | Employer Identification Number (EIN, USA) |
+
+## Frequency of Billing Codes
+
+| Code | Description |
+|---|---|
+| `DLY` | Daily |
+| `WKY` | Weekly |
+| `Q15` | Once in 15 days |
+| `MTH` | Monthly |
+| `Q45` | Once in 45 days |
+| `Q60` | Once in 60 days |
+| `QTR` | Quarterly |
+| `YRL` | Yearly |
+| `HYR` | Half-Yearly |
+| `OTH` | Others |
+
+## Invoiced Object Identifier Scheme (UNCL1153)
+
+Hundreds of entries, alphabetical by code (AAA–ZZZ), covering customs declarations, transport documents, financial instruments, and other commercial/regulatory references.
+
+| Code | Name | Description |
+|---|---|---|
+| AAA | Order acknowledgement document identifier | Reference number identifying the acknowledgement of an order |
+| ABM | Replacing part number | New part number which replaces the existing part number |
+| AWB | Air waybill number | Reference number assigned to an air waybill |
+| CT | Contract number | Reference number of a contract concluded between parties |
+
+<Callout kind="info" collapsed="false">
+  Full UNCL1153 list at [https://cleartax-unified-api.netlify.app/countries/uae/code-lists/invoiced-object-identifier-scheme-the-identification-scheme-identifier-of-the-invoiced-object-identifier](https://cleartax-unified-api.netlify.app/countries/uae/code-lists/invoiced-object-identifier-scheme-the-identification-scheme-identifier-of-the-invoiced-object-identifier).
+</Callout>
+
+## Organization Identifier Scheme Codes (ISO 6523 ICD)
+
+Used for IBT-029-1 (Seller identifier scheme) and IBT-046-1 (Buyer identifier scheme). **248+ total entries.**
+
+| Code | Name | Purpose |
+|---|---|---|
+| 0002 | SIRENE | French official registration for trade and organization identification |
+| 0003 | Belgian Financial Institution Codification | Identifies Belgian financial institutions and branches |
+| 0007 | Organisationsnummer | Swedish organization identification by National Tax Board |
+| 0031 | EDI Partner Identification Code | Identifies EDI partners in electronic commerce |
+| 0060 | Data Universal Numbering System (D-U-N-S) | Worldwide business and institution identification |
+| 0088 | EAN Location Code | Location identification by EAN International |
+| 0151 | Australian Business Number (ABN) | Unique Australian business identifier for government interaction |
+| 0177 | Odette International Limited | European automotive industry B2B entity identification |
+| 0183 | Swiss Unique Business Identification Number (UIDB) | Swiss company/organization identification |
+| 0192 | Organisasjonsnummer | Norwegian Central Coordinating Register identification |
+| 0199 | Legal Entity Identifier (LEI) | ISO 17442 standard for global financial entity identification |
+| 0209 | GS1 identification keys | Global entity reference (trade items, logistics, services) |
+| 0235 | UAE Tax Identification Number (TIN) | UAE Federal Tax Authority number for tax purposes |
+| 0248 | Oman Value Added Tax Identification Number | VAT-registered entity identification in Oman |
+
+<Callout kind="info" collapsed="false">
+  Full 248+ entry ISO 6523 ICD list at [https://cleartax-unified-api.netlify.app/countries/uae/code-lists/organization-identifier-scheme-codes---iso-6523-icd-list](https://cleartax-unified-api.netlify.app/countries/uae/code-lists/organization-identifier-scheme-codes---iso-6523-icd-list).
+</Callout>
+
+## Item Type (BTAE-13)
+
+| Code | Description |
+|---|---|
+| `G` | Goods |
+| `S` | Services |
+| `B` | Both |
+
+## Payment Means Codes (IBT-081)
+
+| Code | Name | Description |
+|---|---|---|
+| `1` | Instrument not defined | Not defined legally enforceable agreement between two or more parties |
+| `10` | In cash | Payment by currency (including bills and coins) in circulation, including checking account deposits |
+| `20` | Cheque | Payment by a pre-printed form on which instructions are given to an account holder (a bank or building society) to pay a stated sum to a named recipient |
+| `21` | Banker's draft | Issue of a banker's draft in payment of the funds |
+| `30` | Credit transfer | Payment by credit movement of funds from one account to another |
+| `49` | Direct debit | The amount is to be, or has been, directly debited to the customer's bank account |
+| `54` | Credit card | Payment made by means of credit card |
+| `55` | Debit card | Payment made by means of debit card |
+| `68` | Online payment service | Payment will be made or has been made by an online payment service |
+
+## VAT/Tax Exemption Reason Code
+
+<Callout kind="warning" collapsed="false">
+  Source site has a typo in the first entry ("Cetrain" instead of "Certain") — corrected below.
+</Callout>
+
+| Code | Description |
+|---|---|
+| `DL8.46.1` | Certain financial services |
+| `DL8.46.2` | Supply of residential units (lease or sale) |
+| `DL8.46.3` | Bare land |
+| `DL8.46.4` | Local passenger transport |
+
+## Invoiced Quantity Unit of Measure Code (IBT-130)
+
+Source: [UN/ECE Recommendation 20](https://docs.peppol.eu/poac/ae/v1.0.2/pint-ae/trn-invoice/codelist/UNECERec20/). **500+ total entries** spanning volume, mass, distance, temperature, pressure, and specialized industrial units.
+
+| Code | Name | Description |
+|---|---|---|
+| `10` | group | A unit of count defining the number of groups |
+| `11` | outfit | A unit of count defining the number of outfits |
+| `13` | ration | A unit of count defining the number of rations |
+| `14` | shot | A unit of liquid measure, especially related to spirits |
+| `15` | stick, military | A unit of count defining the number of military sticks |
+| `20` | twenty foot container | A unit of count defining the number of shipping containers that measure 20 foot in length |
+| `21` | forty foot container | A unit of count defining the number of shipping containers that measure 40 foot in length |
+| `22` | decilitre per gram | Standard measurement unit |
+| `23` | gram per cubic centimetre | Standard measurement unit |
+| `24` | theoretical pound | A unit of mass defining the expected mass of material |
+| `25` | gram per square centimetre | Standard measurement unit |
+| `27` | theoretical ton | A unit of mass defining the expected mass of material, expressed as the number of tons |
+| `28` | kilogram per square metre | Standard measurement unit |
+| `33` | kilopascal square metre per gram | Standard measurement unit |
+| `34` | kilopascal per millimetre | Standard measurement unit |
+
+<Callout kind="info" collapsed="false">
+  Full 500+ entry list at [https://cleartax-unified-api.netlify.app/countries/uae/code-lists/invoiced-quantity-unit-of-measure-code](https://cleartax-unified-api.netlify.app/countries/uae/code-lists/invoiced-quantity-unit-of-measure-code).
+</Callout>
+
+## Type of Goods or Services Subject to RCM
+
+| Code | Description |
+|---|---|
+| `DL8.48.8.2` | Electronic Devices |
+| `DL8.48.8.1` | Gold and Diamonds |
+| `DL8.48.3.1` | Crude or refined oil |
+| `DL8.48.3.2` | Unprocessed or processed natural gas |
+| `DL8.48.3.3` | Pure hydrocarbons |
+
+## Item Type Identification Code
+
+<Callout kind="info" collapsed="false">
+  This is the full UN/EDIFACT 7143 item type identification code list (200+ entries). Reproduced in full below since it was fully captured from the source.
+</Callout>
+
+| Code | Name | Description |
+|---|---|---|
+| AA | Product version number | Number assigned by manufacturer or seller to identify the release of a product. |
+| AB | Assembly | The item number is that of an assembly. |
+| AC | HIBC (Health Industry Bar Code) | Article identifier used within health sector to indicate data used conforms to HIBC. |
+| AD | Cold roll number | Number assigned to a cold roll. |
+| AE | Hot roll number | Number assigned to a hot roll. |
+| AF | Slab number | Number assigned to a slab, which is produced in a particular production step. |
+| AG | Software revision number | A number assigned to indicate a revision of software. |
+| AH | UPC Consumer package code (1-5-5) | An 11-digit code that uniquely identifies consumer packaging; does not have a check digit. |
+| AI | UPC Consumer package code (1-5-5-1) | A 12-digit code that uniquely identifies the consumer packaging of a product, including a check digit. |
+| AJ | Sample number | Number assigned to a sample. |
+| AK | Pack number | Number assigned to a pack containing a stack of items put together (e.g. cold roll sheets). |
+| AL | UPC Shipping container code (1-2-5-5) | A 13-digit code that uniquely identifies the manufacturer's shipping unit, including the packaging indicator. |
+| AM | UPC/EAN Shipping container code (1-2-5-5-1) | Shipping container code including the packaging indicator and the check digit. |
+| AN | UPC suffix | A suffix used in conjunction with a higher level UPC to define packing variations for a product. |
+| AO | State label code | A code which specifies the codification of the state's labelling requirements. |
+| AP | Heat number | Number assigned to the heat (iron charge) for the production of steel products. |
+| AQ | Coupon number | A number identifying a coupon. |
+| AR | Resource number | A number to identify a resource. |
+| AS | Work task number | A number to identify a work task. |
+| AT | Price look up number | Identification number on a product allowing quick electronic retrieval of price information. |
+| AU | NSN (NATO Stock Number) | Number assigned under the NATO codification system to identify an approved item of supply. |
+| AV | Refined product code | A code specifying the product refinement designation. |
+| AW | Exhibit | A code indicating that the product is identified by an exhibit. |
+| AX | End item | A number specifying an end item. |
+| AY | Federal supply classification | A code to specify a product's Federal supply classification. |
+| AZ | Engineering data list | A code specifying the product's engineering data list. |
+| BA | Milestone event number | A number to identify a milestone event. |
+| BB | Lot number | A number indicating the lot number of a product. |
+| BC | National drug code 4-4-2 format | A code identifying the product in national drug format 4-4-2. |
+| BD | National drug code 5-3-2 format | A code identifying the product in national drug format 5-3-2. |
+| BE | National drug code 5-4-1 format | A code identifying the product in national drug format 5-4-1. |
+| BF | National drug code 5-4-2 format | A code identifying the product in national drug format 5-4-2. |
+| BG | National drug code | A code specifying the national drug classification. |
+| BH | Part number | A number indicating the part. |
+| BI | Local Stock Number (LSN) | A local number assigned to an item of stock. |
+| BJ | Next higher assembly number | A number specifying the next higher assembly/component into which the product is incorporated. |
+| BK | Data category | A code specifying a category of data. |
+| BL | Control number | To specify the control number. |
+| BM | Special material identification code | A number to identify the special material code. |
+| BN | Locally assigned control number | A number assigned locally for control purposes. |
+| BO | Buyer's colour | Colour assigned by buyer. |
+| BP | Buyer's part number | Reference number assigned by the buyer to identify an article. |
+| BQ | Variable measure product code | A code assigned to identify a variable measure item. |
+| BR | Financial phase | To specify as an item, the financial phase. |
+| BS | Contract breakdown | To specify as an item, the contract breakdown. |
+| BT | Technical phase | To specify as an item, the technical phase. |
+| BU | Dye lot number | Number identifying a dye lot. |
+| BV | Daily statement of activities | A statement listing activities of one day. |
+| BW | Periodical statement of activities | Periodical statement listing activities within a bilaterally agreed time period. |
+| BX | Calendar week statement of activities | A statement listing activities of a calendar week. |
+| BY | Calendar month statement of activities | A statement listing activities of a calendar month. |
+| BZ | Original equipment number | Original equipment number allocated to spare parts by the manufacturer. |
+| CC | Industry commodity code | The codes given to certain commodities by an industry. |
+| CG | Commodity grouping | Code for a group of articles with common characteristics (e.g. statistical purposes). |
+| CL | Colour number | Code for the colour of an article. |
+| CR | Contract number | Reference number identifying a contract. |
+| CV | Customs article number | Code defined by Customs authorities to an article or a group of articles. |
+| DR | Drawing revision number | Reference number indicating a change or revision applied to a drawing. |
+| DW | Drawing | Reference number identifying a drawing of an article. |
+| EC | Engineering change level | Reference number indicating a change or revision applied to an article's specification. |
+| EF | Material code | Code defining the material's type, surface, geometric form plus classifying characteristics. |
+| EMD | EMDN (European Medical Device Nomenclature) | Nomenclature system for identification of medical devices. |
+| EN | International Article Numbering Association (EAN) | Number assigned to a manufacturer's product according to EAN. |
+| FS | Fish species | Identification of fish species. |
+| GB | Buyer's internal product group code | Product group code used within a buyer's internal systems. |
+| GMN | Global model number | GS1-identification key used to identify a product model or product family. |
+| GN | National product group code | National product group code, administered by a national agency. |
+| GS | General specification number | The item number is a general specification number. |
+| HS | Harmonised system | Item number is part of, or generated in the context of, the Harmonised Commodity Description and Coding System. |
+| IB | ISBN (International Standard Book Number) | A unique number identifying a book. |
+| IN | Buyer's item number | The item number has been allocated by the buyer. |
+| IS | ISSN (International Standard Serial Number) | A unique number identifying a serial publication. |
+| IT | Buyer's style number | Number given by the buyer to a specific style or form of an article. |
+| IZ | Buyer's size code | Code given by the buyer to designate the size of an article. |
+| MA | Machine number | The item number is a machine number. |
+| MF | Manufacturer's article number | The number given to an article by its manufacturer. |
+| MN | Model number | Reference number assigned by the manufacturer to differentiate product variations. |
+| MP | Product/service identification number | Reference number identifying a product or service. |
+| NB | Batch number | The item number is a batch number. |
+| ON | Customer order number | Reference number of a customer's order. |
+| PD | Part number description | Reference number identifying a description associated with an article identifier. |
+| PL | Purchaser's order line number | Reference number identifying a line entry in a customer's order. |
+| PO | Purchase order number | Reference number identifying a customer's order. |
+| PPI | Phytosanitary Passport identifier | String providing the phytosanitary passport identifier related to the trade item. |
+| PV | Promotional variant number | The item number is a promotional variant number. |
+| QS | Buyer's qualifier for size | The item number qualifies the size of the buyer. |
+| RC | Returnable container number | Reference number identifying a returnable container. |
+| RN | Release number | Reference number identifying a release from a buyer's purchase order. |
+| RU | Run number | The item number identifies the production/manufacturing run or sequence. |
+| RY | Record keeping of model year | The item number relates to the year in which the model was made. |
+| SA | Supplier's article number | Number assigned to an article by the supplier of that article. |
+| SG | Standard group of products (mixed assortment) | Item number relates to a standard group of items grouped as a single item. |
+| SK | SKU (Stock keeping unit) | Reference number of a stock keeping unit. |
+| SN | Serial number | Identification number of an item distinguishing it from identical items. |
+| SRS | RSK number | Plumbing and heating. |
+| SRT | IFLS 5 digit product classification code | 5 digit code for product classification managed by the Institut Francais du Libre Service. |
+| SRU | IFLS 9 digit product classification code | 9 digit code for product classification managed by the Institut Francais du Libre Service. |
+| SRV | GS1 Global Trade Item Number | A unique number, up to 14-digits, assigned according to the GS1 numbering structure. |
+| SRW | EDIS (Energy Data Identification System) | European system for identification of meter data. |
+| SRX | Slaughter number | Unique number given by a slaughterhouse to an animal or group of animals. |
+| SRY | Official animal number | Unique number given by a national authority to identify an animal individually. |
+| SRZ | Harmonized tariff schedule | International HTS used for customs, statistical and other purposes. |
+| SS | Supplier's supplier article number | Article number referring to a sales catalogue of supplier's supplier. |
+| SSA | 46 Level DOT Code | US DOT code identifying hazardous (dangerous) goods. |
+| SSB | Airline Tariff 6D | US code identifying hazardous (dangerous) goods, managed by CBP. |
+| SSC | Title 49 Code of Federal Regulations | US CBP code used to identify hazardous (dangerous) goods. |
+| SSD | International Civil Aviation Administration code | US DOT/FAA code used to identify hazardous (dangerous) goods. |
+| SSE | Hazardous Materials ID DOT | US DOT code used to identify hazardous (dangerous) goods. |
+| SSF | Endorsement | US CBP code used to identify hazardous (dangerous) goods. |
+| SSG | Air Force Regulation 71-4 | Department of Defense/Air Force code identifying hazardous (dangerous) goods. |
+| SSH | Breed | The breed of the item (e.g. plant or animal). |
+| SSI | Chemical Abstract Service (CAS) registry number | Unique numerical identifier for chemical compounds, polymers, biological sequences, mixtures and alloys. |
+| SSJ | Engine model designation | A name or designation to identify an engine model. |
+| SSK | Institutional Meat Purchase Specifications (IMPS) Number | Number assigned by agricultural authorities to identify and track meat products. |
+| SSL | Price Look-Up code (PLU) | Number assigned by agricultural authorities to identify and track meat products. |
+| SSM | International Maritime Organization (IMO) Code | IMO code used to identify hazardous (dangerous) goods. |
+| SSN | Bureau of Explosives 600-A (rail) | DOT/Federal Railroad Administration code identifying hazardous (dangerous) goods. |
+| SSO | United Nations Dangerous Goods List | UN code used to classify and identify dangerous goods. |
+| SSP | International Code of Botanical Nomenclature (ICBN) | Code used to classify and identify botanical articles and commodities. |
+| SSQ | International Code of Zoological Nomenclature (ICZN) | Code used to classify and identify animals. |
+| SSR | International Code of Nomenclature for Cultivated Plants (ICNCP) | Code used to classify and identify cultivated plants. |
+| SSS | Distributor's article identifier | Identifier assigned to an article by the distributor of that article. |
+| SST | Norwegian Classification system ENVA | Product classification system used in the Norwegian market. |
+| SSU | Supplier assigned classification | Product classification assigned by the supplier. |
+| SSV | Mexican classification system AMECE | Product classification system used in the Mexican market. |
+| SSW | German classification system CCG | Product classification system used in the German market. |
+| SSX | Finnish classification system EANFIN | Product classification system used in the Finnish market. |
+| SSY | Canadian classification system ICC | Product classification system used in the Canadian market. |
+| SSZ | French classification system IFLS5 | Product classification system used in the French market. |
+| ST | Style number | Number given to a specific style or form of an article. |
+| STA | Dutch classification system CBL | Product classification system used in the Dutch market. |
+| STB | Japanese classification system JICFS | Product classification system used in the Japanese market. |
+| STC | EU dairy subsidy eligibility classification | Category eligible for EU subsidy for certain dairy products. |
+| STD | GS1 Spain classification system | Product classification system used in the Spanish market. |
+| STE | GS1 Poland classification system | Product classification system used in the Polish market. |
+| STF | Federal Agency on Technical Regulating and Metrology of the Russian Federation | National standardization body of the Russian Federation. |
+| STG | Efficient Consumer Response (ECR) Austria classification system | Product classification system used in the Austrian market. |
+| STH | GS1 Italy classification system | Product classification system used in the Italian market. |
+| STI | CPV (Common Procurement Vocabulary) | Official classification for public procurement in the European Union. |
+| STJ | IFDA (International Foodservice Distributors Association) | International Foodservice Distributors Association classification. |
+| STK | AHFS pharmacologic-therapeutic classification | Classification maintained by the American Hospital Formulary Service. |
+| STL | ATC (Anatomical Therapeutic Chemical) classification system | Maintained by the World Health Organisation. |
+| STM | CLADIMED | Five level classification for medical devices used in the French market. |
+| STN | CMDR (Canadian Medical Device Regulations) classification system | Related to Canadian Medical Device Regulations, maintained by Health Canada. |
+| STO | CNDM (Classificazione Nazionale dei Dispositivi Medici) | Classification for medical devices used in the Italian market. |
+| STP | UK DM&D standard coding scheme | Classification for medicines and devices used in the UK market. |
+| STQ | eCl@ss | Standardized material and service classification and dictionary. |
+| STR | EDMA Product Classification | Classification for in vitro diagnostics medical devices. |
+| STS | EGAR (European Generic Article Register) | A classification system for medical devices. |
+| STT | GMDN (Global Medical Devices Nomenclature) | Nomenclature approved by the European Union. |
+| STU | GPI (Generic Product Identifier) | Drug classification system managed by Medi-Span. |
+| STV | HCPCS | Classification used with US healthcare insurance programs. |
+| STW | ICPS (International Classification for Patient Safety) | Patient safety taxonomy maintained by WHO. |
+| STX | MedDRA | Medical dictionary maintained by IFPMA. |
+| STY | Medical Columbus | Medical product classification system used in the German market. |
+| STZ | NAPCS | Product classification system used in the North American market. |
+| SUA | NHS eClass | Product and Service classification system used in United Kingdom market. |
+| SUB | US FDA Product Code Classification Database | Medical device names and associated information developed by CDRH. |
+| SUC | SNOMED CT | Medical nomenclature developed between NHS and College of American Pathologists. |
+| SUD | UMDNS | Standard international nomenclature for medical devices, maintained by ECRI. |
+| SUE | GS1 Global Returnable Asset Identifier, non-serialised | 13-digit number used to identify a Reusable Transport Item (RTI). |
+| SUF | IMEI | Unique number to identify mobile phones. |
+| SUG | Waste Type (EMSA) | Classification of waste as defined by the European Maritime Safety Agency. |
+| SUH | Ship's store classification type | Classification of ship's stores. |
+| SUI | Emergency fire code | Classification for emergency response procedures related to fire. |
+| SUJ | Emergency spillage code | Classification for emergency response procedures related to spillage. |
+| SUK | IMDG packing group | Packing group defined in the International Maritime Dangerous Goods specification. |
+| SUL | MARPOL Code IBC | International Bulk Chemical code defined by MARPOL. |
+| SUM | IMDG subsidiary risk class | Subsidiary risk class defined in the IMDG specification. |
+| TG | Transport group number | Additional number to form article groups for packing/transportation purposes. |
+| TSN | Taxonomic Serial Number | Unique number assigned to a taxonomic entity (species of plants or animals). |
+| TSO | IMDG main hazard class | Main hazard class defined in the IMDG specification. |
+| TSP | EU Combined Nomenclature | Combined Nomenclature classification maintained by the European Union. |
+| TSQ | Therapeutic classification number | A code to specify a product's therapeutic classification. |
+| TSR | European Waste Catalogue | Waste type number according to the European Waste Catalogue. |
+| TSS | Price grouping code | Number assigned to identify a grouping of products based on price. |
+| TST | UNSPSC | The UNSPSC commodity classification system. |
+| TSU | EU RoHS Directive | European Union Directive on the restriction of hazardous substances. |
+| UA | Ultimate customer's article number | Number assigned by ultimate customer to identify relevant article. |
+| UP | UPC (Universal product code) | Number assigned to a manufacturer's product by the Product Code Council. |
+| VN | Vendor item number | Reference number assigned by a vendor/seller identifying a product/service/article. |
+| VP | Vendor's (seller's) part number | Reference number assigned by a vendor/seller identifying a product/service/article. |
+| VS | Vendor's supplemental item number | Specified by the vendor as a supplemental number. |
+| VX | Vendor specification number | Allocated by the vendor as a specification number. |
+| ZZZ | Mutually defined | Identification mutually agreed between interchanging parties. |
+
+## Media Types (Subset: PINT)
+
+Used for IBT-125-1 (Attached Document Mime Code).
+
+| Code | Description |
+|---|---|
+| `application/pdf` | PDF document format |
+| `application/vnd.oasis.opendocument.spreadsheet` | OpenDocument spreadsheet format |
+| `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` | Microsoft Excel spreadsheet format |
+| `image/jpeg` | JPEG image format |
+| `image/png` | PNG image format |
+| `text/csv` | Comma-separated values text format |
+| `application/xml` | Extensible Markup Language format |
+
+## Credit Note Reason Code
+
+| Code | Description |
+|---|---|
+| `DL8.61.1.A` | If the supply was cancelled |
+| `DL8.61.1.B` | If the tax treatment of the supply has changed due to a change in the nature of the supply |
+| `DL8.61.1.C` | If the previously agreed consideration for the supply was altered for any reason (i.e. bad debt relief) |
+| `DL8.61.1.D` | If the recipient of goods or recipient of services returned them to the registrant in full or in part and the consideration was returned in full or in part |
+| `DL8.61.1.E` | If the tax was charged or tax treatment was applied in error |
+| `VD` | Volume Discount |
+
+## Legal Registration Identifier Type
+
+Used for IBT-030-1 (Seller legal registration identifier scheme) and IBT-047-1 (Buyer legal registration identifier scheme).
+
+| Code | Description |
+|---|---|
+| `TL` | Commercial/Trade license |
+| `EID` | Emirates ID |
+| `CD` | Cabinet decision |
+| `PAS` | Passport |
+
+## Country Subdivision Codes
+
+Used for IBT-040 and IBT-055 within UAE addresses.
+
+| Code | Emirate |
+|---|---|
+| AUH | Abu Dhabi |
+| DXB | Dubai |
+| SHJ | Sharjah |
+| UAQ | Umm Al Quwain |
+| FUJ | Fujairah |
+| AJM | Ajman |
+| RAK | Ras Al Khaimah |

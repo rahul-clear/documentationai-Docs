@@ -1,0 +1,451 @@
+---
+title: Germany - Delta Schema
+description: 'How Germany''s BIS Billing and XRechnung schemes differ from the ClearTax Base Schema'
+---
+
+Germany supports two e-invoicing schemes on top of the ClearTax Base Schema: **BIS Billing** and **XRechnung**. Each has its own set of field-level deltas, documented separately below.
+
+## BIS Billing
+
+### BG-001. Invoice Information
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Buyer reference | `buyerReference` | Alphanumeric | IBT-010 | An identifier assigned by the Buyer used for internal routing purposes | Conditional Mandatory → Optional |
+| Purchase order reference | `orderReference.id` | Alphanumeric | IBT-013 | Reference number of the Purchase Order or Purchase order number | Conditional Mandatory → Mandatory |
+| Value added tax point date | `taxPointDate` | Date | IBT-007 | Date when tax accountability occurs for seller/buyer, or payment receipt date for advance invoices | Optional → Conditional Mandatory |
+| Invoiced Object Identifier Scheme Identifier | `additionalDocumentReference.id.schemeID` | String | IBT-018-1 | Scheme identifier chosen from the UNTDID 1153 code list | Optional → Conditional Mandatory |
+
+<Callout kind="info" collapsed="false">
+  Tax point date becomes conditionally mandatory when the invoice date differs from the supply/delivery date. Scheme identifier becomes conditionally mandatory when an invoiced object identifier is supplied.
+</Callout>
+
+### BG-003. Preceding Invoice Reference
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Preceding invoice number | `billingReference.invoiceDocumentReference.id` | Alphanumeric | IBT-025 | Identifies the original invoice being adjusted by a Credit Note, Debit Note, or Corrective invoice | Mandatory → Conditional Mandatory |
+| Preceding invoice issue date | `billingReference.invoiceDocumentReference.issueDate` | Date | IBT-026 | The date the original invoice was issued | Optional → Conditional Mandatory |
+
+Both fields become mandatory when issuing Credit Notes, Debit Notes, or Corrective invoices, to ensure accurate reconciliation and auditability.
+
+### BG-004. Invoice Note
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Invoice note | `note.value` | String | IBT-022 | Unstructured note relevant to the invoice or document | Optional → Conditional Mandatory |
+
+Becomes conditionally mandatory for property-related services (construction, repair, gardening) supplied to private customers, where the invoice must include a note about a 2-year retention obligation under German tax law (§ 14b Abs. 1 Satz 5 UStG).
+
+### BG-007. Seller
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Seller legal registration identifier | `accountingSupplierParty.party.partyLegalEntity.companyID.value` | Identifier | IBT-030 | Conditional Mandatory → Optional |
+| Seller legal registration identifier scheme | `accountingSupplierParty.party.partyLegalEntity.companyID.schemeID` | Code | IBT-030-1 | Optional → Conditional Mandatory |
+| Seller VAT identifier | `accountingSupplierParty.party.partyTaxScheme.companyID` | Numeric | IBT-031 | Conditional Mandatory → Mandatory |
+| Seller identifier | `accountingSupplierParty.party.partyIdentification.id.value` | Alphanumeric | IBT-029 | Conditional Mandatory → Optional |
+| Seller identifier scheme | `accountingSupplierParty.party.partyIdentification.id.schemeID` | String | IBT-029-1 | Optional → Conditional Mandatory |
+| Seller tax scheme code | `accountingSupplierParty.party.partyTaxScheme.taxScheme.id.value` | Text | IBT-031-1 | Optional → Mandatory |
+
+VAT identifier and tax scheme code become mandatory; registration identifier shifts from conditional to optional while its scheme becomes conditionally mandatory.
+
+### BG-010. Buyer
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Buyer legal registration identifier scheme | `accountingCustomerParty.party.partyLegalEntity.companyID.schemeID` | Code | IBT-047-1 | Optional → Conditional Mandatory (when a legal registration identifier is provided) |
+| Buyer VAT identifier | `accountingCustomerParty.party.partyTaxScheme.companyID` | Numeric | IBT-048 | Optional → Conditional Mandatory for intra-community supply or reverse charge; must NOT be provided when VAT category is "Not subject to VAT" |
+| Buyer identifier scheme | `accountingCustomerParty.party.partyIdentification.id.schemeID` | String | IBT-046-1 | Optional → Conditional Mandatory (when Buyer identifier IBT-046 is supplied) |
+| Buyer tax scheme code | `accountingCustomerParty.party.partyTaxScheme.taxScheme.id.value` | Text | IBT-048-1 | Optional → Mandatory |
+
+### BG-011. Buyer Postal Address
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Buyer city | `accountingCustomerParty.party.postalAddress.cityName` | Alphabets | IBT-052 | Common name of the city/town/village of the Buyer's address | Optional → Mandatory |
+| Buyer post code | `accountingCustomerParty.party.postalAddress.postalZone` | Numeric | IBT-053 | Identifier for an addressable group of properties per the relevant postal service | Optional → Mandatory |
+
+### BG-013. Delivery Information
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Deliver to party name | `delivery.deliveryParty.partyName.name` | String | IBT-070 | Person or organization receiving goods/services | Optional → Conditional Mandatory |
+| Deliver to location identifier | `delivery.deliveryLocation.id.value` | Alphanumeric | IBT-071 | Identifier for the delivery location | Optional → Conditional Mandatory |
+| Deliver to location identifier scheme | `delivery.deliveryLocation.id.schemeID` | Alphanumeric | IBT-071-1 | Identification scheme for the delivery location identifier | Optional → Conditional Mandatory |
+| Actual delivery date | `delivery.actualDeliveryDate` | Date | IBT-072 | Date supply of goods/services was completed (YYYY-MM-DD) | Optional → Conditional Mandatory |
+| Deliver to address line 1 | `delivery.deliveryLocation.address.streetName` | String | IBT-075 | Extra detail supplementing the main address line | Optional → Conditional Mandatory |
+| Deliver to post code | `delivery.deliveryLocation.address.postalZone` | Numeric | IBT-078 | Identifier for an addressable group of properties | Optional → Conditional Mandatory |
+
+All delivery fields shift to conditionally mandatory when the delivery location differs from the buyer's address.
+
+### BG-014. Additional Supporting Documents
+
+| Field | JSON Path | Delta vs Base | Trigger |
+|---|---|---|---|
+| Supporting document reference | `additionalDocumentReference.id` | Mandatory → Conditional Mandatory | Invoice includes supporting documents (delivery orders, timesheets, contracts, statements of work) |
+| Attached document | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject` | Optional → Conditional Mandatory | Supporting document embedded directly as a binary object |
+| Attached document MIME code | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.mimeCode` | Optional → Conditional Mandatory | Attached document included, to identify file type (e.g. PDF, PNG, JPEG) |
+
+### BG-015. Payee
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Payee name | `payeeParty.partyName.name` | String | IBT-059 | The name of the Payee | Mandatory → Conditional Mandatory |
+| Payee identifier | `payeeParty.partyIdentification.id.value` | Identifier | IBT-060 | An identifier for the Payee | Optional → Conditional Mandatory |
+| Payee identifier scheme | `payeeParty.partyIdentification.id.schemeID` | Code | IBT-060-1 | Must reference the ISO/IEC 6523 maintenance agency list | Optional → Conditional Mandatory |
+| Payee legal registration identifier scheme | `payeeParty.partyLegalEntity.companyID.schemeID` | Code | IBT-061-1 | Must reference the ISO/IEC 6523 maintenance agency list | Optional → Conditional Mandatory |
+
+Payee details become conditionally mandatory when the payment recipient differs from the Seller.
+
+### BG-016. Seller Tax Representative Party
+
+| Field | JSON Path | Type | Delta vs Base |
+|---|---|---|---|
+| Tax representative name | `taxRepresentativeParty.partyName.name` | String | Mandatory → Conditional Mandatory |
+| Tax representative VAT ID | `taxRepresentativeParty.partyTaxScheme.companyID` | Identifier | Mandatory → Conditional Mandatory |
+| Tax representative postal code | `taxRepresentativeParty.postalAddress.postalZone` | Numeric | Optional → Conditional Mandatory |
+| Tax representative country code | `taxRepresentativeParty.postalAddress.country.identificationCode.countryCode` | Alphabets | Mandatory → Conditional Mandatory |
+
+Triggered when: the seller is in the EU but represented by a tax representative in Germany; the seller is outside the EU and represented by a tax representative in Germany; or the seller is VAT-registered in Germany through a fiscal tax representative.
+
+### BG-018. Credit Transfer
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Payment account identifier | `paymentMeans.payeeFinancialAccount.id.value` | Alphanumeric | IBT-084 | IBAN used to specify the seller's bank account | Mandatory → Conditional Mandatory |
+| Payment service provider identifier | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.id` | Alphanumeric | IBT-086 | BIC/SWIFT code identifying the payee's bank | Optional → Conditional Mandatory |
+
+Both become mandatory when credit transfer is the payment method (BT-81). When either is populated, alternative payment details (IBT-087 through IBT-091) must not be provided.
+
+### BG-019. Payment Card Information
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Payment card primary account number | `paymentMeans.cardAccount.primaryAccountNumberID` | String | IBT-087 | PAN of the payment card; only the last 4-6 digits should be shown | Mandatory → Conditional Mandatory |
+
+Becomes mandatory when the payment method is a payment card (credit, debit, corporate) and card information appears under Payment Means (BT-81 codes 48, 54, 55). When these codes apply, IBT-084, IBT-085, IBT-086, IBT-089, IBT-090, and IBT-091 must not be provided.
+
+### BG-020. Document Level Allowances/Charges
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| VAT category code (allowance) | `allowanceCharge.taxCategory.id` | Alphanumeric | IBT-095 | Mandatory → Conditional Mandatory |
+| Allowance amount | `allowanceCharge.amount.value` | Numeric | IBT-092 | Mandatory → Conditional Mandatory |
+| VAT category code (charge) | `allowanceCharge.taxCategory.id` | Alphanumeric | IBT-102 | Mandatory → Conditional Mandatory |
+| Charge amount | `allowanceCharge.amount.value` | Numeric | IBT-099 | Mandatory → Conditional Mandatory |
+| Base amount (allowance) | `allowanceCharge.baseAmount.value` | Numeric | IBT-093 | Optional → Conditional Mandatory |
+| Base amount (charge) | `allowanceCharge.baseAmount.value` | Numeric | IBT-100 | Optional → Conditional Mandatory |
+
+VAT category and amount fields become mandatory only when the corresponding allowance/charge is applied; base amounts become conditionally mandatory when percentage-based calculations are used.
+
+### BG-022. Document Totals
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Invoice total VAT amount | `taxTotal.taxAmount.value` | Numeric | IBT-110 | Optional → Mandatory |
+
+<Callout kind="info" collapsed="false">
+  This is the VAT total expressed in the accounting currency (EUR). Required in all cases, regardless of whether the invoice currency is EUR or foreign (USD, GBP, INR, etc.). When the invoice currency is EUR, this equals the invoice total VAT amount; for foreign currencies, it equals the invoice total VAT amount × exchange rate.
+</Callout>
+
+### BG-025. Invoice Line
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Invoice line object identifier scheme identifier | `invoiceLine.documentReference.id.schemeID` | String | IBT-128-1 | Optional → Conditional Mandatory |
+
+Becomes mandatory when the invoice line object identifier (IBT-128) is provided.
+
+### BG-026. Invoice Line Period
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Invoice line period start date | `invoiceLine.invoicePeriod.startDate` | Date | IBT-134 | Date the invoice period for this line starts | Conditional Mandatory → Optional |
+| Invoice line period end date | `invoiceLine.invoicePeriod.endDate` | Date | IBT-135 | Date the invoice period for this line ends | Conditional Mandatory → Optional |
+
+### BG-027. Invoice Line Charges/Allowances
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Invoice line charge/allowance percentage | `invoiceLine.allowanceCharge.multiplierFactorNumeric` | Numeric | IBT-138 | Percentage of discount applied at line-item level | Conditional Mandatory → Optional |
+| Invoice line charge/allowance amount | `invoiceLine.allowanceCharge.amount.value` | Numeric | IBT-136 | Amount of an allowance or charge, without VAT | Optional → Conditional Mandatory |
+| Invoice line charge/allowance percentage | `invoiceLine.allowanceCharge.multiplierFactorNumeric` | Numeric | IBT-143 | Handling/packaging/freight fees at line level | Conditional Mandatory → Optional |
+
+### BG-029. Price Details
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Item price discount | `invoiceLine.price.allowanceCharge.amount.value` | Numeric | IBT-147 | Discount subtracted from the item gross price to calculate the item net price | Optional → Conditional Mandatory |
+
+Mandatory when a reduction is applied to derive the item net price from the gross price.
+
+### BG-031. Item Information
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Item standard identifier scheme identifier | `invoiceLine.item.standardItemIdentification.id.schemeID` | Code | IBT-157-1 | Optional → Conditional Mandatory |
+
+Mandatory when an item standard identifier (IBT-157) is provided.
+
+### BG-032. Item Attributes
+
+| Field | JSON Path | Type | BT ID | Description | Delta vs Base |
+|---|---|---|---|---|---|
+| Item attribute name | `invoiceLine.item.additionalItemProperty.name` | String | IBT-160 | Name of the attribute/property of the item | Mandatory → Conditional Mandatory |
+| Item attribute value | `invoiceLine.item.additionalItemProperty.value` | String | IBT-161 | Value of the attribute/property of the item | Conditional Mandatory |
+
+Item attribute name must be provided if the value is provided. The item attribute group itself is optional (cardinality 0..n), but name/value are interdependent once used.
+
+### Germany BIS-Specific Fields
+
+| Field | JSON Path | Type | BT ID | Description | Delta Status |
+|---|---|---|---|---|---|
+| Currency exchange rate | `na` | Numeric | — | Used when invoice currency and tax/payment currency differ | Conditional Mandatory |
+| Item gross price | `invoiceLine.price.allowanceCharge.baseAmount` | Numeric | IBT-148 | Unit price, exclusive of tax, before subtracting item price discount | Optional |
+| Invoice total VAT amount in tax accounting currency | `taxTotal.taxAmount` | Numeric | IBT-111 | VAT total expressed in the accounting currency required in the seller's country | Conditional Mandatory |
+| Mandate reference identifier | `paymentMeans.paymentMandate.id` | String | IBT-089 | Required for Direct Debit with buyer-authorized mandate | Conditional Mandatory |
+| Bank assigned creditor identifier | `accountingSupplierParty.party.partyIdentification.id` | String | IBT-090 | Creditor identification assigned by bank | Optional |
+| Debited account identifier | `paymentMeans.paymentMandate.payerFinancialAccount.id` | String | IBT-091 | Account identifier for Direct Debit transactions | Optional |
+| Scheme version identifier | `invoiceLine.item.commodityClassification.itemClassificationCode.listVersionID` | — | IBT-158-2 | Version of the identification scheme | Optional |
+| Attached document filename | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.filename` | String | IBT-125-2 | Required when supporting documents are attached | Conditional Mandatory |
+| Tax point date code | `invoicePeriod.descriptionCode` | String | IBT-008 | Code for when tax becomes accountable for seller/buyer | Optional |
+| Tax scheme | `invoiceLine.item.classifiedTaxCategory.taxScheme.id` | Alphabets | IBT-167 | Code indicating the type of tax | Optional |
+
+---
+
+## XRechnung
+
+### BG-001. Invoice Information
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Purchase order reference | `orderReference.id` | Alphanumeric | IBT-013 | Conditional Mandatory → Mandatory |
+| VAT point date | `taxPointDate` | Date | IBT-007 | Optional → Conditional Mandatory (when invoice date differs from actual supply/delivery date) |
+| Invoiced object identifier scheme ID | `additionalDocumentReference.id.schemeID` | String | IBT-018-1 | Optional → Conditional Mandatory |
+
+### BG-003. Preceding Invoice Reference
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Preceding invoice number | `billingReference.invoiceDocumentReference.id` | Alphanumeric | IBT-025 | Identifier of the previous invoice referenced | `CN-001 / DN-001` | Mandatory → Conditional Mandatory |
+| Preceding invoice issue date | `billingReference.invoiceDocumentReference.issueDate` | Date | IBT-026 | Date the previous invoice was issued; required if the previous invoice identifier is not unique | `2025-11-01T00:00:00` | Optional → Conditional Mandatory |
+
+Triggered by Credit Note, Debit Note, or Corrective invoice.
+
+### BG-004. Invoice Note
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Invoice note | `note.value` | String | IBT-022 | Optional → Conditional Mandatory |
+
+Captures unstructured invoice remarks and documents the 2-year retention obligation under § 14b Abs. 1 Satz 5 UStG for property-related services to private/non-commercial recipients. Sample wording: "The recipient must retain this invoice or payment proof for 2 years (§ 14b Abs. 1 Satz 5 UStG)."
+
+### BG-007. Seller
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Seller tax registration identifier | `accountingSupplierParty.party.partyTaxScheme.companyID` | Alphanumeric | IBT-032 | Optional → Conditional Mandatory |
+| Seller legal registration identifier | `accountingSupplierParty.party.partyLegalEntity.companyID.value` | Identifier | IBT-030 | Conditional Mandatory → Optional |
+| Seller legal registration identifier scheme | `accountingSupplierParty.party.partyLegalEntity.companyID.schemeID` | Code | IBT-030-1 | Optional → Conditional Mandatory |
+| Seller VAT identifier | `accountingSupplierParty.party.partyTaxScheme.companyID` | Numeric | IBT-031 | Conditional Mandatory → Mandatory |
+| Seller identifier | `accountingSupplierParty.party.partyIdentification.id.value` | Alphanumeric | IBT-029 | Conditional Mandatory → Optional |
+| Seller identifier scheme | `accountingSupplierParty.party.partyIdentification.id.schemeID` | String | IBT-029-1 | Optional → Conditional Mandatory |
+| Seller tax scheme code | `accountingSupplierParty.party.partyTaxScheme.taxScheme.id.value` | Text | IBT-031-1 | Optional → Mandatory |
+
+XRechnung requires at least one seller tax identifier (BT-31 or BT-32).
+
+### BG-008. Seller Postal Address
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Seller city | `accountingSupplierParty.party.postalAddress.cityName` | Alphabets | IBT-037 | City/municipality of the seller's address | Berlin | Optional → Mandatory |
+| Seller post code | `accountingSupplierParty.party.postalAddress.postalZone` | Numeric | IBT-038 | Identifier for an addressable group of properties | 10115 | Optional → Mandatory |
+
+### BG-009. Seller Contact
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Seller contact email | `accountingSupplierParty.party.contact.electronicMail` | String | IBT-043 | Email of the contact person/point; validated per BR-DE-28 | `test.name@gmail.com` | Optional → Mandatory |
+| Seller contact telephone | `accountingSupplierParty.party.contact.telephone` | Numeric | IBT-042 | Telephone number of contact; mandatory for B2G, minimum 3 digits per BR-DE-27 | `49 30 123456` | Optional → Mandatory |
+| Seller contact point | `accountingSupplierParty.party.contact.name` | String | IBT-041 | Name, department, or office designation of the contact | David | Optional → Mandatory |
+
+### BG-010. Buyer
+
+- **Buyer legal registration identifier scheme** (`schemeID`): Optional → Conditional Mandatory — required when a legal registration number is declared.
+- **Buyer VAT identifier** (`companyID`): Optional → Conditional Mandatory — required for intra-community supply/reverse charge; must NOT be provided when VAT category is "Not subject to VAT".
+- **Buyer identifier scheme** (`schemeID`): Optional → Conditional Mandatory — required whenever a Buyer identifier is supplied.
+- **Buyer tax scheme code** (`taxScheme.id.value`): Optional → Mandatory — fixed value `VAT`.
+
+### BG-011. Buyer Postal Address
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Buyer city | `accountingCustomerParty.party.postalAddress.cityName` | Alphabets | IBT-052 | Optional → Mandatory |
+| Buyer post code | `accountingCustomerParty.party.postalAddress.postalZone` | Numeric | IBT-053 | Optional → Mandatory |
+
+### BG-013. Delivery Information
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Deliver to party name | `delivery.deliveryParty.partyName.name` | String | IBT-070 | Optional → Conditional Mandatory |
+| Deliver to location identifier | `delivery.deliveryLocation.id.value` | Alphanumeric | IBT-071 | Optional → Conditional Mandatory |
+| Location identifier scheme | `delivery.deliveryLocation.id.schemeID` | Alphanumeric | IBT-071-1 | Optional → Conditional Mandatory |
+| Actual delivery date | `delivery.actualDeliveryDate` | Date | IBT-072 | Optional → Conditional Mandatory |
+| Deliver to address line 1 | `delivery.deliveryLocation.address.streetName` | String | IBT-075 | Optional → Conditional Mandatory |
+| Deliver to city | `delivery.deliveryLocation.address.cityName` | Alphabets | IBT-077 | Optional → Conditional Mandatory |
+| Deliver to post code | `delivery.deliveryLocation.address.postalZone` | Numeric | IBT-078 | Optional → Conditional Mandatory |
+
+Becomes mandatory when the delivery location differs from the Buyer's address.
+
+### BG-014. Additional Supporting Documents
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Supporting document reference | `additionalDocumentReference.id` | String | IBT-122 | Identifies the supporting document | `DO-2025-045` | Mandatory → Conditional Mandatory |
+| Attached document | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject` | String | IBT-125 | Embeds document content as binary data | Base64-encoded PDF | Optional → Conditional Mandatory |
+| Attached document MIME code | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.mimeCode` | String | IBT-125-1 | File type of attachment | `PDF` | Optional → Conditional Mandatory |
+
+### BG-015. Payee
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Payee name | `payeeParty.partyName.name` | String | IBT-059 | Used when payee differs from seller | ABC | Mandatory → Conditional Mandatory |
+| Payee identifier | `payeeParty.partyIdentification.id.value` | Identifier | IBT-060 | Identifier for the payee | `DE98ZZZ09999` | Optional → Conditional Mandatory |
+| Payee identifier scheme | `payeeParty.partyIdentification.id.schemeID` | Code | IBT-060-1 | Scheme identifier for the payee identifier | `0094` | Optional → Conditional Mandatory |
+| Payee legal registration identifier scheme | `payeeParty.partyLegalEntity.companyID.schemeID` | Code | IBT-061-1 | Scheme identifier for the payee legal registration identifier | `0094` | Optional → Conditional Mandatory |
+
+### BG-016. Seller Tax Representative Party
+
+| Field | JSON Path | Type | Delta vs Base |
+|---|---|---|---|
+| Name | `taxRepresentativeParty.partyName.name` | String | Mandatory → Conditional Mandatory |
+| VAT ID | `taxRepresentativeParty.partyTaxScheme.companyID` | Identifier | Mandatory → Conditional Mandatory |
+| Address line 1 | `taxRepresentativeParty.postalAddress.streetName` | String | Optional → Conditional Mandatory |
+| Post code | `taxRepresentativeParty.postalAddress.postalZone` | Numeric | Optional → Conditional Mandatory |
+| Country code | `taxRepresentativeParty.postalAddress.country.identificationCode.countryCode` | Alphabets | Mandatory → Conditional Mandatory |
+
+Triggered when the seller is in the EU but represented in Germany, outside the EU but represented in Germany, or VAT-registered in Germany through a fiscal tax representative.
+
+### BG-018. Credit Transfer
+
+| Field | JSON Path | Description | Delta vs Base | Sample |
+|---|---|---|---|---|
+| Payment account identifier | `paymentMeans.payeeFinancialAccount.id.value` | IBAN for credit transfer | Mandatory → Conditional Mandatory | `DE89370400440532013000` |
+| Payment service provider identifier | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.id` | BIC; mandatory for non-SEPA payments (IBAN alone usually suffices for SEPA, with exceptions for San Marino, Monaco, Switzerland, etc.) | Optional → Conditional Mandatory | `9999` |
+
+Mutually exclusive with payment card fields when credit transfer applies.
+
+### BG-019. Payment Card Information
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Payment card primary account number | `paymentMeans.cardAccount.primaryAccountNumberID` | String | IBT-087 | Card number; per security standards, the full number should not appear | `XXXXXXXXXXXX1234` | Mandatory → Conditional Mandatory |
+
+Required when payment method is a payment card (BT-81 codes 48, 54, 55). When applicable, IBT-084, IBT-085, IBT-086, IBT-089, IBT-090, IBT-091 must not be provided.
+
+### BG-020. Document Level Allowances/Charges
+
+- **VAT category code** (IBT-095, IBT-102): Mandatory → Conditional Mandatory — required only when a document-level allowance/charge applies. Valid codes per UNTDID 5305: S, Z, E, AE, K, G, O, L, M.
+- **Amount** (IBT-092 allowance, IBT-099 charge): Mandatory → Conditional Mandatory.
+- **Base amount** (IBT-093, IBT-100): Optional → Conditional Mandatory — required when percentage-based calculations are used.
+
+### BG-022. Document Totals
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Invoice total VAT amount | `taxTotal.taxAmount.value` | Numeric | IBT-110 | Total sales tax for the invoice | 676 | Optional → Mandatory |
+
+### BG-025. Invoice Line
+
+<Callout kind="info" collapsed="false">
+  XRechnung 3.x introduces conditional requirements tied to SubInvoiceLine usage and arithmetic validation per EN16931/KoSIT rules.
+</Callout>
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base | Reason |
+|---|---|---|---|---|---|---|---|
+| Invoice line object identifier scheme identifier | `invoiceLine.documentReference.id.schemeID` | String | IBT-128-1 | Scheme for the line-level object identifier | `BP` | Optional → Conditional Mandatory | Required when IBT-128 is provided |
+| Invoice line identifier | `invoiceLine.id` | Identifier | IBT-126 | Unique identifier for the invoice item | `1.1` | Mandatory → Conditional Mandatory | Mandatory with SubInvoiceLine elements for KoSIT validation |
+| Invoiced quantity | `invoiceLine.invoicedQuantity.quantity` | Quantity | IBT-129 | Quantity of goods/services invoiced | `10.0` | Mandatory → Conditional Mandatory | Mandatory when SubInvoiceLine net amount derives from unit pricing (R120) |
+| Invoiced quantity unit of measure code | `invoiceLine.invoicedQuantity.unitCode` | Code | IBT-130 | UN/ECE Rec 20/21 unit code | `HUR` | Mandatory → Conditional Mandatory | Required alongside quantity per CIUS standards |
+| Invoice line net amount | `invoiceLine.lineExtensionAmount.value` | Amount | IBT-131 | Total excluding VAT, including discounts/duties | `800.00 EUR` | Mandatory → Conditional Mandatory | Mandatory with SubInvoiceLine for VAT aggregation and reconciliation |
+
+### BG-026. Invoice Line Period
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Invoice line period start date | `invoiceLine.invoicePeriod.startDate` | Date | IBT-134 | Billing period start for this invoice item | `2024-11-15` | Conditional Mandatory → Optional |
+| Invoice line period end date | `invoiceLine.invoicePeriod.endDate` | Date | IBT-135 | Billing period end for this invoice item | `2024-12-15` | Conditional Mandatory → Optional |
+
+### BG-027. Invoice Line Charges/Allowances
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Invoice line charge/allowance percentage | `invoiceLine.allowanceCharge.multiplierFactorNumeric` | Numeric | IBT-138 | Percentage used with the base amount for the item discount | `5.8824%` | Conditional Mandatory → Optional |
+| Invoice line charge/allowance percentage | `invoiceLine.allowanceCharge.multiplierFactorNumeric` | Numeric | IBT-143 | Percentage used with the base amount for item levies | `2.5000%` | Conditional Mandatory → Optional |
+
+### BG-029. Price Details
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta vs Base |
+|---|---|---|---|---|---|---|
+| Item price discount | `invoiceLine.price.allowanceCharge.amount.value` | Numeric | IBT-147 | Discount subtracted from gross item price to get net item price | `10.0` / `5.0000 EUR` | Optional → Conditional Mandatory |
+| Item net price | `invoiceLine.price.priceAmount.value` | Unit price amount | IBT-146 | Price excluding VAT, after discount | `85.0000 EUR` | Mandatory → Conditional Mandatory |
+
+Item net price becomes conditionally mandatory when quantity-based pricing exists (validation reconciles unit price with quantity and line extension amount). Item price discount becomes conditionally mandatory for per-unit discounts outside embedded gross pricing.
+
+### BG-030. Line VAT Information
+
+| Field | JSON Path | Type | BT ID | Delta vs Base |
+|---|---|---|---|---|
+| Invoiced item VAT category code | `invoiceLine.item.classifiedTaxCategory.id` | Code | IBT-151 | Optional → Conditional Mandatory |
+
+Must use UNTDID 5305 codes: S (Standard), Z (Zero-rated), E (Exempt), AE (VAT Reverse Charge), K (EEA intra-community exemption), G (Free export), O (Outside tax scope), L (Canary Islands indirect tax), M (Ceuta/Melilla production tax). Every SubInvoiceLine must specify a VAT category code for KoSIT-compliant VAT breakdown grouping.
+
+### BG-031. Item Information
+
+| Field | JSON Path | Type | BT ID | Base Schema | XRechnung Delta | Notes |
+|---|---|---|---|---|---|---|
+| Item standard identifier scheme identifier | `invoiceLine.item.standardItemIdentification.id.schemeID` | Code | IBT-157-1 | Optional | Conditional Mandatory | Mandatory when item standard identifier (IBT-157) is provided |
+| Item name | `invoiceLine.item.name` | Text | IBT-153 | Mandatory | Conditional Mandatory | Required in SubInvoiceLine context |
+
+### BG-032. Item Attributes
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Notes |
+|---|---|---|---|---|---|---|
+| Item attribute name | `invoiceLine.item.additionalItemProperty.name` | String | IBT-160 | Name of the item's property (e.g. "color") | `Material Grade` | Base: Mandatory → XRechnung: Conditional Mandatory |
+| Item attribute value | `invoiceLine.item.additionalItemProperty.value` | String | IBT-161 | Value of the item's property (e.g. "red") | `46 mm²/s` | Base: Mandatory → XRechnung: Conditional Mandatory |
+
+Per KoSIT rule BR-54, if `AdditionalItemProperty` is present, both name and value must coexist.
+
+### Germany XRechnung-Specific Fields
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Delta Status |
+|---|---|---|---|---|---|---|
+| Invoice note subject code | `note.subjectCode` | Code | IBT-021 | Subject line for the invoice note, from UNTDID 4451 | `AAA` | Conditional Mandatory |
+| Currency exchange rate | `na` | Numeric | — | Required when invoice currency differs from EUR | `0.87` | Conditional Mandatory |
+| Item gross price | `invoiceLine.price.allowanceCharge.baseAmount` | Numeric | IBT-148 | Item price excluding VAT before deduction | `133.45` | Optional |
+| Invoice total VAT in tax accounting currency | `taxTotal.taxAmount` | Numeric | IBT-111 | Total VAT amount stated in the billing currency | `676` | Conditional Mandatory |
+| Mandate reference identifier | `paymentMeans.paymentMandate.id` | String | IBT-089 | Identifier assigned by the payee for the direct debit authorization | `MANDATE-2025-0001` | Conditional Mandatory |
+| Bank assigned creditor identifier | `accountingSupplierParty.party.partyIdentification.id` | String | IBT-090 | Identifier for SEPA direct debit scheme participation | `BANK-CR-987654321` | Optional |
+| Debited account identifier | `paymentMeans.paymentMandate.payerFinancialAccount.id` | String | IBT-091 | Account identifier for the direct debit | `DE89370400440532013000` | Optional |
+| Scheme version identifier | `invoiceLine.item.commodityClassification.itemClassificationCode.listVersionID` | — | IBT-158-2 | Classification scheme version | `GTIN` | Optional |
+| Attached document filename | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.filename` | String | IBT-125-2 | Unique filename within the attachment list | `DO-2025-045.pdf` | Conditional Mandatory |
+| Tax point date code | `invoicePeriod.descriptionCode` | String | IBT-008 | Code for the point in time sales tax must be recorded (UNTDID 2005) | `432` | Optional |
+| Tax scheme | `invoiceLine.item.classifiedTaxCategory.taxScheme.id` | Alphabets | IBT-167 | Tax classification scheme | `VAT` | Optional |
+
+**New structural groups** introduced for XRechnung compliance:
+
+- **SUB INVOICE LINE** (BG-DEX-01) — individual invoice items
+- **SUB INVOICE LINE ITEM INFORMATION** (BG-DEX-02) — goods/services details
+- **SUB INVOICE LINE ALLOWANCES** (BG-DEX-03) — item discounts
+- **SUB INVOICE LINE CHARGES** (BG-DEX-04) — surcharges/costs
+- **SUB INVOICE LINE PERIOD** (BG-DEX-05) — billing period specifics
+- **SUB INVOICE LINE VAT INFORMATION** (BG-DEX-06) — sales tax details
+
+**Third party payment fields:**
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Status |
+|---|---|---|---|---|---|---|
+| Third party payment type | `prepaidPayment.id` | Text | BT-DEX-01 | Type of external claim | `Bundeszuschuss IT-Förderung` | Conditional Mandatory |
+| Third party payment amount | `prepaidPayment.paidAmount` | Amount | BT-DEX-02 | Amount of the external claim | `200.00 EUR` | Conditional Mandatory |
+| Third party payment description | `prepaidPayment.instructionID` | Text | BT-DEX-03 | Description of the third-party claim within the invoice | `Förderanteil gemäß Bundesprogramm Digitalisierung 2026` | Conditional Mandatory |

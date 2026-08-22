@@ -1,0 +1,558 @@
+---
+title: Germany — Code Lists
+description: 'Code lists shared across Germany BIS Billing and XRechnung schemes'
+---
+
+These code lists apply to both the BIS Billing and XRechnung schemes for Germany.
+
+## Tax Category Code
+
+Applied to IBT-118 (VAT category code), IBT-151 (Invoiced item VAT category code), IBT-095 (Document level allowance/charge VAT category code).
+
+| Code | Name | Description |
+|---|---|---|
+| `AE` | VAT Reverse Charge | Code specifying that the standard VAT rate is levied from the invoicee. |
+| `E` | Exempt from tax | Code specifying that taxes are not applicable. |
+| `S` | Standard rate | Code specifying the standard rate. |
+| `Z` | Zero rated goods | Code specifying that the goods are at a zero rate. |
+| `O` | Services outside scope of tax | Code specifying that taxes are not applicable to the services. |
+| `K` | VAT exempt for EEA intra-community supply of goods and services | A tax category indicating VAT exemption for intra-community supplies within the European Economic Area. |
+| `G` | Free export item, tax not charged | Code specifying that the item is free export and taxes are not charged. |
+
+## Allowance Reason Code
+
+| Code | Name | Description |
+|---|---|---|
+| 41 | Bonus for works ahead of schedule | Bonus for completing work ahead of schedule. |
+| 42 | Other bonus | Bonus earned for other reasons. |
+| 60 | Manufacturer's consumer discount | A discount given by the manufacturer which should be passed on to the consumer. |
+| 62 | Due to military status | Allowance granted because of the military status. |
+| 63 | Due to work accident | Allowance granted to a victim of a work accident. |
+| 64 | Special agreement | An allowance or charge as specified in a special agreement. |
+| 65 | Production error discount | A discount given for the purchase of a product with a production error. |
+| 66 | New outlet discount | A discount given at the occasion of the opening of a new outlet. |
+| 67 | Sample discount | A discount given for the purchase of a sample of a product. |
+| 68 | End-of-range discount | A discount given for the purchase of an end-of-range product. |
+| 70 | Incoterm discount | A discount given for a specified Incoterm. |
+| 71 | Point of sales threshold allowance | Allowance for reaching or exceeding an agreed sales threshold at point of sales. |
+| 88 | Material surcharge/deduction | Surcharge/deduction, calculated for higher/lower material's consumption. |
+| 95 | Discount | A reduction from a usual or list price. |
+| 100 | Special rebate | A return of part of an amount paid for goods or services, serving as a reduction. |
+| 102 | Fixed long term | A fixed long term allowance or charge. |
+| 103 | Temporary | A temporary allowance or charge. |
+| 104 | Standard | The standard available allowance or charge. |
+| 105 | Yearly turnover | An allowance or charge based on yearly turnover. |
+
+<Callout kind="warning" collapsed="false">
+  **Truncated — see source.** The following code lists are very large (100+ entries each) and were only partially captured during migration. See the linked source pages for the complete lists before relying on these sections: **Charges Reason Code** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/charges-reason-code)), **Item Classification Code** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/item-classification-code)), **Unit of Measure Code** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/unit-of-measure-code)), **Tax Exemption Reason Code** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/tax-exemption-reason-code)), **Invoiced Object Identifier Scheme** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/invoiced-object-identifier-scheme)), **Registration/Delivery Scheme ID** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/registration-scheme-id-delivery-scheme-id)), and **Invoice Note Subject Code (BT-21)** ([source](https://cleartax-unified-api.netlify.app/countries/germany/code-lists/invoice-note-subject-code-bt-21)).
+</Callout>
+
+## Charges Reason Code (IBT-105, IBT-145)
+
+Over 100 charge codes (e.g. `AA`, `AAA`, `ABK`) covering logistics/transport (rush delivery, consolidation, warehousing), processing/manufacturing (technical modification, fabrication, cutting), packaging/handling (containerisation, palletizing, shrink-wrap), and administrative services (invoicing, clerical services). `ZZZ` = "Mutually defined" for interim use between trading partners. Follows UN/CEFACT structure. **See source for the full table.**
+
+## Country Code
+
+ISO 3166-1 alpha-2 country codes, used for IBT-040 (Seller country code), IBT-055 (Buyer country code), IBT-069 (Tax representative country code), IBT-080 (Deliver to country code), and IBT-159 (Item country of origin). 249 entries total.
+
+| Code | Name |
+|---|---|
+| AD | Andorra |
+| AE | United Arab Emirates |
+| AF | Afghanistan |
+| AG | Antigua and Barbuda |
+| AI | Anguilla |
+| AL | Albania |
+| AM | Armenia |
+| AO | Angola |
+| AQ | Antarctica |
+| AR | Argentina |
+| AS | American Samoa |
+| AT | Austria |
+| AU | Australia |
+| AW | Aruba |
+| AX | Åland Islands |
+| AZ | Azerbaijan |
+| BA | Bosnia and Herzegovina |
+| BB | Barbados |
+| BD | Bangladesh |
+| BE | Belgium |
+| BF | Burkina Faso |
+| BG | Bulgaria |
+| BH | Bahrain |
+| BI | Burundi |
+| BJ | Benin |
+| BL | Saint Barthélemy |
+| BM | Bermuda |
+| BN | Brunei Darussalam |
+| BO | Bolivia, Plurinational State of |
+| BQ | Bonaire, Sint Eustatius and Saba |
+| BR | Brazil |
+| BS | Bahamas (The) |
+| BT | Bhutan |
+| BV | Bouvet Island |
+| BW | Botswana |
+| BY | Belarus |
+| BZ | Belize |
+| CA | Canada |
+| CC | Cocos (Keeling) Islands |
+| CD | Congo, the Democratic Republic of the |
+| CF | Central African Republic |
+| CG | Congo |
+| CH | Switzerland |
+| CI | Côte d'Ivoire |
+| CK | Cook Islands |
+| CL | Chile |
+| CM | Cameroon |
+| CN | China |
+| CO | Colombia |
+| CR | Costa Rica |
+| CU | Cuba |
+| CV | Cabo Verde |
+| CW | Curaçao |
+| CX | Christmas Island |
+| CY | Cyprus |
+| CZ | Czechia |
+| DE | Germany |
+| DJ | Djibouti |
+| DK | Denmark |
+| DM | Dominica |
+| DO | Dominican Republic |
+| DZ | Algeria |
+| EC | Ecuador |
+| EE | Estonia |
+| EG | Egypt |
+| EH | Western Sahara |
+| ER | Eritrea |
+| ES | Spain |
+| ET | Ethiopia |
+| FI | Finland |
+| FJ | Fiji |
+| FK | Falkland Islands (Malvinas) |
+| FM | Micronesia, Federated States of |
+| FO | Faroe Islands |
+| FR | France |
+| GA | Gabon |
+| GB | United Kingdom of Great Britain and Northern Ireland |
+| GD | Grenada |
+| GE | Georgia |
+| GF | French Guiana |
+| GG | Guernsey |
+| GH | Ghana |
+| GI | Gibraltar |
+| GL | Greenland |
+| GM | Gambia |
+| GN | Guinea |
+| GP | Guadeloupe |
+| GQ | Equatorial Guinea |
+| GR | Greece |
+| GS | South Georgia and the South Sandwich Islands |
+| GT | Guatemala |
+| GU | Guam |
+| GW | Guinea-Bissau |
+| GY | Guyana |
+| HK | Hong Kong |
+| HM | Heard Island and McDonald Islands |
+| HN | Honduras |
+| HR | Croatia |
+| HT | Haiti |
+| HU | Hungary |
+| ID | Indonesia |
+| IE | Ireland |
+| IL | Israel |
+| IM | Isle of Man |
+| IN | India |
+| IO | British Indian Ocean Territory |
+| IQ | Iraq |
+| IR | Iran, Islamic Republic of |
+| IS | Iceland |
+| IT | Italy |
+| JE | Jersey |
+| JM | Jamaica |
+| JO | Jordan |
+| JP | Japan |
+| KE | Kenya |
+| KG | Kyrgyzstan |
+| KH | Cambodia |
+| KI | Kiribati |
+| KM | Comoros |
+| KN | Saint Kitts and Nevis |
+| KP | Korea, Democratic People's Republic of |
+| KR | Korea, Republic of |
+| KW | Kuwait |
+| KY | Cayman Islands |
+| KZ | Kazakhstan |
+| LA | Lao People's Democratic Republic |
+| LB | Lebanon |
+| LC | Saint Lucia |
+| LI | Liechtenstein |
+| LK | Sri Lanka |
+| LR | Liberia |
+| LS | Lesotho |
+| LT | Lithuania |
+| LU | Luxembourg |
+| LV | Latvia |
+| LY | Libya |
+| MA | Morocco |
+| MC | Monaco |
+| MD | Moldova, Republic of |
+| ME | Montenegro |
+| MF | Saint Martin (French part) |
+| MG | Madagascar |
+| MH | Marshall Islands |
+| MK | Macedonia, the former Yugoslav Republic of |
+| ML | Mali |
+| MM | Myanmar |
+| MN | Mongolia |
+| MO | Macao |
+| MP | Northern Mariana Islands |
+| MQ | Martinique |
+| MR | Mauritania |
+| MS | Montserrat |
+| MT | Malta |
+| MU | Mauritius |
+| MV | Maldives |
+| MW | Malawi |
+| MX | Mexico |
+| MY | Malaysia |
+| MZ | Mozambique |
+| NA | Namibia |
+| NC | New Caledonia |
+| NE | Niger |
+| NF | Norfolk Island |
+| NG | Nigeria |
+| NI | Nicaragua |
+| NL | Netherlands |
+| NO | Norway |
+| NP | Nepal |
+| NR | Nauru |
+| NU | Niue |
+| NZ | New Zealand |
+| OM | Oman |
+| PA | Panama |
+| PE | Peru |
+| PF | French Polynesia |
+| PG | Papua New Guinea |
+| PH | Philippines |
+| PK | Pakistan |
+| PL | Poland |
+| PM | Saint Pierre and Miquelon |
+| PN | Pitcairn |
+| PR | Puerto Rico |
+| PS | Palestine, State of |
+| PT | Portugal |
+| PW | Palau |
+| PY | Paraguay |
+| QA | Qatar |
+| RE | Réunion |
+| RO | Romania |
+| RS | Serbia |
+| RU | Russian Federation |
+| RW | Rwanda |
+| SA | Saudi Arabia |
+| SB | Solomon Islands |
+| SC | Seychelles |
+| SD | Sudan |
+| SE | Sweden |
+| SG | Singapore |
+| SH | Saint Helena, Ascension and Tristan da Cunha |
+| SI | Slovenia |
+| SJ | Svalbard and Jan Mayen |
+| SK | Slovakia |
+| SL | Sierra Leone |
+| SM | San Marino |
+| SN | Senegal |
+| SO | Somalia |
+| SR | Suriname |
+| SS | South Sudan |
+| ST | Sao Tome and Principe |
+| SV | El Salvador |
+| SX | Sint Maarten (Dutch part) |
+| SY | Syrian Arab Republic |
+| SZ | Swaziland |
+| TC | Turks and Caicos Islands |
+| TD | Chad |
+| TF | French Southern Territories |
+| TG | Togo |
+| TH | Thailand |
+| TJ | Tajikistan |
+| TK | Tokelau |
+| TL | Timor-Leste |
+| TM | Turkmenistan |
+| TN | Tunisia |
+| TO | Tonga |
+| TR | Turkey |
+| TT | Trinidad and Tobago |
+| TV | Tuvalu |
+| TW | Taiwan, Province of China |
+| TZ | Tanzania, United Republic of |
+| UA | Ukraine |
+| UG | Uganda |
+| UM | United States Minor Outlying Islands |
+| US | United States of America |
+| UY | Uruguay |
+| UZ | Uzbekistan |
+| VA | Holy See |
+| VC | Saint Vincent and the Grenadines |
+| VE | Venezuela, Bolivarian Republic of |
+| VG | Virgin Islands, British |
+| VI | Virgin Islands, U.S. |
+| VN | Viet Nam |
+| VU | Vanuatu |
+| WF | Wallis and Futuna |
+| WS | Samoa |
+| YE | Yemen |
+| YT | Mayotte |
+| ZA | South Africa |
+| ZM | Zambia |
+| ZW | Zimbabwe |
+| 1A | Kosovo |
+| XI | United Kingdom (Northern Ireland) |
+
+## Currency Code
+
+ISO 4217 codes for invoice currency (IBT-005) and VAT accounting currency (IBT-006). 163 entries total, spanning major global currencies through regional/specialty codes (commodities XAU/XAG/XPD/XPT, special drawing rights XDR, testing code XTS, "no currency" XXX). Alphabetical from AED through ZWG. Sample:
+
+| Code | Name |
+|---|---|
+| EUR | Euro |
+| USD | US Dollar |
+| GBP | Pound Sterling |
+| CHF | Swiss Franc |
+| AED | UAE Dirham |
+
+**See source for the complete 163-entry list.**
+
+## Invoice Type Code (IBT-003)
+
+| Code | Name | Description |
+|---|---|---|
+| `380` | Commercial invoice | Document/message claiming payment for goods or services supplied under conditions agreed between seller and buyer. |
+| `381` | Credit note | Document/message for providing credit information to the relevant party. |
+| `384` | Corrected invoice | — |
+| `389` | Self-billed invoice | An invoice the invoicee is producing instead of the seller. |
+| `326` | Partial invoice | — |
+| `875` | Partial construction invoice | — |
+| `876` | Partial final construction invoice | — |
+| `877` | Final construction invoice | — |
+
+## Electronic Address Scheme (IBT-034-1, IBT-049-1)
+
+| Code | Name |
+|---|---|
+| 0002 | Système d'Identification du Répertoire des Entreprises (SIRENE) |
+| 0007 | Organisationsnummer (Swedish legal entities) |
+| 0009 | SIRET code |
+| 0037 | LY-tunnus |
+| 0060 | Data Universal Numbering System (D-U-N-S Number) |
+| 0088 | EAN Location Code |
+| 0096 | Danish Chamber of Commerce Scheme (EDIRA compliant) |
+| 0097 | FTI – Ediforum Italia (EDIRA compliant) |
+| 0106 | Association of Chambers of Commerce and Industry in the Netherlands (EDIRA compliant) |
+| 0130 | Directorates of the European Commission |
+| 0135 | SIA Object Identifiers |
+| 0142 | SECETI Object Identifiers |
+| 0147 | Standard Company Code |
+| 0151 | Australian Business Number (ABN) |
+| 0154 | Identification number of economic subjects (ICO) |
+| 0158 | Identification number of economic subjects – State Statistics Act |
+| 0170 | Teikoku Company Code |
+| 0177 | Odette International Limited |
+| 0183 | Swiss Unique Business Identification Number (UID / IDE) |
+| 0184 | DIGSTORG |
+| 0188 | Corporate Number of the Social Security and Tax Number System |
+| 0190 | Dutch Originator's Identification Number |
+| 0191 | Centre of Registers and Information Systems (Ministry of Justice) |
+| 0192 | Enhetsregisteret ved Brønnøysundregistrene |
+| 0193 | UBL.BE party identifier |
+| 0194 | KOIOS Open Technical Dictionary |
+| 0195 | Singapore UEN identifier |
+| 0196 | Kennitala (Iceland legal ID) |
+| 0198 | ERSTORG |
+| 0199 | Legal Entity Identifier (LEI) |
+| 0200 | Legal entity code (Lithuania) |
+| 0201 | Codice Univoco Unità Organizzativa iPA |
+| 0202 | Certified Electronic Mail Address (PEC) |
+| 0203 | eDelivery Network Participant Identifier |
+| 0204 | Leitweg-ID |
+| 0205 | CODDEST |
+| 0208 | Enterprise number (Belgium / Netherlands / Germany) |
+| 0209 | GS1 identification keys |
+| 0210 | Codice Fiscale |
+| 0211 | Partita IVA |
+| 0212 | Finnish Organization Identifier |
+| 0213 | Finnish VAT Identifier |
+| 0215 | Net service ID |
+| 0216 | OVT code |
+| 0217 | Netherlands Chamber of Commerce establishment number |
+| 0218 | Unified registration number (Latvia) |
+| 0221 | Qualified invoice issuer number (Japan) |
+| 0225 | FRCTC Electronic Address |
+| 0230 | National e-Invoicing Framework (Malaysia) |
+| 0235 | UAE Tax Identification Number (TIN) |
+| 0240 | Register of legal persons |
+| 0244 | Tax Identification Number (Nigeria) |
+| 0245 | Tax Identification Number (DIČ, Slovakia) |
+| 9910 | Hungary VAT number |
+| 9913 | Business Registers Network |
+| 9914 | Austrian VAT Identification Number |
+| 9915 | Austrian Administrative / Organization Identifier |
+| 9918 | SWIFT (Society for Worldwide Interbank Financial Telecommunication) |
+| 9919 | German Company Register Number |
+| 9920 | Spanish Tax Agency Identifier |
+| 9922 | Andorra VAT number |
+| 9923 | Albania VAT number |
+| 9924 | Bosnia and Herzegovina VAT number |
+| 9925 | Belgium VAT number |
+| 9926 | Bulgaria VAT number |
+| 9927 | Switzerland VAT number |
+| 9928 | Cyprus VAT number |
+| 9929 | Czech Republic VAT number |
+| 9930 | Germany VAT number |
+| 9931 | Estonia VAT number |
+| 9932 | United Kingdom VAT number |
+| 9933 | Greece VAT number |
+| 9934 | Croatia VAT number |
+| 9935 | Ireland VAT number |
+| 9936 | Liechtenstein VAT number |
+| 9937 | Lithuania VAT number |
+| 9938 | Luxembourg VAT number |
+| 9939 | Latvia VAT number |
+| 9940 | Monaco VAT number |
+| 9941 | Montenegro VAT number |
+| 9942 | North Macedonia VAT number |
+| 9943 | Malta VAT number |
+| 9944 | Netherlands VAT number |
+| 9945 | Poland VAT number |
+| 9946 | Portugal VAT number |
+| 9947 | Romania VAT number |
+| 9948 | Serbia VAT number |
+| 9949 | Slovenia VAT number |
+| 9950 | Slovakia VAT number |
+| 9951 | San Marino VAT number |
+| 9952 | Turkey VAT number |
+| 9953 | Holy See (Vatican City State) VAT number |
+| 9957 | France VAT number |
+| 9959 | Employer Identification Number (EIN, USA) |
+
+## Registration Scheme ID / Delivery Scheme ID (ISO 6523 ICD)
+
+245+ entries. Notable examples:
+
+| Code | Name | Summary |
+|---|---|---|
+| 0002 | SIRENE | French business registration system |
+| 0060 | D-U-N-S Number | Dun & Bradstreet business identifier |
+| 0088 | EAN Location Code | EAN International location identification |
+| 0199 | Legal Entity Identifier (LEI) | Global, open identifier established, governed by LEI Regulatory Oversight Committee |
+| 0204 | Leitweg-ID | German public authority identification |
+| 0208 | Unternehmens-nummer | Belgian enterprise identification system |
+| 0235 | UAE Tax Identification Number | Unique number issued to a range of persons required to be identified for tax purposes |
+
+**See source for the complete list.**
+
+## Item Classification Code
+
+180+ codes (e.g. `AA`, `AB`, `AC`) covering product identifiers (UPC, EAN, ISBN, ISSN, SKU), manufacturer references (part numbers, model numbers), regulatory/standards codes (Harmonized System, UNSPSC, FDA), industry-specific systems (German CCG, Dutch CBL, GMDN, ATC), and material/supply tracking (batch/lot/heat numbers). Ends with `ZZZ` for "mutually defined". **See source for the full table.**
+
+## Payment Means Code (IBT-081)
+
+| Code | Name | Description |
+|---|---|---|
+| 1 | Instrument not defined | Not defined legally enforceable agreement between two or more parties |
+| 2 | Automated clearing house credit | Credit transaction via ACH system |
+| 3 | Automated clearing house debit | Debit transaction via ACH system |
+| 4 | ACH demand debit reversal | Request to reverse ACH debit to demand deposit account |
+| 5 | ACH demand credit reversal | Request to reverse ACH credit to demand deposit account |
+| 6 | ACH demand credit | Credit transaction via ACH to demand deposit account |
+| 7 | ACH demand debit | Debit transaction via ACH to demand deposit account |
+| 8 | Hold | Bank holds payment for beneficiary collection |
+| 9 | National or regional clearing | Payment via national/regional clearing system |
+| 10 | In cash | Payment by currency (including bills and coins) in circulation |
+| 11-19 | Various ACH transactions | Multiple ACH savings/demand variants and CCD/CTP formats |
+| 20 | Cheque | Pre-printed form on which instructions are given to an account holder |
+| 21-29 | Bill/cheque variants | Banker's drafts, certified cheques, bills of exchange |
+| 30 | Credit transfer | Payment by credit movement of funds from one account to another |
+| 31 | Debit transfer | Fund movement via debit between accounts |
+| 32-43 | ACH variants/special transfers | CCD+, PPD, postgiro, bank card options |
+| 44-67 | Bills of exchange and promissory notes | Various endorsed and signed payment instruments |
+| 68 | Online payment service | Payment via online service provider |
+| 70-78 | Bills drawn variants | Creditor-drawn bills on banks/third parties |
+| 91-97 | Special methods | Non-transferable instruments, giro types, mutual definitions |
+| ZZZ | Mutually defined | Code assigned within a code list to be used on interim basis |
+
+## Unit of Measure Code
+
+Hundreds of entries spanning standard SI units, derived units, specialized measurements, and legacy/regional units. Sample:
+
+| Code | Name | Description |
+|---|---|---|
+| `10` | group | A unit of count defining the number of groups |
+| `11` | outfit | A unit of count defining the number of outfits |
+| `EA` | each | A unit of count defining the number of items regarded as separate units |
+| `GRM` | gram | Standard mass unit |
+| `KGM` | kilogram | A unit of mass equal to one thousand grams |
+| `LTR` | litre | Standard volume unit |
+| `MTR` | metre | Standard length unit |
+| `DZN` | dozen | A unit of count defining the number of units in multiples of 12 |
+
+**See source for the complete list.**
+
+## Tax Exemption Reason Code
+
+VAT exemption codes organized by EU Directive 2006/112/EC articles (79, 132-159 covering public interest, import/export, international transport, diplomatic supplies), margin scheme codes (second-hand goods, works of art, collectors' items), reverse charge/intra-community designations (AE, IC, K), French domestic codes (`VATEX-FR-*` referencing Code Général des Impôts), and special designations (`VATEX-EU-G` export outside EU, `VATEX-EU-O` not subject to VAT). **See source for the full table.**
+
+## Invoiced Object Identifier Scheme (IBT-018-1, UNTDID 1153)
+
+Hundreds of entries. Sample:
+
+| Code | Name | Description |
+|---|---|---|
+| AAA | Order acknowledgement document identifier | Reference number identifying the acknowledgement of an order |
+| ABW | Stock keeping unit number | A number that identifies the stock keeping unit |
+| AWB | Air waybill number | Reference number assigned to an air waybill |
+| BM | Bill of lading number | Reference number assigned to a bill of lading |
+| CT | Contract number | Reference number of a contract concluded between parties |
+
+**See source for the complete list.**
+
+## Media Types (IBT-125-1)
+
+| Code | Description |
+|---|---|
+| `application/pdf` | pdf |
+| `application/vnd.oasis.opendocument.spreadsheet` | vnd.oasis.opendocument.spreadsheet |
+| `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` | vnd.openxmlformats-officedocument.spreadsheetml.sheet |
+| `image/jpeg` | jpeg |
+| `image/png` | png |
+| `text/csv` | csv |
+
+## Tax Rate (IBT-119)
+
+| Code | Name |
+|---|---|
+| `0.19` | Standard rate |
+| `0.07` | Reduced Rate |
+| `0` | Zero rated |
+| `0.055` | Special rated |
+| `0.078` | Special rated |
+
+## Invoice Note Subject Code (BT-21, UNTDID 4451)
+
+100+ codes. Sample:
+
+| Code | Purpose |
+|---|---|
+| AAA | Goods description |
+| AAB | Terms of payments |
+| ALC | Allowance/charge information |
+| DEL | Delivery information |
+| DIN | Delivery instructions |
+| HAZ | Hazard information |
+| INV | Invoice instruction |
+| PAC | Packing/marking information |
+| PMT | Payment information |
+| REG | Regulatory information |
+| ZZZ | Mutually defined |
+
+**See source for the complete list.**

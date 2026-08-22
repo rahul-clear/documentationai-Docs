@@ -1,0 +1,442 @@
+---
+title: UAE — Sample Payloads
+description: 'Sample invoice payloads for UAE PINT-AE billing and self-billing'
+---
+
+<Callout kind="info" collapsed="false">
+  The source site hosts 30 billing sample payloads (covering scenarios like Exports, Margin Scheme, Reverse Charge, E-commerce, Disclosed Agent Billing, and more) and 2 self-billing samples. Below is one representative payload per flow — **Standard Tax Invoice** for billing and **Self Billing** for self-billing. The full set of scenario-specific samples is available at the source: [https://cleartax-unified-api.netlify.app/countries/uae/sample-invoice-payloads/billing](https://cleartax-unified-api.netlify.app/countries/uae/sample-invoice-payloads/billing) and [.../self-billing](https://cleartax-unified-api.netlify.app/countries/uae/sample-invoice-payloads/self-billing).
+</Callout>
+
+## Billing
+
+**Standard Tax Invoice**
+
+```json
+{
+  "customizationID": "urn:peppol:pint:billing-1@ae-1",
+  "profileID": "urn:peppol:bis:billing",
+  "profileExecutionID": "00000000",
+  "id": "AE-01TEST",
+  "uuid": "f12f329f-6430-4399-b661-7c5cd9c3a9e6",
+  "issueDate": "2025-02-06",
+  "issueTime": "07:54:00",
+  "dueDate": "2025-02-13",
+  "invoiceTypeCode": { "value": "380" },
+  "note": { "value": "Tax invoice" },
+  "taxPointDate": "2025-01-30",
+  "documentCurrencyCode": "AED",
+  "accountingCost": "Regular sales",
+  "buyerReference": "PO-AE-220",
+  "invoicePeriod": { "startDate": "2025-01-31", "endDate": "2025-02-06" },
+  "orderReference": { "id": "PO-AE-220", "salesOrderID": "Salesorder-2122" },
+  "billingReference": [
+    { "invoiceDocumentReference": { "id": "INV-234-2025", "issueDate": "2025-02-06" } }
+  ],
+  "despatchDocumentReference": [{ "id": { "value": "Memo-1000" } }],
+  "originatorDocumentReference": [{ "id": { "value": "PO-AE-220" } }],
+  "additionalDocumentReference": [
+    {
+      "id": "PO-AE-220",
+      "attachment": { "externalReference": { "uri": "https://www.site.ae/PO-AE-220.pdf" } }
+    },
+    {
+      "id": "PO-AE-220",
+      "attachment": {
+        "embeddedDocumentBinaryObject": {
+          "value": "QmFzZTY0IGNvbnRlbnQgZXhhbXBfZQ==",
+          "mimeCode": "application/pdf",
+          "filename": "document.pdf"
+        }
+      }
+    }
+  ],
+  "projectReference": [{ "id": "Regular work" }],
+  "accountingSupplierParty": {
+    "party": {
+      "endPointID": { "schemeID": "0235", "value": "1987654321" },
+      "partyName": { "name": "Party Trade Name" },
+      "postalAddress": {
+        "streetName": "Street Name",
+        "cityName": "Sharjah",
+        "countrySubentity": "SHJ",
+        "country": { "identificationCode": { "countryCode": "AE" } }
+      },
+      "partyTaxScheme": [
+        { "companyID": "198765432102003", "taxScheme": { "id": { "value": "VAT" } } }
+      ],
+      "partyLegalEntity": {
+        "registrationName": "Supplier Legal Name",
+        "companyID": {
+          "schemeAgencyID": "TL",
+          "schemeAgencyName": "Trade License issuing Authority",
+          "value": "112345678900003"
+        },
+        "companyLegalForm": "Merchant"
+      },
+      "contact": {
+        "name": "Contact Name",
+        "telephone": "Telephone number",
+        "electronicMail": "Email address"
+      }
+    }
+  },
+  "accountingCustomerParty": {
+    "party": {
+      "endPointID": { "schemeID": "0235", "value": "1345678901" },
+      "partyName": { "name": "Buyer Trade Name" },
+      "postalAddress": {
+        "streetName": "Street Name",
+        "cityName": "Abu Dhabi",
+        "countrySubentity": "AUH",
+        "country": { "identificationCode": { "countryCode": "AE" } }
+      },
+      "partyTaxScheme": [
+        { "companyID": "134567890123003", "taxScheme": { "id": { "value": "VAT" } } }
+      ],
+      "partyLegalEntity": {
+        "registrationName": "Noor Electronics",
+        "companyID": {
+          "schemeAgencyID": "TL",
+          "schemeAgencyName": "Trade License issuing Authority",
+          "value": "112345679000001"
+        }
+      },
+      "contact": {
+        "name": "Contact Name",
+        "telephone": "Telephone number",
+        "electronicMail": "Email address"
+      }
+    }
+  },
+  "payeeParty": {
+    "partyName": { "name": "Payee Name" },
+    "partyLegalEntity": { "companyID": { "value": "1122334455" } }
+  },
+  "paymentMeans": {
+    "paymentMeansCode": { "value": "55" },
+    "cardAccount": {
+      "primaryAccountNumberID": "XXXXXXXXXXXX1234",
+      "networkID": "VISA",
+      "holderName": "Card Holder Name"
+    }
+  },
+  "paymentTerms": { "note": "Within a week" },
+  "allowanceCharge": [
+    {
+      "chargeIndicator": false,
+      "allowanceChargeReasonCode": "100",
+      "allowanceChargeReason": "Special Rebate",
+      "multiplierFactorNumeric": 2.5,
+      "amount": { "currencyID": "AED", "value": 262.15 },
+      "baseAmount": { "currencyID": "AED", "value": 10486.0 },
+      "taxCategory": { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+    },
+    {
+      "chargeIndicator": true,
+      "allowanceChargeReasonCode": "AAT",
+      "allowanceChargeReason": "Rush Delivery",
+      "multiplierFactorNumeric": 4.0,
+      "amount": { "currencyID": "AED", "value": 419.44 },
+      "baseAmount": { "currencyID": "AED", "value": 10486.0 },
+      "taxCategory": { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+    }
+  ],
+  "taxTotal": [
+    {
+      "taxAmount": { "currencyID": "AED", "value": 532.16 },
+      "taxIncludedIndicator": false,
+      "taxSubtotal": [
+        {
+          "taxableAmount": { "currencyID": "AED", "value": 10643.29 },
+          "taxAmount": { "currencyID": "AED", "value": 532.1645 },
+          "taxCategory": { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+        }
+      ]
+    }
+  ],
+  "legalMonetaryTotal": {
+    "lineExtensionAmount": { "currencyID": "AED", "value": 10486.0 },
+    "taxExclusiveAmount": { "currencyID": "AED", "value": 10643.29 },
+    "taxInclusiveAmount": { "currencyID": "AED", "value": 11175.45 },
+    "allowanceTotalAmount": { "currencyID": "AED", "value": 262.15 },
+    "chargeTotalAmount": { "currencyID": "AED", "value": 419.44 },
+    "payableRoundingAmount": { "currencyID": "AED", "value": 0.05 },
+    "payableAmount": { "currencyID": "AED", "value": 11175.5 }
+  },
+  "invoiceLine": [
+    {
+      "id": "1",
+      "note": ["All items"],
+      "invoicedQuantity": { "unitCode": "H87", "quantity": 2000.0 },
+      "lineExtensionAmount": { "currencyID": "AED", "value": 10486.0 },
+      "invoicePeriod": { "startDate": "2025-01-31", "endDate": "2025-01-31" },
+      "orderLineReference": [{ "lineId": "1", "orderReference": { "id": "PO-AE-220" } }],
+      "allowanceCharge": [
+        {
+          "chargeIndicator": false,
+          "allowanceChargeReasonCode": "95",
+          "allowanceChargeReason": "Discount",
+          "multiplierFactorNumeric": 3.0,
+          "amount": { "currencyID": "AED", "value": 294.0 },
+          "baseAmount": { "currencyID": "AED", "value": 9800.0 }
+        },
+        {
+          "chargeIndicator": true,
+          "allowanceChargeReasonCode": "AAC",
+          "allowanceChargeReason": "Technical Modification",
+          "multiplierFactorNumeric": 10.0,
+          "amount": { "currencyID": "AED", "value": 980.0 },
+          "baseAmount": { "currencyID": "AED", "value": 9800.0 }
+        }
+      ],
+      "item": {
+        "description": "Item Description",
+        "name": "Item Name",
+        "buyersItemIdentification": { "id": { "value": "Purchase goods" } },
+        "sellersItemIdentification": { "id": { "value": "Sales Goods" } },
+        "originCountry": { "identificationCode": { "countryCode": "AE" } },
+        "classifiedTaxCategory": [
+          { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+        ],
+        "additionalItemProperty": [{ "name": "Item details", "value": "Item Value" }]
+      },
+      "price": {
+        "priceAmount": { "currencyID": "AED", "value": 4.9 },
+        "baseQuantity": { "unitCode": "H87", "quantity": 1.0 },
+        "allowanceCharge": {
+          "chargeIndicator": false,
+          "amount": { "currencyID": "AED", "value": 0.1 },
+          "baseAmount": { "currencyID": "AED", "value": 5.0 }
+        }
+      },
+      "itemPriceExtension": {
+        "amount": { "currencyID": "AED", "value": 11010.3 },
+        "taxTotal": { "taxAmount": { "currencyID": "AED", "value": 524.3 } }
+      }
+    }
+  ],
+  "invoiceTransactionTypeCode": "00000000"
+}
+```
+
+## Self-Billing
+
+**Self Billing**
+
+```json
+{
+  "customizationID": "urn:peppol:pint:selfbilling-1@ae-1",
+  "profileID": "urn:peppol:bis:selfbilling",
+  "profileExecutionID": "00000000",
+  "id": "AE-01-SB-TEST",
+  "uuid": "68205910-ac6b-4e35-9fe7-d1f0a3e3ae72",
+  "issueDate": "2025-02-06",
+  "issueTime": "07:54:00",
+  "dueDate": "2025-02-13",
+  "invoiceTypeCode": { "value": "389" },
+  "note": { "value": "Self Billing Tax invoice" },
+  "taxPointDate": "2025-01-30",
+  "documentCurrencyCode": "AED",
+  "accountingCost": "Regular sales",
+  "buyerReference": "PO-AE-220",
+  "invoicePeriod": { "startDate": "2025-01-31", "endDate": "2025-02-06" },
+  "orderReference": { "id": "PO-AE-220", "salesOrderID": "Salesorder-2122" },
+  "billingReference": [
+    { "invoiceDocumentReference": { "id": "INV-234-2025", "issueDate": "2025-02-06" } }
+  ],
+  "despatchDocumentReference": [{ "id": { "value": "Memo-1000" } }],
+  "originatorDocumentReference": [{ "id": { "value": "PO-AE-220" } }],
+  "additionalDocumentReference": [
+    {
+      "id": "PO-AE-220",
+      "attachment": { "externalReference": { "uri": "https://www.site.ae/PO-AE-220.pdf" } }
+    },
+    {
+      "id": "PO-AE-220",
+      "attachment": {
+        "embeddedDocumentBinaryObject": {
+          "value": "QmFzZTY0IGNvbnRlbnQgZXhhbXBfZQ==",
+          "mimeCode": "application/pdf",
+          "filename": "document.pdf"
+        }
+      }
+    }
+  ],
+  "projectReference": [{ "id": "Regular work" }],
+  "accountingSupplierParty": {
+    "party": {
+      "endPointID": { "schemeID": "0235", "value": "1987654321" },
+      "partyName": { "name": "Party Trade Name" },
+      "postalAddress": {
+        "streetName": "Street Name",
+        "cityName": "Sharjah",
+        "countrySubentity": "SHJ",
+        "country": { "identificationCode": { "countryCode": "AE" } }
+      },
+      "partyTaxScheme": [
+        { "companyID": "198765432102003", "taxScheme": { "id": { "value": "VAT" } } }
+      ],
+      "partyLegalEntity": {
+        "registrationName": "Supplier Legal Name",
+        "companyID": {
+          "schemeAgencyID": "TL",
+          "schemeAgencyName": "Trade License issuing Authority",
+          "value": "112345678900003"
+        },
+        "companyLegalForm": "Merchant"
+      },
+      "contact": {
+        "name": "Contact Name",
+        "telephone": "Telephone number",
+        "electronicMail": "Email address"
+      }
+    }
+  },
+  "accountingCustomerParty": {
+    "party": {
+      "endPointID": { "schemeID": "0235", "value": "1345678901" },
+      "partyName": { "name": "Buyer Trade Name" },
+      "postalAddress": {
+        "streetName": "Street Name",
+        "cityName": "Abu Dhabi",
+        "countrySubentity": "AUH",
+        "country": { "identificationCode": { "countryCode": "AE" } }
+      },
+      "partyTaxScheme": [
+        { "companyID": "134567890123003", "taxScheme": { "id": { "value": "VAT" } } }
+      ],
+      "partyLegalEntity": {
+        "registrationName": "Buyer Legal Name",
+        "companyID": {
+          "schemeAgencyID": "TL",
+          "schemeAgencyName": "Trade License issuing Authority",
+          "value": "112345679000001"
+        }
+      },
+      "contact": {
+        "name": "Contact Name",
+        "telephone": "Telephone number",
+        "electronicMail": "Email address"
+      }
+    }
+  },
+  "payeeParty": {
+    "partyName": { "name": "Payee Name" },
+    "partyLegalEntity": { "companyID": { "value": "1122334455" } }
+  },
+  "paymentMeans": {
+    "paymentMeansCode": { "value": "55" },
+    "cardAccount": {
+      "primaryAccountNumberID": "XXXXXXXXXXXX1234",
+      "networkID": "VISA",
+      "holderName": "Card Holder Name"
+    }
+  },
+  "paymentTerms": { "note": "Within a week" },
+  "allowanceCharge": [
+    {
+      "chargeIndicator": false,
+      "allowanceChargeReasonCode": "100",
+      "allowanceChargeReason": "Special Rebate",
+      "multiplierFactorNumeric": 2.5,
+      "amount": { "currencyID": "AED", "value": 262.15 },
+      "baseAmount": { "currencyID": "AED", "value": 10486.0 },
+      "taxCategory": { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+    },
+    {
+      "chargeIndicator": true,
+      "allowanceChargeReasonCode": "AAT",
+      "allowanceChargeReason": "Rush Delivery",
+      "multiplierFactorNumeric": 4.0,
+      "amount": { "currencyID": "AED", "value": 419.44 },
+      "baseAmount": { "currencyID": "AED", "value": 10486.0 },
+      "taxCategory": { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+    }
+  ],
+  "taxTotal": [
+    {
+      "taxAmount": { "currencyID": "AED", "value": 532.16 },
+      "taxIncludedIndicator": false,
+      "taxSubtotal": [
+        {
+          "taxableAmount": { "currencyID": "AED", "value": 10643.29 },
+          "taxAmount": { "currencyID": "AED", "value": 532.1645 },
+          "taxCategory": { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+        }
+      ]
+    }
+  ],
+  "legalMonetaryTotal": {
+    "lineExtensionAmount": { "currencyID": "AED", "value": 10486.0 },
+    "taxExclusiveAmount": { "currencyID": "AED", "value": 10643.29 },
+    "taxInclusiveAmount": { "currencyID": "AED", "value": 11175.45 },
+    "allowanceTotalAmount": { "currencyID": "AED", "value": 262.15 },
+    "chargeTotalAmount": { "currencyID": "AED", "value": 419.44 },
+    "payableRoundingAmount": { "currencyID": "AED", "value": 0.05 },
+    "payableAmount": { "currencyID": "AED", "value": 11175.5 }
+  },
+  "invoiceLine": [
+    {
+      "id": "1",
+      "note": ["All items"],
+      "invoicedQuantity": { "unitCode": "H87", "quantity": 2000.0 },
+      "lineExtensionAmount": { "currencyID": "AED", "value": 10486.0 },
+      "invoicePeriod": { "startDate": "2025-01-31", "endDate": "2025-01-31" },
+      "orderLineReference": [{ "lineId": "1", "orderReference": { "id": "PO-AE-220" } }],
+      "allowanceCharge": [
+        {
+          "chargeIndicator": false,
+          "allowanceChargeReasonCode": "95",
+          "allowanceChargeReason": "Discount",
+          "multiplierFactorNumeric": 3.0,
+          "amount": { "currencyID": "AED", "value": 294.0 },
+          "baseAmount": { "currencyID": "AED", "value": 9800.0 }
+        },
+        {
+          "chargeIndicator": true,
+          "allowanceChargeReasonCode": "AAC",
+          "allowanceChargeReason": "Technical Modification",
+          "multiplierFactorNumeric": 10.0,
+          "amount": { "currencyID": "AED", "value": 980.0 },
+          "baseAmount": { "currencyID": "AED", "value": 9800.0 }
+        }
+      ],
+      "item": {
+        "description": "Item Description",
+        "name": "Item Name",
+        "buyersItemIdentification": { "id": { "value": "Purchase goods" } },
+        "sellersItemIdentification": { "id": { "value": "Sales Goods" } },
+        "originCountry": { "identificationCode": { "countryCode": "AE" } },
+        "commodityClassification": [
+          {
+            "commodityCode": { "value": "G" },
+            "itemClassificationCode": {
+              "listID": "HS",
+              "listVersionID": "1.0",
+              "value": "11223355"
+            }
+          }
+        ],
+        "classifiedTaxCategory": [
+          { "id": "S", "percent": 5.0, "taxScheme": { "id": { "value": "VAT" } } }
+        ],
+        "additionalItemProperty": [{ "name": "Item details", "value": "Item Value" }]
+      },
+      "price": {
+        "priceAmount": { "currencyID": "AED", "value": 4.9 },
+        "baseQuantity": { "unitCode": "H87", "quantity": 1.0 },
+        "allowanceCharge": {
+          "chargeIndicator": false,
+          "amount": { "currencyID": "AED", "value": 0.1 },
+          "baseAmount": { "currencyID": "AED", "value": 5.0 }
+        }
+      },
+      "itemPriceExtension": {
+        "amount": { "currencyID": "AED", "value": 11010.3 },
+        "taxTotal": { "taxAmount": { "currencyID": "AED", "value": 524.3 } }
+      }
+    }
+  ],
+  "invoiceTransactionTypeCode": "00000000"
+}
+```

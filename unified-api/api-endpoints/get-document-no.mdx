@@ -1,0 +1,161 @@
+---
+title: Get Document Numbers
+description: 'Retrieve a filtered, paginated list of e-invoice document numbers'
+---
+
+**Method:** `GET`
+
+The Get Document Nos. API returns a list of Sales/Purchase e-invoice document Nos., filtered by date range and paginated.
+
+<Callout kind="info" collapsed="false">
+  Document numbers obtained here can be used with the Document Details API to retrieve complete document payloads.
+</Callout>
+
+## Endpoint
+
+| Environment | URL |
+|---|---|
+| Production | `GET https://api.mea.cleartax.com/einvoice/v1/documents/query?start-date=2026-08-10&end-date=2026-08-12&einvoice-type=SALES&page-number=0&page-size=100` |
+| Sandbox | `GET https://api-sandbox.mea.cleartax.com/einvoice/v1/documents/query?start-date=2026-08-10&end-date=2026-08-12&einvoice-type=SALES&page-number=0&page-size=100` |
+
+## Request Headers
+
+| Header | Required | Description |
+|---|---|---|
+| `x-ClearTax-auth-token` | Mandatory | User auth token. |
+| `x-clear-[nodeId]` | Mandatory | Refer to Node ID for details. |
+| `x-clear-branch` | Optional | Branch (store) name mapped to a VAT/VATIN of the entity. |
+| `x-request-id` | Optional | Unique ID per request; used as a trace ID. Auto-populated if omitted. |
+| `x-clear-country-code` | Mandatory | Refer to Country Code for details. |
+| `Content-Type` | Mandatory | `application/json` |
+
+## Request Query Parameters
+
+| Parameter | Data Type | Possible Values | Description |
+|---|---|---|---|
+| `start-date` | Date | ISO date, e.g. `2024-07-20` | Mandatory. Start of the document date range. |
+| `end-date` | Date | ISO date, e.g. `2024-07-22` | Mandatory. End of the document date range. The gap between `start-date` and `end-date` must not exceed 3 days. |
+| `einvoice-type` | ENUM | `SALES` / `PURCHASE` | Mandatory. `SALES` for Sales and `PURCHASE` for Purchase invoices. |
+| `page-number` | Integer | — | Optional. Default `0`. Current page number to retrieve; `0` is the first page. |
+| `page-size` | Integer | Min `1`, Max `1000` | Optional. Default `100`. Number of documents to return in a single call. |
+
+No request body is required for this API.
+
+## Response Schema
+
+### Top-Level Response Fields
+
+| Field | Type | Description |
+|---|---|---|
+| `Success` | String | `"true"`/`"false"` indicating successful request processing. |
+| `Documents` | Array | Collection of documents matching applied filters. |
+| `ErrorDetails` | Array | Optional API-level errors; null when absent. |
+| `PageNumber` | Integer | Current page being returned. |
+| `PageSize` | Integer | Count of records in response. |
+
+### Document Object
+
+| Field | Type | Description |
+|---|---|---|
+| `Documents[].DocumentId` | String | ClearTax-generated ID that uniquely identifies the document. |
+| `Documents[].DocumentNumber` | String | Supplier-assigned document number. |
+| `Documents[].Status` | String | Document Status value. |
+| `Documents[].ErrorDetails` | Array | Field-level errors; empty array when none exist. |
+
+### Error Detail Object
+
+| Field | Type | Description |
+|---|---|---|
+| `ErrorCode` | String | Error identifier code. |
+| `ErrorMessage` | String | Human-readable error explanation. |
+| `ErrorSource` | String | Error origin; value is `CLEARTAX`. |
+| `Path` | String | Field path for validation errors. |
+
+## API Constraints
+
+- **Authentication:** Requires a valid auth token. Returns `401` if missing or expired. Returns `403` if the user lacks Admin role for the entity.
+- **Date Range:** The gap between `start-date` and `end-date` must not exceed 3 days.
+- **Rate Limiting:** 10K requests per min.
+- **Pagination:** Max 1000 documents per page.
+
+## Sample Request & Response
+
+**Headers:**
+
+```
+x-cleartax-auth-token: <Auth token>
+x-clear-country-code:  AE
+x-clear-trn:           <TRN>
+Content-Type:          application/json
+```
+
+No request body is required for this API.
+
+**HTTP 200 - Success:**
+
+```json
+{
+  "Success": "true",
+  "Documents": [
+    {
+      "DocumentId": "6a7c29d291e17c4f9783a499",
+      "DocumentNumber": "Demo-01",
+      "Status": "Delivered to Buyer",
+      "ErrorDetails": []
+    },
+    {
+      "DocumentId": "6a7c29d291e17c4f9783a49a",
+      "DocumentNumber": "Demo-04",
+      "Status": "Delivered to Buyer",
+      "ErrorDetails": []
+    }
+  ],
+  "PageNumber": 0,
+  "PageSize": 2
+}
+```
+
+**HTTP 400 - Missing start-date:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "400",
+      "ErrorMessage": "start-date is required",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```
+
+**HTTP 401 - Unauthorized:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "401",
+      "ErrorMessage": "Unauthorized",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```
+
+**HTTP 403 - Forbidden:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "403",
+      "ErrorMessage": "FORBIDDEN",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```

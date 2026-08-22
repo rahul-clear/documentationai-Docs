@@ -1,0 +1,356 @@
+---
+title: Base Schema
+description: 'The common EN16931-based schema shared across all countries on the Unified API'
+---
+
+The API accepts a single JSON payload organized into 28 business term groups (BGs). This model is based on EN16931, the European standard for electronic invoicing semantics, using the Peppol BIS Billing 3.0 framework as the underlying structure.
+
+Each country's schema builds on this common core by adding or removing fields as needed - so your core integration stays unchanged as you expand to new markets. The base schema provides a standardized starting point that individual nations customize through delta schemas — modifications that add or remove particular fields without disrupting the core structure. See each country's Delta Schema page for its specific variations.
+
+## BG-1 Invoice Information
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Invoice number | `id` | Identifier | BT-001 | A unique identifier for the invoice, assigned by the seller. | Mandatory |
+| Invoice issue date | `issueDate` | Date | BT-002 | The date on which the invoice was issued. | Mandatory |
+| Invoice type code | `invoiceTypeCode.value` | Code | BT-003 | A code specifying the functional type of the invoice (e.g. 380 = commercial invoice, 381 = credit note). | Mandatory |
+| Invoice currency code | `documentCurrencyCode` | Code | BT-005 | The currency in which all invoice amounts are expressed, using ISO 4217 three-letter codes. | Mandatory |
+| VAT accounting currency code | `taxCurrencyCode` | Code | BT-006 | The currency used for VAT accounting and reporting when different from the invoice currency. | Conditional Mandatory |
+| Value added tax point date | `taxPointDate` | Date | BT-007 | The date when VAT becomes accountable for the seller and the buyer. | Optional |
+| Payment due date | `dueDate` | Date | BT-009 | The date by which the buyer should pay. | Conditional Mandatory |
+| Buyer reference | `buyerReference` | Text | BT-010 | An identifier assigned by the buyer for internal routing purposes (e.g. cost centre, project code). | Conditional Mandatory |
+| Project reference | `projectReference.id` | Identifier | BT-011 | An identifier for the project to which the invoice relates. | Optional |
+| Contract reference | `contractDocumentReference.id.value` | Identifier | BT-012 | An identifier for the contract to which the invoice relates. | Optional |
+| Purchase order reference | `orderReference.id` | Identifier | BT-013 | An identifier for the purchase order that triggered the invoice. | Conditional Mandatory |
+| Sales order reference | `orderReference.salesOrderID` | Identifier | BT-014 | An identifier for the sales order issued by the seller. | Optional |
+| Receiving advice reference | `receiptDocumentReference.id.value` | Identifier | BT-015 | An identifier for the receiving advice issued by the buyer. | Optional |
+| Despatch advice reference | `despatchDocumentReference.id.value` | Identifier | BT-016 | An identifier for the despatch advice (delivery note) issued by the seller. | Optional |
+| Tender or lot reference | `originatorDocumentReference.id.value` | Identifier | BT-017 | An identifier for the tender or lot to which the invoice relates. | Optional |
+| Invoiced object identifier | `additionalDocumentReference.id` | Identifier | BT-018 | An identifier for the object on which the invoice is based (e.g. a subscription number, meter point). | Optional |
+| Invoiced Object Identifier Scheme Identifier | `additionalDocumentReference.id.schemeID` | Code | BT-018-1 | The scheme identifier for the invoiced object identifier. | Optional |
+| Invoiced Object Identifier Document Type Code | `additionalDocumentReference.documentTypeCode` | Text | — | A code identifying the type of document referenced (use '130' to mark an invoiced object reference). | Optional |
+| Buyer accounting reference | `accountingCost` | Text | BT-019 | A text value used by the buyer for internal accounting or bookkeeping. | Optional |
+| Payment terms | `paymentTerms.note` | Text | BT-020 | A text description of the payment terms. | Conditional Mandatory |
+
+## BG-2 Process Control
+
+| Field | JSON Path | Type | BT ID | Description | Sample Value | Cardinality |
+|---|---|---|---|---|---|---|
+| Business process type | `profileID` | Identifier | BT-023 | Identifies the business process context. | `urn:fdc:peppol.eu:2017:poacc:billing:01:1.0` | Mandatory |
+| Specification identifier | `customizationID` | Identifier | BT-024 | Identifies the specification that the invoice conforms to. | `urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0` | Mandatory |
+
+## BG-3 Preceding Invoice Reference
+
+| Field | JSON Path | Type | BT ID | Description | Sample Value | Cardinality |
+|---|---|---|---|---|---|---|
+| Preceding invoice number | `billingReference.invoiceDocumentReference.id` | Identifier | BT-025 | The identification of the invoice that was previously issued and is being corrected or credited. | `INV-2024-0087` | Mandatory |
+| Preceding invoice issue date | `billingReference.invoiceDocumentReference.issueDate` | Date | BT-026 | The issue date of the preceding invoice. | `2024-02-01 00:00:00` | Optional |
+
+## BG-4 Invoice Note
+
+| Field | JSON Path | Type | BT ID | Description | Example Value | Cardinality |
+|---|---|---|---|---|---|---|
+| Invoice note | `note.value` | Text | BT-022 | Free-text note providing additional unstructured information about the invoice. | `Goods delivered as agreed.` | Optional |
+
+## BG-5 Invoice Period
+
+| Field | JSON Path | Type | BT ID | Description | Sample Value | Cardinality |
+|---|---|---|---|---|---|---|
+| Invoicing period start date | `invoicePeriod.startDate` | Date | BT-073 | The start date of the invoicing period. | `2024-02-01 00:00:00` | Conditional Mandatory* |
+| Invoicing period end date | `invoicePeriod.endDate` | Date | BT-074 | The end date of the invoicing period. | `2024-02-29 00:00:00` | Conditional Mandatory* |
+
+<Callout kind="info" collapsed="false">
+  *If an Invoicing period (BG-5) is used, at least one of Start date (BT-73) or End date (BT-74) must be populated per business rule BR-CO-19.
+</Callout>
+
+## BG-7 Seller
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Seller name | `accountingSupplierParty.party.partyLegalEntity.registrationName` | Text | BT-027 | The full legal name of the seller as registered with the relevant authority. | Mandatory |
+| Seller trading name | `accountingSupplierParty.party.partyName.name` | Text | BT-028 | A name by which the seller is known, other than the legal registered name. | Optional |
+| Seller identifier | `accountingSupplierParty.party.partyIdentification.id.value` | Identifier | BT-029 | An identifier for the seller, such as a GLN, DUNS number, or other identifier. | Conditional Mandatory* |
+| Seller Identifier Scheme Identifier | `accountingSupplierParty.party.partyIdentification.id.schemeID` | Code | BT-029-1 | The scheme identifier for the seller identifier. | Optional |
+| Seller legal registration identifier | `accountingSupplierParty.party.partyLegalEntity.companyID.value` | Identifier | BT-030 | An identifier for the seller issued by a legal registration body (e.g. company registration number). | Conditional Mandatory* |
+| Seller legal registration identifier Scheme identifier | `accountingSupplierParty.party.partyLegalEntity.companyID.schemeID` | Code | BT-030-1 | The scheme identifier for the seller legal registration identifier. | Optional |
+| Seller VAT identifier | `accountingSupplierParty.party.partyTaxScheme.companyID` | Number | BT-031 | The seller's VAT number, prefixed with the two-letter country code. | Conditional Mandatory* |
+| Seller Tax scheme code | `accountingSupplierParty.party.partyTaxScheme.taxScheme.id.value` | Text | BT-031-1 | The tax scheme code identifying the tax type (always 'VAT' for VAT identifiers). | Optional |
+| Seller tax registration identifier | `accountingSupplierParty.party.partyTaxScheme.companyID` | Number | BT-032 | The seller's local tax number, used where a separate tax identifier exists alongside the VAT number. | Optional |
+| Seller additional legal information | `accountingSupplierParty.party.partyLegalEntity.companyLegalForm` | Text | BT-033 | Additional legal information about the seller, such as share capital or registration details. | Optional |
+| Seller electronic address | `accountingSupplierParty.party.endPointID.value` | Identifier | BT-034 | The seller's electronic address for receiving documents (e.g. Peppol participant identifier). | Mandatory |
+| Seller electronic address Scheme identifier | `accountingSupplierParty.party.endPointID.schemeID` | Code | BT-034-1 | The scheme identifier for the seller electronic address (Peppol EAS code). | Mandatory |
+
+<Callout kind="info" collapsed="false">
+  *At least one of BT-29, BT-30, or BT-31 must be present per business rule BR-CO-26. VAT identifier is also required for specific tax categories per BR-S-02.
+</Callout>
+
+## BG-8 Seller Postal Address
+
+| Field | JSON Path | Type | BT ID | Cardinality | Description |
+|---|---|---|---|---|---|
+| Seller address line 1 | `accountingSupplierParty.party.postalAddress.streetName` | Text | BT-035 | Optional | The main street address of the seller. |
+| Seller address line 2 | `accountingSupplierParty.party.postalAddress.additionalStreetName` | Text | BT-036 | Optional | Additional street address information of the seller. |
+| Seller city | `accountingSupplierParty.party.postalAddress.cityName` | Text | BT-037 | Optional | The city or town of the seller. |
+| Seller post code | `accountingSupplierParty.party.postalAddress.postalZone` | Text | BT-038 | Optional | The postal code of the seller address. |
+| Seller country subdivision | `accountingSupplierParty.party.postalAddress.countrySubentity` | Text | BT-039 | Optional | The subdivision (state, province, or region) of the seller address. |
+| Seller country code | `accountingSupplierParty.party.postalAddress.country.identificationCode.countryCode` | Code | BT-040 | Mandatory | The country code of the seller address using ISO 3166-1 alpha-2. |
+| Seller address line 3 | `accountingSupplierParty.party.postalAddress.addressLine.line` | Text | BT-162 | Optional | Seller address line 3. |
+
+## BG-9 Seller Contact
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Seller contact point | `accountingSupplierParty.party.contact.name` | Text | BT-041 | The name of the contact person at the seller. | Optional |
+| Seller contact telephone number | `accountingSupplierParty.party.contact.telephone` | Text | BT-042 | The telephone number of the seller contact. | Optional |
+| Seller contact email address | `accountingSupplierParty.party.contact.electronicMail` | Text | BT-043 | The email address of the seller contact. | Optional |
+
+## BG-10 Buyer
+
+| Field | JSON Path | Type | BT ID | Description | Requirement |
+|---|---|---|---|---|---|
+| Buyer name | `accountingCustomerParty.party.partyLegalEntity.registrationName` | Text | BT-044 | The full legal name of the buyer. | Mandatory |
+| Buyer trading name | `accountingCustomerParty.party.partyName.name` | Text | BT-045 | A name by which the buyer is known, other than the legal name. | Optional |
+| Buyer identifier | `accountingCustomerParty.party.partyIdentification.id.value` | Identifier | BT-046 | An identifier for the buyer (e.g. GLN, DUNS number). | Optional |
+| Buyer identifier_Scheme identifier | `accountingCustomerParty.party.partyIdentification.id.schemeID` | Code | BT-046-1 | The scheme identifier for the buyer identifier. | Optional |
+| Buyer legal registration identifier | `accountingCustomerParty.party.partyLegalEntity.companyID.value` | Identifier | BT-047 | An identifier for the buyer issued by a legal registration body. | Optional |
+| Buyer legal registration identifier_Scheme identifier | `accountingCustomerParty.party.partyLegalEntity.companyID.schemeID` | Code | BT-047-1 | The scheme identifier for the buyer legal registration identifier. | Optional |
+| Buyer VAT identifier | `accountingCustomerParty.party.partyTaxScheme.companyID` | Identifier | BT-048 | The buyer's VAT number, prefixed with the two-letter country code. | Optional |
+| Buyer Tax scheme code | `accountingCustomerParty.party.partyTaxScheme.taxScheme.id.value` | Text | BT-048-1 | The tax scheme code identifying the tax type for the buyer (always 'VAT'). | Optional |
+| Buyer electronic address | `accountingCustomerParty.party.endPointID.value` | Identifier | BT-049 | The buyer's electronic address for receiving documents (e.g. Peppol participant identifier). | Mandatory |
+| Buyer electronic address_Scheme identifier | `accountingCustomerParty.party.endPointID.schemeID` | Code | BT-049-1 | The scheme identifier for the buyer electronic address (Peppol EAS code). | Mandatory |
+
+## BG-11 Buyer Postal Address
+
+| Field | JSON Path | Type | BT ID | Description | Sample Value | Requirement |
+|---|---|---|---|---|---|---|
+| Buyer address line 1 | `accountingCustomerParty.party.postalAddress.streetName` | Text | BT-050 | The main street address of the buyer. | `Damrak 1` | Optional |
+| Buyer address line 2 | `accountingCustomerParty.party.postalAddress.additionalStreetName` | Text | BT-051 | Additional street address information of the buyer. | `2nd Floor` | Optional |
+| Buyer city | `accountingCustomerParty.party.postalAddress.cityName` | Text | BT-052 | The city or town of the buyer. | `Amsterdam` | Optional |
+| Buyer post code | `accountingCustomerParty.party.postalAddress.postalZone` | Text | BT-053 | The postal code of the buyer address. | `1012 LG` | Optional |
+| Buyer country subdivision | `accountingCustomerParty.party.postalAddress.countrySubentity` | Text | BT-054 | The subdivision (state, province, or region) of the buyer address. | `North Holland` | Optional |
+| Buyer country code | `accountingCustomerParty.party.postalAddress.country.identificationCode.countryCode` | Code | BT-055 | The country code of the buyer address using ISO 3166-1 alpha-2. | `NL` | Mandatory |
+| Buyer address line 3 | `accountingCustomerParty.party.postalAddress.addressLine.line` | Text | BT-163 | Buyer address line 3. | `NA` | Optional |
+
+## BG-12 Buyer Contact
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Buyer contact point | `accountingCustomerParty.party.contact.name` | Text | BT-056 | The name of the contact person at the buyer. | Optional |
+| Buyer contact telephone number | `accountingCustomerParty.party.contact.telephone` | Text | BT-057 | The telephone number of the buyer contact. | Optional |
+| Buyer contact email address | `accountingCustomerParty.party.contact.electronicMail` | Text | BT-058 | The email address of the buyer contact. | Optional |
+
+## BG-13 Delivery Information
+
+| Field | JSON Path | Type | BT ID | Description | Requirement |
+|---|---|---|---|---|---|
+| Actual delivery date | `delivery.actualDeliveryDate` | Date | BT-072 | The date on which delivery of the goods or services was made or completed. | Optional |
+| Deliver to location identifier | `delivery.deliveryLocation.id.value` | Identifier | BT-071 | The identifier of the delivery location. | Optional |
+| Deliver to location identifier—Scheme identifier | `delivery.deliveryLocation.id.schemeID` | Code | BT-071-1 | Scheme identifier for the delivery location identifier. | Optional |
+| Deliver to address line 1 | `delivery.deliveryLocation.address.streetName` | Text | BT-075 | The main street address of the delivery location. | Optional |
+| Deliver to address line 2 | `delivery.deliveryLocation.address.additionalStreetName` | Text | BT-076 | Additional street address information of the delivery location. | Optional |
+| Deliver to city | `delivery.deliveryLocation.address.cityName` | Text | BT-077 | The city of the delivery location. | Optional |
+| Deliver to post code | `delivery.deliveryLocation.address.postalZone` | Text | BT-078 | The postal code of the delivery location. | Optional |
+| Deliver to country subdivision | `delivery.deliveryLocation.address.countrySubentity` | Text | BT-079 | The subdivision (state, province, region) of the delivery address. | Optional |
+| Deliver to country code | `delivery.deliveryLocation.address.country.identificationCode.countryCode` | Code | BT-080 | The country code of the delivery address using ISO 3166-1 alpha-2. | Conditional Mandatory |
+| Deliver to party name | `delivery.deliveryParty.partyName.name` | Text | BT-070 | The name of the party to whom the goods or services are delivered. | Optional |
+| Deliver to address line 3 | `delivery.deliveryLocation.address.addressLine.line` | Text | BT-165 | Additional delivery address information. | Optional |
+
+## BG-14 Additional Supporting Documents
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Supporting document reference | `additionalDocumentReference.id` | Identifier | BT-122 | An identifier for the supporting document. | Mandatory |
+| Supporting document description | `additionalDocumentReference.documentDescription` | Text | BT-123 | A human-readable description of the supporting document. | Optional |
+| External document location | `additionalDocumentReference.attachment.externalReference.uri` | Text | BT-124 | A URL where the supporting document can be accessed externally. | Optional |
+| Attached document | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject` | Text | BT-125 | An attached document embedded in the invoice as a base64-encoded binary object. | Optional |
+| Attached Document Mime Code | `additionalDocumentReference.attachment.embeddedDocumentBinaryObject.mimeCode` | Code | BT-125-1 | The MIME type of the attached document. | Optional |
+
+## BG-15 Payee
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Payee name | `payeeParty.partyName.name` | Text | BT-059 | The name of the payee party. | Mandatory |
+| Payee identifier | `payeeParty.partyIdentification.id.value` | Identifier | BT-060 | An identifier for the payee (e.g. GLN or DUNS number). | Optional |
+| Payee identifier_Scheme identifier | `payeeParty.partyIdentification.id.schemeID` | Code | BT-060-1 | The scheme identifier for the payee identifier. | Optional |
+| Payee legal registration identifier | `payeeParty.partyLegalEntity.companyID.value` | Identifier | BT-061 | An identifier for the payee issued by a legal registration body. | Optional |
+| Payee Legal Registration Identifier Scheme Identifier | `payeeParty.partyLegalEntity.companyID.schemeID` | Code | BT-061-1 | The scheme identifier for the payee legal registration identifier. | Optional |
+
+## BG-16 Seller Tax Representative Party
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Seller tax representative name | `taxRepresentativeParty.partyName.name` | Text | BT-062 | The name of the seller's tax representative. | Mandatory |
+| Seller tax representative VAT identifier | `taxRepresentativeParty.partyTaxScheme.companyID` | Identifier | BT-063 | The VAT identifier of the seller's tax representative. | Mandatory |
+| Tax Representative Tax scheme code | `taxRepresentativeParty.partyTaxScheme.taxScheme.id.value` | Text | BT-063-1 | The tax scheme code identifying the tax type for the tax representative (always 'VAT'). | Mandatory |
+| Tax representative address line 1 | `taxRepresentativeParty.postalAddress.streetName` | Text | BT-064 | The main street address of the seller's tax representative. | Optional |
+| Tax representative address line 2 | `taxRepresentativeParty.postalAddress.additionalStreetName` | Text | BT-065 | Additional street address of the seller's tax representative. | Optional |
+| Tax representative city | `taxRepresentativeParty.postalAddress.cityName` | Text | BT-066 | The city of the tax representative address. | Optional |
+| Tax representative post code | `taxRepresentativeParty.postalAddress.postalZone` | Text | BT-067 | The postal code of the tax representative address. | Optional |
+| Tax representative country subdivision | `taxRepresentativeParty.postalAddress.countrySubentity` | Text | BT-068 | The subdivision (state, province, region) of the tax representative address. | Optional |
+| Tax representative country code | `taxRepresentativeParty.postalAddress.country.identificationCode.countryCode` | Code | BT-069 | The country code of the tax representative address using ISO 3166-1 alpha-2. | Mandatory |
+| Tax representative address line 3 | `taxRepresentativeParty.postalAddress.addressLine.line` | Text | BT-164 | Tax representative address line 3. | Optional |
+
+## BG-17 Payment Instructions
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Payment means type code | `paymentMeans.paymentMeansCode.value` | Code | BT-081 | A code specifying the payment means (e.g. 30 = credit transfer, 58 = SEPA credit transfer). | Mandatory |
+| Payment means text | `paymentMeans.paymentMeansCode.name` | Text | BT-082 | A text description of the payment means. | Optional |
+| Payment terms amount currency code | `paymentTerms.amount.currencyID` | Code | — | Currency identifier for payment terms, aligned with invoice currency. | Optional |
+| Remittance information | `paymentMeans.paymentID.value` | Text | BT-083 | A payment reference such as a structured creditor reference or payment ID. | Optional |
+| Remittance Information Scheme Identifier | `paymentMeans.paymentID.schemeID` | Text | BT-083-1 | The scheme identifier for the remittance information. | Optional |
+
+## BG-18 Credit Transfer
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Payment account identifier | `paymentMeans.payeeFinancialAccount.id.value` | Identifier | BT-084 | The account identifier (typically IBAN) to which the payment should be made. | Mandatory |
+| Payment Account Identifier Scheme Identifier | `paymentMeans.payeeFinancialAccount.id.schemeID` | Code | BT-084-1 | The scheme identifier for the payment account identifier. | Mandatory |
+| Payment account name | `paymentMeans.payeeFinancialAccount.name` | Text | BT-085 | The name of the payment account (the bank account holder name). | Optional |
+| Payment service provider identifier | `paymentMeans.payeeFinancialAccount.financialInstitutionBranch.id` | Identifier | BT-086 | The BIC or national clearing code of the bank where the account is held. | Optional |
+
+## BG-19 Payment Card Information
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Network ID | `paymentMeans.cardAccount.networkID` | Text | — | The card network scheme identifier for the payment card (e.g. Visa, Mastercard). | Mandatory |
+| Payment card primary account number | `paymentMeans.cardAccount.primaryAccountNumberID` | Text | BT-087 | The Primary Account Number (PAN) of the payment card. Only the last 4-6 digits should be shown. | Mandatory |
+| Payment card holder name | `paymentMeans.cardAccount.holderName` | Text | BT-088 | The name of the payment card holder. | Optional |
+
+## BG-20 Document Level Allowances/Charges
+
+| Field | JSON Path | Type | BT ID | Description | Sample | Requirement |
+|---|---|---|---|---|---|---|
+| Document level allowance indicator | `allowanceCharge.chargeIndicator` | Boolean | — | Indicates whether the AllowanceCharge entry is a charge ('true') or an allowance ('false'). | — | Mandatory |
+| Document level allowance amount currency code | `allowanceCharge.amount.currencyID` | Code | — | The currency of the document-level allowance/charge amount, matching the invoice currency. | EUR | Mandatory |
+| Document level allowance/charge amount | `allowanceCharge.amount.value` | Number | BT-092/BT-099 | The amount of the document-level allowance (discount), excluding VAT. | 25 | Mandatory |
+| Document Level Allowance Base Amount currency code | `allowanceCharge.baseAmount.currencyID` | Code | — | The currency of the document-level allowance/charge base amount, matching the invoice currency. | EUR | Optional |
+| Document level allowance/charge base amount | `allowanceCharge.baseAmount.value` | Number | BT-093/BT-100 | The base amount from which the allowance percentage is calculated. | 500 | Optional |
+| Document level allowance/charge percentage | `allowanceCharge.multiplierFactorNumeric` | Number | BT-094/BT-101 | The percentage used to calculate the allowance from the base amount. | 5 | Optional |
+| Document level allowance/charge VAT category code | `allowanceCharge.taxCategory.id` | Code | BT-095/BT-102 | The VAT category code applicable to the allowance. | S | Mandatory |
+| Document level allowance/charge Tax scheme code | `allowanceCharge.taxCategory.taxScheme.id.value` | Text | BT-095-1/BT-102-1 | The tax scheme code for the allowance category (always 'VAT'). | VAT | Mandatory |
+| Document level allowance/charge VAT rate | `allowanceCharge.taxCategory.percent` | Number | BT-096/BT-103 | The VAT rate (as a percentage) applicable to the allowance. | 21 | Conditional Mandatory |
+| Document level allowance/charge reason | `allowanceCharge.allowanceChargeReason` | Text | BT-097/BT-104 | The reason for the allowance in free text. | Volume discount | Conditional Mandatory |
+| Document level allowance/charge reason code | `allowanceCharge.allowanceChargeReasonCode` | Code | BT-098/BT-105 | A code for the reason of the allowance, from the UNTDID 5189 code list. | 95 | Conditional Mandatory |
+
+## BG-22 Document Totals
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Sum of invoice line net amount | `legalMonetaryTotal.lineExtensionAmount.value` | Number | BT-106 | The sum of all invoice line net amounts, before allowances, charges, and VAT. | Mandatory |
+| Sum of Invoice line net amount currency code | `legalMonetaryTotal.lineExtensionAmount.currencyID` | Code | – | The currency of the invoice line net amount total, matching the invoice currency. | Mandatory |
+| Sum Of Allowances On Document Level currency code | `legalMonetaryTotal.allowanceTotalAmount.currencyID` | Code | – | The currency of the document-level allowance total, matching the invoice currency. | Optional |
+| Sum of allowances on document level | `legalMonetaryTotal.allowanceTotalAmount.value` | Number | BT-107 | The total of all document-level allowances. | Optional |
+| Sum Of Charges On Document Level currency code | `legalMonetaryTotal.chargeTotalAmount.currencyID` | Code | – | The currency of the document-level charge total, matching the invoice currency. | Optional |
+| Sum of charges on document level | `legalMonetaryTotal.chargeTotalAmount.value` | Number | BT-108 | The total of all document-level charges. | Optional |
+| Invoice total amount without Tax currency code | `legalMonetaryTotal.taxExclusiveAmount.currencyID` | Code | – | The currency of the tax-exclusive invoice total, matching the invoice currency. | Mandatory |
+| Invoice total amount without VAT | `legalMonetaryTotal.taxExclusiveAmount.value` | Number | BT-109 | The invoice total excluding VAT. | Mandatory |
+| Invoice total VAT amount currency code | `taxTotal.taxAmount.currencyID` | Code | – | The currency of the invoice total VAT amount. | Optional |
+| Invoice total VAT amount | `taxTotal.taxAmount.value` | Number | BT-110 | The total VAT amount for the invoice. | Optional |
+| Invoice total amount with Tax currency code | `legalMonetaryTotal.taxInclusiveAmount.currencyID` | Code | – | The currency of the tax-inclusive invoice total, matching the invoice currency. | Mandatory |
+| Invoice total amount with VAT | `legalMonetaryTotal.taxInclusiveAmount.value` | Number | BT-112 | The total amount of the invoice including VAT. | Mandatory |
+| Paid amount currency code | `legalMonetaryTotal.prepaidAmount.currencyID` | Code | – | The currency of the paid (prepaid) amount, matching the invoice currency. | Optional |
+| Paid amount | `legalMonetaryTotal.prepaidAmount.value` | Number | BT-113 | The total amount already paid (prepayments), to be subtracted from the total. | Optional |
+| Rounding amount currency code | `legalMonetaryTotal.payableRoundingAmount.currencyID` | Code | – | The currency of the rounding amount, matching the invoice currency. | Optional |
+| Rounding amount | `legalMonetaryTotal.payableRoundingAmount.value` | Number | BT-114 | The rounding amount applied to the payable amount. | Optional |
+| Amount due for payment currency code | `legalMonetaryTotal.payableAmount.currencyID` | Code | – | The currency of the amount due for payment, matching the invoice currency. | Mandatory |
+| Amount due for payment | `legalMonetaryTotal.payableAmount.value` | Number | BT-115 | The final amount the buyer must pay. | Mandatory |
+
+## BG-23 VAT Breakdown
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| VAT category taxable amount currency code | `taxTotal.taxSubtotal.taxableAmount.currencyID` | Code | — | The currency of the VAT category taxable amount, matching the invoice currency. | Mandatory |
+| VAT category taxable amount | `taxTotal.taxSubtotal.taxableAmount.value` | Number | BT-116 | The total amount subject to this specific VAT category and rate. | Mandatory |
+| VAT category tax amount currency code | `taxTotal.taxSubtotal.taxAmount.currencyID` | Code | — | The currency of the VAT category tax amount, matching the invoice currency. | Mandatory |
+| VAT category tax amount | `taxTotal.taxSubtotal.taxAmount.value` | Number | BT-117 | The calculated VAT amount for this category. | Mandatory |
+| VAT category code | `taxTotal.taxSubtotal.taxCategory.id` | Code | BT-118 | The VAT category code for this breakdown entry (S, Z, E, AE, K, G, O, L, M). | Mandatory |
+| VAT Category Tax scheme code | `taxTotal.taxSubtotal.taxCategory.taxScheme.id.value` | Text | BT-118-1 | The tax scheme code for the VAT breakdown (always 'VAT'). | Mandatory |
+| VAT category rate | `taxTotal.taxSubtotal.taxCategory.percent` | Number | BT-119 | VAT percentage applicable to this category. | Conditional Mandatory |
+| VAT exemption reason text | `taxTotal.taxSubtotal.taxCategory.taxExemptionReason` | Text | BT-120 | A text explanation of why VAT is not applicable. | Conditional Mandatory |
+| VAT exemption reason code | `taxTotal.taxSubtotal.taxCategory.taxExemptionReasonCode` | Code | BT-121 | A coded reason for the VAT exemption, using the VATEX code list. | Conditional Mandatory |
+
+## BG-25 Invoice Line
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Invoice line identifier | `invoiceLine.id` | Identifier | BT-126 | A unique identifier for the invoice line within the invoice. | Mandatory |
+| Invoice line note | `invoiceLine.note` | Text | BT-127 | A free-text note about the invoice line. | Optional |
+| Invoice line object identifier | `invoiceLine.documentReference.id.value` | Identifier | BT-128 | An identifier for the object on which the line is based (e.g. a meter reading, serial number). | Optional |
+| Scheme Identifier | `invoiceLine.documentReference.id.schemeID` | Text | BT-128-1 | The scheme identifier for the invoice line object identifier. | Optional |
+| Document Type Code | `invoiceLine.documentReference.documentTypeCode.value` | Text | — | A code identifying the type of document referenced at line level (use '130' for an invoiced object reference). | Mandatory |
+| Invoiced quantity | `invoiceLine.invoicedQuantity.quantity` | Number | BT-129 | The quantity of items (goods or services) invoiced on this line. | Mandatory |
+| Unit of measure code | `invoiceLine.invoicedQuantity.unitCode` | Code | BT-130 | The unit of measure for the invoiced quantity, using UN/ECE Recommendation 20 codes. | Mandatory |
+| Currency code | `invoiceLine.lineExtensionAmount.currencyID` | Code | — | Currency matching the invoice document. | Mandatory |
+| Net amount | `invoiceLine.lineExtensionAmount.value` | Number | BT-131 | The total amount of the invoice line after allowances and charges, excluding VAT. | Mandatory |
+| PO line reference | `invoiceLine.orderLineReference.lineID` | Identifier | BT-132 | A reference to the purchase order line that this invoice line relates to. | Optional |
+| Despatch line reference | `invoiceLine.despatchLineReference.lineId` | Text | — | Reference to corresponding despatch advice documentation. | Optional |
+| Buyer accounting reference | `invoiceLine.accountingCost` | Text | BT-133 | The buyer's accounting reference for the invoice line. | Optional |
+
+## BG-26 Invoice Line Period
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Invoice line period start date | `invoiceLine.invoicePeriod.startDate` | Date | BT-134 | The start date of the period to which this invoice line applies. | Conditional Mandatory* |
+| Invoice line period end date | `invoiceLine.invoicePeriod.endDate` | Date | BT-135 | The end date of the period to which this invoice line applies. | Conditional Mandatory* |
+
+<Callout kind="info" collapsed="false">
+  *If an Invoice line period (BG-26) is used, at least one of Start date (BT-134) or End date (BT-135) must be filled per BR-CO-20.
+</Callout>
+
+## BG-27 Invoice Line Charges/Allowances
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Invoice line charge indicator | `invoiceLine.allowanceCharge.chargeIndicator` | Boolean | — | Indicates whether the line-level AllowanceCharge entry is a charge ('true') or an allowance ('false'). | Mandatory |
+| Invoice line allowance amount currency code | `invoiceLine.allowanceCharge.amount.currencyID` | Code | — | Currency matching invoice currency. | Optional |
+| Invoice line charge/allowance amount | `invoiceLine.allowanceCharge.amount.value` | Number | BT-136/BT-141 | The amount of the line-level allowance (discount). | Optional |
+| Invoice line charge/allowance base amount | `invoiceLine.allowanceCharge.baseAmount.value` | Number | BT-137/BT-142 | The base amount from which the line allowance percentage is calculated. | Conditional Mandatory |
+| Invoice Line Allowance Base Amount currency code | `invoiceLine.allowanceCharge.baseAmount.currencyID` | Code | — | Currency matching invoice currency. | Optional |
+| Invoice line charge/allowance percentage | `invoiceLine.allowanceCharge.multiplierFactorNumeric` | Number | BT-138/BT-143 | The percentage used to calculate the line allowance from the base amount. | Conditional Mandatory |
+| Invoice line charge/allowance reason | `invoiceLine.allowanceCharge.allowanceChargeReason` | Text | BT-139/BT-144 | Free-text explanation for allowance/charge. | Conditional Mandatory |
+| Invoice line charge/allowance reason code | `invoiceLine.allowanceCharge.allowanceChargeReasonCode` | Code | BT-140/BT-145 | A code for the reason of the line allowance, from the UNTDID 5189 code list. | Conditional Mandatory |
+
+## BG-29 Price Details
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Item net price | `invoiceLine.price.priceAmount.value` | Number | BT-146 | The net price of the item (after any price discount, before VAT). | Mandatory |
+| Item price discount indicator | `invoiceLine.price.allowanceCharge.chargeIndicator` | Boolean | — | Indicates that the item price AllowanceCharge represents a discount ('false' only; charges are not permitted at price level). | Optional |
+| Item price discount | `invoiceLine.price.allowanceCharge.amount.value` | Number | BT-147 | The discount applied to the item's gross price to arrive at the net price. | Optional |
+| Item price discount currency code | `invoiceLine.price.allowanceCharge.amount.currencyID` | Code | — | The currency of the item price discount amount, matching the invoice currency. | Optional |
+| Item price base quantity | `invoiceLine.price.baseQuantity.value` | Number | BT-149 | The quantity to which the price applies (e.g. price per 100 units). Defaults to 1. | Optional |
+| Item price base quantity unit of measure code | `invoiceLine.price.baseQuantity.unitCode` | Code | BT-150 | The unit of measure for the price base quantity. | Optional |
+
+## BG-30 Line VAT Information
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Invoiced item VAT category code | `invoiceLine.item.classifiedTaxCategory.id` | Code | BT-151 | The VAT category code for this line item. | Mandatory |
+| Invoiced item VAT Tax scheme code | `invoiceLine.item.classifiedTaxCategory.taxScheme.id.value` | Text | BT-151-1 | The tax scheme code for the line item VAT category (always 'VAT'). | Mandatory |
+| Invoiced item VAT rate | `invoiceLine.item.classifiedTaxCategory.percent` | Number | BT-152 | The VAT rate (as a percentage) for this line item. | Conditional Mandatory* |
+
+<Callout kind="info" collapsed="false">
+  *The VAT rate is required for all invoice line VAT categories except 'Not subject to VAT' (O), where it must be absent per BR-O-05 and related category rules.
+</Callout>
+
+## BG-31 Item Information
+
+| Field | JSON Path | Type | BT ID | Description | Requirement |
+|---|---|---|---|---|---|
+| Item name | `invoiceLine.item.name` | Text | BT-153 | The name of the invoiced item or service. | Mandatory |
+| Item description | `invoiceLine.item.description` | Text | BT-154 | A free-text description of the item. | Optional |
+| Item seller's identifier | `invoiceLine.item.sellersItemIdentification.id` | Identifier | BT-155 | An identifier for the item as assigned by the seller (e.g. a SKU or product code). | Optional |
+| Item buyer's identifier | `invoiceLine.item.buyersItemIdentification.id` | Identifier | BT-156 | An identifier for the item as assigned by the buyer (e.g. an internal product code). | Optional |
+| Item standard identifier | `invoiceLine.item.standardItemIdentification.id.value` | Identifier | BT-157 | A global identifier for the item using a standard scheme (e.g. GTIN/EAN, ISBN). | Optional |
+| Item Standard Identifier Scheme Identifier | `invoiceLine.item.standardItemIdentification.id.schemeID` | Code | BT-157-1 | The scheme identifier for the item standard identifier. | Optional |
+| Item classification identifier | `invoiceLine.item.commodityClassification.itemClassificationCode.value` | Identifier | BT-158 | A classification code for the item using a standard classification scheme (e.g. CPV, UNSPSC). | Optional |
+| Item Classification Identifier Scheme Identifier | `invoiceLine.item.commodityClassification.itemClassificationCode.schemeID` | Code | BT-158-1 | The scheme identifier for the item classification code. | Optional |
+| Item country of origin | `invoiceLine.item.originCountry.identificationCode.countryCode` | Code | BT-159 | The country where the item was produced or manufactured, using ISO 3166-1 alpha-2. | Optional |
+
+## BG-32 Item Attributes
+
+| Field | JSON Path | Type | BT ID | Description | Cardinality |
+|---|---|---|---|---|---|
+| Item attribute name | `invoiceLine.item.additionalItemProperty.name` | Text | BT-160 | The name of the item attribute (e.g. 'Colour', 'Size'). | Mandatory |
+| Item attribute value | `invoiceLine.item.additionalItemProperty.value` | Text | BT-161 | The value of the item attribute (e.g. 'Red', 'XL'). | Mandatory |

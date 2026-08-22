@@ -1,0 +1,100 @@
+---
+title: Get e-Invoice PDF
+description: 'Retrieve the PDF version of a previously submitted e-invoice'
+---
+
+**Method:** `GET`
+
+The Get E-Invoice PDF API returns the PDF version of a sales e-invoice already submitted to ClearTax via Send e-Invoice, or a purchase invoice received via ClearTax acting as an ASP.
+
+<Callout kind="info" collapsed="false">
+  The API processes one invoice per request.
+</Callout>
+
+## Endpoint
+
+| Environment | URL |
+|---|---|
+| Production | `GET https://api.mea.cleartax.com/einvoice/v1/documents/print?document-id=<document_id>` |
+| Sandbox | `GET https://api-sandbox.mea.cleartax.com/einvoice/v1/documents/print?document-id=<document_id>` |
+
+## Request Headers
+
+| Header | Required | Description |
+|---|---|---|
+| `x-ClearTax-auth-token` | Mandatory | User auth token. |
+| `x-clear-[nodeId]` | Mandatory | Refer to Node ID for details. |
+| `x-clear-branch` | Optional | Branch (store) name mapped to a VAT/VATIN of the entity. |
+| `x-request-id` | Optional | Unique ID per request; used as a trace ID. Auto-populated if omitted. |
+| `x-clear-country-code` | Mandatory | Refer to Country Code for details. |
+
+## Request Query Parameters
+
+| Parameter | Data Type | Possible Values | Description |
+|---|---|---|---|
+| `document-id` | String | — | Clear's Unique Document ID. Returned in the response of Send e-Invoice and Get Document Nos APIs. Optional; mandatory if other identifiers absent. |
+| `document-number` | String | — | Document number of the invoice. Optional; mandatory if `document-id` not provided. |
+| `document-date` | String | `yyyy-mm-dd` | Issue date of the invoice. Optional; mandatory if `document-id` not provided. |
+| `document-type` | ENUM | Free trade zone invoice, Deemed supply invoice, Profit Margin Scheme invoice, Summary invoice, Continuous Supply invoice, Agent billing invoice, Supply through E-commerce invoice, Exports invoice (and their credit notes) | Optional; mandatory if `document-id` not provided. |
+| `taxPayerIdentifier` | String | — | Issuer VAT. Optional; mandatory if `document-id` not provided. |
+| `einvoice-type` | ENUM | `SALES` / `PURCHASE` | Optional. Defaults to `SALES` if not passed. |
+| `template-id` | String | — | Optional. Print template ID. Defaults to `2` (Standard Invoice Template). Custom templates available via CSM. |
+
+No request body is required for this API call.
+
+## Response Schema
+
+### Success (200)
+
+The response body is returned as a binary stream containing the PDF file itself.
+
+### Error Response
+
+When an error occurs, the response body contains a JSON object with an array of Error Detail objects.
+
+| Field | Type | Description |
+|---|---|---|
+| `ErrorCode` | String | Code identifying the error. |
+| `ErrorMessage` | String | Human-readable error message. |
+| `ErrorSource` | String | Source of the error. Value: `CLEARTAX`. |
+
+## API Constraints
+
+- **Authentication:** Requires a valid auth token. Returns `401` if missing or invalid. Returns `403` if the user isn't authorized to print e-invoices.
+- **Document lookup:** The invoice data identified by the request must already exist in ClearTax, or the API returns `404`.
+- **Rate limiting:** 10K requests per min.
+
+## Sample Request & Response
+
+**Headers:**
+
+```
+x-cleartax-auth-token: <Auth token>
+x-clear-country-code:  AE
+x-clear-trn:           <TRN>
+Content-Type:          application/json
+```
+
+No request body is required for this API call.
+
+**HTTP 200 - Success:**
+
+```
+<document-id>.pdf
+```
+
+(The response body contains the raw PDF binary stream.)
+
+**HTTP 404 - Document Not Found:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "EINV-DOC-NF-001",
+      "ErrorMessage": "You don't have any data present for the selected Document Details",
+      "ErrorSource": "CLEARTAX"
+    }
+  ]
+}
+```

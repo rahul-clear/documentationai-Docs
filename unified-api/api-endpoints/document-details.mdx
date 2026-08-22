@@ -1,0 +1,136 @@
+---
+title: Document Details
+description: 'Retrieve the full invoice payload for a single e-invoice document'
+---
+
+**Method:** `GET`
+
+The Document Details API retrieves a single e-invoice document by its document number. It returns the full invoice payload as a plain JSON object - not the Base64-encoded form used in the Send e-Invoice request body.
+
+<Callout kind="info" collapsed="false">
+  The response body follows the same Document Data schema structure used in the Send e-Invoice request, but returned in unencoded format.
+</Callout>
+
+## Endpoint
+
+| Environment | URL |
+|---|---|
+| Production | `GET https://api.mea.cleartax.com/einvoice/v1/documents?einvoice-type=PURCHASE&document-number=Inv311478` |
+| Sandbox | `GET https://api-sandbox.mea.cleartax.com/einvoice/v1/documents?einvoice-type=PURCHASE&document-number=Inv311478` |
+
+## Request Headers
+
+| Header | Required | Description |
+|---|---|---|
+| `x-ClearTax-auth-token` | Mandatory | User auth token. |
+| `x-clear-[nodeId]` | Mandatory | Refer to Node ID for details. |
+| `x-clear-branch` | Optional | Branch (store) name mapped to a VAT/VATIN of the entity. |
+| `x-request-id` | Optional | Unique ID per request; used as a trace ID. Auto-populated if omitted. |
+| `x-clear-country-code` | Mandatory | Refer to Country Code for details. |
+| `Content-Type` | Mandatory | `application/json` |
+
+## Request Query Parameters
+
+| Parameter | Data Type | Possible Values | Description |
+|---|---|---|---|
+| `einvoice-type` | ENUM | `SALES` / `PURCHASE` | Mandatory. `SALES` for Sales and `PURCHASE` for Purchase invoices. |
+| `document-number` | String | — | Mandatory. Document number of the invoice to fetch. |
+
+Request Body: None
+
+## Response Schema
+
+On success, the API returns a single JSON object conforming to the Document Data schema used in the Send e-Invoice request body, presented as plain JSON rather than Base64-encoded.
+
+### Error Detail Object
+
+| Field | Type | Description |
+|---|---|---|
+| `ErrorCode` | String | Identifier for the specific error encountered. |
+| `ErrorMessage` | String | Human-friendly explanation of what went wrong. |
+| `ErrorSource` | String | Where the error originated; consistently shows `CLEARTAX`. |
+| `Path` | String | For validation errors at the field level, indicates the problematic field location. |
+
+## API Constraints
+
+- **Authentication:** Requires a valid auth token. Returns `401` if missing or expired. Returns `403` if the user lacks Admin role for the entity.
+- **Rate Limiting:** 10K requests per min.
+
+## Sample Request & Response
+
+**Headers:**
+
+```
+x-cleartax-auth-token: <Auth token>
+x-clear-country-code:  AE
+x-clear-trn:           <TRN>
+Content-Type:          application/json
+```
+
+Request Body: None
+
+**HTTP 200 - Success:**
+
+```
+<Invoice Payload>
+```
+
+**HTTP 400 - Missing document-number:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "400",
+      "ErrorMessage": "document-number is required",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```
+
+**HTTP 401 - Unauthorized:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "401",
+      "ErrorMessage": "Unauthorized",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```
+
+**HTTP 403 - Forbidden:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "403",
+      "ErrorMessage": "FORBIDDEN",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```
+
+**HTTP 404 - Document Not Found:**
+
+```json
+{
+  "ErrorDetails": [
+    {
+      "ErrorCode": "404",
+      "ErrorMessage": "Document with number 'INV-8802' not found",
+      "ErrorSource": "CLEARTAX",
+      "Path": null
+    }
+  ]
+}
+```

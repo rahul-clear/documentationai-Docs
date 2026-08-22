@@ -1,0 +1,203 @@
+---
+title: Oman — Validations
+description: 'PINT-OM validation rules for billing and self-billing invoices'
+---
+
+Both rule sets below implement the PINT-OM (Peppol International, Oman) specification and share the same 154-rule structure; self-billing rules are largely identical to billing with adjustments for the self-billed transaction flow.
+
+## Billing
+
+### Core Invoice Requirements
+
+**Transaction Type & Format:**
+- `ALIGNED-IBRP-000-OM`: Transaction type must be a 20-character bitmap with '1' and '0' characters, containing at least one active type.
+- `IBR-001-OM`: Transaction type must consist only of '1' and '0' characters.
+- `IBR-043-OM`: Either position 1 or 2 must always be '1'.
+
+**Specification & Process:**
+- `ALIGNED-IBRP-001-OM`: Specification identifier must start with `urn:peppol:pint:billing-1@om-1`.
+- `ALIGNED-IBRP-002-OM`: Business process format must be `urn:peppol:bis:billing`.
+- `ALIGNED-IBRP-003-OM`: VAT accounting currency must be `OMR`.
+
+### Identifier Requirements
+
+**UUID & Registration:**
+- `IBR-002-OM`: UUID must be valid version 5.
+- `IBR-003-OM`: VATIN format requires `OM` prefix + 10 digits (12 characters total).
+
+**Seller Requirements:**
+- `IBR-006-OM`: Seller tax identifier mandatory except for import goods, import service RCM, or profit margin self-invoice transactions.
+- `IBR-010-OM`: Seller address must include lines 1-3, city, and postal code.
+- `IBR-011-OM`: Seller contact telephone number required.
+
+**Buyer Requirements:**
+- `IBR-016-OM`: Buyer identifier or VATIN required for most invoice types.
+- `IBR-017-OM`: Buyer VATIN mandatory for self-billed, import service RCM, profit margin self-invoice, and import goods.
+- `IBR-020-OM`: Buyer country code must be `OM` for specific transaction types.
+
+### Currency & Exchange
+
+- `IBR-004-OM`: Exchange rate required when invoice currency differs from `OMR`.
+- `IBR-005-OM`: Exchange rate limited to 7 decimal places maximum.
+- `IBR-172-OM`: Exchange rate prohibited when invoice currency is `OMR`.
+
+### VAT Breakdown & Categories
+
+**VAT Structure:**
+- `ALIGNED-IBRP-045`: Each VAT breakdown requires taxable amount.
+- `ALIGNED-IBRP-046`: Each VAT breakdown requires tax amount.
+- `ALIGNED-IBRP-047`: Each VAT breakdown requires category code.
+- `ALIGNED-IBRP-048`: VAT rate required except for non-VAT invoices.
+
+**Standard Rate (S):**
+- `ALIGNED-IBRP-S-05-OM`: VAT rate for category `S` must be 5%.
+- `ALIGNED-IBRP-S-09-OM`: Tax amount must equal sum of line VAT amounts grouped by rate.
+- `ALIGNED-IBRP-S-09-OM-WARN`: Warning issued if calculation differs within Baisa tolerance (±0.001 OMR per line).
+
+**Exempt (E):**
+- `ALIGNED-IBRP-E-01-OM`: Requires VAT breakdown unless simplified tax invoice.
+- `ALIGNED-IBRP-E-05-OM`: Must not contain VAT rate.
+- `ALIGNED-IBRP-E-08-OM`: Taxable amount must equal specific calculation.
+- `ALIGNED-IBRP-E-09-OM`: Tax amount must be zero.
+
+**Zero-Rated (Z):**
+- `ALIGNED-IBRP-Z-05-OM`: VAT rate must be 0%.
+- `ALIGNED-IBRP-Z-08-OM`: Taxable amount must equal specific calculation.
+- `ALIGNED-IBRP-Z-09-OM`: Tax amount must be zero.
+
+**Not Subject to VAT (O):**
+- `ALIGNED-IBRP-O-01-OM`: Requires VAT breakdown unless simplified tax invoice.
+- `ALIGNED-IBRP-O-05-OM`: Must not contain VAT rate.
+- `ALIGNED-IBRP-O-08-OM`: Taxable amount must equal specific calculation.
+- `ALIGNED-IBRP-O-09-OM`: Tax amount must be zero.
+
+### Document Level Allowances & Charges
+
+- `ALIGNED-IBRP-057`: Both or neither base amount and percentage required.
+- `ALIGNED-IBRP-058`: Both or neither base amount and percentage required.
+- `IBR-033-OM`: Allowance amount = base × percentage ÷ 100.
+- `IBR-041-OM`: Base amount required when percentage provided.
+- `IBR-042-OM`: Charge reason code mandatory if charges present.
+- `IBR-062-OM`: Exempt/zero-rated allowances require exemption reason code.
+- `IBR-064-OM`: Exempt/zero-rated charges require exemption reason code.
+
+### Line Item Requirements
+
+- `IBR-071-OM`: Line net amount calculation specified.
+- `IBR-075-OM`: Net price = gross price − discount.
+- `IBR-076-OM`: Each line must have VAT category code.
+- `IBR-078-OM`: Goods/services identification required except for simplified invoices.
+- `IBR-079-OM`: HS code required for goods except simplified invoices.
+- `IBR-080-OM`: HS code must be exactly 12 digits.
+
+**Line Item VAT:**
+- `IBR-038-OM`: Line VAT amount required except for simplified invoices.
+- `IBR-039-OM`: Line VAT amount is zero for exempt category.
+- `IBR-054-OM`: Line VAT amount is zero for not-subject category.
+- `IBR-077-OM`: Line VAT amount is zero for zero-rated category.
+- `IBR-168-OM`: Line VAT = net amount × rate ÷ 100.
+- `IBR-168-OM-WARN`: Warning for calculations within Baisa tolerance.
+
+### Invoice Type & Transaction Type Rules
+
+**Type Codes:**
+- `IBR-023-OM`: Credit/debit note codes (`381`, `383`, `261`) require reason code.
+- `IBR-032-OM`: Credit/debit notes require preceding invoice reference and UUID.
+
+**Transaction Type Exclusions:**
+Multiple rules prevent conflicting transaction type combinations (`IBR-138-OM` through `IBR-177-OM`). Examples:
+- Self-billed cannot combine with third-party, export, or profit margin invoices.
+- Summary invoice cannot combine with continuous supply or export invoices.
+- Profit margin invoices cannot combine with various other types.
+
+### Special Invoice Types
+
+**Simplified Tax Invoice:**
+- `CL-03-OM-1`: Cannot be both full tax and simplified.
+- `CL-03-OM-2`: Must indicate either full tax or simplified.
+
+**Profit Margin Invoices:**
+- `IBR-082-OM`: Total amount due mandatory and must sum all line amounts.
+- `IBR-086-OM`: Line VAT category must be `O`.
+- `IBR-087-OM`: Seller country must be `OM`.
+- `IBR-091-OM`: HS code cannot start with `7101`, `7102`, `7103`, `7104`, `01`, or `06`.
+- `IBR-169-OM`: Total amount due currency must be `OMR`.
+
+**Import Transactions:**
+- `IBR-084-OM`: Country of origin required for imported goods.
+- `IBR-085-OM`: Import date, customs declaration, and incoterms required.
+- `IBR-153-OM`: Buyer identifier with `ICID` scheme required.
+
+**Export Invoices:**
+- `IBR-012-OM`: Deliver-to country cannot be `OM` for service exports.
+- `IBR-013-OM`: Supporting document and UUID required for re-exports.
+- `IBR-014-OM`: Deliver-to country code required.
+
+**E-Commerce Supplies:**
+- `IBR-040-OM`: Delivery address lines, city, postal code, country required.
+
+**Special Zone Supplies:**
+- `IBR-150-OM`: Buyer/seller subdivision codes required.
+- `IBR-151-OM`: Seller SZLN identifier required (except Muscat).
+- `IBR-152-OM`: Buyer SZLN identifier required (except Muscat and special electronic address).
+
+### Dates & Time
+
+- `ALIGNED-IBRP-016-OM`: Invoice issue time required.
+- `IBR-171-OM`: Issue date cannot be in future (Asia/Muscat timezone).
+- `IBR-171-A-OM`: Date format must be `YYYY-MM-DD`.
+- `IBR-156-OM`: Import date must be valid `YYYY-MM-DD` format.
+
+### Item Classification
+
+- `IBR-081-OM`: Industrial classification required except simplified, import, or profit margin invoices.
+- `IBR-056-OM`: Scheme identifier must be `HS` (goods) or `MP` (services).
+- `CL-08-OM-HS`: HS code must be 12-digit valid Oman code.
+- `CL-08-OM-ISIC`: ISIC code must be from official list.
+- `CL-12-OM`: Service classification from official codelist required.
+- `IBR-155-OM`: Service type required for service exports.
+
+### Invoicing Periods
+
+- `IBR-036-OM`: Summary invoice periods must be same calendar month.
+- `IBR-037-OM`: Start/end dates required for summary and continuous supply.
+- `IBR-057-OM`: Summary invoice line periods must be same calendar month.
+- `IBR-072-OM`: Period dates required for combined full tax + summary invoices.
+
+### Prepayment & Payment
+
+- `IBR-058-OM`: Prepayment invoice number and UUID required when paid amount present.
+- `IBR-059-OM`: Source currency is invoice currency; target is VAT accounting currency.
+
+### Decimal Places & Precision
+
+- `IBR-046-OM`: VAT rates 0.00–100.00, maximum 2 decimal places.
+- `IBR-DEC-03-OM`: All amounts maximum 3 decimal places; exchange rate 7 decimals.
+
+### Data Validation
+
+- `IBR-137-OM`: All amounts/quantities zero or positive (except rounding).
+- `ALIGNED-IBRP-SR-12`: Seller VAT identifier occurs at most once.
+- `IBR-136-OM`: Currency ID must match VAT accounting currency for VAT amounts.
+
+<Callout kind="info" collapsed="false">
+  154 rules total in the PINT-OM billing spec. See [source](https://cleartax-unified-api.netlify.app/countries/oman/pint-validations/billing) for the complete rule listing.
+</Callout>
+
+## Self-Billing
+
+The self-billing rule set mirrors billing (154 rules total, same `IBR-*`/`ALIGNED-IBRP-*` prefixes) with the following framework-level requirements called out on the source page:
+
+- `ALIGNED-IBRP-000-OM`: Transaction type must be a 20-character bitmap of `1` and `0` with at least one `1`.
+- Specification identifier must begin with `urn:peppol:pint:billing-1@om-1`; business process follows format `urn:peppol:bis:billing`.
+- **VAT Compliance** (`ALIGNED-IBRP-045` through `ALIGNED-IBRP-Z-09-OM`): VAT breakdowns require taxable amounts, tax amounts, category codes, and rates. Category `S` (Standard) rate must equal 5%; `E` (Exempt) and `O` (Not Subject) tax amount must be zero; `Z` (Zero-rated) rate must be 0.
+- **Invoice Type Validations** (`CL-03-OM` series): An invoice cannot simultaneously be both a Full Tax Invoice and Simplified Invoice — either bit 1 or bit 2 of the transaction type must be active.
+- **Seller/Buyer Requirements** (`IBR-006-OM` through `IBR-020-OM`): Seller VAT identifier is mandatory except for import transactions or profit margin self-invoices. Buyer information requirements vary by transaction type.
+- **Financial Calculations** (`IBR-033-OM`, `IBR-063-OM`, `IBR-071-OM`): Allowances and charges must equal base amount × percentage ÷ 100. Line net amounts follow `(Quantity × Unit Price) + Charges − Allowances`.
+- **Currency & Exchange Rates** (`IBR-004-OM`, `IBR-172-OM`): Exchange rates mandatory when invoice currency differs from `OMR`, prohibited when currency is `OMR`. Maximum 7 decimal places.
+- **Decimal Precision** (`IBR-DEC-03-OM`): All amounts permit maximum 3 decimal places; exchange rates allow 7 decimals.
+- **Date Validations** (`IBR-171-OM`, `IBR-156-OM`): Invoice issue dates cannot be future dates; dates use `YYYY-MM-DD` format.
+
+<Callout kind="info" collapsed="false">
+  The rules enforce strict hierarchical dependencies — transaction type determines required fields across seller identification, buyer details, documentation, and tax treatment. See [source](https://cleartax-unified-api.netlify.app/countries/oman/pint-validations/self-billing) for the complete rule listing.
+</Callout>

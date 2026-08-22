@@ -1,0 +1,106 @@
+---
+title: Germany — Validations
+description: 'Business validation rules for the XRechnung and BIS Billing schemes'
+---
+
+## XRechnung
+
+### Billing
+
+| Rule ID | Description |
+|---|---|
+| BR-DE-1 | An invoice (INVOICE) must contain information on PAYMENT INSTRUCTIONS (BG-16). |
+| BR-DE-2 | The group SELLER CONTACT (BG-6) must be transmitted. |
+| BR-DE-3 | The element Seller city (BT-37) must be transmitted. |
+| BR-DE-4 | The element Seller post code (BT-38) must be submitted. |
+| BR-DE-5 | The Seller contact point (BT-41) element must be transmitted. |
+| BR-DE-6 | The element Seller contact telephone number (BT-42) must be transmitted. |
+| BR-DE-7 | The element Seller contact email address (BT-43) must be submitted. |
+| BR-DE-8 | The element Buyer city (BT-52) must be transmitted. |
+| BR-DE-9 | The Buyer post code (BT-53) element must be transmitted. |
+| BR-DE-10 | Deliver to city (BT-77) required when DELIVER TO ADDRESS (BG-15) is transmitted. |
+| BR-DE-11 | Deliver to post code (BT-78) required when DELIVER TO ADDRESS (BG-15) is submitted. |
+| BR-DE-12 | The Deliver to post code (BT-78) element requires a postal code. |
+| BR-DE-14 | The element VAT category rate (BT-119) must be submitted. |
+| BR-DE-15 | The Buyer reference (BT-10) element must be submitted. |
+| BR-DE-16 | Tax codes S, Z, E, AE, K, G, L, or M require seller VAT/tax identifiers or representative. |
+| BR-DE-17 | Only specific invoice type codes permitted: 326, 380, 384, 389, 381, 875, 876, 877. |
+| BR-DE-18 | Discount information format specifications for Payment terms (BT-20). |
+| BR-DE-19 | Payment account identifier (BT-84) should contain correct IBAN for SEPA code 58. |
+| BR-DE-20 | Debited account identifier (BT-91) should contain correct IBAN for SEPA code 59. |
+| BR-DE-21 | Specification identifier (BT-24) should match XRechnung standard identifier syntax. |
+| BR-DE-22 | Attached documents (BT-125) must have unique filenames (case-insensitive). |
+| BR-DE-23 | Remittance codes (30, 58) require CREDIT TRANSFER; exclude PAYMENT CARD and DIRECT DEBIT. |
+| BR-DE-24 | Card payment codes (48, 54, 55) require PAYMENT CARD INFORMATION only. |
+| BR-DE-25 | Direct debit code (59) requires DIRECT DEBIT group only. |
+| BR-DE-26 | Corrected invoice code (384) should reference preceding invoice (BG-3). |
+| BR-DE-27 | Seller contact telephone number (BT-42) must contain at least three digits. |
+| BR-DE-28 | Seller contact email address (BT-43) must be a valid email address. |
+| BR-DE-29 | Replaced by PEPPOL-EN16931-R061 since XRechnung 3.0.0. |
+| BR-DE-30 | Bank assigned creditor identifier (BT-90) required for DIRECT DEBIT (BG-19). |
+| BR-DE-31 | Debited account identifier (BT-91) required for DIRECT DEBIT (BG-19). |
+| BR-DEX-01 | XML MIME code (`application/xml`) permitted for extensions; coordinate usage. |
+| BR-DEX-03 | SUB INVOICE LINE (BG-DEX-01) must contain exactly one SUB INVOICE LINE VAT INFORMATION (BG-DEX-06). |
+| BR-DEX-04 to BR-DEX-08 | Extension adds DIGA codes XR01, XR02, XR03 to ISO 6523 ICD / CEF EAS validation. |
+| BR-DEX-09 | Amount due calculation includes third-party payments; overrides BR-CO-16. |
+| BR-DEX-10 | Third party payment type (BT-DEX-001) required for THIRD PARTY PAYMENT group. |
+| BR-DEX-11 | Third party payment amount (BT-DEX-002) required for THIRD PARTY PAYMENT group. |
+| BR-DEX-12 | Third party payment description (BT-DEX-003) required for THIRD PARTY PAYMENT group. |
+| BR-DEX-13 | Third party payment amount (BT-DEX-002) limited to 2 decimal places maximum. |
+| BR-DEX-14 | Third party payment currency must match invoice currency code (BT-5). |
+
+<Callout kind="info" collapsed="false">
+  No severity levels are shown on the source page for this rule set.
+</Callout>
+
+### Self-Billing
+
+Same rule set as XRechnung Billing above (BR-DE-1 through BR-DE-31, BR-DEX-01 through BR-DEX-14) — the source page lists 43 identical rules, with only minor wording differences in a few descriptions (e.g. BR-DE-10, BR-DE-11, BR-DE-22, BR-DE-23, BR-DE-26, BR-DEX-04–08). No severity levels shown.
+
+## BIS Billing
+
+<Callout kind="warning" collapsed="false">
+  **Truncated — see source.** The BIS Billing rule sets are very large (906 rules on the Billing page). Only the core structural rules are summarized below; see the source pages for the complete lists: [Billing](https://cleartax-unified-api.netlify.app/countries/germany/bis-billing/validations/billing), [Self-Billing](https://cleartax-unified-api.netlify.app/countries/germany/bis-billing/validations/self-billing).
+</Callout>
+
+### Billing
+
+**Core Invoice Rules**
+- **BR-08**: An Invoice shall contain the Seller postal address.
+- **BR-10**: An Invoice shall contain the Buyer postal address (BG-8).
+- **BR-16**: An Invoice shall have at least one Invoice line (BG-25).
+- **BR-19**: Seller tax representative postal address required if representative exists.
+
+**VAT & Tax Rules (BR-S, BR-Z, BR-E, BR-O, BR-G, BR-IC, BR-AE, BR-AF, BR-AG, BR-B series)**
+Rules governing Standard rated, Zero rated, Exempt, Not subject to VAT, Export outside EU, Intra-community supply, Reverse charge, IGIC, and IPSI categories — each with requirements for VAT category codes, VAT rates (0 or greater than zero), Seller/Buyer VAT identifiers, and VAT breakdown calculations.
+
+**Payment & Financial Rules**
+- **BR-50, BR-61**: Payment account identifier required for credit transfers.
+- **BR-51**: Card primary account number (BT-87) shall show maximum 6+4 digits.
+- **BR-66, BR-67**: Maximum one payment card and one mandate per invoice.
+
+**Code List Rules (BR-CL series)**: Standards for coding document types, currencies, countries, tax categories, allowances, charges, items, endpoints, and units.
+
+**UBL Constraint Rules (UBL-CR series)**: 600+ rules specifying elements that should not be included in UBL invoices (extensions, version IDs, various party/delivery/payment attributes).
+
+### Self-Billing
+
+| Rule ID | Description |
+|---|---|
+| BR-08 | An Invoice shall contain the Seller postal address. |
+| BR-10 | An Invoice shall contain the Buyer postal address (BG-8). |
+| BR-16 | An Invoice shall have at least one Invoice line (BG-25). |
+| BR-19 | The Seller tax representative postal address (BG-12) shall be provided if tax representative exists. |
+| BR-32 | Document level allowance requires VAT category code. |
+| BR-37 | Document level charge requires VAT category code. |
+| BR-44 | Each Invoice line charge shall have an Invoice line charge reason or an invoice line allowance reason code. |
+| BR-45 | Each VAT breakdown (BG-23) shall have a VAT category taxable amount (BT-116). |
+| BR-47 | Each VAT breakdown (BG-23) shall be defined through a VAT category code (BT-118). |
+| BR-48 | VAT breakdown requires VAT category rate, except for non-VAT invoices. |
+| BR-50 | Payment account identifier required if Credit transfer information provided. |
+| BR-51 | The first 6 digits and last 4 digits are the maximum number of digits to be shown (PCI Security Standards Council). |
+| BR-61 | Payment account identifier required for SEPA/international credit transfers. |
+| BR-66 | An Invoice shall contain maximum one Payment Card account (BG-18). |
+| BR-67 | An Invoice shall contain maximum one Payment Mandate (BG-19). |
+
+This excerpt shows the initial 14 core business rules of 906 total on the source page. Additional rules cover VAT categories (BR-AE through BR-Z series) and UBL constraints (UBL-CR series) — see source.

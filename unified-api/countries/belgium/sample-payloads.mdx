@@ -1,0 +1,526 @@
+---
+title: Belgium — Sample Payloads
+description: 'Sample invoice payloads for Belgium on the ClearTax Unified API'
+---
+
+<Callout kind="info" collapsed="false">
+  The source site hosts 47 billing test-case payloads and 2 self-billing test-case payloads covering scenarios like reverse charge, VAT exemptions, multi-currency, construction invoices, and credit notes. One representative sample of each type is shown below; the full set is available at [https://cleartax-unified-api.netlify.app/countries/belgium/sample-invoice-payloads/billing](https://cleartax-unified-api.netlify.app/countries/belgium/sample-invoice-payloads/billing) and [.../self-billing](https://cleartax-unified-api.netlify.app/countries/belgium/sample-invoice-payloads/self-billing).
+</Callout>
+
+## Billing
+
+**Sample: Minimal Invoice**
+
+```json
+{
+  "accountingSupplierParty": {
+    "party": {
+      "partyLegalEntity": {
+        "registrationName": "Demo Shop NV - Commercial name",
+        "companyID": {
+          "value": "0441797980",
+          "schemeID": "0208"
+        }
+      },
+      "partyTaxScheme": [
+        {
+          "companyID": "BE0120240102",
+          "taxScheme": {
+            "id": {
+              "value": "VAT"
+            }
+          }
+        }
+      ],
+      "contact": {
+        "electronicMail": "myname@demoshop.be"
+      },
+      "postalAddress": {
+        "streetName": "Main street 123, BRUSSELS, 1000, BE",
+        "cityName": "Brussels",
+        "postalZone": 1000,
+        "countrySubentity": "Brussels",
+        "country": {
+          "identificationCode": {
+            "countryCode": "BE"
+          }
+        }
+      },
+      "endPointID": {
+        "schemeID": "9925",
+        "value": "BE0120240102"
+      }
+    }
+  },
+  "accountingCustomerParty": {
+    "party": {
+      "partyLegalEntity": {
+        "registrationName": "Hotel Local SPRL"
+      },
+      "partyTaxScheme": [
+        {
+          "companyID": "BE0214168947",
+          "taxScheme": {
+            "id": {
+              "value": "VAT"
+            }
+          }
+        }
+      ],
+      "postalAddress": {
+        "streetName": "Rue de la Mairie 456\n",
+        "cityName": "LIEGE",
+        "postalZone": 4000,
+        "countrySubentity": "LIEGE",
+        "country": {
+          "identificationCode": {
+            "countryCode": "BE"
+          }
+        }
+      },
+      "contact": {
+        "name": "BE"
+      },
+      "endPointID": {
+        "schemeID": "0193",
+        "value": "01202401021129"
+      }
+    }
+  },
+  "orderReference": {
+    "id": "YR127129"
+  },
+  "invoiceLine": [
+    {
+      "id": 1,
+      "item": {
+        "name": "Good X",
+        "commodityClassification": [
+          {
+            "itemClassificationCode": {
+              "value": 9348023,
+              "listID": "AA"
+            }
+          }
+        ],
+        "classifiedTaxCategory": [
+          {
+            "id": "S",
+            "percent": 21,
+            "taxScheme": {
+              "id": {
+                "value": "VAT"
+              }
+            }
+          }
+        ]
+      },
+      "invoicedQuantity": {
+        "unitCode": "58",
+        "quantity": 40
+      },
+      "price": {
+        "allowanceCharge": {
+          "chargeIndicator": false,
+          "amount": {
+            "currencyID": "EUR",
+            "value": 3.0
+          },
+          "baseAmount": {
+            "currencyID": "EUR",
+            "value": 60
+          }
+        },
+        "priceAmount": {
+          "currencyID": "EUR",
+          "value": 57.0
+        }
+      },
+      "lineExtensionAmount": {
+        "currencyID": "EUR",
+        "value": 2280.0
+      }
+    }
+  ],
+  "profileID": "urn:fdc:peppol.eu:2017:poacc:billing:01:1.0",
+  "customizationID": "urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0",
+  "invoiceTypeCode": {
+    "value": "380"
+  },
+  "id": 2019000001,
+  "issueDate": "2018-04-09 00:00:00",
+  "documentCurrencyCode": "EUR",
+  "legalMonetaryTotal": {
+    "lineExtensionAmount": {
+      "currencyID": "EUR",
+      "value": 2280.0
+    },
+    "taxExclusiveAmount": {
+      "currencyID": "EUR",
+      "value": 2280.0
+    },
+    "taxInclusiveAmount": {
+      "currencyID": "EUR",
+      "value": 2758.8
+    },
+    "prepaidAmount": {
+      "currencyID": "EUR",
+      "value": 0.0
+    },
+    "payableAmount": {
+      "currencyID": "EUR",
+      "value": 2758.8
+    },
+    "payableRoundingAmount": {
+      "currencyID": "EUR",
+      "value": 0.0
+    }
+  },
+  "taxTotal": [
+    {
+      "taxAmount": {
+        "currencyID": "EUR",
+        "value": 478.8
+      },
+      "taxSubtotal": [
+        {
+          "taxableAmount": {
+            "currencyID": "EUR",
+            "value": 2280.0
+          },
+          "taxAmount": {
+            "currencyID": "EUR",
+            "value": 478.8
+          },
+          "taxCategory": {
+            "id": "S",
+            "percent": 21,
+            "taxScheme": {
+              "id": {
+                "value": "VAT"
+              }
+            }
+          }
+        }
+      ],
+      "taxIncludedIndicator": false
+    }
+  ],
+  "dueDate": "2018-05-09 00:00:00",
+  "paymentMeans": {
+    "paymentMeansCode": {
+      "value": "30"
+    },
+    "payeeFinancialAccount": {
+      "id": {
+        "value": "BE54000000000097"
+      },
+      "financialInstitutionBranch": {
+        "id": "BPOTBEB1"
+      }
+    }
+  },
+  "paymentTerms": {
+    "note": "30 days after invoice date"
+  },
+  "delivery": {
+    "actualDeliveryDate": "2018-04-01 00:00:00"
+  }
+}
+```
+
+## Self-Billing
+
+**Sample: Self-Billed Invoice**
+
+```json
+{
+  "accountingSupplierParty": {
+    "party": {
+      "partyLegalEntity": {
+        "registrationName": "ClearTax",
+        "companyID": {
+          "value": "0441797980",
+          "schemeID": "0208"
+        }
+      },
+      "partyTaxScheme": [
+        {
+          "companyID": "BE0120240102",
+          "taxScheme": {
+            "id": {
+              "value": "VAT"
+            }
+          }
+        }
+      ],
+      "contact": {
+        "electronicMail": "Globalclear@clear.in",
+        "telephone": 3232328210,
+        "name": "David"
+      },
+      "postalAddress": {
+        "streetName": "Nike Store Antwerpen",
+        "additionalStreetName": "Meir 55, 2000 Antwerpen",
+        "cityName": "Belgium",
+        "postalZone": 2000,
+        "countrySubentity": "Flemish Region ",
+        "country": {
+          "identificationCode": {
+            "countryCode": "BE"
+          }
+        }
+      },
+      "endPointID": {
+        "schemeID": "9925",
+        "value": "BE0120240102"
+      }
+    }
+  },
+  "accountingCustomerParty": {
+    "party": {
+      "partyLegalEntity": {
+        "registrationName": "Zeta NV ",
+        "companyID": {
+          "value": "0123456789",
+          "schemeID": "0003"
+        }
+      },
+      "partyTaxScheme": [
+        {
+          "companyID": "BE9872222222",
+          "taxScheme": {
+            "id": {
+              "value": "VAT"
+            }
+          }
+        }
+      ],
+      "contact": {
+        "electronicMail": "buyer@clear.in",
+        "telephone": "32 89 84 52 58",
+        "name": "BE"
+      },
+      "postalAddress": {
+        "streetName": 23,
+        "additionalStreetName": "Place de l'Atomium 1",
+        "cityName": "1020 Brussels",
+        "postalZone": 1020,
+        "countrySubentity": "Flemish Region ",
+        "country": {
+          "identificationCode": {
+            "countryCode": "BE"
+          }
+        }
+      },
+      "endPointID": {
+        "schemeID": "0193",
+        "value": "01202401021129"
+      }
+    }
+  },
+  "buyerReference": "Refernce123",
+  "orderReference": {
+    "id": 65435
+  },
+  "contractDocumentReference": [
+    {
+      "id": {
+        "value": "7865Test"
+      }
+    }
+  ],
+  "projectReference": [
+    {
+      "id": "PID33"
+    }
+  ],
+  "note": {
+    "value": "Please note our new phone number 33 44 55 66\n"
+  },
+  "invoiceLine": [
+    {
+      "id": 1,
+      "item": {
+        "name": "Premium Television",
+        "description": "Premium Television",
+        "commodityClassification": [
+          {
+            "itemClassificationCode": {
+              "value": 9348023,
+              "listID": "AA"
+            }
+          }
+        ],
+        "classifiedTaxCategory": [
+          {
+            "id": "S",
+            "percent": 21.0,
+            "taxScheme": {
+              "id": {
+                "value": "VAT"
+              }
+            }
+          }
+        ]
+      },
+      "invoicedQuantity": {
+        "unitCode": "AE",
+        "quantity": 1
+      },
+      "price": {
+        "allowanceCharge": {
+          "chargeIndicator": false,
+          "amount": {
+            "currencyID": "EUR",
+            "value": 10.0
+          },
+          "baseAmount": {
+            "currencyID": "EUR",
+            "value": 200
+          }
+        },
+        "priceAmount": {
+          "currencyID": "EUR",
+          "value": 190.0
+        }
+      },
+      "allowanceCharge": [
+        {
+          "chargeIndicator": false,
+          "allowanceChargeReasonCode": "95",
+          "multiplierFactorNumeric": 3.0,
+          "amount": {
+            "currencyID": "EUR",
+            "value": 6
+          },
+          "taxCategory": {
+            "id": "S",
+            "percent": 21.0,
+            "taxScheme": {
+              "id": {
+                "value": "VAT"
+              }
+            }
+          },
+          "baseAmount": {
+            "currencyID": "EUR",
+            "value": 200.0
+          }
+        }
+      ],
+      "lineExtensionAmount": {
+        "currencyID": "EUR",
+        "value": 184.0
+      }
+    }
+  ],
+  "profileID": "urn:fdc:peppol.eu:2017:poacc:selfbilling:01:1.0",
+  "customizationID": "urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:selfbilling:3.0",
+  "invoiceTypeCode": {
+    "value": "389"
+  },
+  "id": "InvoiceNo00011",
+  "issueDate": "2025-06-26",
+  "documentCurrencyCode": "EUR",
+  "invoicePeriod": {
+    "startDate": "2025-06-26",
+    "endDate": "2025-06-26"
+  },
+  "allowanceCharge": [
+    {
+      "chargeIndicator": false,
+      "allowanceChargeReasonCode": "95",
+      "amount": {
+        "currencyID": "EUR",
+        "value": 10
+      },
+      "taxCategory": {
+        "id": "S",
+        "percent": 21.0,
+        "taxScheme": {
+          "id": {
+            "value": "VAT"
+          }
+        }
+      }
+    }
+  ],
+  "legalMonetaryTotal": {
+    "lineExtensionAmount": {
+      "currencyID": "EUR",
+      "value": 184.0
+    },
+    "taxExclusiveAmount": {
+      "currencyID": "EUR",
+      "value": 174.0
+    },
+    "taxInclusiveAmount": {
+      "currencyID": "EUR",
+      "value": 210.54
+    },
+    "prepaidAmount": {
+      "currencyID": "EUR",
+      "value": 100.0
+    },
+    "payableRoundingAmount": {
+      "currencyID": "EUR",
+      "value": -0.16
+    },
+    "payableAmount": {
+      "currencyID": "EUR",
+      "value": 110.38
+    },
+    "allowanceTotalAmount": {
+      "currencyID": "EUR",
+      "value": 10.0
+    }
+  },
+  "taxTotal": [
+    {
+      "taxAmount": {
+        "currencyID": "EUR",
+        "value": 36.54
+      },
+      "taxSubtotal": [
+        {
+          "taxableAmount": {
+            "currencyID": "EUR",
+            "value": 174.0
+          },
+          "taxAmount": {
+            "currencyID": "EUR",
+            "value": 36.54
+          },
+          "taxCategory": {
+            "id": "S",
+            "percent": 21.0,
+            "taxScheme": {
+              "id": {
+                "value": "VAT"
+              }
+            }
+          }
+        }
+      ],
+      "taxIncludedIndicator": false
+    }
+  ],
+  "paymentMeans": {
+    "paymentMeansCode": {
+      "value": "10"
+    },
+    "payeeFinancialAccount": {
+      "id": {
+        "value": "NO99991122222"
+      },
+      "financialInstitutionBranch": {
+        "id": 9999
+      }
+    }
+  },
+  "paymentTerms": {
+    "note": "Net within 30 days"
+  }
+}
+```

@@ -1,0 +1,288 @@
+---
+title: UAE — Validations
+description: 'PINT-AE validation rules for billing and self-billing invoices'
+---
+
+All rules below are sourced from the UAE PINT-AE specification and are marked as **fatal** — a violation blocks invoice processing.
+
+## Billing
+
+<Callout kind="info" collapsed="false">
+  132 validation rules apply to UAE billing invoices under PINT-AE.
+</Callout>
+
+| Identifier | Message | Flag |
+|---|---|---|
+| `ALIGNED-IBRP-001-AE` | Specification identifier (ibt-024) MUST start with the value 'urn:peppol:pint:billing-1@ae-1' | fatal |
+| `ALIGNED-IBRP-002-AE` | Business process (ibt-023) MUST be in the format 'urn:peppol:bis:billing' | fatal |
+| `ALIGNED-IBRP-004` | Item net price (ibt-146) MUST equal (Gross price (ibt-148) - Price discount (ibt-147)) | fatal |
+| `ALIGNED-IBRP-032` | Each Document level allowance (ibg-20) MUST have a Document level allowance VAT category code | fatal |
+| `ALIGNED-IBRP-037` | Each Document level charge (ibg-21) MUST have a Document level charge VAT category code | fatal |
+| `ALIGNED-IBRP-045` | Each VAT breakdown (ibg-23) MUST have a VAT category taxable amount (ibt-116) | fatal |
+| `ALIGNED-IBRP-046` | Each VAT breakdown (ibg-23) MUST have a VAT category tax amount (ibt-117) | fatal |
+| `ALIGNED-IBRP-047` | Each VAT breakdown (ibg-23) MUST be defined through a VAT category code (ibt-118) | fatal |
+| `ALIGNED-IBRP-048` | Each VAT breakdown (ibg-23) MUST have a VAT category rate (ibt-119), except if not VAT-subject | fatal |
+| `ALIGNED-IBRP-057` | Either both or neither Allowance base amount (ibt-093) and percentage (ibt-094) MUST be provided | fatal |
+| `ALIGNED-IBRP-058` | Either both or neither Charge base amount (ibt-100) and percentage (ibt-101) MUST be provided | fatal |
+| `ALIGNED-IBRP-AE-01-AE` | Invoice with reverse charge items MUST contain VAT breakdown with reverse charge category code | fatal |
+| `ALIGNED-IBRP-AE-05-AE` | In invoice line with reverse charge VAT category, Invoiced item VAT rate (ibt-152) MUST be present | fatal |
+| `ALIGNED-IBRP-AE-06` | Document level allowance with reverse charge VAT category code must have zero VAT rate | fatal |
+| `ALIGNED-IBRP-AE-07` | Document level charge with reverse charge VAT category code must have zero VAT rate | fatal |
+| `ALIGNED-IBRP-AE-08-AE` | Reverse charge VAT breakdown taxable amount must equal sum of applicable line amounts | fatal |
+| `ALIGNED-IBRP-AE-09-AE` | In VAT breakdown with reverse charge, VAT category tax amount (ibt-117) MUST equal zero | fatal |
+| `ALIGNED-IBRP-E-01` | Invoice with exempt from VAT items MUST contain exactly one VAT breakdown with exempt code | fatal |
+| `ALIGNED-IBRP-E-05` | Invoice line with exempt from VAT category MUST NOT contain Invoiced item VAT rate | fatal |
+| `ALIGNED-IBRP-E-06` | Document level allowance with exempt from VAT category must have zero VAT rate | fatal |
+| `ALIGNED-IBRP-E-07` | Document level charge with exempt from VAT category must have zero VAT rate | fatal |
+| `ALIGNED-IBRP-E-08` | Exempt from VAT breakdown taxable amount must equal sum of applicable line amounts | fatal |
+| `ALIGNED-IBRP-E-09` | In VAT breakdown with exempt from VAT category, tax amount (ibt-117) MUST equal zero | fatal |
+| `ALIGNED-IBRP-O-01` | Invoice with not subject to VAT items MUST contain exactly one VAT breakdown with code | fatal |
+| `ALIGNED-IBRP-O-05` | Invoice line with not subject to VAT category MUST NOT contain Invoiced item VAT rate | fatal |
+| `ALIGNED-IBRP-O-06` | Document level allowance with not subject to VAT category MUST NOT contain VAT rate | fatal |
+| `ALIGNED-IBRP-O-07` | Document level charge with not subject to VAT category MUST NOT contain VAT rate | fatal |
+| `ALIGNED-IBRP-O-08` | Not subject to VAT breakdown taxable amount must equal sum of applicable line amounts | fatal |
+| `ALIGNED-IBRP-O-09` | In VAT breakdown with not subject to VAT category, tax amount (ibt-117) MUST equal zero | fatal |
+| `ALIGNED-IBRP-O-11-AE` | In VAT breakdown where VAT category code is 'Not Subject to VAT', VAT rate shall not be provided | fatal |
+| `ALIGNED-IBRP-S-01` | Invoice with standard rated items MUST contain VAT breakdown with standard rated code | fatal |
+| `ALIGNED-IBRP-S-05` | In invoice line with standard rated VAT category, Invoiced item VAT rate (ibt-152) > zero | fatal |
+| `ALIGNED-IBRP-S-06` | Document level allowance with standard rated category must have VAT rate greater than zero | fatal |
+| `ALIGNED-IBRP-S-07` | Document level charge with standard rated category must have VAT rate greater than zero | fatal |
+| `ALIGNED-IBRP-S-08` | Standard rated VAT breakdown taxable amount must equal sum of applicable line amounts | fatal |
+| `ALIGNED-IBRP-S-09` | Standard rated VAT category tax amount must equal taxable amount × VAT rate | fatal |
+| `ALIGNED-IBRP-S-10` | Standard rate VAT breakdown MUST NOT have VAT exemption reason code or text | fatal |
+| `ALIGNED-IBRP-SR-12` | Seller tax identifier (ibt-031) MUST occur maximum once | fatal |
+| `ALIGNED-IBRP-Z-01` | Invoice with zero rated items MUST contain exactly one VAT breakdown with zero rated code | fatal |
+| `ALIGNED-IBRP-Z-05` | In invoice line with zero rated VAT category, Invoiced item VAT rate (ibt-152) MUST be zero | fatal |
+| `ALIGNED-IBRP-Z-06` | Document level allowance with zero rated category must have zero VAT rate | fatal |
+| `ALIGNED-IBRP-Z-07` | Document level charge with zero rated category must have zero VAT rate | fatal |
+| `ALIGNED-IBRP-Z-08` | Zero rated VAT breakdown taxable amount must equal sum of applicable line amounts | fatal |
+| `ALIGNED-IBRP-Z-09` | In VAT breakdown with zero rated category, tax amount (ibt-117) MUST equal zero | fatal |
+| `IBR-001-AE` | Credit note reason code [BTAE-03] value should be from the Reasons for credit note code list | fatal |
+| `IBR-002-AE` | Currency exchange rate [BTAE-04] should contain values till maximum of 6 decimal places | fatal |
+| `IBR-005-AE` | Frequency of billing (BTAE-06) should be from the frequency of billing code list | fatal |
+| `IBR-006-AE` | Item with reverse charge VAT category must have Type of goods or services from RCM list | fatal |
+| `IBR-007-AE` | When Invoice Transaction-type code has free trade zone value, Beneficiary ID (BTAE-01) MUST exist | fatal |
+| `IBR-010-AE` | Passport issuing country code (BTAE-19) MUST be present when Buyer identifier type is Passport | fatal |
+| `IBR-011-AE` | Passport issuing country code (BTAE-19) MUST use ISO code list 3166-1 | fatal |
+| `IBR-012-AE` | Passport issuing country code (BTAE-18) MUST be present when Seller identifier type is Passport | fatal |
+| `IBR-013-AE` | Passport issuing country code (BTAE-18) MUST use ISO code list 3166-1 | fatal |
+| `IBR-055-AE` | Preceding invoice reference (IBG-03) required for credit notes except when reason code is 'VD' | fatal |
+| `IBR-101-AE` | Authority name (BTAE-11) MUST be present when Buyer identifier type is Commercial/Trade license | fatal |
+| `IBR-102-AE` | Standard rate additional VAT breakdown taxable amount must equal applicable invoice line amounts | fatal |
+| `IBR-103-AE` | When Invoiced item VAT category is reverse charge, Buyer VAT identifier (ibt-048) MUST exist | fatal |
+| `IBR-104-AE` | When Line VAT Information exists, Invoice line amount in AED (BTAE-10) and VAT amount (BTAE-08) required | fatal |
+| `IBR-105-AE` | Invoice with standard rate additional VAT items must contain exactly one VAT breakdown with code | fatal |
+| `IBR-108-AE` | Standard rate additional VAT breakdown tax amount (ibt-117) MUST equal zero | fatal |
+| `IBR-111-AE` | Invoice line with standard rate additional VAT category, VAT rate (ibt-152) should not be zero | fatal |
+| `IBR-114-AE` | Document level charge VAT category code (ibt-102) cannot be 'Standard rate additional VAT' | fatal |
+| `IBR-115-AE` | Document level allowance VAT category code (ibt-095) cannot be 'Standard rate additional VAT' | fatal |
+| `IBR-116-AE` | With margin scheme invoice transaction type, tax category code must be 'Standard rate additional VAT' | fatal |
+| `IBR-119-AE` | Each VAT breakdown shall have a VAT category rate (ibt-119), except if not VAT-subject | fatal |
+| `IBR-120-AE` | In VAT breakdown where VAT category code is 'Zero Rated', VAT category rate must equal zero | fatal |
+| `IBR-121-AE` | In VAT breakdown where VAT category code is 'Exempt from VAT', VAT rate shall not be provided | fatal |
+| `IBR-122-AE` | Out of scope or credit note invoice types must use Exempt, Not subject, or Zero rated categories | fatal |
+| `IBR-123-AE` | Line VAT Information (IBG-30) MUST exist once, except for out of scope or credit note types | fatal |
+| `IBR-124-AE` | VAT point date [ibt-007] MUST NOT exist for credit note invoice types | fatal |
+| `IBR-125-AE` | In Item Information (IBG-31), Item description (ibt-154) MUST be present | fatal |
+| `IBR-126-AE` | In Price Details (IBG-29), Item price base quantity (ibt-149) and Gross Price (ibt-148) required | fatal |
+| `IBR-127-AE` | Payment due date required when amount due > 0, except for credit notes or deemed supply | fatal |
+| `IBR-128-AE` | When Country code is AE, country subdivision must be one of: AUH, DXB, SHJ, UAQ, FUJ, AJM, RAK | fatal |
+| `IBR-131-AE` | Allowance amount must equal base amount × percentage / 100 if both values exist | fatal |
+| `IBR-132-AE` | VAT identifier must be 15-digit TRN starting with 1, ending with 03 | fatal |
+| `IBR-133-AE` | VAT scheme code must be 'VAT' except when Seller tax registration identifier is provided | fatal |
+| `IBR-134-AE` | Seller VAT Identifier (ibt-031) required except for out of scope or credit note types | fatal |
+| `IBR-135-AE` | Buyer identifier or VAT identifier MUST exist when transaction type is not exports | fatal |
+| `IBR-136-AE` | Buyer legal registration identifier required for out of scope or credit note invoice types | fatal |
+| `IBR-137-AE` | Principal ID (BTAE-14) required when Invoice transaction type is disclosed agent billing | fatal |
+| `IBR-138-AE` | Invoicing period [IBG-14] required when Invoice transaction type is summary invoice | fatal |
+| `IBR-139-AE` | All tax category codes must be selected from the aligned tax category code list | fatal |
+| `IBR-140-AE` | When VAT accounting currency exists, it shall be AED | fatal |
+| `IBR-141-AE` | When VAT point date exists, it should be before the Invoice issue date | fatal |
+| `IBR-142-AE` | For e-commerce supplies, Delivery address line 1, city, and subdivision MUST be present | fatal |
+| `IBR-143-AE` | Seller address line 1, city, and country subdivision must be provided | fatal |
+| `IBR-144-AE` | Buyer address line 1, city, and country subdivision must be provided | fatal |
+| `IBR-145-AE` | Each Invoice line (IBG-25) MUST have an Invoiced item VAT category code (ibt-151) | fatal |
+| `IBR-146-AE` | Charge amount must equal base amount × percentage / 100 if both values exist | fatal |
+| `IBR-147-AE` | Invoice line net amount must equal (Quantity × (Unit price / base quantity)) + charges - allowances | fatal |
+| `IBR-148-AE` | Seller VAT registration identifier must be 10 numeric digits in format 1XXXXXXXXX | fatal |
+| `IBR-149-AE` | Buyer legal registration identifier required when scheme is 0235 and address not free trade zone | fatal |
+| `IBR-150-AE` | Seller legal registration identifier required when scheme identifier is 0235 | fatal |
+| `IBR-151-AE` | Commercial and credit note invoices must include at least one non-exempt VAT category | fatal |
+| `IBR-152-AE` | Exports require delivery address, with country code not AE | fatal |
+| `IBR-153-AE` | When tax currency is AED and invoice currency differs, currency exchange rate must be provided | fatal |
+| `IBR-154-AE` | Invoice Transaction-type code must be 8-character string of 0s and 1s per transaction applicability | fatal |
+| `IBR-157-AE` | Summary, deemed supply, and margin scheme types cannot be used with out of scope or credit note invoices | fatal |
+| `IBR-158-AE` | When Invoice type code is 'Credit note', Credit note reason code [BTAE-03] MUST be present | fatal |
+| `IBR-159-AE` | Currency exchange rate [BTAE-04] required when Invoice currency code differs from AED | fatal |
+| `IBR-160-AE` | When Frequency of billing is 'Others', value must be provided in Invoice note | fatal |
+| `IBR-162-AE` | For reverse charge items, VAT Line amount [BTAE-08] MUST be zero | fatal |
+| `IBR-163-AE` | For exempt items, VAT Line amount [BTAE-08] shall not be present | fatal |
+| `IBR-165-AE` | For zero rated items, VAT Line amount [BTAE-08] MUST be zero | fatal |
+| `IBR-166-AE` | For reverse charge items, Type of goods or services (BTAE-09) MUST be present | fatal |
+| `IBR-167-AE` | Exempt from VAT line items MUST have a VAT exemption reason code (ibt-186) | fatal |
+| `IBR-168-AE` | Exempt from VAT allowances MUST have a VAT exemption reason code (ibt-196) | fatal |
+| `IBR-169-AE` | Exempt from VAT charges MUST have a VAT exemption reason code (ibt-198) | fatal |
+| `IBR-172-AE` | Authority name (BTAE-12) required when Seller identifier type is Commercial/Trade license | fatal |
+| `IBR-173-AE` | Seller identifier type must be Commercial/Trade license, Emirates ID, Passport, or Cabinet decision | fatal |
+| `IBR-174-AE` | Reverse charge items must have Item Standard Identifier (ibt-157) with scheme 0160 | fatal |
+| `IBR-175-AE` | When invoice currency differs from AED tax currency, total VAT amount and AED amount required | fatal |
+| `IBR-176-AE` | For disclosed agent billing, Seller VAT Identifier and Principal ID must not be the same | fatal |
+| `IBR-177-AE` | Either Seller tax registration identifier (ibt-032) or VAT identifier (ibt-031) MUST exist | fatal |
+| `IBR-178-AE` | Tax scheme code must not be 'VAT' when Seller tax registration identifier is provided | fatal |
+| `IBR-179-AE` | Buyer VAT identifier (ibt-048) MUST occur maximum once | fatal |
+| `IBR-180-AE` | When scheme is 0235 and Buyer legal registration identifier exists, identifier type required | fatal |
+| `IBR-181-AE` | When scheme is 0235 and Seller legal registration identifier exists, identifier type required | fatal |
+| `IBR-183-AE` | Buyer identifier type must be Commercial/Trade license, Emirates ID, Passport, or Cabinet decision | fatal |
+| `IBR-184-AE` | When Item type [BTAE-13] is 'Goods', Item classification identifier (ibt-158) must be provided | fatal |
+| `IBR-185-AE` | When Item type [BTAE-13] is 'Services', Service accounting code (BTAE-17) must be provided | fatal |
+| `IBR-186-AE` | When Item type [BTAE-13] is 'Both', both classification identifier and service code required | fatal |
+| `IBR-187-AE` | Minimum number of digits for Item classification identifier and Service accounting code is 'X' | fatal |
+| `IBR-188-AE` | Item classification identifier scheme (ibt-158-1) MUST be HS when provided | fatal |
+| `IBR-189-AE` | Service accounting code scheme (BTAE-17-1) MUST be SAC when provided | fatal |
+| `IBR-190-AE` | Standard rated VAT category must have a VAT rate of 5.00 | fatal |
+| `IBR-191-AE` | Payment means type code required except for credit notes or deemed supply transactions | fatal |
+| `IBR-192-AE` | When Payment means type is 'credit transfer', Payment account identifier (ibt-084) required | fatal |
+| `IBR-193-AE` | The unique identifier number (BTAE-07) must be provided | fatal |
+| `IBR-194-AE` | Invoice line Amount payable (BTAE-10) must be provided | fatal |
+| `IBR-196-AE` | The Incoterms (BTAE-22) must be provided | fatal |
+
+## Self-Billing
+
+<Callout kind="info" collapsed="false">
+  132 validation rules apply to UAE self-billing invoices under PINT-AE. Rule identifiers and structure mirror Billing above; differences from the Billing ruleset are called out where present (e.g. specification/business-process identifiers accept the self-billing variant).
+</Callout>
+
+| Identifier | Message | Flag |
+|---|---|---|
+| `ALIGNED-IBRP-001-AE` | Specification identifier (ibt-024) MUST start with 'urn:peppol:pint:billing-1@ae-1' or 'urn:peppol:pint:selfbilling-1@ae-1' | fatal |
+| `ALIGNED-IBRP-002-AE` | Business process (ibt-023) MUST be in the format 'urn:peppol:bis:billing' or 'urn:peppol:bis:selfbilling' | fatal |
+| `ALIGNED-IBRP-004` | Item net price (ibt-146) MUST equal (Gross price (ibt-148) - Price discount (ibt-147)) when gross price is provided | fatal |
+| `ALIGNED-IBRP-032` | Each Document level allowance (ibg-20) MUST have a Document level allowance VAT category code (ibt-095) | fatal |
+| `ALIGNED-IBRP-037` | Each Document level charge (ibg-21) MUST have a Document level charge VAT category code (ibt-102) | fatal |
+| `ALIGNED-IBRP-045` | Each VAT breakdown (ibg-23) MUST have a VAT category taxable amount (ibt-116) | fatal |
+| `ALIGNED-IBRP-046` | Each VAT breakdown (ibg-23) MUST have a VAT category tax amount (ibt-117) | fatal |
+| `ALIGNED-IBRP-047` | Each VAT breakdown (ibg-23) MUST be defined through a VAT category code (ibt-118) | fatal |
+| `ALIGNED-IBRP-048` | Each VAT breakdown (ibg-23) MUST have a VAT category rate (ibt-119), except if the Invoice is not subject to VAT or Exempt from Tax | fatal |
+| `ALIGNED-IBRP-057` | Either both or neither Allowance base amount (ibt-093) and percentage (ibt-094) MUST be provided | fatal |
+| `ALIGNED-IBRP-058` | Either both or neither Charge base amount (ibt-100) and percentage (ibt-101) MUST be provided | fatal |
+| `ALIGNED-IBRP-AE-01-AE` | An Invoice with a line/allowance/charge where the VAT category code is "Reverse charge" MUST contain a VAT Breakdown with category code "VAT reverse charge" | fatal |
+| `ALIGNED-IBRP-AE-05-AE` | In an Invoice line where the Invoiced item VAT category code is "Reverse charge", the Invoiced item VAT rate (ibt-152) MUST be there | fatal |
+| `ALIGNED-IBRP-AE-06` | Document level allowance with "Reverse charge" VAT category code MUST have zero VAT rate | fatal |
+| `ALIGNED-IBRP-AE-07` | Document level charge with "Reverse charge" VAT category code MUST have zero VAT rate | fatal |
+| `ALIGNED-IBRP-AE-08-AE` | Reverse charge VAT breakdown taxable amount MUST equal sum of applicable line/charge/allowance amounts per rate | fatal |
+| `ALIGNED-IBRP-AE-09-AE` | In a VAT breakdown with "Reverse charge" category, VAT category tax amount (IBT-117) MUST equal 0 | fatal |
+| `ALIGNED-IBRP-E-01` | Invoice with "Exempt from VAT" items MUST contain exactly one VAT breakdown with "Exempt from VAT" code | fatal |
+| `ALIGNED-IBRP-E-05` | Invoice line with "Exempt from VAT" category shall not contain Invoiced item VAT rate | fatal |
+| `ALIGNED-IBRP-E-06` | Document level allowance with "Exempt from VAT" category MUST have VAT rate = 0 | fatal |
+| `ALIGNED-IBRP-E-07` | Document level charge with "Exempt from VAT" category MUST have VAT rate = 0 | fatal |
+| `ALIGNED-IBRP-E-08` | Exempt from VAT breakdown taxable amount MUST equal sum of applicable line/charge/allowance amounts | fatal |
+| `ALIGNED-IBRP-E-09` | VAT category tax amount in "Exempt from VAT" breakdown MUST equal 0 | fatal |
+| `ALIGNED-IBRP-O-01` | Invoice with "Not subject to VAT" items MUST contain exactly one VAT breakdown with that code | fatal |
+| `ALIGNED-IBRP-O-05` | Invoice line with "Not subject to VAT" category MUST NOT contain Invoiced item VAT rate | fatal |
+| `ALIGNED-IBRP-O-06` | Document level allowance with "Not subject to VAT" category MUST NOT contain VAT rate | fatal |
+| `ALIGNED-IBRP-O-07` | Document level charge with "Not subject to VAT" category MUST NOT contain VAT rate | fatal |
+| `ALIGNED-IBRP-O-08` | "Not subject to VAT" breakdown taxable amount MUST equal sum of applicable line/charge/allowance amounts | fatal |
+| `ALIGNED-IBRP-O-09` | VAT category tax amount in "Not subject to VAT" breakdown MUST be 0 | fatal |
+| `ALIGNED-IBRP-O-11-AE` | In VAT breakdown where category is "Not Subject to VAT", VAT category tax Rate shall not be provided | fatal |
+| `ALIGNED-IBRP-S-01` | Invoice with "Standard rated" items MUST contain a VAT breakdown with "Standard rated" code | fatal |
+| `ALIGNED-IBRP-S-05` | Invoice line with "Standard rated" category MUST have Invoiced item VAT rate > 0 | fatal |
+| `ALIGNED-IBRP-S-06` | Document level allowance with "Standard rated" category MUST have VAT rate > 0 | fatal |
+| `ALIGNED-IBRP-S-07` | Document level charge with "Standard rated" category MUST have VAT rate > 0 | fatal |
+| `ALIGNED-IBRP-S-08` | Standard rated VAT breakdown taxable amount MUST equal sum of applicable line/charge/allowance amounts per rate | fatal |
+| `ALIGNED-IBRP-S-09` | Standard rated VAT category tax amount MUST equal taxable amount × VAT category rate | fatal |
+| `ALIGNED-IBRP-S-10` | "Standard rate" VAT breakdown MUST NOT have a VAT exemption reason code or text | fatal |
+| `ALIGNED-IBRP-SR-12` | Seller tax identifier (ibt-031) MUST occur maximum once | fatal |
+| `ALIGNED-IBRP-Z-01` | Invoice with "Zero rated" items MUST contain exactly one VAT breakdown with "Zero rated" code | fatal |
+| `ALIGNED-IBRP-Z-05` | Invoice line with "Zero rated" category MUST have Invoiced item VAT rate = 0 | fatal |
+| `ALIGNED-IBRP-Z-06` | Document level allowance with "Zero rated" category MUST have VAT rate = 0 | fatal |
+| `ALIGNED-IBRP-Z-07` | Document level charge with "Zero rated" category MUST have VAT rate = 0 | fatal |
+| `ALIGNED-IBRP-Z-08` | "Zero rated" VAT breakdown taxable amount MUST equal sum of applicable line/charge/allowance amounts | fatal |
+| `ALIGNED-IBRP-Z-09` | VAT category tax amount in "Zero rated" breakdown MUST equal 0 | fatal |
+| `IBR-001-AE` | Credit note reason code [BTAE-03] value should be from the Reasons for credit note code list | fatal |
+| `IBR-002-AE` | Currency exchange rate [BTAE-04] should contain values up to a maximum of 6 decimal places | fatal |
+| `IBR-005-AE` | Frequency of billing (BTAE-06) should be taken from the frequency of billing code list | fatal |
+| `IBR-006-AE` | Item with "VAT Reverse charge" category MUST have Type of goods or services from the RCM code list | fatal |
+| `IBR-007-AE` | When Invoice Transaction-type code has value 1XXXXXXX (Free trade zone), Beneficiary ID (BTAE-01) MUST be provided | fatal |
+| `IBR-010-AE` | Passport issuing country code (BTAE-19) MUST be present when Buyer identifier type is 'Passport' | fatal |
+| `IBR-011-AE` | Passport issuing country code (BTAE-19) MUST be coded using ISO code list 3166-1 | fatal |
+| `IBR-012-AE` | Passport issuing country code (BTAE-18) MUST be present when Seller identifier type is 'Passport' | fatal |
+| `IBR-013-AE` | Passport issuing country code (BTAE-18) MUST be coded using ISO code list 3166-1 | fatal |
+| `IBR-055-AE` | Preceding invoice reference (IBG-03) required for invoice type 381/81 (Credit note) except when reason code is 'VD' | fatal |
+| `IBR-101-AE` | Authority name (BTAE-11) MUST be present when Buyer identifier type is 'Commercial/Trade license' | fatal |
+| `IBR-102-AE` | In VAT breakdown with "Standard rate additional VAT" category, taxable amount MUST equal sum of applicable line amounts per rate | fatal |
+| `IBR-103-AE` | When Invoiced item VAT category is "VAT reverse charge", Buyer VAT identifier (ibt-048) MUST be provided | fatal |
+| `IBR-104-AE` | When Line VAT Information is present, Invoice line amount in AED (BTAE-10) and VAT Line amount in AED (BTAE-08) MUST be provided | fatal |
+| `IBR-105-AE` | Invoice with "Standard rate additional VAT" line items MUST contain exactly one matching VAT breakdown | fatal |
+| `IBR-108-AE` | "Standard rate additional VAT" breakdown tax amount (IBT-117) MUST equal 0 | fatal |
+| `IBR-111-AE` | Invoice line with "Standard rate additional VAT" category, Invoiced item VAT rate should not be zero | fatal |
+| `IBR-114-AE` | Document level charge VAT category code cannot be "Standard rate additional VAT" | fatal |
+| `IBR-115-AE` | Document level allowance tax category code cannot be "Standard rate additional VAT" | fatal |
+| `IBR-116-AE` | When Invoice transaction-type code has value XX1XXXXX (Margin scheme), tax category code should be "Standard rate additional VAT" | fatal |
+| `IBR-119-AE` | Each VAT breakdown shall have a VAT category rate, except if not subject to VAT or Exempt | fatal |
+| `IBR-120-AE` | In VAT breakdown with "Zero Rated" category, VAT category Rate shall equal 0 | fatal |
+| `IBR-121-AE` | In VAT breakdown with "Exempt from VAT" category, VAT category Rate shall not be provided | fatal |
+| `IBR-122-AE` | For invoice type 'Out of scope of VAT' or credit-note-related-to-goods, VAT categories MUST be Exempt/Not subject/Zero rated only | fatal |
+| `IBR-123-AE` | Line VAT Information (IBG-30) MUST occur exactly once, except for out-of-scope or credit-note-related types | fatal |
+| `IBR-124-AE` | VAT point date [IBT-007] MUST NOT be present for credit note invoice types | fatal |
+| `IBR-125-AE` | In Item Information (IBG-31), Item description (IBT-154) MUST be present | fatal |
+| `IBR-126-AE` | In Price Details (IBG-29), Item price base quantity and Item Gross Price MUST be present | fatal |
+| `IBR-127-AE` | Payment due date [IBT-009] MUST be present when amount due > 0, except for credit notes or deemed supply | fatal |
+| `IBR-128-AE` | When Country code is AE, country subdivision MUST be one of AUH, DXB, SHJ, UAQ, FUJ, AJM, RAK | fatal |
+| `IBR-131-AE` | Allowance amount MUST equal base amount × percentage / 100 when both exist | fatal |
+| `IBR-132-AE` | VAT identifier MUST be a 15-digit TRN starting with 1, ending with 03 | fatal |
+| `IBR-133-AE` | VAT scheme code, where provided, shall be 'VAT' except when Seller tax registration identifier is provided | fatal |
+| `IBR-134-AE` | Seller VAT Identifier (IBT-031) MUST be present, except for out-of-scope or credit-note-related types | fatal |
+| `IBR-135-AE` | Buyer identifier or Buyer VAT identifier MUST be present when transaction type is not Exports and scheme/address conditions apply | fatal |
+| `IBR-136-AE` | Buyer legal registration identifier MUST be present for out-of-scope or credit-note-related invoice types | fatal |
+| `IBR-137-AE` | Principal ID (BTAE-14) MUST be present when transaction type is Disclosed Agent billing | fatal |
+| `IBR-138-AE` | Invoicing period (IBG-14) MUST be present when transaction type is Summary invoice | fatal |
+| `IBR-139-AE` | All tax category codes MUST be selected from the aligned tax category code list | fatal |
+| `IBR-140-AE` | VAT accounting currency (IBT-006), where present, shall be AED | fatal |
+| `IBR-141-AE` | VAT point date, where present, should be before the Invoice issue date | fatal |
+| `IBR-142-AE` | For E-commerce supplies, Delivery address line 1, city, and country subdivision MUST be present | fatal |
+| `IBR-143-AE` | Seller address line 1, city, and country subdivision MUST be provided | fatal |
+| `IBR-144-AE` | Buyer address line 1, city, and country subdivision MUST be provided | fatal |
+| `IBR-145-AE` | Each Invoice line MUST be categorized with an Invoiced item VAT category code | fatal |
+| `IBR-146-AE` | Charge amount MUST equal base amount × percentage / 100 when both exist | fatal |
+| `IBR-147-AE` | Invoice line net amount MUST equal (Quantity × (Item net price / base quantity)) + line charges - line allowances | fatal |
+| `IBR-148-AE` | Seller VAT registration identifier MUST be a 10-digit TIN in format 1XXXXXXXXX | fatal |
+| `IBR-149-AE` | Buyer legal registration identifier MUST be provided when scheme is '0235' and address is not a free-trade-zone code | fatal |
+| `IBR-150-AE` | Seller legal registration identifier MUST be provided when scheme identifier is '0235' | fatal |
+| `IBR-151-AE` | Commercial invoice / Credit note VAT categories should not be exclusively Exempt/Not subject | fatal |
+| `IBR-152-AE` | For Exports, Delivery address line 1/city/subdivision MUST be present and deliver-to country ≠ 'AE' | fatal |
+| `IBR-153-AE` | When Tax accounting currency is AED and invoice currency differs, currency exchange rate MUST be provided | fatal |
+| `IBR-154-AE` | Invoice Transaction-type code MUST be an 8-character string of only 0s and 1s per applicable transaction sequence | fatal |
+| `IBR-157-AE` | Summary/Deemed supply/Margin scheme transaction types cannot combine with out-of-scope or credit-note-related invoice types | fatal |
+| `IBR-158-AE` | Where invoice type is 'Credit note', Credit note reason code [BTAE-03] MUST be present | fatal |
+| `IBR-159-AE` | Currency exchange rate [BTAE-04] MUST be present when Invoice currency code differs from AED | fatal |
+| `IBR-160-AE` | When Frequency of billing is 'Others', a value MUST be provided in Invoice note | fatal |
+| `IBR-162-AE` | For "Reverse charge" line items, VAT Line amount [BTAE-08] MUST be zero | fatal |
+| `IBR-163-AE` | For "Exempt" line items, VAT Line amount [BTAE-08] shall not be present | fatal |
+| `IBR-165-AE` | For "Zero Rated" line items, VAT Line amount [BTAE-08] MUST be zero | fatal |
+| `IBR-166-AE` | For "Reverse charge" line items, Type of goods or services (BTAE-09) MUST be present | fatal |
+| `IBR-167-AE` | "Exempt from VAT" line items MUST have a VAT exemption reason code (IBT-186) | fatal |
+| `IBR-168-AE` | "Exempt from VAT" document-level allowances MUST have a VAT exemption reason code (IBT-196) | fatal |
+| `IBR-169-AE` | "Exempt from VAT" document-level charges MUST have a VAT exemption reason code (IBT-198) | fatal |
+| `IBR-172-AE` | Authority name (BTAE-12) MUST be present when Seller identifier type is 'Commercial/Trade license' | fatal |
+| `IBR-173-AE` | Seller legal registration identifier type MUST be Commercial/Trade license, Emirates ID, Passport, or Cabinet decision (when scheme is 0235 and country is AE) | fatal |
+| `IBR-174-AE` | "Reverse charge" items MUST have Item Standard Identifier (IBT-157) with scheme identifier 0160 | fatal |
+| `IBR-175-AE` | When invoice currency ≠ AED and tax accounting currency = AED, total VAT amount and AED total amount MUST be present | fatal |
+| `IBR-176-AE` | For Disclosed Agent billing, Seller VAT Identifier and Principal ID MUST NOT be the same | fatal |
+| `IBR-177-AE` | Either Seller tax registration identifier or Seller VAT identifier MUST be provided | fatal |
+| `IBR-178-AE` | Tax scheme code shall not be 'VAT' when Seller tax registration identifier is provided | fatal |
+| `IBR-179-AE` | Buyer VAT identifier (IBT-048) MUST occur maximum once | fatal |
+| `IBR-180-AE` | When scheme is '0235' and Buyer legal registration identifier is provided, identifier type MUST be present | fatal |
+| `IBR-181-AE` | When scheme is '0235' and Seller legal registration identifier is provided, identifier type MUST be present | fatal |
+| `IBR-183-AE` | Buyer legal registration identifier type MUST be Commercial/Trade license, Emirates ID, Passport, or Cabinet decision (under scheme 0235 conditions) | fatal |
+| `IBR-184-AE` | When Item type is 'Goods', Item classification identifier MUST be provided | fatal |
+| `IBR-185-AE` | When Item type is 'Services', Service accounting code MUST be provided | fatal |
+| `IBR-186-AE` | When Item type is 'Both', both Item classification identifier and Service accounting code MUST be provided | fatal |
+| `IBR-187-AE` | Minimum digit count 'X' applies to Item classification identifier and Service accounting code | fatal |
+| `IBR-188-AE` | Item classification identifier scheme MUST be 'HS' when provided | fatal |
+| `IBR-189-AE` | Service accounting code scheme MUST be 'SAC' when provided | fatal |
+| `IBR-190-AE` | Standard rated VAT rate MUST be 5.00 | fatal |
+| `IBR-191-AE` | Payment means type code MUST be provided except for credit notes or deemed supply | fatal |
+| `IBR-192-AE` | When Payment means type is 'credit transfer', Payment account identifier MUST be provided | fatal |
+| `IBR-193-AE` | The unique identifier number (BTAE-07) MUST be provided | fatal |
+| `IBR-194-AE` | Invoice line Amount payable (BTAE-10) MUST be provided | fatal |
+| `IBR-196-AE` | The Incoterms (BTAE-22) MUST be provided | fatal |
