@@ -1,0 +1,97 @@
+---
+title: Reports
+description: 'The MIS Dashboard: status and daywise breakdowns, and the per-business overview table in ClearTax UAE'
+---
+Reports give you an aggregated view of your e-invoicing activity - how many invoices have flowed through the system, their status distribution, day-over-day volume, and the underlying financial totals. Where Sales Documents and Purchase Documents let you inspect individual documents, Reports lets you understand the shape of the whole book of business at a glance.
+
+The current release ships with one report: the MIS Dashboard. Purchase-side reporting is on the roadmap.
+
+## Getting to Reports
+
+From the e-Invoicing app, click the Reports icon in the left sidebar. You'll land on the MIS Dashboard.
+
+## The MIS Dashboard
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/reports/mis-dashboard-sales.jpg" width="1400" height="799" alt="MIS Dashboard on Sales tab" />
+
+The MIS Dashboard has five zones from top to bottom: tab switcher (Sales / Purchase), filter controls, KPI cards, charts, and the Overview table.
+
+### Sales and Purchase tabs
+
+Two tabs sit at the top of the dashboard:
+
+- **Sales** - active by default. Covers your outbound documents (Sales Documents, plus any self-billed invoices you've created).
+- **Purchase** - currently disabled. Hovering shows a "Coming Soon" tooltip.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/reports/purchase-tab-coming-soon.jpg" width="1400" height="796" alt="Purchase tab: Coming Soon tooltip" />
+
+Purchase-side reporting will land in a subsequent release; until then, use the [Purchase Documents](/countries/uae/product-guide/purchase-documents) list view for inbound monitoring.
+
+### Filter panel
+
+Click Filter to open the filter side panel.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/reports/filter-panel.jpg" width="1400" height="801" alt="MIS Dashboard filter panel" />
+
+The panel groups filters into four sections:
+
+| Filter group | Options |
+| --- | --- |
+| Document date range | Start and end date (DD/MM/YY format). Sets the window over which everything on the dashboard is calculated. |
+| Document status | Pending, Submitted to exchange network, Delivered to buyer network, Delivered to buyer, Failed |
+| Mode of generation | Manual ingestion - Web, API, SFTP - filter by how documents entered ClearTax |
+| Document type | Tax invoice, Debit note, Credit note, Pre-payment invoice, Other |
+
+### Status breakdown chart
+
+A half-donut chart showing the distribution of documents across statuses within the selected window.
+
+Key elements:
+
+- **Centre label** - shows the count and percentage of the largest segment by default (e.g. 201 &middot; 69.8% &middot; Delivered to buyer)
+- **Legend below** - lists every status with its share (colour-coded)
+- **Segments** - each status is a wedge sized proportionally to its share
+
+Hover over any segment to see its exact count.
+
+### Daywise breakdown chart
+
+A stacked bar chart showing daily document volume across the selected window.
+
+- **X-axis** - dates (only days with activity are labelled; empty days are compressed)
+- **Y-axis** - document count (0 to the visible maximum)
+- **Bar segments** - same status colour coding as the Status breakdown donut, stacked within each day's bar
+
+The chart is useful for spotting anomalies - a sudden spike in Failed on a particular day usually maps to an upstream ERP or integration issue.
+
+### Overview table
+
+Below the charts, the Overview table gives a per-business-name breakdown of counts and monetary values, cross-tabulated by status.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/reports/overview-table-left.jpg" width="1400" height="798" alt="Overview table (left side)" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/reports/overview-table-right.jpg" width="1400" height="793" alt="Overview table (scrolled right)" />
+
+Row grouping: each row is one entity + registration identifier combination under your workspace. The grouping key is:
+
+- **Entity Name** - the legal name of the business
+- **TRN** - Tax Registration Number
+- **TIN** - Tax Identifier Number
+
+If you operate a single entity, you'll see one row. If you operate multiple entities, or a single entity with multiple TRN/TIN combinations (branches, tax groups, etc.), each combination appears as its own row.
+
+Column grouping: the columns are organised into blocks by status. Each status block has three sub-columns:
+
+| Sub-column | Meaning |
+| --- | --- |
+| Invoice | Count of documents in this status |
+| Total invoice value (AED) | Sum of gross document amounts |
+| Total tax amount (AED) | Sum of VAT portions |
+
+Status blocks visible: Total, Pending, Submitted to exchange network, Delivered to buyer network, Delivered to buyer, Failed.
+
+The table scrolls horizontally to reveal all status blocks; the leftmost columns (Business name and Total) remain visible as you scroll right.
+
+## Purchase reports
+
+Similar to Sales reports: Coming Soon.

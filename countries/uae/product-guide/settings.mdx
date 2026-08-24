@@ -1,0 +1,193 @@
+---
+title: Settings
+description: 'Roles, API credentials, print format, business settings, user access, workspace, email, and API clients in ClearTax UAE'
+---
+Settings is where you configure how ClearTax behaves for your workspace - from the roles you assign to users, to the format of invoice filenames, to the SMTP server you use for outbound emails. Click the gear icon at the bottom of the left sidebar in the e-Invoicing app to open Settings.
+
+The settings sidebar is grouped into two categories:
+
+- **Local settings** - country-scoped configuration that applies only to the country you're operating in (e.g. UAE-specific print format, UAE-specific roles).
+- **Global settings** - workspace-wide configuration that applies across all your entities and countries (users, businesses, workspace details, integrations).
+
+## Local settings
+
+### Roles
+
+The Roles page lists the built-in roles you can assign to users on the User access page. Roles are pre-defined - you don't create custom roles.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/roles.jpg" width="1400" height="796" alt="Roles page with the seven built-in roles and their descriptions" />
+
+The full set of built-in roles:
+
+| Role | What it allows |
+| --- | --- |
+| E-Invoice User | All actions on both Sales and Purchase documents - Upload, Generate, View, Cancel, Request for rejection, Download, Print, Email |
+| Sales E-Invoice User | All actions on Sales documents only (Upload, Generate, View, Cancel, Download, Print, Email) |
+| Purchase E-Invoice User | All actions on Purchase documents only - including Upload, Generate, View, Cancel, Self-billing, Request for rejection, Download, Print, Email |
+| View Only User | View and download both Sales and Purchase documents. No other actions can be taken. |
+| Sales View Only User | View and download Sales documents only |
+| Purchase View Only User | View and download Purchase documents only |
+| Admin | Workspace-level administrative access |
+
+Pick the least-privileged role that lets each user do their job. A pattern that works well: E-Invoice User for finance operators, one of the View Only variants for auditors and internal reviewers, and Admin only for a small handful of workspace owners.
+
+### API Credentials
+
+API Credentials is where you retrieve the credentials your ERP or middleware uses to authenticate with the ClearTax API. Detailed guidance on generating and rotating credentials is in the ClearTax API documentation - contact your ClearTax point of contact for the current API reference.
+
+### Print format
+
+Print format controls the filename of invoices when they're downloaded, printed, or emailed. You can either use the default format ClearTax generates, or customise it by combining up to four fields.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/print-format.jpg" width="1400" height="798" alt="Print format page - default vs custom naming" />
+
+The Switch country selector at the top lets you set independent print formats per country, since your naming conventions may differ across jurisdictions. Click Save at the top-right to persist changes.
+
+## Global settings
+
+### Business settings
+
+Business settings lets you view and manage all the businesses (TRNs and branches) in your workspace.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/business-settings.jpg" width="1400" height="798" alt="Business settings - view and manage businesses" />
+
+Layout:
+
+- **Product tabs** (EInvoice - the tabs will expand as you add other Clear products)
+- **Add / Switch Country** dropdown - same country selector used elsewhere in the app; scopes the businesses shown to that country
+- **Search** field - filter the table by business name or TRN
+- **Add business** CTA - register another TRN under this workspace (kicks off a linking flow similar to [Onboarding](/countries/uae/product-guide/onboarding))
+
+The businesses table shows:
+
+| Column | What it shows |
+| --- | --- |
+| Name | Business or entity name. Parent entities with multiple TRNs are expandable to reveal their child TRNs. |
+| TRN > Branch code | The TRN and any branch code assigned to that TRN |
+| Type | Business type (VAT-registered, tax group, individual, etc.) |
+| Emaratax Status | Linked (successfully paired with EmaraTax via ASP flow) or Not Linked (needs onboarding) |
+| Actions | Add Branch (add a new branch under this TRN), Edit (modify business metadata), and further actions via the &#8942; menu |
+
+The Emaratax Status column is your at-a-glance operational health check for onboarding - any TRN that shows Not Linked cannot yet exchange live invoices.
+
+### User access
+
+User Access Management is where you invite team members and manage their access to the workspace.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/user-access.jpg" width="1400" height="797" alt="User Access Management with the Invite new user dropdown" />
+
+Layout:
+
+- **Filter and Search** - narrow the user list
+- **Invite new user** CTA - opens a dropdown to choose the user type:
+  - **Regular user** - full team member with access to their assigned products and businesses. Use for anyone on your finance, tax, or IT team.
+  - **Guest user** - external collaborator with limited, time-bound access. Use for auditors, consultants, or implementation partners.
+
+The users table shows:
+
+| Column | What it shows |
+| --- | --- |
+| Name & Email | The user's display name and login email |
+| User Type | Regular user or Guest user |
+| Products | Which Clear products this user has access to - e.g. EInvoice, Workspace |
+| Role | One of the roles from the Roles page |
+| Businesses | Which TRNs/branches this user can operate under |
+| Action | New role (assign an additional role), Edit user (change name/role/businesses), Delete (remove from workspace) |
+
+Role assignment is per user, per business - a user can be a Sales E-Invoice User on one TRN and a View Only User on another.
+
+### Workspace
+
+The Workspace section groups workspace-level metadata and security. It expands to two sub-pages in the left sidebar: Workspace Details and Workspace Security.
+
+The Workspace Details page displays and lets you edit workspace metadata:
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/workspace-details.jpg" width="1400" height="795" alt="Workspace Details - metadata and security settings" />
+
+Fields shown:
+
+| Field | Meaning |
+| --- | --- |
+| Workspace name | Display name for this workspace. Set As Default Workspace checkbox next to it - tick to make this the workspace you land in after login. |
+| Workspace Id | Unique UUID for the workspace. Copy button next to it - useful when raising support tickets. |
+| Legal Name | The legal entity name (from EmaraTax / your registration). |
+| Business Address | Registered address, if provided. |
+| Workspace type | Business or Individual. |
+| Location | Primary country of operation. |
+| Created on date | When the workspace was first set up. |
+
+Below the metadata is a Workspace Security Settings section (also accessible via the dedicated Workspace Security sub-page):
+
+- **SAML required** - Yes/No. When Yes, all users in this workspace must authenticate via your configured SAML identity provider.
+- **Allowed User Email Domains** - whitelist of email domains that can be invited to this workspace. Restrict this to your corporate domains to prevent accidental invites to personal accounts.
+
+Click Edit at the top-right to change any of the above.
+
+### Profile
+
+Profile is where you view your personal account details. Most profile settings have moved to the Clear Accounts webpage; the Settings page shows a read-only summary and links out.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/profile.jpg" width="1400" height="797" alt="Profile page - account information summary" />
+
+The notice at the top reads: "Important: We've moved profile settings to the Clear Accounts webpage. To access your account and profile settings, simply click on the profile dropdown." Use the Go to Profile settings link to open the Clear Accounts page in a new tab.
+
+Read-only account fields visible here:
+
+- Profile picture
+- Name
+- Email (login)
+- Password (masked - change via Clear Accounts)
+- Change phone number
+- Country
+- Language
+
+### Subscriptions
+
+Subscription Details shows your active ClearTax subscription - plan, seat count, renewal date, and add-ons.
+
+### Email configuration
+
+Email configuration lets you route outbound emails from ClearTax through your own SMTP server. When configured, actions like Actions &rarr; Email on an invoice will be sent from your domain rather than a ClearTax default sender - useful for brand consistency and for suppliers/customers who whitelist your domain.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/email-configuration.jpg" width="1400" height="798" alt="Email configuration form" />
+
+Prerequisite:
+
+- **My SMTP server is accessible from the public internet** - tick this box only if your SMTP server accepts inbound connections from the public internet (as opposed to being locked to your VPN). ClearTax's servers need to reach it to send. The rest of the form activates only when this is ticked.
+
+SMTP fields:
+
+| Field | What to enter |
+| --- | --- |
+| Email client | A pre-configured preset (e.g. Gmail, Outlook, custom) - populates default port and settings if applicable |
+| SMTP server | The host or IP address of your email server - e.g. smtp-mail.domain.com |
+| SMTP port | Typically 587 (STARTTLS) or 465 (SSL/TLS); confirm with your email admin |
+| SMTP username | The account username used to authenticate against the SMTP server |
+| SMTP password | The account password (stored encrypted) |
+| Sender name | Display name for outbound emails (e.g. "Acme LLC Billing") |
+| Sender email | The From: address (e.g. billing@acme.ae) |
+| Test email address | A destination address ClearTax will send a test message to when you click Test Connection |
+
+At the bottom, the Connection to your host server card includes a Test Connection button. Click it to verify credentials before saving. Then click Save Changes at the top-right to persist.
+
+### Integrations - API Clients
+
+API Clients is where you create and manage credentials for programmatic access. Each API client generates an access token that your ERP or middleware uses to authenticate calls to the ClearTax API.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/api-clients.jpg" width="1400" height="797" alt="API Clients management page" />
+
+Best practice - as the page copy notes: "For each ERP or billing system, it is recommended to create a separate API client." Separate clients mean you can rotate or revoke credentials for one integration without affecting others.
+
+The API Clients table shows:
+
+| Column | What it shows |
+| --- | --- |
+| Label | The name you gave the client (e.g. "SAP Production", "NetSuite Sandbox") |
+| Status | Active or Inactive - inactive clients can't be used to make API calls |
+| Workspace name | The workspace the client belongs to |
+| Products | Which products/scopes the client can access (e.g. All Products (Workspace Admin)) |
+| Created by | The user who created the client |
+| Created on | Timestamp of creation |
+| Actions | Edit (change label/scope), Delete (revoke immediately) |
+
+Click Create API Client (top-right) to add a new one. When you do, ClearTax generates the credentials once - copy them into your ERP/middleware configuration immediately. For rotation, create a new client, cut your ERP over to it, then delete the old one.

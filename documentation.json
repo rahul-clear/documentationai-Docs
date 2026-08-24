@@ -65,6 +65,48 @@
                         "path": "countries/uae/end-user-onboarding/error-scenarios"
                       }
                     ]
+                  },
+                  {
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/uae/product-guide/overview"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/uae/product-guide/onboarding"
+                      },
+                      {
+                        "title": "Dashboard Walkthrough",
+                        "path": "countries/uae/product-guide/dashboard-walkthrough"
+                      },
+                      {
+                        "title": "Sales Documents",
+                        "path": "countries/uae/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/uae/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "Importing Documents",
+                        "path": "countries/uae/product-guide/importing-documents"
+                      },
+                      {
+                        "title": "Reports",
+                        "path": "countries/uae/product-guide/reports"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/uae/product-guide/settings"
+                      },
+                      {
+                        "title": "Support Desk",
+                        "path": "countries/uae/product-guide/support-desk"
+                      }
+                    ]
                   }
                 ]
               },

@@ -1,0 +1,160 @@
+---
+title: Importing Documents
+description: 'Bulk upload via the Import UI, Import History, and API/SFTP integration in ClearTax UAE'
+---
+Documents enter ClearTax UAE through three channels: bulk file upload via the Import UI, API integration, and SFTP file drop. All three paths land in the same downstream flow - invoices are validated, deduplicated, and made available in Sales Documents (or Purchase Documents for self-billed) for onward submission to the Peppol network and the FTA.
+
+This section covers:
+
+- The bulk upload flow via the Import UI
+- Import History for reviewing past uploads and their outcomes
+- API and SFTP integration at a high level
+
+## Bulk upload via Import
+
+### Getting to Import
+
+From the e-Invoicing app, click the Import icon in the left sidebar.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/import-sidebar.jpg" width="1400" height="790" alt="Left sidebar with Import highlighted" />
+
+### Choose what to import
+
+A side panel opens asking you to choose the type of documents you're bringing in.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/select-import-type.jpg" width="1400" height="798" alt="Select documents to be imported" />
+
+Two options:
+
+| Option | Use when |
+| --- | --- |
+| Import Sales Documents | You're the seller - uploading commercial invoices, credit notes, debit notes, etc. to send to your customers |
+| Import Self-Billed Documents | You're the buyer - uploading self-billed invoices you've raised on behalf of your suppliers (see [Purchase Documents - Self-billed invoices](/countries/uae/product-guide/purchase-documents#self-billed-invoices)) |
+
+Pick the type; the panel advances to the upload step.
+
+### Upload the file
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/upload-panel.jpg" width="1400" height="788" alt="Import file upload panel" />
+
+The upload panel has two zones:
+
+- **Drop zone (top)** - either click to open the file picker or drag-and-drop your file. The drop zone accepts both `.xlsx` and `.csv` files. The UI label emphasises `.xlsx` because the ClearTax Ingestion Template is distributed as Excel, but CSV uploads work identically as long as they follow the same column structure.
+- **Template link (bottom)** - under "Don't have a file to import?", click ClearTax Ingestion Template to download the master Excel template with all the required columns and format guidance.
+
+Using the ClearTax Ingestion Template is strongly recommended - it has the exact column headers and data types the importer expects, so validation errors are far less likely.
+
+### Confirm file details
+
+After the file uploads, a File details panel opens for you to confirm three things.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/file-details.jpg" width="1400" height="796" alt="File details confirmation panel" />
+
+| Step | What to do |
+| --- | --- |
+| 1. File selected for import | The filename you uploaded, with a trash icon to remove and re-upload |
+| 2. Business | Confirms which business (TRN) the file's rows belong to. If your file spans multiple entities, select "File has multiple TRNs" - the importer will route rows to the right entity based on the TRN column in the file. Otherwise pick the specific TRN. |
+| 3. Template to be used | Select the ingestion template ClearTax should validate against - e.g. "Einvoice UAE - Sales Template". The panel notes: "We check your file for required columns based on the template you select." Use the same template you downloaded in the previous step. |
+
+Once all three are set, click Check file for errors & duplicates at the bottom. ClearTax runs schema and business rule validation against every row.
+
+### Review the file summary
+
+ClearTax processes the file and returns a summary. Two outcomes:
+
+**Outcome A - Errors found**
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/file-summary-errors.jpg" width="1400" height="797" alt="File Summary with errors" />
+
+The summary shows:
+
+- **File Details** - filename and size
+- **Branch Summary** - Docs, Rows, Errors (red count), No Errors (green count)
+- **Error File** download link - a copy of your original file with error columns appended, useful if you want to fix everything offline in Excel
+- **Review and fix errors** CTA - takes you into the guided fix flow
+
+**Outcome B - No errors**
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/file-summary-success.jpg" width="1400" height="796" alt="File Summary success state" />
+
+The summary shows a green success state:
+
+- "No errors in your file. Good job!"
+- Branch Summary (Rows Without Errors) with counts
+- Proceed CTA - imports the file directly into Sales Documents (or Self-Billed)
+
+### Fix errors inline
+
+When errors are found, clicking Review and fix errors opens the inline error review page.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/fix-errors-inline.jpg" width="1400" height="797" alt="Error review page" />
+
+Header:
+
+- File name and Business/TRN tabs - confirming what you're fixing
+- "Fix the highlighted errors to import these rows"
+- Fixed / Remaining counter - e.g. "Fixed: 0, Remaining: 1" - tracks your progress
+- Proceed button (top-right)
+
+### Proceed and ingest
+
+Clicking Proceed commits the file to ClearTax. Rows land in Sales Documents (or the Self-Billed section of Purchase Documents) with a starting Document Status of Pending, ready to be submitted to Peppol.
+
+From here, the invoices follow the standard outbound flow described in [Sales Documents](/countries/uae/product-guide/sales-documents).
+
+## Import History
+
+Every file you upload - successful, partial, or fully errored - is recorded in Import History. Click Import history in the left sidebar.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/import-history-list.jpg" width="1400" height="799" alt="Import history list view" />
+
+### Layout
+
+Columns:
+
+| Column | What it shows |
+| --- | --- |
+| Upload Date (GST) | Timestamp of the upload |
+| File Name | Original filename you uploaded |
+| Source | How the file entered ClearTax - UI, FTP, ERP, API, or JSON_API |
+| VAT/BRANCH | Which TRN/branch the file was routed to (or "Multiple BRANCH" for multi-entity files) |
+| Template | The ingestion template used |
+| File Type | xlsx or csv |
+| Total sheets | Number of worksheet tabs in the file |
+| Rows Processed | Total rows the importer read |
+| Rows (No Errors) | Rows that passed validation |
+| Rows (Errors) | Rows that failed validation |
+| Actions | Row-level action link |
+
+### Filtering
+
+Click Filters to open the side panel.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/importing-documents/import-history-filters.jpg" width="1400" height="798" alt="Import history filters" />
+
+Filter groups:
+
+- **Upload Date** - date picker to narrow by upload day/window
+- **File Name** - free-text search on the filename
+- **Source** - checkboxes: UI, FTP, ERP, API, JSON_API
+
+Apply Filters and Reset at the bottom of the panel.
+
+Useful patterns: isolate all failed uploads from your ERP integration by filtering Source = ERP and looking at Rows (Errors); find yesterday's manual uploads by filtering Source = UI and Upload Date = &lt;yesterday&gt;.
+
+### Actions on a past import
+
+The Actions column shows a contextual link based on the file's state:
+
+| Action link | When it appears | What it does |
+| --- | --- | --- |
+| Fix Errors (red) | The file had errors that weren't resolved during initial upload | Opens the same inline error review page, letting you fix the outstanding errors and complete the import |
+| View File (blue) | The file was fully processed with no outstanding errors | Opens a read-only view of the file contents as ingested |
+
+## API and SFTP
+
+For customers pushing high volume from an ERP, ClearTax supports two direct integration channels beyond the Import UI:
+
+**API** - refer to the ClearTax UAE E-Invoicing API documentation, available via your ClearTax point of contact.
+
+**SFTP** - contact your ClearTax representative for setup details.

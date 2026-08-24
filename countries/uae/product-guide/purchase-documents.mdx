@@ -1,0 +1,207 @@
+---
+title: Purchase Documents (Inbound)
+description: 'Managing inbound e-invoices from suppliers and self-billed invoices in ClearTax UAE'
+---
+Purchase Documents is where you manage all inbound e-invoices your suppliers send you - tax invoices, credit notes, debit notes, and other documents delivered to you via the Peppol network. Unlike Sales, invoices here are received, not created: your supplier is the sender, ClearTax is your Access Point (C3 in the 5-corner model), and documents land in your Purchase Documents view once they arrive.
+
+This section covers three activities:
+
+1. Monitoring incoming documents as they arrive from the Peppol network
+2. Reviewing individual documents in detail
+3. Exporting documents to your AP workflow
+
+## Getting to Purchase Documents
+
+From the e-Invoicing dashboard, either click the Purchase documents tile in the main area, or click the Purchase Documents icon in the left sidebar. Both land you on the Purchase Documents list view.
+
+## The Purchase Documents list view
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/purchase-documents/list-view.jpg" width="1400" height="777" alt="Purchase Documents list view" />
+
+Layout mirrors the Sales list - status tiles, actions bar, filter chips, document table - with two key differences: the status set is inbound-oriented, and the counterparty columns show Seller (your supplier) instead of Customer.
+
+### Status summary tiles (top)
+
+Six tiles at the top show inbound counts, scoped to your current filter selection:
+
+| Tile | Meaning |
+| --- | --- |
+| Total | All documents matching current filters |
+| Received | Document has arrived in Purchase Documents from the Peppol network |
+| Pending | (Reserved for self-billed invoices - see below) |
+| Failed | Processing or validation failed on receipt |
+| Submitted to exchange network | (Reserved for self-billed invoices - see below) |
+| Delivered to seller network | Reached your Access Point (C3) |
+| Delivered to seller | Reached your ClearTax workspace |
+
+### Document table
+
+Default columns for Purchase Documents:
+
+| Column | What it shows |
+| --- | --- |
+| Checkbox | Select the row for bulk actions |
+| Document Number | Supplier's invoice number (clickable - opens the detail view) |
+| Document Status | Where the document is |
+| Government Reporting Status | FTA's view of the reporting outcome |
+| Document Date | Invoice issue date |
+| Document Type | Commercial invoice, Credit Note, Debit Note, Tax invoice, Prepayment Receipt, etc. |
+| Seller Name | Your supplier's legal name |
+| Seller TRN | Your supplier's Tax Registration Number |
+| Total Document Amount | Gross amount including tax |
+| Total VAT Amount | VAT portion |
+
+## Filtering the list
+
+Click Filter to open the side panel. Structure and interaction are the same as Sales Documents. Fields specific to Purchases are called out below.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/purchase-documents/filter-panel.jpg" width="1400" height="797" alt="Purchase filter panel top section" />
+
+### Filter groups
+
+- **Document Date Range** - same as Sales.
+- **Validation Date Range** - new on the Purchase side. Filter by the date the document was validated on receipt.
+- **Document Number** - free-text search on your supplier's invoice number.
+- **Seller VAT** - free-text search on supplier VAT identifier.
+- **Government Reporting Status** - same as Sales: Not Submitted, Processing, Accepted, Withdrawn.
+- **Document Type** - Commercial invoice, Credit Note, Debit Note, Tax invoice, Prepayment Receipt.
+- **Document Status** - checkbox list matching the top-of-page status tiles.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/purchase-documents/filter-doctype.jpg" width="1400" height="798" alt="Filter panel: Government Reporting Status and Document Type" />
+
+### Applying and clearing filters
+
+Identical to Sales - Apply, Clear All, &times; to close, and per-group Clear links.
+
+## Actions on selected documents
+
+Tick one or more rows to enable bulk actions.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/purchase-documents/actions-dropdown.jpg" width="1400" height="799" alt="Actions dropdown on Purchase Documents" />
+
+The action set differs from Sales in one important way: Delete is not offered. You can't delete documents your suppliers have sent you - the audit trail on inbound documents is retained.
+
+| Action | What it does |
+| --- | --- |
+| Download XML report | Downloads the raw XML payload of the selected document(s) |
+| Print | Opens the document(s) in the print dialog |
+| Email | Sends the document(s) as an email attachment |
+| Download &#9656; | Opens a submenu (Lite / Detailed) |
+| Show/Hide Reorder Column | Column customiser |
+| Sort | Sort controls |
+
+Same as Sales-side Send: Send is only available for documents in Pending or Failed state. In the Purchase context this applies specifically to self-billed invoices you have created - see below.
+
+### Download submenu
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/purchase-documents/download-submenu.jpg" width="1400" height="795" alt="Download submenu" />
+
+Same as Sales: Download Lite Report (compact) and Download Detailed Report (full).
+
+## The document detail view
+
+Click any Document Number in the list to open the detail view.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/purchase-documents/detail-view.jpg" width="1400" height="784" alt="Purchase document detail view" />
+
+### Header
+
+- **Invoice Number** (e.g. INV-00004)
+- **Document Status** pill (e.g. Received)
+- **Government Reporting Status** pill (e.g. Accepted)
+- **Edit** button (top-right) - greyed out and non-clickable for documents received from a supplier. You can't modify an invoice someone else sent you. The exception is self-billed invoices you have created, which are editable in the same way outbound Sales invoices are (see below).
+- **&times;** - close and return to the list
+
+### Left navigation
+
+The section list on the left differs from the Sales-side detail view - the Purchase view uses a slightly different grouping of the underlying PINT-AE data:
+
+| Section | What it holds |
+| --- | --- |
+| Document Summary | Header-level fields (invoice number, issue date/time, type code, currency, transaction type, credit note reason, currency exchange rate, beneficiary ID, principle ID) |
+| Invoice Reference | Preceding invoice reference and issue date - used for credit notes, debit notes, or documents that reference a prior invoice |
+| Seller Details | Supplier's identifiers, address, VAT TRN, legal registration, authority name, additional legal information |
+| Buyer Details | Your identifiers, address, TRN, Peppol ID |
+| Seller Tax Representative Details | For cases where the supplier's tax representative is on the document |
+| Invoicing Period | Invoicing period start and end dates as a standalone section |
+| Delivery Details | Delivery party, address, and date |
+| Document - Discount and Charge Details | Header-level allowances and charges applied across the whole invoice |
+| Line items | Individual line items |
+| Invoice Level Details | Totals: taxable amount, tax total, payable amount |
+| Payment Details | Payment means, terms, due date, bank details |
+| Payee Details | Where the payee differs from the supplier |
+| Invoice References | Additional related-document references (PO, contract, etc.) |
+
+Key structural differences from the Sales detail view: "Document Summary" replaces "Invoice Details" as the header section; "Invoice Reference" is a first-class section (up front); "Invoicing Period" is a standalone section; "Document - Discount and Charge Details" is a standalone section.
+
+## Understanding statuses
+
+Every inbound document carries two independent status values.
+
+### Document Status (Peppol &rarr; Your workspace)
+
+| Status | What has happened | Applies to |
+| --- | --- | --- |
+| Received | Document arrived from the Peppol network and is stored in Purchase Documents | Invoices received from suppliers (typical inbound) |
+| Pending | Awaiting submission - queued or retrying | Self-billed invoices you created |
+| Failed | Submission or validation failed | Self-billed invoices you created |
+| Submitted to exchange network | Handed off to Peppol | Self-billed invoices you created |
+| Delivered to seller network | Reached the supplier's Access Point | Self-billed invoices you created |
+| Delivered to seller | Reached the supplier's ClearTax workspace | Self-billed invoices you created |
+
+For received supplier invoices, the terminal state is Received + Accepted. For self-billed invoices you created, the terminal state is Delivered to seller + Accepted - mirroring the outbound Sales flow but running from your Purchase Documents view.
+
+### Government Reporting Status (FTA)
+
+Same set of values as Sales: Not Submitted, Processing, Accepted, Withdrawn. Runs in parallel with Document Status because FTA reporting is a separate flow.
+
+## Self-billed invoices
+
+### What self-billed means
+
+A self-billed invoice is one where the buyer creates the invoice on behalf of the seller. This inverts the usual role split: instead of the supplier issuing an invoice to the buyer, the buyer raises the invoice themselves and sends it to the supplier for confirmation.
+
+Self-billing is common when:
+
+- The buyer has better data (marketplaces, aggregators, franchise operators)
+- The supplier is a small vendor who can't easily issue compliant invoices
+- The contract terms make self-billing procedurally simpler
+
+Whichever the reason, in the UAE the self-billed invoice is a valid tax document and flows through the Peppol network like any other invoice.
+
+### Where self-billed invoices appear in ClearTax
+
+Because you are the buyer creating the invoice, self-billed documents live in your Purchase Documents view - not Sales. This is why the Purchases side has actions and statuses that don't quite make sense for received supplier invoices: they exist to support the self-billed flow.
+
+Correspondingly, the supplier on the other end sees your self-billed invoice arrive in their Sales Documents with status Received.
+
+### Actions available on self-billed documents
+
+Unlike received supplier invoices, self-billed invoices behave much like outbound Sales invoices:
+
+| Capability | Received supplier invoice | Self-billed invoice you created |
+| --- | --- | --- |
+| Edit | Not available (greyed out) | Available |
+| Send | Not applicable | Available in Pending or Failed state |
+| Save + Resubmit workflow | Not applicable | Available (same as outbound) |
+| Error banner + fix-to-continue | Not applicable | Available |
+
+### Status lifecycle for self-billed
+
+Self-billed invoices you create move through the outbound-style status lifecycle:
+
+```
+Pending -> Submitted to exchange network -> Delivered to seller network -> Delivered to seller
+```
+
+At any point, submission may enter a Failed state - typically due to schema or business-rule validation issues on your supplier's data, missing mandatory fields, or FTA-side rejection. Fix the underlying issue (via Edit) and click Send to resubmit. Reading errors follows the same pattern as outbound - see [Sales Documents - Troubleshooting](/countries/uae/product-guide/sales-documents#troubleshooting).
+
+In parallel, the FTA Government Reporting Status transitions Not Submitted &rarr; Processing &rarr; Accepted (or Withdrawn).
+
+### Filtering to see only self-billed documents
+
+Use the Document Type filter and select the relevant self-billed types (Self-billed invoice, Self-billed credit note, etc.) to isolate them from the broader Purchase Documents list.
+
+### Creating a self-billed invoice
+
+See [Importing Documents](/countries/uae/product-guide/importing-documents) for the bulk upload flow, which supports self-billed invoices via a dedicated "Import Self-Billed Documents" option.

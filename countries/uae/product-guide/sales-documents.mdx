@@ -1,0 +1,229 @@
+---
+title: Sales Documents (Outbound)
+description: 'Managing outbound e-invoices, filtering, actions, statuses, and troubleshooting in ClearTax UAE'
+---
+Sales Documents is where you manage all outbound e-invoices you issue - tax invoices, credit notes, debit notes, self-billed invoices, and other document types your customers receive from you. It covers three broad activities:
+
+1. Creating invoices (manually, via bulk import, or via API/ERP integration)
+2. Monitoring their journey through the Peppol network and the FTA reporting
+3. Acting on individual or multiple documents (sending, resending, downloading, printing, emailing, deleting)
+
+## Getting to Sales Documents
+
+From the e-Invoicing dashboard, either click the Sales documents tile in the main area, or click the Sales Documents icon in the left sidebar. Both land you on the Sales Documents list view.
+
+## The Sales Documents list view
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/list-view.jpg" width="1400" height="793" alt="Sales Documents list view" />
+
+The list view has four zones from top to bottom: status summary tiles, actions bar, active filter chips, and the document table.
+
+### Status summary tiles (top)
+
+Seven tiles at the top show the count of documents in each state, scoped to your current filter selection:
+
+| Tile | Meaning |
+| --- | --- |
+| Total | All documents matching current filters |
+| Pending | Awaiting submission - queued, retrying, or in manual review |
+| Failed | Submission or validation failed; needs remediation |
+| Submitted to exchange network | Handed off to the Peppol network |
+| Delivered to buyer network | Reached the buyer's Access Point (C3) |
+| Delivered to buyer | Reached the buyer's ERP or system (C4) |
+| Received | Applies to self-billed invoices only - indicates a self-billed invoice raised on your behalf by a buyer has been received into your Sales Documents. Zero for typical outbound flows. |
+
+Clicking a tile filters the table to that status.
+
+### Document table
+
+Each row is one document. Default columns:
+
+| Column | What it shows |
+| --- | --- |
+| Checkbox | Select the row for bulk actions |
+| Document Number | Your invoice number (clickable - opens the detail view) |
+| Document Status | ClearTax's view of where the document is |
+| Government Reporting Status | FTA's view of the reporting outcome (Not Submitted / Processing / Accepted / Withdrawn) |
+| Document Date | Invoice issue date |
+| Document Type | Commercial invoice, Credit note, Self-Billed Invoice, etc. |
+| Customer Name | Buyer's legal name |
+| Customer TRN | Buyer's Tax Registration Number |
+| Total Document Amount | Gross amount including tax |
+| Total VAT Amount | VAT portion |
+
+Columns can be shown, hidden, and reordered - see Actions below (Show/Hide Reorder Column).
+
+## Filtering the list
+
+Click Filter to open the side panel.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/filter-panel-top.jpg" width="1400" height="796" alt="Filter panel top section" />
+
+Filters are grouped into sections. Use the Search Filters box at the top to jump to a specific filter, or scroll through the panel.
+
+### Filter groups
+
+- **Document Date Range** - filter by the invoice issue date. Enter start and end dates.
+- **Invoice Send Date** - filter by the date the document was submitted to the network.
+- **Document Number** - free-text search on your invoice number.
+- **Customer Name** - free-text search on buyer name.
+- **Customer TRN** - free-text search on buyer TRN.
+- **Document Status** - checkbox list matching the status tiles at the top.
+- **Government Reporting Status** - Not Submitted, Processing, Accepted, Withdrawn.
+- **Document Type** - Commercial invoice, Credit note, Self-billed invoice, Self billed credit note, Invoice out of scope of tax, Credit note related to goods or services.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/filter-status-doctype.jpg" width="1400" height="797" alt="Filter panel: Status and Document Type" />
+
+- **Document Transaction Type** - Standard, Continuous Supply, Summary, Free trade zone, Deemed supply, Profit Margin Scheme, Exports.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/filter-transaction-type.jpg" width="1400" height="795" alt="Filter panel: Document Transaction Type" />
+
+### Applying and clearing filters
+
+At the bottom of the panel:
+
+- **Apply** - apply your selections. The table refreshes and each active filter appears as a chip above the table.
+- **Clear All** - resets every filter in the panel back to unselected.
+- **&times;** (top-right of panel) - closes the panel without applying changes.
+
+Individual filter groups have their own Clear link to reset only that group.
+
+## Actions on selected documents
+
+Tick one or more rows to enable bulk actions. The Actions button becomes active.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/actions-dropdown.jpg" width="1400" height="792" alt="Actions dropdown expanded" />
+
+| Action | What it does |
+| --- | --- |
+| Download XML report | Downloads the raw XML payload of the selected document(s) |
+| Delete | Removes the document from ClearTax. Only available for documents that haven't been submitted successfully to the network. |
+| Print | Opens the document(s) in the print dialog |
+| Email | Sends the document(s) as an email attachment to a specified address |
+| Download &#9656; | Opens a submenu (Lite + Detailed Reports) |
+| Show/Hide Reorder Column | Opens the column customiser to hide unused columns or reorder them |
+| Sort | Opens sort controls to order the table by any visible column |
+
+### Download submenu
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/download-submenu.jpg" width="1400" height="795" alt="Download submenu" />
+
+| Sub-option | What it contains |
+| --- | --- |
+| Download Lite Report | Compact CSV/Excel export with headline fields only - good for quick reconciliation |
+| Download Detailed Report | Full export including line items, tax breakup, and Peppol metadata - good for audits and downstream analysis |
+
+### Send
+
+The Send button (blue, next to Actions) submits selected documents to the Peppol network for delivery to the buyer's Access Point.
+
+Send is only available for documents in **Pending** or **Failed** state. For documents that have already been submitted successfully - Submitted to exchange network, Delivered to buyer network, Delivered to buyer - Send is not offered, since the network handles onward delivery from that point.
+
+Two places to trigger Send:
+
+- **Bulk:** from the list view, tick one or more rows and click Send in the actions bar.
+- **Single:** from a document's detail view, click Send Document in the header.
+
+## The document detail view
+
+Click any Document Number in the list to open the detail view.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/detail-view.jpg" width="1400" height="796" alt="Invoice detail view" />
+
+### Header
+
+The top of the detail view shows:
+
+- **Invoice Number** (e.g. INV-00002)
+- **Document Status** pill (e.g. Delivered to buyer)
+- **Government Reporting Status** pill (e.g. Accepted)
+- **Edit** button (top-right)
+- **&times;** - close and return to the list
+
+### Left navigation
+
+A section jump-list; click any entry to scroll the main pane to that section.
+
+| Section | What it holds |
+| --- | --- |
+| Invoice Details | Header-level fields: number, type code, issue date/time, currency, transaction type, period, supply flags |
+| Seller Details | Your organisation's identifiers, address, VAT TRN, electronic address (Peppol ID), legal registration |
+| Seller Tax Representative Details | Fields for cases where a tax representative acts on the seller's behalf |
+| Buyer Details | Customer identifiers, address, TRN, Peppol ID |
+| Delivery Details | Delivery party, address, and date if different from billing |
+| Document Level Details | Header-level allowances, charges, and notes |
+| Invoice Level Details | Totals: taxable amount, tax total, payable amount, prepaid amounts |
+| Line items | Individual line items with descriptions, quantities, prices, tax categories |
+| Payment Details | Payment means, terms, due date, bank details |
+| Payee Details | Fields for cases where the payee differs from the seller |
+| Invoice References | Links to related documents - original invoice for a credit note, PO reference, contract reference |
+
+## Header states
+
+The detail view header changes based on the document's state:
+
+**Successfully delivered document** (Delivered to buyer + Accepted) - only Edit is shown. Send Document is hidden - the network has already completed delivery.
+
+**Failed document requiring action** (Failed + Not Submitted or Withdrawn) - both Send Document and Edit are shown, along with an "Invoice exchange error/warnings" banner at the top of the content area.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/header-states-failed.jpg" width="1400" height="795" alt="Failed document detail view with error banner" />
+
+### Edit mode
+
+Click Edit in the detail view header to switch fields from read-only to editable.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/sales-documents/edit-mode.jpg" width="1400" height="800" alt="Invoice in edit mode" />
+
+## Creating documents
+
+Invoices can be created manually, via bulk upload, or via API/ERP integration - see [Importing Documents](/countries/uae/product-guide/importing-documents) for the bulk-upload and integration flows.
+
+## Understanding statuses
+
+Every outbound document carries two independent status values throughout its lifecycle.
+
+### Document Status (ClearTax &rarr; Peppol &rarr; Buyer)
+
+| Status | What has happened | Typical next state |
+| --- | --- | --- |
+| Pending | Document is in ClearTax, awaiting submission | Submitted to exchange network (on success) or Failed (on error) |
+| Failed | Submission or validation failed | Fix and resend &rarr; Pending |
+| Submitted to exchange network | Handed off to Peppol (C2 &rarr; C3 in flight) | Delivered to buyer network |
+| Delivered to buyer network | Reached the buyer's Access Point (C3) | Delivered to buyer |
+| Delivered to buyer | Reached the buyer's ERP or system (C4) - terminal success state | (none) |
+
+### Government Reporting Status (ClearTax &rarr; FTA)
+
+| Status | What has happened |
+| --- | --- |
+| Not Submitted | Reporting to the FTA has not yet been attempted |
+| Processing | Report has been submitted; FTA is validating |
+| Accepted | FTA has accepted the report - terminal success state |
+| Withdrawn | The document has been withdrawn from the FTA record |
+
+## Troubleshooting
+
+When a document fails validation or submission, ClearTax surfaces the errors in two places:
+
+1. On the list view - the row shows Failed under Document Status and (usually) Not Submitted or Withdrawn under Government Reporting Status.
+2. Inside the document's detail view - a red "Invoice exchange error/warnings" banner appears above the Invoice Details section.
+
+### Reading the error banner
+
+Click View More on the banner to expand the full error list; click View Less to collapse it back to the summary.
+
+Errors are labelled "Errors - Fix to continue" (red chip) - meaning submission is blocked until the underlying issue is corrected. Each error is a numbered line in the format:
+
+```
+<Source> : [<rule-code>] - <message referencing PINT-AE element IDs>
+```
+
+Example:
+
+```
+1. GOVT : [ibr-126-ae] - In Price Details (IBG-29), Item price base quantity (IBT-149) and Item Gross Price (IBT-148) MUST be there.
+```
+
+### Where to look up rule codes
+
+PINT-AE rule codes (`ibr-*-ae`) are defined by the FTA / OpenPeppol PINT-AE specification. Each code has a canonical description in the specification. When a rule is unfamiliar, cross-reference the code against the PINT-AE rule catalogue.
