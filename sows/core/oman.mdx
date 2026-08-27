@@ -91,3 +91,27 @@ For high-volume, multi-store retail deployments with non-reliable internet conne
 
 ✓ End-to-end submission of the locally queued invoice XML to the OTA's central system (via API/SFTP leg) → this is a background process distinct from local generation and is scoped separately from the SDK's offline generation path.
 
+## E-Invoicing - Onboarding:
+
+Onboarding covers the end-to-end setup required for a taxpayer to start generating and submitting OTA-compliant e-invoices through the ClearTax platform.
+
+### Onboarding on Fawtara portal
+
+✓ The taxpayer's VAT Identification Number (VATIN) is verified against OTA records as part of the onboarding process using the taxpayer's Fawtara portal credentials.
+
+✓ Support for offboarding (delinking from ClearTax ASP) is available as part of the onboarding module.
+
+✓ Note: Customer is required to select ClearTax as their designated ASP in the Fawtara portal, declaring that ClearTax will act as Service provider legally for exchanging eInvoices.
+
+✓ ClearTax will create the Peppol ID; publish and update the same in the PEPPOL directory.
+
+### Onboarding on ClearTax
+
+✓ Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
+
+✓ Configure your account and profile with the Company Legal Name, User's Name and Designation.
+
+✓ Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
+
+✓ Configure your VATIN to define your organisation's structure
+
