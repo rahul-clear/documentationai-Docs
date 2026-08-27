@@ -2,32 +2,31 @@
 title: 'SoW - Core: UAE'
 description: Statement of Work for ClearTax's core UAE e-invoicing platform access
 ---
-
 ### 1. Core eInvoicing
 
 Access to the ClearTax UAE e-invoicing platform to send, receive and report invoices via ClearTax as an FTA-recognised Accredited Service Provider (ASP), keeping you compliant with the UAE e-invoicing mandate.
 
 **Scope**
 
-<span style={{color: '#22c55e'}}>✓</span> **Peppol network exchange (5-corner model)** — ClearTax operates as your registered Peppol Access Point (C2-supplier/C3-buyer) — we will exchange invoices over the UAE Peppol network on your behalf and report the corresponding tax data to the Federal Tax Authority (C5)
+✓ **Peppol network exchange (5-corner model)** — ClearTax operates as your registered Peppol Access Point (C2-supplier/C3-buyer) — we will exchange invoices over the UAE Peppol network on your behalf and report the corresponding tax data to the Federal Tax Authority (C5)
 
-<span style={{color: '#22c55e'}}>✓</span> **B2B, B2G and B2C coverage** — ClearTax supports the transaction types covered under the current phase of the UAE mandate i.e. B2B and B2G. B2C remains outside the statutory e-invoicing scope.
+✓ **B2B, B2G and B2C coverage** — ClearTax supports the transaction types covered under the current phase of the UAE mandate i.e. B2B and B2G. B2C remains outside the statutory e-invoicing scope.
 
-<span style={{color: '#22c55e'}}>✓</span> **Sending your invoices to your buyers** — ClearTax validates each invoice against the PINT-AE schema and business rules and delivers the invoice to your buyer's Access Point. ClearTax supports sending of all document types available as part of the UAE mandate: Tax Invoices, Simplified Tax Invoices, Credit Notes, Debit Notes and their self-billing variants.
+✓ **Sending your invoices to your buyers** — ClearTax validates each invoice against the PINT-AE schema and business rules and delivers the invoice to your buyer's Access Point. ClearTax supports sending of all document types available as part of the UAE mandate: Tax Invoices, Simplified Tax Invoices, Credit Notes, Debit Notes and their self-billing variants.
 
-<span style={{color: '#22c55e'}}>✓</span> Auto "withdrawal" of TDD (C5) in case the Buyer Access Point rejects the eInvoice document due to business or schema validation rules.
+✓ Auto "withdrawal" of TDD (C5) in case the Buyer Access Point rejects the eInvoice document due to business or schema validation rules.
 
-<span style={{color: '#22c55e'}}>✓</span> **Receiving invoices from your suppliers** — Invoices arriving from your suppliers' Access Points are accepted in the PINT-AE format, normalised into a common representation, and made available on the platform.
+✓ **Receiving invoices from your suppliers** — Invoices arriving from your suppliers' Access Points are accepted in the PINT-AE format, normalised into a common representation, and made available on the platform.
 
-<span style={{color: '#22c55e'}}>✓</span> **Mandatory status reporting to the FTA** — TDD is submitted to the FTA within the mandated SLA (15 minutes from validation for domestic and cross-border exchanges), with MLS acknowledgement tracked back to your workspace.
+✓ **Mandatory status reporting to the FTA** — TDD is submitted to the FTA within the mandated SLA (15 minutes from validation for domestic and cross-border exchanges), with MLS acknowledgement tracked back to your workspace.
 
 You can choose the integration method that fits your systems:
 
-<span style={{color: '#22c55e'}}>✓</span> **Direct upload via the ClearTax web platform** (Excel template) — upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields
+✓ **Direct upload via the ClearTax web platform** (Excel template) — upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields
 
-<span style={{color: '#22c55e'}}>✓</span> **SFTP batch ingestion** — ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for FTA-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
+✓ **SFTP batch ingestion** — ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for FTA-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
 
-<span style={{color: '#22c55e'}}>✓</span> **REST API** — Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
+✓ **REST API** — Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
 
 ### 2. Onboarding
 
@@ -35,11 +34,11 @@ Onboarding covers the end-to-end setup required for a taxpayer to start generati
 
 **Onboarding on EmaraTax**
 
-<span style={{color: '#22c55e'}}>✓</span> The taxpayer's Tax Identification Number (TIN) and VAT TRN are verified against FTA records as part of the onboarding process using the taxpayer's EmaraTax credentials.
+✓ The taxpayer's Tax Identification Number (TIN) and VAT TRN are verified against FTA records as part of the onboarding process using the taxpayer's EmaraTax credentials.
 
-<span style={{color: '#22c55e'}}>✓</span> Support for re-verification of TIN credentials (in case of EmaraTax token expiry or FTA record changes) and off-boarding (delinking from ClearTax ASP) is available as part of the onboarding module.
+✓ Support for re-verification of TIN credentials (in case of EmaraTax token expiry or FTA record changes) and off-boarding (delinking from ClearTax ASP) is available as part of the onboarding module.
 
-<span style={{color: '#22c55e'}}>✓</span> ClearTax will create the Peppol ID, and publish and update the same in the FTA directory.
+✓ ClearTax will create the Peppol ID, and publish and update the same in the FTA directory.
 
 <Callout kind="info" collapsed="false">
   Customer is required to select ClearTax as their designated ASP in the EmaraTax portal, declaring that ClearTax will act as service provider legally for exchanging eInvoices.
@@ -47,10 +46,10 @@ Onboarding covers the end-to-end setup required for a taxpayer to start generati
 
 **Onboarding on ClearTax**
 
-<span style={{color: '#22c55e'}}>✓</span> Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
+✓ Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
 
-<span style={{color: '#22c55e'}}>✓</span> Configure your account and profile with the Company Legal Name, User's Name and Designation.
+✓ Configure your account and profile with the Company Legal Name, User's Name and Designation.
 
-<span style={{color: '#22c55e'}}>✓</span> Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
+✓ Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
 
-<span style={{color: '#22c55e'}}>✓</span> Configure your TRN (if applicable) and TIN to define your organisation's structure.
+✓ Configure your TRN (if applicable) and TIN to define your organisation's structure.
