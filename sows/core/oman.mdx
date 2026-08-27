@@ -1,6 +1,31 @@
 ---
 title: 'SOW - Core: Oman'
-description: Statement of Work for ClearTax's core Oman e-invoicing platform access
+description: >-
+  Access to the ClearTax Oman e-invoicing platform to send, receive and report
+  invoices via ClearTax's accreditation as an Oman Tax Authority
+  (OTA)-recognised Service Provider, keeping you compliant with the Fawtara
+  e-invoicing mandate.
 ---
+## **Scope:**
 
+✓ **Peppol network exchange (5-corner model)** - ClearTax operates as your registered Access Point (C2/C3) - we will exchange invoices over the Oman Peppol network on your behalf and report the corresponding tax data to the Oman Tax Authority (C5).
+
+✓ **B2B, B2G and B2C coverage** - ClearTax supports the transaction types covered under the current phase of the Oman mandate i.e. B2B, B2C and B2G.
+
+✓ **Sending your invoices to your buyers** - ClearTax validates each invoice against the PINT-OM schema and business rules and delivers the invoice to your buyer's Access Point. 
+
+- ClearTax supports sending of all document types available as part of the Oman mandate: Tax Invoices, Simplified Tax Invoices, Credit Notes, Debit Notes and their self-billing variants.
+- Auto “withdrawal” (Disregard) of TDD (C5) in case the Buyer Access Point rejects the eInvoice document due to business or schema validations rules.
+
+✓ **Receiving invoices from your suppliers** - Invoices arriving from your suppliers' Access Points are accepted in the PINT-OM format, normalised into a common representation, and made available on the platform.
+
+✓ **Mandatory status reporting to the FTA** - TDDs are submitted to the OTA within the mandated SLA (15 minutes for B2B, 30 minutes for B2C from validation), with MLS acknowledgement tracked back to your workspace.
+
+### You can choose the integration method that fits your systems:
+
+✓ **Direct upload via the ClearTax web platform** (Excel template) - upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields
+
+✓ **SFTP batch ingestion** - ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for FTA-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
+
+✓ **REST API** - Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
 

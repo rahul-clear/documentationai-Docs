@@ -315,10 +315,6 @@
                 "icon": "settings",
                 "pages": [
                   {
-                    "title": "Onboarding with the Tax Authority",
-                    "path": "sows/platform/onboarding"
-                  },
-                  {
                     "title": "RBAC",
                     "path": "sows/platform/rbac"
                   },
@@ -341,14 +337,6 @@
                   {
                     "title": "License",
                     "path": "sows/platform/license"
-                  },
-                  {
-                    "title": "Sales Reconciliation",
-                    "path": "sows/platform/sales-reconciliation"
-                  },
-                  {
-                    "title": "GL VAT Automation",
-                    "path": "sows/platform/gl-vat-automation"
                   },
                   {
                     "title": "Reports",
