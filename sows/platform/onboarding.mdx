@@ -1,37 +1,5 @@
 ---
-title: Onboarding with the Tax Authority
-description: >-
-  End-to-end setup for sending and receiving invoices through ClearTax as your
-  accredited Access Point
+title: ClearTax Onboarding
+description: 'End-to-end setup for creating your workspace on ClearTax '
 ---
-Onboarding covers the end-to-end setup needed for your business to start sending and receiving invoices through ClearTax as your accredited Access Point under the relevant e-invoicing mandate. The specifics vary by country:
-
-<Expandable title="France" default-open="false">
-  - **Business hierarchy setup** - SIREN legal entities, SIRET establishments, and routing codes configured so invoices route to the correct entity or branch.
-  - **Business and identity verification (KYB/KYC)** - ClearTax verifies legal existence and the legal representative's identity via official French and European registries, meeting French AML and eIDAS requirements for certified PAs.
-  - ClearTax registers the business with DGFiP as a linked entity under its PA accreditation; the SIREN is enrolled in the Annuaire, the French e-invoicing directory used to route invoices correctly.
-  - A demo environment is provided to test integrations end-to-end before going live in production.
-</Expandable>
-
-<Expandable title="Oman" default-open="false">
-  - Your 10-digit Omani VATIN is validated as part of onboarding, and your consent is captured via the Fawtara Portal before ClearTax registers you on the central SMP.
-  - ClearTax registers you with the OTA as a linked entity under its Service Provider accreditation, and assigns a Peppol participant identifier (scheme 0248, based on your VATIN) to enable e-invoice exchange on the Oman Peppol network - completed within 3 working days of your consent.
-  - **Business hierarchy** - your seller details, invoice numbering series, business hierarchy (VATIN → Branch), and document preferences are configured on the platform as part of onboarding.
-  - A sandbox/testbed environment is provided for your team and your ERP/POS integrations to test each feature - including B2B and B2C flows and QR generation - end-to-end before going live in production.
-  - Off-boarding (de-registration from the central SMP) is completed within 1 working day of relationship termination, including in switch-of-Service-Provider scenarios.
-</Expandable>
-
-<Expandable title="UAE" default-open="false">
-  Two onboarding paths are supported, depending on where the taxpayer starts:\
-
-
-  - **Via EmaraTax** - the taxpayer's admin logs into EmaraTax, selects e-Invoicing, chooses the TIN to onboard, and selects ClearTax (listed as "Defmacro") as their Accredited Service Provider. EmaraTax then redirects the user to ClearTax to complete the linking request.
-  - **Via ClearTax** - the taxpayer creates a ClearTax account first; when setting up their business profile (TRN), they're redirected to EmaraTax to select ClearTax as ASP, then redirected back to ClearTax to complete the linking request.
-  - **Linking request** - on either path, the user submits their registered EmaraTax email, TIN, and an optional phone number on ClearTax. ClearTax verifies these against EmaraTax and displays the fetched taxpayer details (legal type, entity name in English/Arabic, VAT TRN, registration dates) for the user to confirm and submit after ticking a declaration checkbox.
-  - **Verification and Peppol ID creation** - once EmaraTax verifies the submission, a Peppol Participant ID is generated for the taxpayer and registered in the FTA's central Peppol directory, completing the ASP linkage.
-  - **ClearTax account setup** - password creation and T\&Cs acceptance, workspace setup (legal name, turnover band), and profile personalisation (name, designation).
-  - **Business profile** - TRN and organisation name are prefilled from EmaraTax and are read-only, since they must exactly match the FTA registration.
-  - **Landing on the dashboard** - onboarding completes with the user landing on the e-Invoicing dashboard, with Sales and Purchase Documents overviews and shortcuts to other platform features.
-  - **Error handling** - the linking request form validates the email format and the TIN (must be exactly 10 numeric digits), flagging incorrect entries before they can be submitted.
-</Expandable>
 
