@@ -1,9 +1,8 @@
 ---
-title: "SFTP Integration"
-description: "Ingest non-standard invoice formats via SFTP and process through standard flows"
+title: SFTP Integration
+description: >-
+  Ingest non-standard invoice formats via SFTP and process through standard
+  flows
 ---
 
-Accepts invoice data from your systems in XML (or other non-standard formats) via SFTP, transforms it into the mandate-compliant representation, and processes it through the standard e-invoicing and e-reporting flows. Response and output files are returned to your SFTP server in CSV format for downstream consumption.
 
-- **Setup** - a one-time transformation mapping is built between your source format and the mandate-compliant representation.
-- **Ongoing operation** - ClearTax pulls input files from your SFTP server on the agreed frequency, applies the transformation, submits each invoice through the standard flows, and places output files (status responses, error reports, delivery confirmations) back on the SFTP server.
