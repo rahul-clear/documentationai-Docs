@@ -8,26 +8,26 @@ description: >-
 ---
 ## **Scope:**
 
-✓ **Peppol network exchange (5-corner model)** - ClearTax operates as your registered Access Point (C2/C3) - we will exchange invoices over the Oman Peppol network on your behalf and report the corresponding tax data to the Oman Tax Authority (C5).
+<span style={{color: '#22c55e'}}>✓</span> **Peppol network exchange (5-corner model)** - ClearTax operates as your registered Access Point (C2/C3) - we will exchange invoices over the Oman Peppol network on your behalf and report the corresponding tax data to the Oman Tax Authority (C5).
 
-✓ **B2B, B2G and B2C coverage** - ClearTax supports the transaction types covered under the current phase of the Oman mandate i.e. B2B, B2C and B2G.
+<span style={{color: '#22c55e'}}>✓</span> **B2B, B2G and B2C coverage** - ClearTax supports the transaction types covered under the current phase of the Oman mandate i.e. B2B, B2C and B2G.
 
-✓ **Sending your invoices to your buyers** - ClearTax validates each invoice against the PINT-OM schema and business rules and delivers the invoice to your buyer's Access Point. 
+<span style={{color: '#22c55e'}}>✓</span> **Sending your invoices to your buyers** - ClearTax validates each invoice against the PINT-OM schema and business rules and delivers the invoice to your buyer's Access Point. 
 
 - ClearTax supports sending of all document types available as part of the Oman mandate: Tax Invoices, Simplified Tax Invoices, Credit Notes, Debit Notes and their self-billing variants.
 - Auto “withdrawal” (Disregard) of TDD (C5) in case the Buyer Access Point rejects the eInvoice document due to business or schema validations rules.
 
-✓ **Receiving invoices from your suppliers** - Invoices arriving from your suppliers' Access Points are accepted in the PINT-OM format, normalised into a common representation, and made available on the platform.
+<span style={{color: '#22c55e'}}>✓</span> **Receiving invoices from your suppliers** - Invoices arriving from your suppliers' Access Points are accepted in the PINT-OM format, normalised into a common representation, and made available on the platform.
 
-✓ **Mandatory status reporting to the FTA** - TDDs are submitted to the OTA within the mandated SLA (15 minutes for B2B, 30 minutes for B2C from validation), with MLS acknowledgement tracked back to your workspace.
+<span style={{color: '#22c55e'}}>✓</span> **Mandatory status reporting to the FTA** - TDDs are submitted to the OTA within the mandated SLA (15 minutes for B2B, 30 minutes for B2C from validation), with MLS acknowledgement tracked back to your workspace.
 
 ### You can choose the integration method that fits your systems:
 
-✓ **Direct upload via the ClearTax web platform** (Excel template) - upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields
+<span style={{color: '#22c55e'}}>✓</span> **Direct upload via the ClearTax web platform** (Excel template) - upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields
 
-✓ **SFTP batch ingestion** - ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for FTA-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
+<span style={{color: '#22c55e'}}>✓</span> **SFTP batch ingestion** - ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for FTA-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
 
-✓ **REST API** - Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
+<span style={{color: '#22c55e'}}>✓</span> **REST API** - Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
 
 ## SDK - Offline B2C e-Invoice solution with QR & Invoice Generation:
 
@@ -35,61 +35,61 @@ For high-volume, multi-store retail deployments with non-reliable internet conne
 
 ### Scope and responsibilities of ClearTax:
 
-✓ JSON-to-UBL conversion → the SDK converts JSON invoice data of a sale into the official PINT-OM UBL XML invoice format.
+<span style={{color: '#22c55e'}}>✓</span> JSON-to-UBL conversion → the SDK converts JSON invoice data of a sale into the official PINT-OM UBL XML invoice format.
 
-✓ Rule-based validation → every invoice is validated against the defined OTA/PINT-OM business rule set
+<span style={{color: '#22c55e'}}>✓</span> Rule-based validation → every invoice is validated against the defined OTA/PINT-OM business rule set
 
-✓ Seller UUID + QR generation → the SDK derives a deterministic Seller UUID and generates the QR code (Base64-encoded) for the printed receipt.
+<span style={{color: '#22c55e'}}>✓</span> Seller UUID + QR generation → the SDK derives a deterministic Seller UUID and generates the QR code (Base64-encoded) for the printed receipt.
 
-✓ Fully offline transaction path → invoice xml generation, validation, and QR/UUID derivation run entirely offline without any internet connection
+<span style={{color: '#22c55e'}}>✓</span> Fully offline transaction path → invoice xml generation, validation, and QR/UUID derivation run entirely offline without any internet connection
 
-✓ Embedded deployment model → The sdk.jar application will reside on the POS/KIOSK, on its Java classpath and will be called in-process per sale; validation rules are available by default and cached in memory for the life of the process, keeping per-sale latency low.
+<span style={{color: '#22c55e'}}>✓</span> Embedded deployment model → The sdk.jar application will reside on the POS/KIOSK, on its Java classpath and will be called in-process per sale; validation rules are available by default and cached in memory for the life of the process, keeping per-sale latency low.
 
-✓ CLI tooling for QA, support, and batch work → the same jar ships a command-line interface for testing POS releases, investigating any disputed invoices and pulling activity logs.
+<span style={{color: '#22c55e'}}>✓</span> CLI tooling for QA, support, and batch work → the same jar ships a command-line interface for testing POS releases, investigating any disputed invoices and pulling activity logs.
 
-✓ Device onboarding / activation → each POS terminal/device is one-time activated against the ClearTax portal using the VATIN number, activation code, and auth token issued for that store/device; an un-onboarded or revoked device will be prevented from issuing invoices compliant.
+<span style={{color: '#22c55e'}}>✓</span> Device onboarding / activation → each POS terminal/device is one-time activated against the ClearTax portal using the VATIN number, activation code, and auth token issued for that store/device; an un-onboarded or revoked device will be prevented from issuing invoices compliant.
 
-✓ Local activity logs → the SDK maintains local logs of device activity, exportable/clearable via the CLI, to support audits and debugging issues without disrupting the live POS invoicing process.
+<span style={{color: '#22c55e'}}>✓</span> Local activity logs → the SDK maintains local logs of device activity, exportable/clearable via the CLI, to support audits and debugging issues without disrupting the live POS invoicing process.
 
 ### Deployment prerequisites:
 
-✓ Java 21 or newer on each device; the jar bundles everything else it needs → no separate install step.
+<span style={{color: '#22c55e'}}>✓</span> Java 21 or newer on each device; the jar bundles everything else it needs → no separate install step.
 
-✓ A VAT number, activation code, and auth token per device/store, issued by ClearTax as part of onboarding.
+<span style={{color: '#22c55e'}}>✓</span> A VAT number, activation code, and auth token per device/store, issued by ClearTax as part of onboarding.
 
-✓ Invoice data supplied per the SDK's JSON contract.
+<span style={{color: '#22c55e'}}>✓</span> Invoice data supplied per the SDK's JSON contract.
 
-✓ The machine should have minimum of 2 GB storage and a minimum processing capacity of 512 MB RAM but it is recommended that the system has 8 GB storage and 2 GB RAM for best performance
+<span style={{color: '#22c55e'}}>✓</span> The machine should have minimum of 2 GB storage and a minimum processing capacity of 512 MB RAM but it is recommended that the system has 8 GB storage and 2 GB RAM for best performance
 
-✓ Storage will be used to store generated E-Invoice XMLs and log files
+<span style={{color: '#22c55e'}}>✓</span> Storage will be used to store generated E-Invoice XMLs and log files
 
-✓ Processing would be used to sign XMLs and validate data
+<span style={{color: '#22c55e'}}>✓</span> Processing would be used to sign XMLs and validate data
 
 ### Client responsibilities:
 
-✓ Integration: Embedding sdk.jar into the POS/KIOSK/relevant channel application(s) and map sale data into the agreed JSON contract, sending all fields required by PINT-OM in the format defined by ClearTax.
+<span style={{color: '#22c55e'}}>✓</span> Integration: Embedding sdk.jar into the POS/KIOSK/relevant channel application(s) and map sale data into the agreed JSON contract, sending all fields required by PINT-OM in the format defined by ClearTax.
 
-✓ Invoice completeness: Submit every in-scope sale document and its associated notes (credit/debit).
+<span style={{color: '#22c55e'}}>✓</span> Invoice completeness: Submit every in-scope sale document and its associated notes (credit/debit).
 
-✓ Onboarding gate: Ensuring each device is onboarded before it is permitted to issue live invoices. Any device that is not onboarded will not be able to issue compliant invoices
+<span style={{color: '#22c55e'}}>✓</span> Onboarding gate: Ensuring each device is onboarded before it is permitted to issue live invoices. Any device that is not onboarded will not be able to issue compliant invoices
 
-✓ Runtime maintenance: Maintaining Java 21+ runtime on each device throughout the SDK's operational life.
+<span style={{color: '#22c55e'}}>✓</span> Runtime maintenance: Maintaining Java 21+ runtime on each device throughout the SDK's operational life.
 
-✓ SDK version currency: Apply Cleartax-published SDK updates within the timelines communicated for each release so that devices remain aligned with the latest OTA/PINT-OM version.
+<span style={{color: '#22c55e'}}>✓</span> SDK version currency: Apply Cleartax-published SDK updates within the timelines communicated for each release so that devices remain aligned with the latest OTA/PINT-OM version.
 
-✓ Tamper protection: Do not tamper with the sdk or its logs. Any modification, tampering or deletion of the SDK and associated files may lead to non-compliance
+<span style={{color: '#22c55e'}}>✓</span> Tamper protection: Do not tamper with the sdk or its logs. Any modification, tampering or deletion of the SDK and associated files may lead to non-compliance
 
-✓ Systems not having ClearTax SDK: In case a Customer is maintaining separate Point of Sale (PoS) systems which are not connected with ClearTax then the Customer must be solely responsible for generating and reporting E-invoices for documents generated from such systems.
+<span style={{color: '#22c55e'}}>✓</span> Systems not having ClearTax SDK: In case a Customer is maintaining separate Point of Sale (PoS) systems which are not connected with ClearTax then the Customer must be solely responsible for generating and reporting E-invoices for documents generated from such systems.
 
-✓ Connectivity for Reporting: Ensure connectivity is sufficient for locally queued invoices to reach Cleartax (C2) within the OTA mandated reporting window of 24 hours via the strategy convenient to the business.
+<span style={{color: '#22c55e'}}>✓</span> Connectivity for Reporting: Ensure connectivity is sufficient for locally queued invoices to reach Cleartax (C2) within the OTA mandated reporting window of 24 hours via the strategy convenient to the business.
 
-✓ Reporting may originate directly from the POS device once it is online or via a back-office system that collects queued invoices from devices and relays them to Cleartax.
+<span style={{color: '#22c55e'}}>✓</span> Reporting may originate directly from the POS device once it is online or via a back-office system that collects queued invoices from devices and relays them to Cleartax.
 
-✓ You can choose and manage either of these options to ensure compliance within the applicable mandate window.
+<span style={{color: '#22c55e'}}>✓</span> You can choose and manage either of these options to ensure compliance within the applicable mandate window.
 
 ### Additional Dependencies:
 
-✓ End-to-end submission of the locally queued invoice XML to the OTA's central system (via API/SFTP leg) → this is a background process distinct from local generation and is scoped separately from the SDK's offline generation path.
+<span style={{color: '#22c55e'}}>✓</span> End-to-end submission of the locally queued invoice XML to the OTA's central system (via API/SFTP leg) → this is a background process distinct from local generation and is scoped separately from the SDK's offline generation path.
 
 ## E-Invoicing - Onboarding:
 
@@ -97,21 +97,21 @@ Onboarding covers the end-to-end setup required for a taxpayer to start generati
 
 ### Onboarding on Fawtara portal
 
-✓ The taxpayer's VAT Identification Number (VATIN) is verified against OTA records as part of the onboarding process using the taxpayer's Fawtara portal credentials.
+<span style={{color: '#22c55e'}}>✓</span> The taxpayer's VAT Identification Number (VATIN) is verified against OTA records as part of the onboarding process using the taxpayer's Fawtara portal credentials.
 
-✓ Support for offboarding (delinking from ClearTax ASP) is available as part of the onboarding module.
+<span style={{color: '#22c55e'}}>✓</span> Support for offboarding (delinking from ClearTax ASP) is available as part of the onboarding module.
 
-✓ Note: Customer is required to select ClearTax as their designated ASP in the Fawtara portal, declaring that ClearTax will act as Service provider legally for exchanging eInvoices.
+<span style={{color: '#22c55e'}}>✓</span> Note: Customer is required to select ClearTax as their designated ASP in the Fawtara portal, declaring that ClearTax will act as Service provider legally for exchanging eInvoices.
 
-✓ ClearTax will create the Peppol ID; publish and update the same in the PEPPOL directory.
+<span style={{color: '#22c55e'}}>✓</span> ClearTax will create the Peppol ID; publish and update the same in the PEPPOL directory.
 
 ### Onboarding on ClearTax
 
-✓ Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
+<span style={{color: '#22c55e'}}>✓</span> Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
 
-✓ Configure your account and profile with the Company Legal Name, User's Name and Designation.
+<span style={{color: '#22c55e'}}>✓</span> Configure your account and profile with the Company Legal Name, User's Name and Designation.
 
-✓ Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
+<span style={{color: '#22c55e'}}>✓</span> Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
 
-✓ Configure your VATIN to define your organisation's structure
+<span style={{color: '#22c55e'}}>✓</span> Configure your VATIN to define your organisation's structure
 
