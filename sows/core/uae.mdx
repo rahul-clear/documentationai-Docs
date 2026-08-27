@@ -3,4 +3,137 @@ title: 'SoW - Core: UAE'
 description: Statement of Work for ClearTax's core UAE e-invoicing platform access
 ---
 
+### 1. Core eInvoicing
+
+Access to the ClearTax UAE e-invoicing platform to send, receive and report invoices via ClearTax as an FTA-recognised Accredited Service Provider (ASP), keeping you compliant with the UAE e-invoicing mandate.
+
+**Scope**
+
+- **Peppol network exchange (5-corner model)** — ClearTax operates as your registered Peppol Access Point (C2-supplier/C3-buyer) — we will exchange invoices over the UAE Peppol network on your behalf and report the corresponding tax data to the Federal Tax Authority (C5)
+- **B2B, B2G and B2C coverage** — ClearTax supports the transaction types covered under the current phase of the UAE mandate i.e. B2B and B2G. B2C remains outside the statutory e-invoicing scope.
+- **Sending your invoices to your buyers** — ClearTax validates each invoice against the PINT-AE schema and business rules and delivers the invoice to your buyer's Access Point. ClearTax supports sending of all document types available as part of the UAE mandate: Tax Invoices, Simplified Tax Invoices, Credit Notes, Debit Notes and their self-billing variants.
+- Auto "withdrawal" of TDD (C5) in case the Buyer Access Point rejects the eInvoice document due to business or schema validation rules.
+- **Receiving invoices from your suppliers** — Invoices arriving from your suppliers' Access Points are accepted in the PINT-AE format, normalised into a common representation, and made available on the platform.
+- **Mandatory status reporting to the FTA** — TDD is submitted to the FTA within the mandated SLA (15 minutes from validation for domestic and cross-border exchanges), with MLS acknowledgement tracked back to your workspace.
+
+You can choose the integration method that fits your systems:
+
+- **Direct upload via the ClearTax web platform** (Excel template) — upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields
+- **SFTP batch ingestion** — ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for FTA-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
+- **REST API** — Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
+
+### 2. Onboarding
+
+Onboarding covers the end-to-end setup required for a taxpayer to start generating and submitting FTA-compliant e-invoices through the ClearTax platform.
+
+**Onboarding on EmaraTax**
+
+- The taxpayer's Tax Identification Number (TIN) and VAT TRN are verified against FTA records as part of the onboarding process using the taxpayer's EmaraTax credentials.
+- Support for re-verification of TIN credentials (in case of EmaraTax token expiry or FTA record changes) and off-boarding (delinking from ClearTax ASP) is available as part of the onboarding module.
+- ClearTax will create the Peppol ID, and publish and update the same in the FTA directory.
+
+<Callout kind="info" collapsed="false">
+  Customer is required to select ClearTax as their designated ASP in the EmaraTax portal, declaring that ClearTax will act as service provider legally for exchanging eInvoices.
+</Callout>
+
+**Onboarding on ClearTax**
+
+- Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
+- Configure your account and profile with the Company Legal Name, User's Name and Designation.
+- Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
+- Configure your TRN (if applicable) and TIN to define your organisation's structure.
+
+### 3. E-invoices Exchange supported
+
+| Exchange | Supported | Comment                                |
+| -------- | --------- | -------------------------------------- |
+| **B2B**  | ✅         |                                        |
+| **B2G**  | ✅         |                                        |
+| **B2C**  | N/A       | Currently not part of phase 1 mandated |
+
+### 4. Document types supported
+
+|  Document Type            | Supported |
+| ------------------------- | --------- |
+| **Standard Tax eInvoice** | ✅         |
+| **Credit Note**           | ✅         |
+| **Debit Note**            | ✅         |
+| **Self Billed eInvoice**  | ✅         |
+| **Prepayment Invoice**    | ✅         |
+
+<Callout kind="info" collapsed="false">
+  ClearTax follows PINT-AE rules. As mandated by UAE goveronment
+</Callout>
+
+### 5. Channels
+
+| Channel                   | Support | Description                                                                                                                                               | Taxpayer                                                                                                                   |
+| ------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **API**                   | ✅       | REST endpoints for integrating with your ERP or POS/accounting system: sending invoices, checking status, querying documents, and retrieving PDFs/XMLs.   | Hits the Cleartax provided endpoint with auth-token and eInvoice data as per API contract.                                 |
+| **UI (manual ingestion)** | ✅       | Direct upload via the ClearTax web platform (Excel/CSV template),                                                                                         | Fills in the template provided by ClearTax which clearly highlights "mandatory, conditional mandatory and optional fields" |
+| **SFTP**                  | ✅       | Scheduled bulk file exchange: drop invoice batches (CSV/Excel/XML) into a secure directory and pick up status and response files from an outbound folder. |                                                                                                                            |
+
+### 6. Accounts Receivable (ClearTax as C2 - seller side)
+
+Taxpayer will be able to send documents to buyer (counterparty) via ClearTax
+
+- ClearTax's Access Point will be able to consume eInvoice data from taxpayer via API, UI (ingestion) or SFTP.
+- Validate the documents against government provided XSLT (validations/schematron rules).
+- Prepare the document and send it to Buyer's (counterparty) Access point.
+- Grab status i.e. MLS from Buyer AP and showcase the same to the seller side.
+- In case Buyer Access point rejects (or not available) the document due to validation or schematron failures", the taxpayer is able to fix and re-send the document to the buyer.
+
+| Status                         | Meaning                               |
+| ------------------------------ | ------------------------------------- |
+| **Pending**                    | Document queued, awaiting submission  |
+| **Delivered to buyer network** | Document reached buyer's access point |
+| **Delivered to buyer**         | Document reached Taxpayer             |
+| **Failed**                     | Validation or delivery failed         |
+
+### 7. Accounts Payable (ClearTax as C3 - buyer side)
+
+Taxpayer will be able to receive inbound eInvoices via ClearTax
+
+1. Validate the documents against government provided XSLT (validations/schematron rules).
+2. Return back the acknowledgement to in the form of MLS to Sellers Access Point
+3. Store and share the document with the customer via API, UI and SFTP
+
+
+
+| Status   | Meaning                       |
+| -------- | ----------------------------- |
+| Received | Invoice arrived from supplier |
+| Failed   | Validation failed on receipt  |
+
+### 8. Government Reporting (FTA - via TDD)
+
+1. Every exchange (send and receive) is reported to FTA as a TDD document, on both seller and buyer sides, within the defined SLA (15 mins from the time document reaches the counterparty AP)
+2. If the Buyer rejects the document sent via Taxpayer, ClearTax "withdraws" the TDD from FTA and notifies the seller.
+3. ClearTax will retry submission of TDD to government in case of non-availability of government access point (multiple times within the span of 24 hours). &#x20;
+
+<Callout kind="info" collapsed="false">
+  **TDD**: The report a service provider sends to the FTA (C5) to declare an invoice. Sent by C2 for the issuer and by C3 for the receiver\
+
+
+  **TDS**: A variant of the TDD used to report a validation outcome rather than a clean declaration - i.e. where C3 finds a C2-declared "PINT-AE compliant" invoice does not validate
+</Callout>
+
+| Status        | Meaning                            |
+| ------------- | ---------------------------------- |
+| Not Submitted | TDD not yet dispatched             |
+| Processing    | TDD sent, awaiting response        |
+| Accepted      | FTA accepted the TDD               |
+| Withdrawn     | TDD withdrawn (following buyer RE) |
+
+**What is MLS?**
+
+<Callout kind="info" collapsed="false">
+  MLS = Message Level Status. It's a machine-generated acknowledgment sent back through the Peppol network confirming that the receiving access point accepted (or rejected) the document.
+</Callout>
+
+| MLS code | Description                                                                       |
+| -------- | --------------------------------------------------------------------------------- |
+| AP       | Accepted by Access Point and sent to Taxpayer (with acknowledgement received)     |
+| AB       | Accepted by Access Point but no confirmation from Taxpayer                        |
+| RE       | Rejected (with reason code: SV syntax / BV business rule / BW warning / FD fraud) |
 
