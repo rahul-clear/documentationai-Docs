@@ -29,3 +29,65 @@ description: >-
 
 ✓ **REST API** - Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format
 
+## SDK - Offline B2C e-Invoice solution with QR & Invoice Generation:
+
+For high-volume, multi-store retail deployments with non-reliable internet connection, ClearTax provides a self-contained, offline-first Java SDK that generates OTA/PINT-OM-compliant e-invoices, XML, Seller UUID, and QR code → locally at the point of sale, with no network call required for the transaction itself.
+
+### Scope and responsibilities of ClearTax:
+
+✓ JSON-to-UBL conversion → the SDK converts JSON invoice data of a sale into the official PINT-OM UBL XML invoice format.
+
+✓ Rule-based validation → every invoice is validated against the defined OTA/PINT-OM business rule set
+
+✓ Seller UUID + QR generation → the SDK derives a deterministic Seller UUID and generates the QR code (Base64-encoded) for the printed receipt.
+
+✓ Fully offline transaction path → invoice xml generation, validation, and QR/UUID derivation run entirely offline without any internet connection
+
+✓ Embedded deployment model → The sdk.jar application will reside on the POS/KIOSK, on its Java classpath and will be called in-process per sale; validation rules are available by default and cached in memory for the life of the process, keeping per-sale latency low.
+
+✓ CLI tooling for QA, support, and batch work → the same jar ships a command-line interface for testing POS releases, investigating any disputed invoices and pulling activity logs.
+
+✓ Device onboarding / activation → each POS terminal/device is one-time activated against the ClearTax portal using the VATIN number, activation code, and auth token issued for that store/device; an un-onboarded or revoked device will be prevented from issuing invoices compliant.
+
+✓ Local activity logs → the SDK maintains local logs of device activity, exportable/clearable via the CLI, to support audits and debugging issues without disrupting the live POS invoicing process.
+
+### Deployment prerequisites:
+
+✓ Java 21 or newer on each device; the jar bundles everything else it needs → no separate install step.
+
+✓ A VAT number, activation code, and auth token per device/store, issued by ClearTax as part of onboarding.
+
+✓ Invoice data supplied per the SDK's JSON contract.
+
+✓ The machine should have minimum of 2 GB storage and a minimum processing capacity of 512 MB RAM but it is recommended that the system has 8 GB storage and 2 GB RAM for best performance
+
+✓ Storage will be used to store generated E-Invoice XMLs and log files
+
+✓ Processing would be used to sign XMLs and validate data
+
+### Client responsibilities:
+
+✓ Integration: Embedding sdk.jar into the POS/KIOSK/relevant channel application(s) and map sale data into the agreed JSON contract, sending all fields required by PINT-OM in the format defined by ClearTax.
+
+✓ Invoice completeness: Submit every in-scope sale document and its associated notes (credit/debit).
+
+✓ Onboarding gate: Ensuring each device is onboarded before it is permitted to issue live invoices. Any device that is not onboarded will not be able to issue compliant invoices
+
+✓ Runtime maintenance: Maintaining Java 21+ runtime on each device throughout the SDK's operational life.
+
+✓ SDK version currency: Apply Cleartax-published SDK updates within the timelines communicated for each release so that devices remain aligned with the latest OTA/PINT-OM version.
+
+✓ Tamper protection: Do not tamper with the sdk or its logs. Any modification, tampering or deletion of the SDK and associated files may lead to non-compliance
+
+✓ Systems not having ClearTax SDK: In case a Customer is maintaining separate Point of Sale (PoS) systems which are not connected with ClearTax then the Customer must be solely responsible for generating and reporting E-invoices for documents generated from such systems.
+
+✓ Connectivity for Reporting: Ensure connectivity is sufficient for locally queued invoices to reach Cleartax (C2) within the OTA mandated reporting window of 24 hours via the strategy convenient to the business.
+
+✓ Reporting may originate directly from the POS device once it is online or via a back-office system that collects queued invoices from devices and relays them to Cleartax.
+
+✓ You can choose and manage either of these options to ensure compliance within the applicable mandate window.
+
+### Additional Dependencies:
+
+✓ End-to-end submission of the locally queued invoice XML to the OTA's central system (via API/SFTP leg) → this is a background process distinct from local generation and is scoped separately from the SDK's offline generation path.
+
