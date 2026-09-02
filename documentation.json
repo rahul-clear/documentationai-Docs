@@ -323,20 +323,16 @@
                     "path": "sows/platform/audit-trail"
                   },
                   {
-                    "title": "Email",
+                    "title": "Send document via Email",
                     "path": "sows/platform/email"
                   },
                   {
-                    "title": "Customer Print Template",
+                    "title": "Invoice Print Template ",
                     "path": "sows/platform/customer-print-template"
                   },
                   {
-                    "title": "Data Archival",
+                    "title": "Data Archival and Storage",
                     "path": "sows/platform/data-archival"
-                  },
-                  {
-                    "title": "License",
-                    "path": "sows/platform/license"
                   },
                   {
                     "title": "Reports",
@@ -367,7 +363,7 @@
                     "path": "sows/platform/ap-routing"
                   },
                   {
-                    "title": "AMC",
+                    "title": "E-Invoicing - Annual Maintenance Charge",
                     "path": "sows/platform/amc"
                   }
                 ]
