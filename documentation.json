@@ -285,6 +285,10 @@
                     "path": "sows/core/france"
                   },
                   {
+                    "title": "Germany",
+                    "path": "germany"
+                  },
+                  {
                     "title": "Belgium",
                     "path": "sows/core/belgium"
                   },
