@@ -285,6 +285,10 @@
                     "path": "sows/core/germany"
                   },
                   {
+                    "title": "Poland",
+                    "path": "sows/core/poland"
+                  },
+                  {
                     "title": "Belgium",
                     "path": "sows/core/belgium"
                   },
@@ -307,10 +311,6 @@
                   {
                     "title": "Jordan",
                     "path": "sows/core/jordan"
-                  },
-                  {
-                    "title": "Poland",
-                    "path": "sows/core/poland"
                   }
                 ]
               },
