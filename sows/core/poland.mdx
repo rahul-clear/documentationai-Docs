@@ -1,4 +1,55 @@
 ---
-title: 'SOW - Core: Poland'
+title: 'SoW - Core: Poland'
+description: >-
+  Access to the ClearTax Poland e-invoicing platform to issue, receive and
+  archive invoices through KSeF (Krajowy System e-Faktur), Poland's
+  centralized government e-invoicing platform, with ClearTax acting as your
+  authorised entity for invoice submission, keeping you compliant with the
+  Poland e-invoicing mandate.
 ---
-Coming soon.
+## **Scope:**
+
+<span style={{color: '#22c55e'}}>✓</span> **Centralized exchange model** - KSeF is a single national platform run by Poland's Ministry of Finance (Krajowa Administracja Skarbowa). ClearTax submits your invoices directly to KSeF as your authorised entity, and the same platform is where your incoming invoices are generated and made available.
+
+<span style={{color: '#22c55e'}}>✓</span> **B2B and B2G coverage** - ClearTax supports the transaction types covered under the current phase of the Poland mandate, i.e. B2B and B2G. B2C remains voluntary.
+
+<span style={{color: '#22c55e'}}>✓</span> **Sending your invoices to your buyers** - ClearTax validates each invoice against the FA(3) schema (Poland's EN 16931 based structured XML format) and business rules, then submits it to KSeF. Once KSeF validates the invoice, it assigns a unique KSeF invoice number and QR code, at which point the invoice is legally issued and becomes retrievable by your buyer from the same platform.
+
+- ClearTax supports sending of document types available under the KSeF mandate: standard invoices and corrective invoices.
+- If KSeF rejects a submission for schema or business rule errors, the error is flagged on your workspace for correction and resubmission as a new or corrective invoice.
+
+<span style={{color: '#22c55e'}}>✓</span> **Receiving invoices from your suppliers** - Invoices issued to you are picked up from KSeF once assigned a KSeF number, normalised into a common representation, and made available on the platform.
+
+<span style={{color: '#22c55e'}}>✓</span> **QR code verification** - Code I (KSeF invoice number) is embedded on every invoice.
+
+### You can choose the integration method that fits your systems:
+
+<span style={{color: '#22c55e'}}>✓</span> **Direct upload via the ClearTax web platform (Excel template)** - Upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields.
+
+<span style={{color: '#22c55e'}}>✓</span> **SFTP batch ingestion** - ClearTax will pull invoice files from the customer's SFTP/FTP server at regular intervals, push them through ClearTax APIs for KSeF-compliant processing, and drop the response files back on the same server, with email alerts to admin on any failures.
+
+<span style={{color: '#22c55e'}}>✓</span> **REST API** - Provided RESTful endpoints to seamlessly connect your ERP, POS, or accounting software using JSON format.
+
+### 2. Onboarding
+
+Onboarding covers the end-to-end setup required for a taxpayer to start issuing and receiving KSeF-compliant e-invoices through the ClearTax platform.
+
+**Onboarding on KSeF**
+
+<span style={{color: '#22c55e'}}>✓</span> The taxpayer's NIP (Polish Tax Identification Number) is verified as part of the onboarding process.
+
+<span style={{color: '#22c55e'}}>✓</span> You will need to share your KSeF certificates for both production and testing with ClearTax (Link: How to generate KSeF certificates?).
+
+<span style={{color: '#22c55e'}}>✓</span> ClearTax will configure your account against a KSeF certificate or token issued after initial authentication.
+
+**Onboarding on ClearTax**
+
+<span style={{color: '#22c55e'}}>✓</span> Sign-up via SSO or Email, with Multi-Factor Authentication (MFA) requiring OTP verification sent to the chosen login email address.
+
+<span style={{color: '#22c55e'}}>✓</span> Configure your account and profile with the Company Legal Name, User's Name and Designation.
+
+<span style={{color: '#22c55e'}}>✓</span> Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) prior to setting up the production environment.
+
+<span style={{color: '#22c55e'}}>✓</span> Configure your NIP to define your organisation's structure.
+
+<span style={{color: '#22c55e'}}>✓</span> **RBAC** - Role-based access control lets your workspace administrator assign users to roles with different permissions, controlling who can view, create, approve, or act on invoices within your workspace, in line with your internal segregation-of-duties requirements.

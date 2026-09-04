@@ -1,5 +1,53 @@
 ---
-title: 'SOW - Core: France'
-description: Statement of Work for ClearTax's core France e-invoicing platform access
+title: 'SoW - Core: France'
+description: >-
+  Access to the ClearTax France e-invoicing platform to send, receive and
+  report invoices via ClearTax's certified Plateforme Agréée (PA), keeping
+  you compliant with the French e-invoicing mandate.
 ---
+## **Scope:**
 
+<span style={{color: '#22c55e'}}>✓</span> **Peppol network exchange (5-corner model)** - ClearTax operates as your registered Peppol Access Point and certified Plateforme Agréée (C2-supplier/C3-buyer) - we will exchange invoices over the Peppol network on your behalf and report the corresponding invoice and lifecycle data to the PPF (C5).
+
+<span style={{color: '#22c55e'}}>✓</span> **B2B domestic, B2B international and B2C coverage** - ClearTax supports domestic B2B exchange under the mandate, and e-reporting for the transaction types that fall outside it: B2B international sales and purchases, and B2C transactions.
+
+<span style={{color: '#22c55e'}}>✓</span> **Sending your invoices to your buyers** - ClearTax validates each invoice, delivers it to your buyer's platform, and files it with the PPF along with lifecycle statuses. Outbound invoices are issued in UBL format for French PA exchange.
+
+- ClearTax supports sending of all document types available as part of the French mandate.
+
+<span style={{color: '#22c55e'}}>✓</span> **Receiving invoices from your suppliers** - Invoices arriving from your suppliers' platforms are accepted in any mandate-approved format (UBL, CII, or Factur-X), normalised into a common representation, and made available on the platform.
+
+- ClearTax supports reception of all document types available as part of the French mandate.
+
+<span style={{color: '#22c55e'}}>✓</span> **Lifecycle actions and mandatory status reporting to the PPF** - Your team can manage the full lifecycle of purchase and sales invoices as defined by the French mandate. The mandatory statuses - Filed, Rejected, Refused and Payment Collected - are reported to the PPF within the 24-hour window.
+
+<span style={{color: '#22c55e'}}>✓</span> **E-reporting to the PPF** - For transactions outside the domestic B2B scope: B2B international sales and purchases, B2C transactions, and payment reporting for the same.
+
+- You submit each transaction to ClearTax on a per-invoice basis.
+- ClearTax handles the consolidation and submission to the PPF within the mandated reporting timelines based on your VAT regime.
+
+<span style={{color: '#22c55e'}}>✓</span> **AFNOR business scenarios** - ClearTax supports 35 of the 44 business scenarios defined in AFNOR XP Z12-014, with coverage expanded on an ongoing basis as additional scenarios are added to the platform.
+
+<span style={{color: '#22c55e'}}>✓</span> **Role-based access control (RBAC)** - Your workspace administrator can assign users to roles with different permissions, controlling who can view, create, approve, or act on invoices within your workspace, in line with your internal segregation-of-duties requirements.
+
+### You can choose the integration method that fits your systems:
+
+<span style={{color: '#22c55e'}}>✓</span> **Direct upload via the ClearTax web platform (Excel template)** - Upload your invoice data based on the provided ingestion template, clearly highlighting mandatory, conditional-mandatory and optional fields.
+
+<span style={{color: '#22c55e'}}>✓</span> **SFTP batch ingestion** - ClearTax will pick up invoice files from your SFTP server at regular intervals, process them for mandate-compliant exchange, and drop the response files back on the same server.
+
+<span style={{color: '#22c55e'}}>✓</span> **REST API** - RESTful endpoints to seamlessly connect your ERP or accounting software: sending invoices, checking status, querying documents, performing lifecycle actions, and uploading e-reporting transactions.
+
+### 2. Onboarding
+
+Onboarding covers the end-to-end setup needed for your business to start sending and receiving invoices through ClearTax as your certified Plateforme Agréée (PA) under the French e-invoicing mandate.
+
+**Onboarding on ClearTax**
+
+<span style={{color: '#22c55e'}}>✓</span> **Business and identity verification (KYB and KYC)** - Before account activation, ClearTax verifies your business's legal existence and the identity of your legal representative, meeting French requirements applicable to certified PAs.
+
+<span style={{color: '#22c55e'}}>✓</span> **Registration with the PPF** - ClearTax registers your business with the French tax authority as a linked entity under ClearTax's PA accreditation, so all invoices sent and received on your behalf count as compliant under the mandate.
+
+<span style={{color: '#22c55e'}}>✓</span> **Configure your business hierarchy** - Your team can configure SIREN legal entities, SIRET establishments, and routing codes, so invoices are routed to the correct entity or branch within your organisation.
+
+<span style={{color: '#22c55e'}}>✓</span> Both Demo and Production environments are available. We recommend utilizing the Demo environment for integration testing and user acceptance testing (UAT) with your ERP prior to setting up the production environment.
