@@ -273,6 +273,10 @@
                     "path": "sows/core/uae"
                   },
                   {
+                    "title": "Germany",
+                    "path": "sows/core/germany"
+                  },
+                  {
                     "title": "Oman",
                     "path": "sows/core/oman"
                   },
