@@ -121,6 +121,10 @@
                   {
                     "title": "Flows",
                     "path": "countries/oman/flows"
+                  },
+                  {
+                    "title": "Offline SDK",
+                    "path": "countries/oman/offline-sdk"
                   }
                 ]
               },
