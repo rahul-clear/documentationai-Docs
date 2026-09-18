@@ -1,0 +1,79 @@
+---
+title: Onboarding for Partners
+description: 'Step-by-step flow for a partner onboarding an end customer as a UAE taxpayer on ClearTax as ASP'
+---
+In this scenario a partner onboards an end customer onto ClearTax on their behalf. The partner's part of the flow is limited to adding the end customer's TIN in Business settings. From that point on, the end customer completes the rest of the onboarding directly on EmaraTax, and stops just short of logging in or signing up on ClearTax - reporting back to the partner instead of completing that step themselves.
+
+### Step 1: Partner adds a new TIN in Business settings
+
+The partner logs in to their own ClearTax workspace and opens **Settings > Business settings**. This page lists all the businesses (TRNs) already onboarded under the partner's workspace.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/business-settings-populated.png" width="1400" height="763" alt="Business settings - view and manage businesses" />
+
+The partner clicks **Add business** to open the **Add new TRNs** modal and enters the Business Identifier (TIN), Business Name, and VAT Registration Type for the end customer being onboarded.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/add-trn-modal.png" width="1400" height="766" alt="Add new TRNs modal - enter Business Identifier, Business Name, and VAT Registration Type" />
+
+The partner's part of the flow ends here. The new TIN now shows as **Not Linked** under the Emaratax Status column until the end customer completes the EmaraTax side of the linking, described below.
+
+### Step 2: End customer logs in to EmaraTax
+
+The end customer's admin user logs in to the EmaraTax portal of FTA-UAE by entering their credentials and captcha.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/emaratax-login.jpg" width="1400" height="696" alt="EmaraTax login screen" />
+
+### Step 3: Select e-Invoicing
+
+The user lands on the homepage of EmaraTax and chooses e-Invoicing since they need to begin with the process of e-Invoicing.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/emaratax-e-invoicing-menu.jpg" width="1400" height="698" alt="EmaraTax homepage with e-Invoicing option" />
+
+### Step 4: Click on Proceed
+
+EmaraTax portal gives details of the actions that are possible while on the e-Invoicing page, to which the user clicks on "Proceed" to move to the actual page.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/action-required-modal.jpg" width="1400" height="698" alt="EmaraTax e-Invoicing page Proceed action" />
+
+### Step 5: Select TIN
+
+The user selects the same TIN that the partner added in Business settings, from the dropdown list containing the list of all TINs that are mapped in the EmaraTax account.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/select-tin.jpg" width="1400" height="700" alt="TIN selection dropdown on EmaraTax" />
+
+### Step 6: Selection of "Defmacro" as ASP
+
+After selecting the TIN the user sees the list of available ASPs. The user has to navigate to the page where ClearTax appears, listed under its legal entity name "Defmacro" - this is expected. After selecting the radio button against "Defmacro", the user clicks on "Proceed to ASP".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/select-defmacro-asp.jpg" width="1400" height="701" alt="Selecting Defmacro (ClearTax) as ASP on EmaraTax" />
+
+### Step 7: Confirmation of redirection to ClearTax
+
+After clicking on "Proceed to ASP" a popup message appears on EmaraTax to indicate that the user will be redirected to the ASP website. The user clicks on "Yes" to continue the next steps of the onboarding process on ClearTax.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/confirm-redirect.jpg" width="1400" height="701" alt="Redirect confirmation popup on EmaraTax" />
+
+### Step 8: Linking request on ClearTax
+
+The user is redirected to ClearTax, which opens the "Linking request" page. Here the user enters the registered EmaraTax email address, TIN number, and phone number, with phone number being optional. After entering the correct details the user clicks on "Verify applicant details".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/linking-request-form.jpg" width="1400" height="875" alt="ClearTax Linking request page" />
+
+### Step 9: Confirmation of details
+
+Once all the details are correctly entered, the user will see the taxpayer information as per EmaraTax displayed on the screen. The user can check all the details and select the declaration check box to click on "Submit" in order to proceed further.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/confirm-details-unchecked.jpg" width="1400" height="701" alt="Taxpayer details fetched from EmaraTax" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/confirm-details-checked.jpg" width="1400" height="691" alt="Declaration checkbox and Submit on ClearTax" />
+
+### Step 10: Complete verification and Peppol ID creation
+
+The taxpayer information is verified by EmaraTax. Once this is done a Peppol participant ID will be generated for the taxpayer and registered in the central directory of the FTA. After all these steps are completed a success message will be displayed, along with the option to click on "Get Started".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/peppol-id-created.jpg" width="1400" height="697" alt="Verification success and Peppol ID creation" />
+
+### The end customer's flow stops here
+
+Clicking "Get Started" would normally take the end customer to ClearTax to log in to an existing account or sign up for a new one (see [Step 10 onwards of Onboarding via EmaraTax](/countries/uae/end-user-onboarding/onboarding-via-emaratax)). In partner-led onboarding, the end customer does **not** complete this step. Instead, they stop here and report back to the partner that EmaraTax linking is complete.
+
+The partner can then confirm the link by checking the Emaratax Status column on the Business settings page - the TIN added in Step 1 should now show as **Linked**, and the partner can proceed with e-Invoicing on behalf of the end customer under that TRN.

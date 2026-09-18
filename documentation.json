@@ -61,6 +61,10 @@
                         "path": "countries/uae/end-user-onboarding/onboarding-via-cleartax"
                       },
                       {
+                        "title": "Onboarding for Partners",
+                        "path": "countries/uae/end-user-onboarding/onboarding-for-partners"
+                      },
+                      {
                         "title": "Error Scenarios",
                         "path": "countries/uae/end-user-onboarding/error-scenarios"
                       }
