@@ -1,0 +1,153 @@
+---
+title: Importing Documents
+description: 'Bulk upload via the Import UI, Import History, and a high-level look at API/SFTP integration'
+---
+Documents enter ClearTax Jordan through three channels: bulk file upload via the Import UI, API integration, and SFTP file drop. All three land in the same downstream flow - invoices are validated, deduplicated, and made available in Sales Documents for onward submission to ISTD.
+
+This section covers:
+
+- The bulk upload flow via the Import UI
+- Import History for reviewing past uploads and their outcomes
+- API and SFTP integration at a high level
+
+## Bulk upload via Import
+
+### Getting to Import
+
+From the e-Invoicing app, click the Import icon in the left sidebar.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/import-sidebar.png" width="2048" height="1155" alt="Import icon in the left sidebar" />
+
+### Upload the file
+
+The upload panel accepts .xlsx and .csv files matching the ClearTax Ingestion Template for Jordan.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/upload-panel.png" width="2048" height="1155" alt="Upload panel for bulk import" />
+
+The upload panel has two zones:
+
+- **Drop zone (top)** - either click to open the file picker or drag-and-drop your file. The drop zone accepts both .xlsx and .csv files. The UI label emphasises .xlsx because the ClearTax Ingestion Template is distributed as Excel, but CSV uploads work identically as long as they follow the same column structure.
+- **Template link (bottom)** - under "Don't have a file to import?", click ClearTax Ingestion Template to download the master Excel template with all the required columns and format guidance.
+
+Using the ClearTax Ingestion Template is strongly recommended - it has the exact column headers and data types the importer expects, so validation errors are far less likely.
+
+### Confirm file details and review errors
+
+After upload, confirm the business (TIN), the template to validate against, and run the check. ClearTax returns a summary of rows with and without errors, with an inline fix flow for anything flagged.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/confirm-file-details.png" width="2048" height="1155" alt="Confirm file details before import" />
+
+| Step | What to do |
+| --- | --- |
+| 1. File selected for import | The filename you uploaded, with a trash icon to remove and re-upload |
+| 2. Business | Confirms which business (TIN) the file's rows belong to. If your file spans multiple entities, select "File has multiple TINs" - the importer will route rows to the right entity based on the TIN column in the file. Otherwise pick the specific TIN. |
+| 3. Template to be used | Select the ingestion template ClearTax should validate against - e.g. "Einvoice Jordan - Sales Template". The panel notes: "We check your file for required columns based on the template you select." Use the same template you downloaded in the previous step. |
+
+Once all three are set, click Check file for errors & duplicates at the bottom. ClearTax runs schema and business rule validation against every row.
+
+### Review the file summary
+
+ClearTax processes the file and returns a summary. Two outcomes:
+
+**Outcome A - Errors found**
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/file-summary-errors.jpg" width="1400" height="797" alt="File Summary with errors" />
+
+The summary shows:
+
+- **File Details** - filename and size
+- **Branch Summary** - Docs, Rows, Errors (red count), No Errors (green count)
+- **Error File** download link - a copy of your original file with error columns appended, useful if you want to fix everything offline in Excel
+- **Review and fix errors** CTA - takes you into the guided fix flow
+
+**Outcome B - No errors**
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/file-summary-success.jpg" width="1400" height="796" alt="File Summary success state" />
+
+The summary shows a green success state:
+
+- "No errors in your file. Good job!"
+- Branch Summary (Rows Without Errors) with counts
+- Proceed CTA - imports the file directly into Sales Documents (or Self-Billed)
+
+If you're in this state, skip ahead to Proceed and ingest below.
+
+### Fix errors inline
+
+When errors are found, clicking Review and fix errors opens the inline error review page.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/error-review.jpg" width="1400" height="797" alt="Error review page" />
+
+Header:
+
+- File name and Business/TIN tabs - confirming what you're fixing
+- "Fix the highlighted errors to import these rows"
+- Fixed / Remaining counter - e.g. "Fixed: 0, Remaining: 1" - tracks your progress
+- Proceed button (top-right)
+
+### Proceed and ingest
+
+Clicking Proceed commits the file to ClearTax. Rows land in Sales Documents with a starting Document Status of Pending, ready to be submitted to JoFotara.
+
+From here, the invoices follow the standard outbound flow described in [Sales Documents](/countries/jordan/product-guide/sales-documents).
+
+## Import History
+
+Every file you upload is recorded in Import History, with columns for upload date, file name, source, TIN/branch, template, file type, and row counts.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/import-history.jpg" width="1400" height="799" alt="Import History list" />
+
+### Layout
+
+Columns:
+
+| Column | What it shows |
+| --- | --- |
+| Upload Date (GST) | Timestamp of the upload |
+| File Name | Original filename you uploaded |
+| Source | How the file entered ClearTax - UI, FTP, ERP, API, or JSON_API |
+| VAT/BRANCH | Which TIN/branch the file was routed to (or "Multiple BRANCH" for multi-entity files) |
+| Template | The ingestion template used |
+| File Type | xlsx or csv |
+| Total sheets | Number of worksheet tabs in the file |
+| Rows Processed | Total rows the importer read |
+| Rows (No Errors) | Rows that passed validation |
+| Rows (Errors) | Rows that failed validation |
+| Actions | Row-level action link |
+
+### Filtering
+
+Click Filters to open the side panel.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/importing-documents/import-history-filters.jpg" width="1400" height="798" alt="Import History filters" />
+
+Filter groups:
+
+- **Upload Date** - date picker to narrow by upload day/window
+- **File Name** - free-text search on the filename
+- **Source** - checkboxes: UI, FTP, ERP, API, JSON_API
+
+Apply Filters and Reset are at the bottom of the panel.
+
+Useful patterns: isolate all failed uploads from your ERP integration by filtering Source = ERP and looking at Rows (Errors); find yesterday's manual uploads by filtering Source = UI and Upload Date = yesterday.
+
+### Actions on a past import
+
+The Actions column shows a contextual link based on the file's state:
+
+| Action link | When it appears | What it does |
+| --- | --- | --- |
+| Fix Errors (red) | The file had errors that weren't resolved during initial upload | Opens the same inline error review page, letting you fix the outstanding errors and complete the import |
+| View File (blue) | The file was fully processed with no outstanding errors | Opens a read-only view of the file contents as ingested |
+
+## API and SFTP
+
+For customers pushing high volume from an ERP, ClearTax supports two direct integration channels beyond the Import UI:
+
+### API
+
+Please refer to the API documentation: [https://cleartax-unified-api.netlify.app/](https://cleartax-unified-api.netlify.app/)
+
+### SFTP
+
+Please contact your ClearTax representative for further details.

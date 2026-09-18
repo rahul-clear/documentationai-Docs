@@ -1,0 +1,191 @@
+---
+title: Sales Documents
+description: 'Managing outbound invoices and credit notes - filtering, actions, statuses, and troubleshooting'
+---
+Sales Documents is where you manage all outbound e-invoices you issue - tax invoices, credit notes and other document types your customers receive from you. It covers three broad activities:
+
+1. Creating invoices (manually, via bulk import, or via API/ERP integration)
+2. Monitoring their journey through JoFotara
+3. Acting on individual or multiple documents (sending, resending, downloading, printing, emailing, deleting)
+
+## Getting to Sales Documents
+
+From the e-Invoicing dashboard, either click the Sales documents tile in the main area, or click the Sales Documents icon in the left sidebar.
+
+## The Sales Documents list view
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/sales-documents/list-view.png" width="2048" height="1155" alt="Sales Documents list view" />
+
+The list view has four zones from top to bottom: status summary tiles, actions bar, active filter chips, and the document table.
+
+### Status summary tiles (top)
+
+Tiles at the top show the count of documents in each state, scoped to your current filter selection:
+
+| Tile | Meaning (placeholder) |
+| --- | --- |
+| Total | All documents matching current filters |
+| Pending | Awaiting submission to JoFotara |
+| Failed | Submission or validation failed; needs remediation |
+| Submitted | Sent to JoFotara and awaiting response |
+| Valid | Accepted and cleared by JoFotara |
+
+### Document table
+
+| Column | What it shows |
+| --- | --- |
+| Checkbox | Select the row for bulk actions |
+| Invoice Number | Your document number (clickable - opens the detail view) |
+| Invoice Status | ClearTax's view of where the document is |
+| Invoice Exchange Date | Date when invoice became Valid |
+| Invoice Date | Invoice issue date |
+| Invoice Type | Invoice & Credit note |
+| Invoice Sub-type | Cash Income Sales, Receivable Income Sales, Cash General Sales, Receivable General Sales, Cash Special Sales, Receivable Special Sales, Cash Export Income Sales, Receivable Export Income Sales |
+| Buyer Name | Buyer's legal name |
+| Buyer TIN | Buyer's Tax Identification Number |
+| Document currency code | Jordanian Dinar (JOD) |
+| Total Document Amount | Gross amount including tax |
+| Total VAT Amount | VAT portion |
+
+## Filtering the list
+
+Click Filter to open the side panel.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/sales-documents/filter-panel.png" width="2048" height="1155" alt="Sales Documents filter panel" />
+
+### Filter groups
+
+- **Document Date Range** - filter by the invoice issue date. Enter start and end dates.
+- **Invoice exchange Date** - filter by the date the document was submitted to JoFotara.
+- **Invoice Number** - free-text search on your invoice number.
+- **Buyer TIN** - free-text search on buyer TIN.
+- **Document Status** - checkbox list matching the status tiles at the top.
+- **Invoice Type** - Invoice & Credit Note
+- **Invoice Sub-type** - Cash Income Sales, Receivable Income Sales, Cash General Sales, Receivable General Sales, Cash Special Sales, Receivable Special Sales, Cash Export Income Sales, Receivable Export Income Sales
+
+### Applying and clearing filters
+
+At the bottom of the panel:
+
+- **Apply** - apply your selections. The table refreshes and each active filter appears as a chip above the table.
+- **Clear All** - resets every filter in the panel back to unselected.
+- **×** (top-right of panel) - closes the panel without applying changes.
+
+Individual filter groups have their own Clear link to reset only that group.
+
+## Actions on selected documents
+
+Tick one or more rows to enable bulk actions. The Actions button becomes active.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/sales-documents/bulk-actions.png" width="2048" height="1155" alt="Bulk actions on selected Sales Documents" />
+
+| Action | What it does |
+| --- | --- |
+| Download XML report | Downloads the raw XML payload of the selected document(s) |
+| Delete | Removes a document that hasn't been submitted successfully |
+| Print | Opens the document(s) in the print dialog |
+| Email | Sends the document(s) as an email attachment |
+| Download (Lite / Detailed report) | Compact or full export of selected documents |
+| Send | Submits selected documents to JoFotara for clearance |
+
+### Download submenu
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/sales-documents/download-submenu.png" width="2048" height="1155" alt="Download submenu" />
+
+| Sub-option | What it contains |
+| --- | --- |
+| Download Lite Report | Compact CSV/Excel export with headline fields only - good for quick reconciliation |
+| Download Detailed Report | Full export including line items, tax breakup, and Peppol metadata - good for audits and downstream analysis |
+
+### Send
+
+The Send button (blue, next to Actions) submits selected documents to JoFotara. Send is only available for documents in **Pending** or **Failed** state. For documents that have already been submitted successfully (Valid), Send is not offered, since the network handles onward delivery from that point.
+
+Two places to trigger Send:
+
+- **Bulk:** from the list view, tick one or more rows and click Send in the actions bar.
+- **Single:** from a document's detail view, click Send Document in the header.
+
+## The document detail view
+
+Click any Document Number in the list to open the detail view, showing invoice, seller, buyer, line item, and payment details.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/sales-documents/detail-view.png" width="2048" height="1155" alt="Sales document detail view" />
+
+### Header
+
+The top of the detail view shows:
+
+- **Invoice Number** (e.g. INV-00002)
+- **Document Status** pill (e.g. Delivered to buyer)
+- **Edit** button (top-right)
+- **×** - close and return to the list
+
+### Left navigation
+
+A section jump-list; click any entry to scroll the main pane to that section.
+
+| Section | What it holds |
+| --- | --- |
+| Invoice Details | Header-level fields: number, type code, issue date/time, currency, transaction type, period, supply flags |
+| Seller Details | Your organisation's identifiers, address, TIN, Income sequence source, name and country |
+| Buyer Details | Your organisation's identifiers, address, TIN, Income sequence source, name and country, identification type |
+| Line items | Individual line items with descriptions, quantities, prices, tax categories |
+| Payment Details | Payment means, terms, due date, bank details |
+| Amount Details | All details including and excluding taxes |
+
+## The document detail view - header states
+
+The detail view header changes based on the document's state:
+
+**Successfully delivered document** (Valid) - Send and Edit is hidden. No changes are possible post validation.
+
+**Failed document requiring action** (Failed + Not Submitted or Withdrawn) - both Send Document and Edit are shown, along with an "Invoice exchange error/warnings" banner at the top of the content area.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/jordan/product-guide/sales-documents/error-banner.png" width="2048" height="1155" alt="Invoice exchange error/warnings banner" />
+
+### Edit mode
+
+Click Edit in the detail view header to switch fields from read-only to editable.
+
+## Creating an invoice manually
+
+Detailed flow will be covered ahead.
+
+## Bulk upload (Import)
+
+See [Importing Documents](/countries/jordan/product-guide/importing-documents).
+
+## API and ERP integration
+
+For high-volume issuers, invoices flow into ClearTax directly from the ERP via API or SFTP. See [Importing Documents](/countries/jordan/product-guide/importing-documents) for a high-level overview.
+
+## Understanding statuses
+
+| Status | What has happened (placeholder) |
+| --- | --- |
+| Pending | Document is in ClearTax, awaiting submission |
+| Failed | Submission or validation failed |
+| Submitted | Sent to JoFotara and awaiting response |
+| Valid | Accepted and cleared by JoFotara |
+
+## Troubleshooting
+
+When a document fails validation or submission, ClearTax surfaces the errors in two places:
+
+1. On the list view - the row shows Failed under Document Status and (usually) Not Submitted or Withdrawn under Government Reporting Status.
+2. Inside the document's detail view - a red "Invoice exchange error/warnings" banner appears above the Invoice Details section.
+
+### Reading the error banner
+
+Click View More on the banner to expand the full error list; click View Less to collapse it back to the summary.
+
+Errors are labelled "Errors - Fix to continue" (red chip) - meaning submission is blocked until the underlying issue is corrected. Each error is a numbered line in the format:
+
+`<Source> : [<rule-code>] - <message referencing element IDs>`
+
+Example:
+
+```
+1. GOVT : Missing Client-Id or Secret-Key in request headers
+```

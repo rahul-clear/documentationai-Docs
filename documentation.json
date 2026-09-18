@@ -193,8 +193,46 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Jordan (Coming Soon)",
-                    "path": "countries/jordan/coming-soon"
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/jordan/product-guide/overview"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/jordan/product-guide/onboarding"
+                      },
+                      {
+                        "title": "Dashboard Walkthrough",
+                        "path": "countries/jordan/product-guide/dashboard-walkthrough"
+                      },
+                      {
+                        "title": "Sales Documents",
+                        "path": "countries/jordan/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/jordan/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "Importing Documents",
+                        "path": "countries/jordan/product-guide/importing-documents"
+                      },
+                      {
+                        "title": "Reports",
+                        "path": "countries/jordan/product-guide/reports"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/jordan/product-guide/settings"
+                      },
+                      {
+                        "title": "Support Desk",
+                        "path": "countries/jordan/product-guide/support-desk"
+                      }
+                    ]
                   }
                 ]
               },
