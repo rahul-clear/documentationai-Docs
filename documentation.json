@@ -373,6 +373,18 @@
                   {
                     "title": "E-Invoicing - Annual Maintenance Charge",
                     "path": "sows/platform/amc"
+                  },
+                  {
+                    "title": "Advanced Archival",
+                    "path": "sows/platform/advanced-archival"
+                  },
+                  {
+                    "title": "eArchive",
+                    "path": "sows/platform/earchive"
+                  },
+                  {
+                    "title": "PDF Merge",
+                    "path": "sows/platform/pdf-merge"
                   }
                 ]
               }
