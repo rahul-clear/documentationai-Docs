@@ -11,6 +11,7 @@ Before starting, make sure you have:
 - An existing, active ClearTax workspace (admin or business-settings access)
 - The new entity's **Business Identifier (TIN/TRN)**, **Business Name**, and **VAT Registration Type**
 - Admin login credentials for the new entity on the **EmaraTax** portal, with access to select an ASP for that TIN
+- Contact with your **ClearTax account representative**, who must be informed once the flow below is complete so they can enable the TIN for invoice exchange (see Step 12)
 
 ## Step-by-step process
 
@@ -82,6 +83,10 @@ EmaraTax verifies the taxpayer information and generates a Peppol participant ID
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/peppol-id-created.jpg" width="1400" height="697" alt="Verification success and Peppol ID creation" />
 
-### Step 11: New entity available in the workspace
+### Step 11: New entity shows as linked
 
-Back in ClearTax's Business settings, the new TIN's Emaratax Status now shows as **Linked**. The entity is available for selection alongside your other businesses, and you can begin generating and exchanging e-invoices under it right away - no new account or workspace is required.
+Back in ClearTax's Business settings, the new TIN's Emaratax Status now shows as **Linked**, and it is available for selection alongside your other businesses in the same workspace - no new account or workspace is required. You can also continue through to the e-Invoice dashboard as with a standard onboarding.
+
+### Step 12: Report the TIN to your ClearTax account representative
+
+Linking the TIN on the EmaraTax/ClearTax side does **not** by itself enable invoice exchange for it. Inform your ClearTax account representative that the new TIN has been added and linked - they will map the workspace, Peppol ID, and email ID for that TIN internally (via Retool). Invoice exchange for the new entity is only enabled once this internal mapping is complete.
