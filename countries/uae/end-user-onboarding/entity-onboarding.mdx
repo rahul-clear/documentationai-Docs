@@ -1,0 +1,87 @@
+---
+title: Entity Onboarding
+description: 'Process and requirements for adding a new entity (TIN) to an existing ClearTax workspace'
+---
+This scenario covers an **existing ClearTax customer** who already has an active workspace and needs to onboard an **additional legal entity (TRN/TIN)** under it - for example, a new branch, subsidiary, or sister company. It differs from the flows in [Onboarding via EmaraTax](/countries/uae/end-user-onboarding/onboarding-via-emaratax) and [Onboarding via ClearTax](/countries/uae/end-user-onboarding/onboarding-via-cleartax), which cover a taxpayer setting up ClearTax for the very first time, and from [Onboarding for Partners](/countries/uae/end-user-onboarding/onboarding-for-partners), where a partner adds the TIN on behalf of an end customer. Here, the account owner performs both the TIN addition and the EmaraTax linking themselves, end-to-end, without creating a new ClearTax account.
+
+## Requirements
+
+Before starting, make sure you have:
+
+- An existing, active ClearTax workspace (admin or business-settings access)
+- The new entity's **Business Identifier (TIN/TRN)**, **Business Name**, and **VAT Registration Type**
+- Admin login credentials for the new entity on the **EmaraTax** portal, with access to select an ASP for that TIN
+
+## Step-by-step process
+
+### Step 1: Add the new TIN in Business settings
+
+Log in to your existing ClearTax workspace and open **Settings > Business settings**. This page lists all the businesses (TRNs) already onboarded under the workspace.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/business-settings-populated.png" width="1400" height="763" alt="Business settings - view and manage businesses" />
+
+Click **Add business** to open the **Add new TRNs** modal and enter the Business Identifier (TIN), Business Name, and VAT Registration Type for the new entity.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/settings/add-trn-modal.png" width="1400" height="766" alt="Add new TRNs modal - enter Business Identifier, Business Name, and VAT Registration Type" />
+
+The new TIN now shows as **Not Linked** under the Emaratax Status column until the EmaraTax linking below is completed.
+
+### Step 2: Log in to EmaraTax
+
+Log in to the EmaraTax portal of FTA-UAE with the admin credentials for the new entity, entering credentials and captcha.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/emaratax-login.jpg" width="1400" height="696" alt="EmaraTax login screen" />
+
+### Step 3: Select e-Invoicing
+
+Land on the EmaraTax homepage and choose e-Invoicing to begin the ASP linking process.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/emaratax-e-invoicing-menu.jpg" width="1400" height="698" alt="EmaraTax homepage with e-Invoicing option" />
+
+### Step 4: Click on Proceed
+
+EmaraTax shows the details of the actions possible on the e-Invoicing page. Click "Proceed" to move to the actual page.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/action-required-modal.jpg" width="1400" height="698" alt="EmaraTax e-Invoicing page Proceed action" />
+
+### Step 5: Select the new TIN
+
+Select the same TIN that was added in Business settings in Step 1, from the dropdown list of all TINs mapped in the EmaraTax account.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/select-tin.jpg" width="1400" height="700" alt="TIN selection dropdown on EmaraTax" />
+
+### Step 6: Select "Defmacro" as ASP
+
+After selecting the TIN, navigate to the page where ClearTax appears, listed under its legal entity name "Defmacro" - this is expected. Select the radio button against "Defmacro" and click "Proceed to ASP".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/select-defmacro-asp.jpg" width="1400" height="701" alt="Selecting Defmacro (ClearTax) as ASP on EmaraTax" />
+
+### Step 7: Confirm redirection to ClearTax
+
+A popup message appears on EmaraTax indicating you will be redirected to the ASP website. Click "Yes" to continue on ClearTax.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/confirm-redirect.jpg" width="1400" height="701" alt="Redirect confirmation popup on EmaraTax" />
+
+### Step 8: Linking request on ClearTax
+
+You are redirected to ClearTax, which opens the "Linking request" page. Enter the registered EmaraTax email address, TIN number, and phone number (optional), then click "Verify applicant details".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/linking-request-form.jpg" width="1400" height="875" alt="ClearTax Linking request page" />
+
+### Step 9: Confirm details
+
+Review the taxpayer information fetched from EmaraTax, select the declaration checkbox, and click "Submit".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/confirm-details-unchecked.jpg" width="1400" height="701" alt="Taxpayer details fetched from EmaraTax" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/confirm-details-checked.jpg" width="1400" height="691" alt="Declaration checkbox and Submit on ClearTax" />
+
+### Step 10: Complete verification and Peppol ID creation
+
+EmaraTax verifies the taxpayer information and generates a Peppol participant ID, registered in the FTA's central directory. A success message is displayed with the option to click "Get Started".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/peppol-id-created.jpg" width="1400" height="697" alt="Verification success and Peppol ID creation" />
+
+### Step 11: New entity available in the workspace
+
+Back in ClearTax's Business settings, the new TIN's Emaratax Status now shows as **Linked**. The entity is available for selection alongside your other businesses, and you can begin generating and exchanging e-invoices under it right away - no new account or workspace is required.

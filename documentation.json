@@ -65,6 +65,10 @@
                         "path": "countries/uae/end-user-onboarding/onboarding-for-partners"
                       },
                       {
+                        "title": "Entity Onboarding",
+                        "path": "countries/uae/end-user-onboarding/entity-onboarding"
+                      },
+                      {
                         "title": "Error Scenarios",
                         "path": "countries/uae/end-user-onboarding/error-scenarios"
                       }
