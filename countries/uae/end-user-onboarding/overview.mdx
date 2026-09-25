@@ -13,4 +13,33 @@ This section covers scenarios of a taxpayer in the UAE onboarding ClearTax as an
 | [Onboarding for Partners](/countries/uae/end-user-onboarding/onboarding-for-partners) | Partner adds the end customer's TIN in Business settings, then the end customer completes the EmaraTax linking and reports back to the partner instead of signing up on ClearTax |
 | [New Entity Onboarding](/countries/uae/end-user-onboarding/entity-onboarding) | Existing ClearTax customer adds a new entity (TIN/TRN) to their workspace and completes the EmaraTax linking themselves |
 
+## Understand your tax registration type
+
+Before onboarding, identify which of the three UAE tax registration types applies to each entity you are onboarding. This determines the **VAT Registration Type** you select and what you enter in the **TRN** field on ClearTax.
+
+| Registration type | What it means |
+| --- | --- |
+| **VAT Group** | The company has a Group TRN, and each child entity operates under its own separate TIN. With Peppol document exchange, these TINs are used to receive invoices. |
+| **VAT Registered** | The company has only a single TRN/TIN pair. |
+| **Not VAT Registered** | The company has only a single TIN. |
+
+A large conglomerate can have a combination of these registration types across its entities, so identify the type for each entity separately.
+
+### What to enter on ClearTax
+
+The VAT Registration Type is selected on two screens:
+
+- The **Add new TRNs** modal in **Settings > Business settings**, using the **VAT Registration Type** dropdown
+- The **Create Business Profile** step after selecting e-Invoicing, using the **VAT Registration Type** radio buttons (**Single VAT**, **Group VAT**, **Not registered**)
+
+| Your registration type | Select | TRN field | Business / Organisation Name |
+| --- | --- | --- | --- |
+| VAT Group | Group VAT | Your actual Group TRN | Your business name |
+| VAT Registered | Single VAT | Your actual TRN | Your business name |
+| Not VAT Registered | Not registered | A free-text name, such as your entity or business name, instead of a TRN | Your business name - this can be the same as the free text entered in the TRN field |
+
+<Callout kind="info" collapsed="false">
+If you are **not VAT registered**, select the same **Not registered** option on both screens. The TRN field accepts free text in this case, and no validations are applied to the details entered.
+</Callout>
+
 See [Error Scenarios](/countries/uae/end-user-onboarding/error-scenarios) for validation failures that can occur during either flow.
