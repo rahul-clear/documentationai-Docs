@@ -12,6 +12,8 @@ Submitting starts a chain that runs partly on its own. You click one button; Cle
 
 Select the documents you want to send and click **Submit**, the blue button above the table. You can submit a single document or several at once.
 
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/product-guide/sending-an-invoice/25-f25.png" width="2048" height="1176" alt="Submit button highlighted" />
+
 <Callout kind="warning" collapsed="false">
 **Submit is not reversible.** Once a document has been submitted and accepted, it cannot be deleted. Only Pending and Failed documents can be removed.
 </Callout>
@@ -38,12 +40,16 @@ Validation has two outcomes.
 - Correct the affected fields
 - **Submit** again
 
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/product-guide/sending-an-invoice/26-f26.png" width="2048" height="1176" alt="Document submission failed at ClearTax - edit, fix and resubmit" />
+
 **Delete it and import a corrected document.** Best when the problem started in your ERP, or when several fields are wrong.
 
 - Delete the failed document using the **Delete** action
 - Correct the document in your ERP or business system
 - Import it again through the UI, API or SFTP
 - **Submit** the new document
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/product-guide/sending-an-invoice/27-f27.png" width="2048" height="1176" alt="Document submission failed at ClearTax - Delete the documents" />
 
 <Callout kind="info" collapsed="false">
 **Fixing it in ClearTax does not correct your ERP.** If the bad data came from your source system, editing here sends a correct invoice but leaves the original wrong. Where the underlying record matters, fix it at source and re-import.
@@ -77,6 +83,8 @@ ClearTax files the mandatory reports with the PPF within 24 hours. Two things ar
 
 These filings are tracked in the **Government Reporting** column, independently of the invoice status. Each filing is accepted or rejected on its own, which is why a document can show a healthy invoice status while its reporting has failed.
 
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/product-guide/sending-an-invoice/28-f28.png" width="2048" height="1176" alt="Govt. Reporting columns shows the outcome of reporting to the PPF" />
+
 <Callout kind="info" collapsed="false">
 **Reporting does not wait for your buyer.** ClearTax reports as soon as technical delivery is acknowledged. It does not wait for Received, Made Available, or any later status.
 </Callout>
@@ -86,6 +94,8 @@ Reporting runs asynchronously and independently of the exchange with your buyer.
 ## What happens at your buyer's end
 
 Once the document has been delivered, the statuses that follow come from your buyer's platform: **Received**, **Made Available**, and then whatever your buyer decides.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/product-guide/sending-an-invoice/29-f29.png" width="2048" height="1176" alt="Buyer’s PA confirmed delivery to the Buyer via “Made Available” status" />
 
 <Callout kind="warning" collapsed="false">
 **These statuses may never arrive.** Your buyer's PA may not have implemented them, or may have issues at their end. A document sitting at delivered without progressing is not necessarily a problem with your invoice, and it does not affect your reporting obligations - those were met at stage 3.
