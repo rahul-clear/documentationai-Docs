@@ -143,6 +143,60 @@
                   {
                     "title": "Flows",
                     "path": "countries/france/flows"
+                  },
+                  {
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/france/product-guide/overview"
+                      },
+                      {
+                        "title": "Dashboard Walkthrough",
+                        "path": "countries/france/product-guide/dashboard-walkthrough"
+                      },
+                      {
+                        "title": "Importing Documents",
+                        "path": "countries/france/product-guide/importing-documents"
+                      },
+                      {
+                        "title": "Sales Documents",
+                        "path": "countries/france/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Sending an Invoice",
+                        "path": "countries/france/product-guide/sending-an-invoice"
+                      },
+                      {
+                        "title": "When Something Goes Wrong",
+                        "path": "countries/france/product-guide/when-something-goes-wrong"
+                      },
+                      {
+                        "title": "Reporting Payment",
+                        "path": "countries/france/product-guide/reporting-payment"
+                      },
+                      {
+                        "title": "Self-Billed Invoices You Receive",
+                        "path": "countries/france/product-guide/self-billed-invoices-received"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/france/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "Reviewing a Purchase Invoice",
+                        "path": "countries/france/product-guide/reviewing-a-purchase-invoice"
+                      },
+                      {
+                        "title": "Self-Billed Invoices You Issue",
+                        "path": "countries/france/product-guide/self-billed-invoices-issued"
+                      },
+                      {
+                        "title": "e-Reporting",
+                        "path": "countries/france/product-guide/e-reporting"
+                      }
+                    ]
                   }
                 ]
               },
