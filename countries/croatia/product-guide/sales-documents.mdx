@@ -1,0 +1,129 @@
+---
+title: B2B Sales Documents
+description: 'Sending e-invoices, statuses, document actions, reference files, and payment e-reporting'
+---
+## Sending e-invoices
+
+You can submit your sales invoice data to ClearTax via API, ERP integration, or Excel ingestion using the same unified format used across all countries. ClearTax validates the data, converts it into the Croatian format, and submits it for fiscalisation and delivery automatically.
+
+When an invoice is sent:
+
+1. ClearTax validates the invoice - seller tax ID match, mandatory fields, and tax calculations.
+2. The invoice is fiscalised with the Tax Administration, which returns a Request ID (JIR).
+3. Only once it is fiscalised, the invoice (now containing the JIR) is delivered to the buyer over the Peppol network.
+
+Supported document types: Commercial invoice, Credit note, Debit note, Corrective invoice, Advance payment invoice, Partial invoice, Lease invoice, and Metered services invoice. Croatian VAT rates of 25%, 13%, 5% and 0% are supported.
+
+## Navigating the Sales Dashboard
+
+The Sales documents page is the central hub for all your outgoing invoices. Summary tiles at the top show the total number of documents and the count in each status.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-list.png" width="3022" height="1654" alt="Sales documents list" />
+The table shows each document's Invoice Number, Invoice Status, Invoice Exchange Date Time, Invoice Date, Invoice Type, Buyer Name, Buyer VAT Number, Document Currency Code, and Payment Reporting status. Click an invoice number to open the detailed document view.
+
+### Invoice statuses
+
+| Status    | What it means                                                                                                                           |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| Pending   | The invoice has been ingested into ClearTax and has not yet been sent.                                                                  |
+| Submitted | The invoice has been sent and is awaiting the fiscalisation and delivery outcome.                                                       |
+| Valid     | The invoice has been fiscalised with the Tax Administration and delivered to the buyer's Access Point. This is the final success state. |
+| Failed    | The invoice failed validation or fiscalisation. Open the invoice to see the error details, correct the data, and resend.                |
+
+A failure can come from ClearTax validation, Access Point validation, or fiscalisation by the Tax Administration. All of these show as Failed - the error message in the invoice's detailed view tells you which one occurred and what to fix.
+
+### Filtering the list
+
+Click "Filter" to open the filter panel. You can filter by Invoice Date, Invoice Exchange Date, Invoice Status (Valid, Pending, Failed, Submitted), Invoice Number, and Buyer VAT Number. Click "Apply" to apply your filters, or "Clear All" to reset them.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-filter.png" width="3020" height="1654" alt="Sales documents filter panel" />
+## Actions on Sales Documents
+
+Select one or more documents and click "Send" to submit them, or open the "Actions" dropdown for other actions.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-actions.png" width="3024" height="1654" alt="Sales documents Actions menu" />
+| Action                   | Description                                                                                                                                                                            |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Send                     | Submits the selected invoices for fiscalisation and delivery.                                                                                                                          |
+| Download XML report      | Downloads a ZIP file for each fiscalised invoice, containing the original payload, the final legal invoice sent to the buyer, and the Tax Administration acknowledgement with the JIR. |
+| Delete                   | Removes documents that have not yet been sent.                                                                                                                                         |
+| Print                    | Generates a PDF of the invoice using the available print template.                                                                                                                     |
+| Sync document status     | Fetches the latest status of the selected documents.                                                                                                                                   |
+| Email                    | Sends the invoice PDF by email using a selected template.                                                                                                                              |
+| Manage Reference Files   | Attaches additional reference documents to an invoice.                                                                                                                                 |
+| Record Payment           | Reports a payment received against a fiscalised invoice to the Tax Administration.                                                                                                     |
+| Download                 | Downloads the Lite Report or the Detailed Report for the selected documents.                                                                                                           |
+| Show/Hide Reorder Column | Shows, hides, and reorders table columns.                                                                                                                                              |
+| Sort                     | Sorts the table by a selected column.                                                                                                                                                  |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-download-reports.png" width="3022" height="1650" alt="Download submenu with Lite and Detailed reports" />
+## Manage additional reference files
+
+You can attach supporting documents, such as a delivery order, to an invoice:
+
+- Select the invoice, open "Actions", and choose "Manage Reference Files".
+- Click "Add Files" and enter a Document reference (mandatory, for example DO-2026-45) and an optional Description (for example, "Delivery order for PO12345").
+- Select a file to import, or drag and drop it into the upload box.
+- Click "Save & Attach".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/manage-reference-files.png" width="3024" height="1652" alt="Manage additional reference files panel" />
+## Payment e-reporting (Record Payment)
+
+Under Fiscalisation 2.0, when you receive payment for a fiscalised outgoing e-invoice, you must report it to the Tax Administration. ClearTax lets you do this directly from the Sales documents page.
+
+### When you can record a payment
+
+- The invoice status must be **Valid** (fiscalised).
+- Payment recording is not available for credit notes.
+- If these conditions are not met, the Record Payment action is not shown.
+
+### Recording a payment
+
+1. Select the invoice, open "Actions", and choose "Record Payment".
+2. The modal shows the buyer, invoice number and issue date, the invoice total, the amount collected so far, the amount still due, and the percentage collected.
+3. Enter the payment details:
+    - **Amount (EUR)** - the amount received, up to 2 decimal places. It cannot be zero.
+    - **Date of Collection** - the date the payment was received. It cannot be in the future or before the invoice issue date.
+    - **Payment Method** - T (transaction account / bank transfer), O (pro-forma invoice / offset), or Z (other).
+4. To report more than one payment at once, click "Add another Payment record" (up to 5 records per submission, each with its own date, method, and amount).
+5. Check the "Total amount collected" and click "Collect Payment".
+
+All other details required by the Tax Administration - document number, issue date, your OIB, the buyer's OIB, and currency (EUR) - are filled in automatically from the invoice.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/record-payment.png" width="3024" height="1648" alt="Record Payment modal" />
+### Partial payments
+
+Invoices paid in instalments are supported. You can record multiple payments against the same invoice over time, and ClearTax keeps a running total of the amount reported and the amount remaining.
+
+### Correcting a payment
+
+The Tax Administration does not allow reported payments to be edited. To correct a payment:
+
+1. Submit a cancellation record - the same payment with the amount negated (for example, -250.00 for an original 250.00). All other details must exactly match the original record.
+2. Once the cancellation is accepted, submit a new record with the correct amount.
+
+Negative amounts are only accepted as amendments to previously accepted payments.
+
+### Payment reporting statuses
+
+| Status             | What it means                                                                                                                             |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| Not Reported       | No payment has been reported for the invoice yet.                                                                                         |
+| In-Progress        | A payment report has been submitted and is awaiting a response from the Tax Administration.                                               |
+| Partially Reported | One or more payments have been reported, and part of the invoice amount remains. A warning icon means one of the partial payments failed. |
+| Reported           | The payment has been successfully reported to the Tax Administration.                                                                     |
+| Failed             | The payment report was rejected. Open the invoice to see the error, then correct and resubmit.                                            |
+
+The detailed view of each invoice includes a Payment Recording Details section showing the payment recorded, payment remaining, payment method, date of collection, Request ID, whether the request was accepted, and the date and time sent. For failures, it also shows the error code, record number, and error description.
+
+### Payment reporting deadline
+
+Payments must be reported by the 20th of the month following the date of collection.
+
+| Payment collected in | E-reporting deadline |
+|----------------------|----------------------|
+| March 2026           | 20th April 2026      |
+| April 2026           | 20th May 2026        |
+| December 2026        | 20th January 2027    |
+
+For an invoice paid in instalments across different months, each payment has its own deadline.

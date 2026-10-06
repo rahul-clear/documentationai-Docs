@@ -353,8 +353,38 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Croatia (Coming Soon)",
-                    "path": "countries/croatia/coming-soon"
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/croatia/product-guide/overview"
+                      },
+                      {
+                        "title": "Introduction",
+                        "path": "countries/croatia/product-guide/introduction"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/croatia/product-guide/onboarding"
+                      },
+                      {
+                        "title": "Home Dashboard",
+                        "path": "countries/croatia/product-guide/home-dashboard"
+                      },
+                      {
+                        "title": "B2B Sales Documents",
+                        "path": "countries/croatia/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/croatia/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "Error Reference",
+                        "path": "countries/croatia/product-guide/error-reference"
+                      }
+                    ]
                   }
                 ]
               },

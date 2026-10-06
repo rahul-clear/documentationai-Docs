@@ -1,0 +1,36 @@
+---
+title: Introduction
+description: 'Croatia''s Fiscalisation 2.0 mandate, the Active Buyer, and how ClearTax fits in'
+---
+This guide provides an overview of the ClearTax E-Invoicing platform for Croatia and the functionality designed to help you comply with Croatia's Fiscalisation 2.0 mandate.
+
+## Understanding the Croatian Mandate
+
+Fiscalisation 2.0 is Croatia's move towards a cashless payment system with an integrated e-archive and advanced online book-keeping within the VAT system. The Tax Administration wants real-time visibility into the full lifecycle of a transaction - not just when an invoice is issued, but also when it is received, rejected, or paid.
+
+- **Mandatory deadline:** From January 1, 2026, domestic B2B e-invoicing, together with fiscalisation and e-reporting, is mandatory for all VAT-registered taxpayers. From January 1, 2027, the mandate extends to non-registered taxpayers.
+- **Legal validity:** An invoice is only legally valid once it has been fiscalised and carries the Request ID (JIR) issued by the Tax Administration. Invoices that are not fiscalised are not valid for VAT deduction.
+- **Format:** Invoices are exchanged as structured UBL 2.1 XML files that follow the Croatian HR-CIUS specification.
+
+## What Fiscalisation 2.0 requires
+
+Fiscalisation 2.0 combines three processes that run in parallel:
+
+1. **Exchange:** Structured e-invoices are sent between seller and buyer over the Peppol network through certified Information Intermediaries.
+2. **Fiscalisation (real time):** The seller reports the invoice to the Tax Administration before it is exchanged, and the buyer reports receipt of the invoice within 5 working days.
+3. **E-reporting (monthly):** Post-issuance events must be reported by the 20th of the following month - payments (by the seller) and business rejections (by the buyer).
+
+## The Active Buyer
+
+The "2.0" in Fiscalisation 2.0 signals a shift from seller-only reporting to reporting by both parties. In Croatia, the buyer is an active participant: the buyer must confirm receipt of every e-invoice to the Tax Administration, and must formally report any rejection of an invoice, together with a reason.
+
+## How ClearTax fits in
+
+ClearTax works with a certified Information Intermediary and Peppol Access Point partner that handles the technical last mile for you:
+
+- **Format conversion and validation:** Your invoice data is converted into the HR-CIUS UBL 2.1 format and validated.
+- **Electronic signature:** Messages to the Tax Administration are signed with the mandatory XAdES electronic signature.
+- **Fiscalisation:** Outgoing invoices are fiscalised before they are delivered, and incoming invoices are fiscalised automatically on receipt - no action is needed from you.
+- **Delivery:** Invoices are routed to your buyer's Access Point over Peppol, using the AMS address book to find the right endpoint.
+
+The ClearTax platform gives you a single interface to manage your Croatian sales and purchase documents alongside your other countries, track every invoice's status, and complete your e-reporting obligations (payment reporting and rejections) directly from the UI.

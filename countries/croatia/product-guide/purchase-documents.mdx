@@ -1,0 +1,72 @@
+---
+title: Purchase Documents
+description: 'Receiving e-invoices, statuses, document actions, and rejection e-reporting'
+---
+## Receiving e-invoices
+
+The Purchase documents page is your inbox for e-invoices received from your suppliers over Peppol. Once your business is registered in the AMS address book, any e-invoice sent to you appears here automatically.
+
+**Recipient fiscalisation is automatic.** Croatian buyers must confirm receipt of every e-invoice to the Tax Administration within 5 working days. This is done for you automatically, in near real time, as soon as the invoice is received - no action is needed on the ClearTax UI.
+
+## Navigating the Purchase Dashboard
+
+Summary tiles at the top show the total number of documents and the count in each status. The table shows each document's Invoice Number, Invoice Status, Invoice Received Date, Invoice Date, Invoice Type, Seller Name, Total Invoice Amount, and Total VAT Amount. Click an invoice number to open the detailed document view.
+
+### Invoice statuses
+
+| Status            | What it means                                                                                                              |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Received          | The invoice has been received and fiscalised. You can reject it if there is a business error.                              |
+| Rejection Pending | You have submitted a rejection and it is being reported to the Tax Administration.                                         |
+| Rejected          | The rejection has been successfully recorded by the Tax Administration. No further actions are possible on the invoice.    |
+| Rejection Failed  | The rejection was not accepted by the Tax Administration. The invoice remains valid, and you can view the error and retry. |
+
+### Filtering the list
+
+Click "Filter" to filter by Invoice Status (Received, Rejected, Rejection Pending, Rejection Failed), Invoice Type (Tax Invoice, Credit Note, Prepayment Invoice, Commercial Invoice), and AP/VIM Delivery Status (Delivered, Failed, Pending, Partially Delivered).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/purchase-documents/purchase-documents-filter.png" width="3024" height="1652" alt="Purchase documents filter panel" />
+## Actions on Purchase Documents
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/purchase-documents/purchase-documents-actions.png" width="3022" height="1652" alt="Purchase documents Actions menu" />
+| Action                                  | Description                                                                       |
+|-----------------------------------------|-----------------------------------------------------------------------------------|
+| Download XML report                     | Downloads a ZIP file containing the XML files for the selected invoices.          |
+| Download Additional Reference Documents | Downloads supporting documents attached to the invoice by the supplier.           |
+| Reject Invoice (e-Report)               | Formally rejects the invoice and reports the rejection to the Tax Administration. |
+| Print                                   | Generates a PDF of the invoice using the available print template.                |
+| Email                                   | Sends the invoice PDF by email using a selected template.                         |
+| Sync document status                    | Fetches the latest status of the selected documents.                              |
+| Download                                | Downloads the Lite Report or the Detailed Report for the selected documents.      |
+| Show/Hide Reorder Column                | Shows, hides, and reorders table columns.                                         |
+| Sort                                    | Sorts the table by a selected column.                                             |
+
+## Rejecting an invoice (e-reporting)
+
+If an invoice you received contains a business error (for example, a wrong price or damaged goods), you must formally reject it and report the rejection, with a reason, to the Tax Administration. ClearTax lets you do this directly from the UI.
+
+### When you can reject an invoice
+
+- The invoice status must be **Received** or **Rejection Failed**. The action is not available while a rejection is pending or once the invoice has been rejected.
+- Rejections must be reported by the 20th of the month following the month the invoice was received.
+
+### Steps to reject
+
+1. Open the "Reject Invoice (e-Report)" action - either from the top-right corner of the invoice's detailed view, or by selecting the invoice on the Purchase documents page and choosing it from the "Actions" menu.
+2. The rejection modal warns that the action will be reported immediately to the Tax Administration.
+3. Select a **Reason Type** (mandatory):
+    - N - Data Error (no tax impact)
+    - U - Tax Error (affects VAT/total)
+    - O - Other Reason
+4. Enter the **Reason for Rejection** (mandatory, up to 1000 characters) - for example, "Incorrect unit price on line 3".
+5. Click "Confirm Rejection".
+
+On success, you see the message "Rejection successfully recorded." and the invoice moves to Rejection Pending, then to Rejected once the Tax Administration accepts it. If the rejection fails, the invoice moves to Rejection Failed - view the error, correct the details if needed, and retry.
+
+The rest of the details required by the Tax Administration (invoice number, issue date, seller and buyer identifiers, and so on) are taken automatically from the invoice, so they cannot be mistyped.
+
+Note: The Tax Administration does not notify the supplier of a rejection. Communicating the rejection to your supplier is outside the mandate.
+
+### Rejection details
+
+The detailed view of each rejected invoice includes a Rejection Details section showing the rejection code, rejection text, Request ID, whether the request was accepted, and the date and time sent. For failures, it also shows the error code, record number, and error description.

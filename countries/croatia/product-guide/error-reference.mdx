@@ -1,0 +1,19 @@
+---
+title: Error Reference
+description: 'Tax Administration error codes and what to do about them'
+---
+When the Tax Administration does not accept a request, it returns an error code. The error code and description are shown in the invoice's detailed view.
+
+| Code | What it means                                                                                             | What to do                                                                                                                |
+|------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| S001 | Temporary system error at the Tax Administration.                                                         | No action needed - the request is retried automatically.                                                                  |
+| S002 | The digital signature is not in the correct place in the message.                                         | No action needed - this is a technical error that is retried.                                                             |
+| S003 | The signing certificate is invalid, expired, revoked, or not from a trusted provider.                     | Contact ClearTax Support.                                                                                                 |
+| S004 | The request signature is invalid or does not match the content.                                           | No action needed - this is a technical error that is retried.                                                             |
+| S005 | The message does not match the required schema (for example, a missing mandatory field or invalid value). | Sales: correct the invoice data and resend. Purchases: contact the supplier to cancel and reissue a valid invoice.        |
+| S006 | The Information Intermediary is not authorised to submit data for your OIB.                               | Reach out to your ClearTax account representative - they will guide you through the authorisation in the ePorezna portal. |
+| S007 | An OIB is not in the correct format.                                                                      | Sales: correct the OIB and resend. Purchases: contact the supplier.                                                       |
+| S008 | An e-invoice with the same identifier and type has already been fiscalised.                               | No action needed if the invoice was already recorded.                                                                     |
+| S009 | No fiscalised e-invoice found for the rejection.                                                          | Check with the supplier why the invoice was not fiscalised.                                                               |
+| S010 | A rejection has already been recorded for this invoice.                                                   | No action needed - the invoice is treated as Rejected.                                                                    |
+| S011 | The OIBs in the request do not match the expected taxpayer records.                                       | Check the OIBs on the invoice. For purchases, contact the supplier.                                                       |
