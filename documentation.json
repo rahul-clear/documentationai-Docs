@@ -247,8 +247,38 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Belgium (Coming Soon)",
-                    "path": "countries/belgium/coming-soon"
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/belgium/product-guide/overview"
+                      },
+                      {
+                        "title": "Introduction",
+                        "path": "countries/belgium/product-guide/introduction"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/belgium/product-guide/onboarding"
+                      },
+                      {
+                        "title": "B2B Sales Documents",
+                        "path": "countries/belgium/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/belgium/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "MIS Dashboard",
+                        "path": "countries/belgium/product-guide/mis-dashboard"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/belgium/product-guide/settings"
+                      }
+                    ]
                   }
                 ]
               },

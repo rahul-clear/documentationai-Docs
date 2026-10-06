@@ -1,0 +1,107 @@
+---
+title: Settings
+description: 'User access management, custom ingestion templates, and email configuration'
+---
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/settings/settings-1.png" width="1600" height="668" alt="Settings" />
+
+You can configure and manage various aspects of your business via the settings option.
+
+- Roles: Provides information about all available user roles (e.g., e-invoice user, sales-only user, purchase-only user).
+- Business Settings: Manage configurations such as adding a country or a VAT/legal entity.
+- User Access: Facilitate the assignment of user roles.
+- Workspace: Details related to the workspace and security configurations.
+- Profile: Contains personal details such as name, email, etc.
+- Email Configuration: Set up your email using SMTP.
+- Integrations (API Clients): Your unique authentication keys for connecting your ERP or external systems to the ClearTax platform.
+
+## User access management
+
+You can add & configure different users with 6 types of roles based on your business requirements. Please find below the roles & their respective descriptions below.
+
+| ROLES                   | DESCRIPTIONS                                                                                                                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| E-Invoice User          | This role provides the user access to all actions for both sales & purchase documents within e-invoicing i.e Upload, Generate, View,  Download, Print, Email                                      |
+| Sales E-Invoice User    | This role provides the user access to all actions for only sales documents within e-invoicing i.e Upload, Generate, View,  Download, Print, Email                                                 |
+| Purchase E-Invoice User | This role provides the user access to all actions for only purchase documents within e-invoicing i.e Upload , Generate, View, Download, Print, Email                                              |
+| View Only User          | This role provides access to only view & download both sales & purchase documents. With this role, the user won't be able to take any action or upload any new data in e-Invoicing.               |
+| Sales View Only User    | This role provides access to only view & download only sales documents. With this role, the user won't be able to take any action or upload any new data in e-Invoicing.                          |
+| Purchase View Only User | This role provides access to only view & download only purchase documents. With this role, the user won't be able to take any action or upload any new data in e-Invoicing. |
+
+### Invite new users
+
+- Navigate to the "User access" page via "Settings" option on the left-hand panel
+- Click on the button "Invite new user" to start adding a new user to your workspace.
+
+- Enter user details for adding a new user
+  - Type of user
+  - Name
+  - Email
+  - Product – Select "EInvoice"
+  - Role – Select the role for which you want to give the user the access.
+  - Click on "Continue" after entering the details as expected.
+
+- Once you have invited the user, they will receive an email to accept the invitation on the email address that was mentioned before.
+- The intended recipient can accept the invitation and start using the workspace based on the role access they have configured.
+
+## Custom Ingestion Template
+
+The product provides standard templates in which invoice data can be entered and ingested into the product.
+
+However, if you have a data file with required data but in your own format then you can create a custom ingestion template by mapping the file headers with standard templates and use this to ingest invoice data directly.
+
+The following section explains how to get custom data ingestion mapping done.
+
+### Custom data mapping as part of Ingestion workflow
+
+- Once you have added business, completed onboarding, and have the data file ready, please go to upload file section
+
+- In the upload section, please select whether you want to map purchase data or sales data
+
+- Click on the "Select a file to import" button to choose a file from your system to ingest.
+
+If you do not have the template, you can download the Cleartax template using the download option in the bottom right corner
+
+- You can ingest the file that contains the required headers to be mapped with the standard template using the import flow as explained in the earlier section
+
+- In the template selection dropdown, select "Create Custom Template" option and click on "Check file for errors & duplicates"
+
+The file is processed, the processing may take some time depending on the file size
+
+- Once the file is processed and ingested, the custom mapper screen is displayed, in which you can see the column header name from the standard template.
+
+- Map the column header in the standard template with the corresponding column header in the file ingested. Make sure that correct headers are mapped. You can also search the required header using the search bar.
+
+  Bar at the top of the table shows the number of fields - required, mapped, unmapped.
+
+- The required headers are highlighted in red. All the required headers need to be mapped, then only the template can be saved.
+
+  Once all the desired headers from the files have been mapped, you can save the template by clicking on the "Save template" button. Auto filled template name is shown which can be changed if required.
+
+- The newly created custom template is saved and the ingestion process continues with running the validation on the invoice file and checking duplicates.
+
+- This mapped template will now be visible under the templates section once the mapping is done for any future ingestion. You can select this template to upload data in this format going forward
+
+### Custom data mapping via settings section
+
+You can create a custom ingestion template during the ingestion and directly from the settings section as well.
+
+- Go to settings section - you can find it towards the bottom left side on the menu
+
+- Select the type of template you want to create from the Template dropdown
+
+- Select the business (VAT) for which this template is to be created. The created template would be available only for the selected business
+
+- All the created custom templates will be shown in the table along with other details for the template. You can edit the template by clicking on "Edit" under actions. If you want to delete the template, click on 3 dots on the right side of actions and select "Delete template".
+
+- You can click on "Create Template" and use this to import data in the sales document dashboard.
+
+## Email Configuration
+
+### Email Configuration Guide
+
+To ensure the correct sender appears on emails:
+
+1. Navigate to **Global Settings**.
+2. Set your Email ID as the sender by configuring the SMTP settings.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/settings/email-configuration-1.png" width="1600" height="1281" alt="Email Configuration" />

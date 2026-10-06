@@ -1,0 +1,43 @@
+---
+title: Introduction
+description: 'Belgium''s B2B e-invoicing mandate, the Peppol 4-corner model, and ClearTax as your Access Point'
+---
+This guide provides a comprehensive overview of the ClearTax E-Invoicing platform for Belgium. It details the product's functionalities, which are designed to ensure full compliance with Belgium's upc
+
+## Understanding the Belgian Mandate
+
+Belgium is transitioning to a mandatory structured e-invoicing model for all business-to-business (B2B) transactions. This mandate is a significant shift from traditional invoicing (paper or PDF) and requires a new approach to compliance.
+
+- **Mandatory Deadline:** From January 1, 2026, all VAT-registered businesses in Belgium must be able to issue and receive structured electronic invoices for their B2B transactions.
+- **What is a "Structured E-Invoice"?** A structured e-invoice is not a PDF file. It is a machine-readable data file, specifically an XML file, that must conform to the European Standard EN 16931 and the Peppol BIS 3.0 format. From the 2026 deadline, unstructured formats like paper invoices or PDFs sent via email will no longer be considered legally compliant for B2B transactions.
+
+## Peppol '4 Corner' Model
+
+The Belgian mandate is built entirely on the Peppol network. Understanding Peppol is essential to understanding the ClearTax solution.
+
+Peppol (Pan-European Public Procurement Online) is not a single platform but a secure, open network designed to exchange electronic business documents, including e-invoices.
+
+It functions similarly to a telecommunications network: just as a customer on one phone network can call a customer on any other network, a business on the Peppol network can transact with any other business registered on the network, regardless of their software or service provider.
+
+This system operates on a 4-Corner Model:
+
+1. **Corner 1: The Sender (Your business)**
+2. **Corner 2: The Sender's Access Point (Your service provider, e.g., ClearTax)**
+3. **Corner 3: The Receiver's Access Point (Your customer's service provider)**
+4. **Corner 4: The Receiver (Your customer)**
+
+This decentralized model is fundamentally different from centralized government portal systems. For B2B transactions in Belgium, businesses do not upload invoices to a single government website. Instead, compliance is achieved by exchanging the structured invoices directly with trading partners through the secure Peppol network, using a certified Access Point. This makes the choice of an Access Point the most critical compliance decision for a Belgian business.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/introduction/peppol-4-corner-model-1.png" width="1600" height="1145" alt="Peppol '4 Corner' Model" />
+
+## Clear Access Point
+
+A business cannot connect to the Peppol network directly. Connection is only possible through a certified Peppol Access Point (AP), which acts as a secure gateway to the network.
+
+**ClearTax is a certified Peppol Access Point.**
+
+As your certified Access Point, the ClearTax platform handles all the technical complexities of e-invoicing compliance:
+
+- **Format Validation**: Automatically ensures every invoice created or imported adheres to the strict Peppol BIS 3.0 standard.
+- **Secure Transmission:** Manages the secure exchange of documents using required protocols (like AS4).
+- **Peppol Directory (SMP) Lookup**: Before sending, ClearTax automatically looks up the recipient's Peppol ID in the Service Metadata Publisher (SMP) directory to find their registered Access Point and confirm they can receive the document.

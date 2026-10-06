@@ -1,0 +1,140 @@
+---
+title: B2B Sales Documents
+description: 'Importing data, generating e-invoices, audit trail, document actions, and import history'
+---
+## Import your data
+
+- On the E-invoicing home page, you can click on the "Sales documents" tile to start your sales e-invoice generation process.
+- Once done, you will land on the "Sales documents" dashboard page.
+
+**Navigating the Sales Dashboard**
+
+The Sales Dashboard is the central hub for managing all outgoing invoices. It provides an at-a-glance view of all documents and their current status.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/sales-documents/import-your-data-1.png" width="1600" height="944" alt="Import your data" />
+
+- On the "Sales documents" dashboard page, you can perform all the actions pertaining to your sales documents.
+
+You can import data onto the Cleartax platform using the web-based ingestion template if you are not integrated via API or SFTP.
+
+- To initiate the process of e-invoice generation, click on "Import file" action via the link on the empty dashboard or through the "Import" button on the left-hand panel.
+- When you click on the "Import" action, you will see another right-hand side panel opening in front of you where you can import your file for the purpose of e-invoice generation.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/sales-documents/import-your-data-2.png" width="1600" height="873" alt="Import your data" />
+
+- You can select a file to import your data on the ClearTax platform either in the ClearTax excel template or you can create your own custom template and map it to ClearTax headers in the "Settings" section.
+- For more information on custom mapped templates, please refer to the "Settings" section.
+
+- Once you have successfully imported the file, click on the "Check file for errors & duplicates" button.
+- This action will run all the ClearTax validations on the ingested data to see if the data complies with the Belgian law.
+
+- Once all the validations have successfully completed on the ingested file, you will see a "File Summary" screen.
+- This screen will give you a summary of the file in terms of number of rows with errors and number of errors respectively.
+- If there are any validation errors, you will see the summary result on this screen.
+- You can click on the "Review and fix errors" button to review and correct these errors on the ClearTax UI screen itself.
+- You can also correct the errors by "Downloading Error Report", correcting it offline and re-uploading the file.
+
+- You will see an error correction screen for rows with errors highlighted in Red color.
+- You can correct the document with errors by hovering over the error cell and correcting the values in the cells as described in the error body.
+- Once you have corrected the errors highlighted in Red color, you can click on the "Proceed" button to continue with your data importing activity.
+
+- ClearTax will run its validations again on the corrected data entries as part of the error correction flow.
+
+- Once this activity is completed, you will again see the "File Summary" screen.
+- You can click on the "Import rows without errors" button to proceed further.
+
+- Once the import activity is successfully completed, you will see the ingested document rows on the "Sales dashboard" page in "Not generated" state.
+- You can use the imported data for e-invoice generation either individually or by doing bulk selection.
+- Please follow the next sub-module on "Generate e-invoice(s)" for detailed steps on E-invoice generation.
+
+## Generate e-invoice(s)
+
+- For generating e-invoices, select the documents that you want to generate e-invoices on the "Sales dashboard" page.
+- You can select a document row individually and click on the "Send" button to generate an e-invoice.
+- Alternatively, you can also bulk select the document rows (adjust the filter options for more refined bulk selection) and click on the "Send" button to generate e-invoices in bulk.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/sales-documents/generate-e-invoice-s-1.png" width="1600" height="820" alt="Generate e-invoice(s)" />
+
+- Once the "Send" action is completed, you will see the status of the documents change to reflect the e-invoicing status.
+- There can be 5 possible states for these documents
+  - **Pending**: The invoice is saved in ClearTax but has not been sent to the Peppol network.
+  - **Failed:** The invoice has failed at the Access Point/Buyer validation stage (e.g., a mandatory field is missing). This can also occur if the recipient is not being registered to receive this document type.
+  - **Submitted to Exchange Network**: The invoice has passed validation and has been successfully transmitted from ClearTax (Corner 2) to the Peppol network.
+  - **Delivered to Buyer Network:** The invoice has been successfully received and acknowledged by the buyer's Access Point (Corner 3). This confirms delivery.
+  - **Delivered to Buyer:** The invoice has been successfully received by the buyer's system (Corner 4).
+
+- You can further click on the hyperlinked "Document number" to open the document details. The Detailed Document View allows you to see all invoice, seller, and buyer information. You can edit fields as well.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/sales-documents/generate-e-invoice-s-2.png" width="1600" height="861" alt="Generate e-invoice(s)" />
+
+- In case of a "Failed" or an "Invalid" document, you can also see the error message and correct the error using the "Edit" button.
+- Once the error is corrected, you can reinitiate the e-invoice generation process via the same page.
+
+## Audit Trail
+
+Audit trail functionality helps users to track all actions take for an invoice by users on the product.
+
+- On the "Sales Document" and "Purchase Document" screens, audit trail for a document can be accessed by clicking on the icon against an invoice in the "Action" column
+- A side panel open which gives the details of the actions taken on the invoice along with the user and timestamp
+
+## Actions on Sales Document
+
+| Action | Applies to | Description |
+| --- | --- | --- |
+| Send                | Pending invoices only                  | Submits the invoice to the PEPPOL network.                                                                                                                                                                                                                  |
+| Delete              | Pending invoices only                  | Permanently removes the document from the UI. An error is shown if the document is past the Pending stage.                                                                                                                                                  |
+| Download XML        | Submitted to Exchange Network or later | Downloads a ZIP file containing the XML files exchanged over the Peppol network.                                                                                                                                                                            |
+| Download CSV Report | All Stages                             | Downloads selected lite/detailed report containing the details of the invoice<br />• Light Report: Contains fewer fields, suitable for image consumption.<br />• Detailed Report: Contains significantly more fields (approx. 74 fields). |
+| Print               | Submitted to Exchange Network or later | Generates a PDF of the invoice using the available template.                                                                                                                                                                                                |
+| Email               | Submitted to Exchange Network or later | Send the invoice to the buyer's email address using a selected template.                                                                                                                                                                                    |
+| Show/Hide Column    | All Stages                             | Shows/Hides the column basis preference                                                                                                                                                                                                                     |
+| Sort                | All Stages                             | Sorts the column basis preference                                                                                                                                                                                                                           |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/sales-documents/actions-on-sales-document-1.png" width="1600" height="843" alt="Actions on Sales Document" />
+
+### Download XML
+
+- You can download the report from the "Actions" dropdown
+- You can click on 'Download XML'
+- It will download a ZIP file containing the XML files exchanged over the Peppol network.
+- You can see the success notification on the top-right corner of the screen once the zip file has been downloaded successfully.
+
+### Delete imported data
+
+- You can choose to delete the imported data on ClearTax platform before e-invoice generation in case you identify any issues with the imported data.
+- Please note that this activity can only be performed on the documents that are in "Not Generated" state.
+- You can bulk select the documents that need to be deleted, click on the "Actions" dropdown and then select the "Delete" option.
+- You will see a modal pop-up screen to validate your action since this action cannot be undone.
+- Once you click on the "Delete" button, the selected and eligible documents will get deleted from the "Sales dashboard" page.
+  - Eligible documents are the ones on which the delete action can be performed such as documents in "Not generated" state only.
+
+### Print e-invoice(s)
+
+- You can bulk select the documents that you want to print and select the "Print" button inside the "Actions" dropdown.
+- You will see a "Print preview" screen open up in front of you where you can choose the print template.
+- Once done, you will see the document ready to be printed or downloaded on your system.
+
+### Download report
+
+- You can download the report from the "Actions" dropdown
+- You can either download "Detailed CSV report" or "Lite CSV report".
+- You can see the success notification on the top-right corner of the screen once the reports have been downloaded successfully.
+
+### E-mail invoice
+
+In order to email an invoice PDF, follow below steps -
+
+- Select the invoices from the "Sales Document" or "Purchase Document" screen to be email. Go to "Actions" and select "Email"
+- Enter the recepient emails in "To" cc and bcc.
+- Select the print template in which the PDF file is required.
+- Select the email body template as per the invoice type.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/belgium/product-guide/sales-documents/e-mail-invoice-1.png" width="2880" height="1622" alt="E-mail invoice" />
+
+- Preview the email format and click on "Send"
+
+## Check sales import history
+
+- You can select on the "Import history" button on the left-hand panel and see the import history sorted by the upload date.
+- You can view and fix the errors in your imported file through this page.
+- You can also view the documents that were imported as part of a file uploaded on ClearTax.
