@@ -12,6 +12,10 @@ When an invoice is sent:
 2. The invoice is fiscalised with the Tax Administration, which returns a Request ID (JIR).
 3. Only once it is fiscalised, the invoice (now containing the JIR) is delivered to the buyer over the Peppol network.
 
+To import invoices from Excel, click the "Import" icon on the left-hand panel. In the "Import file" panel, select an .xlsx file or drag and drop it into the box. If you don't have a file yet, download the "ClearTax Ingestion Template".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/import-file.png" width="1600" height="873" alt="Import file panel" />
+
 Supported document types: Commercial invoice, Credit note, Debit note, Corrective invoice, Advance payment invoice, Partial invoice, Lease invoice, and Metered services invoice. Croatian VAT rates of 25%, 13%, 5% and 0% are supported.
 
 ## Navigating the Sales Dashboard
@@ -19,6 +23,7 @@ Supported document types: Commercial invoice, Credit note, Debit note, Correctiv
 The Sales documents page is the central hub for all your outgoing invoices. Summary tiles at the top show the total number of documents and the count in each status.
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-list.png" width="3022" height="1654" alt="Sales documents list" />
+
 The table shows each document's Invoice Number, Invoice Status, Invoice Exchange Date Time, Invoice Date, Invoice Type, Buyer Name, Buyer VAT Number, Document Currency Code, and Payment Reporting status. Click an invoice number to open the detailed document view.
 
 ### Invoice statuses
@@ -37,11 +42,13 @@ A failure can come from ClearTax validation, Access Point validation, or fiscali
 Click "Filter" to open the filter panel. You can filter by Invoice Date, Invoice Exchange Date, Invoice Status (Valid, Pending, Failed, Submitted), Invoice Number, and Buyer VAT Number. Click "Apply" to apply your filters, or "Clear All" to reset them.
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-filter.png" width="3020" height="1654" alt="Sales documents filter panel" />
+
 ## Actions on Sales Documents
 
 Select one or more documents and click "Send" to submit them, or open the "Actions" dropdown for other actions.
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-actions.png" width="3024" height="1654" alt="Sales documents Actions menu" />
+
 | Action                   | Description                                                                                                                                                                            |
 |--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Send                     | Submits the selected invoices for fiscalisation and delivery.                                                                                                                          |
@@ -57,6 +64,7 @@ Select one or more documents and click "Send" to submit them, or open the "Actio
 | Sort                     | Sorts the table by a selected column.                                                                                                                                                  |
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/sales-documents-download-reports.png" width="3022" height="1650" alt="Download submenu with Lite and Detailed reports" />
+
 ## Manage additional reference files
 
 You can attach supporting documents, such as a delivery order, to an invoice:
@@ -67,6 +75,7 @@ You can attach supporting documents, such as a delivery order, to an invoice:
 - Click "Save & Attach".
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/manage-reference-files.png" width="3024" height="1652" alt="Manage additional reference files panel" />
+
 ## Payment e-reporting (Record Payment)
 
 Under Fiscalisation 2.0, when you receive payment for a fiscalised outgoing e-invoice, you must report it to the Tax Administration. ClearTax lets you do this directly from the Sales documents page.
@@ -91,6 +100,7 @@ Under Fiscalisation 2.0, when you receive payment for a fiscalised outgoing e-in
 All other details required by the Tax Administration - document number, issue date, your OIB, the buyer's OIB, and currency (EUR) - are filled in automatically from the invoice.
 
 <Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/croatia/product-guide/sales-documents/record-payment.png" width="3024" height="1648" alt="Record Payment modal" />
+
 ### Partial payments
 
 Invoices paid in instalments are supported. You can record multiple payments against the same invoice over time, and ClearTax keeps a running total of the amount reported and the amount remaining.
