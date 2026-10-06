@@ -1,0 +1,92 @@
+---
+title: Onboarding
+description: 'Creating your ClearTax account and landing on your Oman e-Invoicing dashboard for the first time'
+---
+Onboarding sets up your organisation on ClearTax for Oman e-invoicing (Fawtara). Once onboarding is complete on ClearTax, you can begin exchanging invoices from the ClearTax dashboard. Your Peppol Participant ID registration with OTA is handled separately by the ClearTax team and are outside the scope of this guide.
+
+The flow is entirely on ClearTax - from account creation to landing on your dashboard.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- An active OTA VAT registration with admin access
+- One or more VATs registered under your OTA account (format: OM + 10 digits)
+- The **admin email address** registered with OTA - this is the email against which ClearTax will verify and map your account, so use the same one on both sides
+- Access to the ClearTax Oman URL: **https://app.om.cleartax.com/new-einvoicing**
+
+If any of these are missing, complete your OTA registration first before starting.
+
+## Create your ClearTax account
+
+### Step 1 - Sign up
+
+Go to https://app.om.cleartax.com/new-einvoicing. Enter your email address and click Continue. You can also sign up with Google.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/create-your-account-page.jpg" width="1400" height="699" alt="Create your account page" />
+
+### Step 2 - Set a password and accept terms
+
+Enter and confirm your password, tick the T&Cs checkbox, and click Agree and continue.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/password-creation-with-t-cs.jpg" width="1400" height="697" alt="Password creation with T&Cs" />
+
+### Step 3 - Set up your workspace
+
+Enter your company's legal name and select the applicable turnover band (&lt; 25mn AED, 25mn – 100mn AED, &gt; 100mn AED). Click Continue.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/let-s-create-your-workspace.jpg" width="1400" height="700" alt="Let's create your workspace" />
+
+### Step 4 - Personalise your profile
+
+Enter your name and select your designation (CFO/Director, Head/VP/GM, Manager, or Other). Click Continue.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/help-us-personalize-your-experience.jpg" width="1400" height="700" alt="Help us personalize your experience" />
+
+### Step 5 - Open the e-Invoicing app
+
+You'll see a "Welcome to Clear" popup. Click Continue, then click the e-Invoicing card on the Clear Compliance Cloud landing page.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/welcome-to-clear-popup.jpg" width="1400" height="698" alt="Welcome to Clear popup" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/clear-compliance-cloud-landing-with-e.jpg" width="1400" height="701" alt="Clear Compliance Cloud landing with e-Invoicing card" />
+
+## Land on your dashboard
+
+### Step 6 - Confirm the welcome screen
+
+You'll return to the welcome screen, this time without the warning banner. Click Continue.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/welcome-page-clean-state.png" width="2048" height="1086" alt="Welcome page (clean state)" />
+
+### Step 7 - Confirm your business profile
+
+You'll land on the Business profile page - Step 3 of the onboarding wizard ("Create Business Profile"). The form asks for:
+
+- **Organisation Identifier (VAT or Group VAT)** - your VAT registration number
+- **Organisation Name** - your legal entity name
+
+If your ClearTax account has been pre-provisioned by the ClearTax team following OTA accreditation, both fields are prefilled and cannot be edited - they must exactly match your OTA registration. If you've arrived here before provisioning is complete, the fields are empty; enter your details manually. Click Continue to Dashboard.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/business-profile-with-prefilled-fields-post.png" width="2048" height="1088" alt="Business profile with prefilled fields (post-linking)" />
+
+### Step 8 - Your ClearTax dashboard
+
+You'll now land on the e-Invoicing dashboard. From here you can:
+
+- View **Sales documents** and **Purchase documents** overviews (populating as invoices flow in)
+- Access **Business insights and analytics** - MIS Dashboard and Analytics Dashboard
+- Run **Reconciliation** - Sales Register vs. e-Invoice, and General Ledger vs. Sales e-Invoice
+- Get help via **Product guides and videos**, and stay current with **Product release notes**
+- Start exchanging invoices via bulk upload or API/SFTP integration (covered in [Importing Documents](/countries/oman/product-guide/importing-documents))
+
+The VAT you onboarded is shown in the top bar - click it to switch entities if you manage multiple VATs.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/oman/product-guide/onboarding/e-invoicing-dashboard.jpg" width="2046" height="1165" alt="E-Invoicing dashboard" />
+
+## Error scenarios and troubleshooting
+
+| Error                                                              | What it means                                                       | How to resolve                                                        |
+|------------------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| "Couldn't find a VAT associated with this account" on Business profile | Your ClearTax account has not yet been provisioned by the ClearTax team | Contact the ClearTax team; provisioning is handled off-platform           |
+| VAT format rejected on Business Profile                                | VAT number entered doesn't match Oman format                            | Ensure your VAT is exactly OM followed by 10 digits, no spaces or hyphens |

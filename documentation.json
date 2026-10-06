@@ -129,6 +129,48 @@
                   {
                     "title": "Offline SDK",
                     "path": "countries/oman/offline-sdk"
+                  },
+                  {
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/oman/product-guide/overview"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/oman/product-guide/onboarding"
+                      },
+                      {
+                        "title": "Dashboard Walkthrough",
+                        "path": "countries/oman/product-guide/dashboard-walkthrough"
+                      },
+                      {
+                        "title": "Sales Documents",
+                        "path": "countries/oman/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/oman/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "Importing Documents",
+                        "path": "countries/oman/product-guide/importing-documents"
+                      },
+                      {
+                        "title": "Reports",
+                        "path": "countries/oman/product-guide/reports"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/oman/product-guide/settings"
+                      },
+                      {
+                        "title": "Support Desk",
+                        "path": "countries/oman/product-guide/support-desk"
+                      }
+                    ]
                   }
                 ]
               },
