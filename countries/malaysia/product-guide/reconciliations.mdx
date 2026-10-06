@@ -1,0 +1,91 @@
+---
+title: Reconciliations
+description: 'Matching your sales and purchase registers against e-invoices, and the reconciliation logic used'
+---
+Reconciliation module in the product provides users an option to match their accounting data with the E-invoices to ensure correct reporting.
+
+- Sales Register vs E-invoice
+- Purchase Register vs E-invoice
+
+**Steps to access -**
+
+Option 1 - Available reconciliations can be accessed from the homepage using the cards
+
+Option 2 - Reconciliation module can be accessed using the side bar menu which lists the available reconciliations
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/reconciliations-1.png" width="2878" height="1614" alt="Reconciliations" />
+
+## Reconciliation logic
+
+The reconciliation is run to match 2 data sources. One is the e-invoice that is present with ClearTax, other is the SR or the PR data which is present in the customer's ERP. After matching, each invoice is categorised into different buckets based on logics mentioned below-
+
+| Category                                                           | Logic                                                                                                                                                                                                         |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Match** |                                                                                                                                                                                                               |
+| Exact                 | If all the 13 fields match exactly on LHS and RHS                                                                                                                                                             |
+| Suggested            | - If all the document identifier fields match and one of the amount field does not match<br />- If all the amount fields match but one of the document identifier fields does not match                  |
+| Low                                                                | Threshold of amount mismatch is +1 MYR to -1 MYR                                                                                                                                                              |
+| Medium                                                             | Threshold of amount mismatch is +5 MYR to -5 MYR                                                                                                                                                              |
+| High                                                               | Threshold of amount mismatch is +15 MYR to -15 MYR                                                                                                                                                            |
+| Mismatch      | - If more than one of the document identifier fields does not match<br />- If the document identifier fields match but one or more of the amounts fields mismatch by a difference of more than +- 15 MYR |
+| Missing                         |                                                                                                                                                                                                               |
+| Missing in EInv                                                    | Present in sales data but not found in EInv data                                                                                                                                                              |
+| Missing in Sales                                                   | Present in EInv data but not found in sales data                                                                                                                                                              |
+
+## Sales Register vs E-invoice Reconciliation
+
+To run a SR vs E-invoice reconciliation -
+
+- On the Sales Register vs E-invoice reconciliation screen, click on "Actions" and select "Run recon again"
+- Select the TIN and time period for which the recon has to be run and click on "Proceed"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/sales-register-vs-e-invoice-reconciliation-1.png" width="2880" height="1624" alt="Sales Register vs E-invoice Reconciliation" />
+
+- For the selected time period, e-invoice data will be pulled from ClearTax systems and the count of invoices will be shown. Verify and click on "Continue"
+- Import the sales register data in the excel format. If you don't have the required template, it can be downloaded by clicking on "ClearTax Sales Template"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/sales-register-vs-e-invoice-reconciliation-2.png" width="2880" height="1616" alt="Sales Register vs E-invoice Reconciliation" />
+
+- After importing the Sales register data, the file will be checked for data formats and duplicates. After successful ingestion, click on "Run Reconciliation"
+- The recon algorithm runs and matches each and every invoices
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/sales-register-vs-e-invoice-reconciliation-3.png" width="2880" height="1626" alt="Sales Register vs E-invoice Reconciliation" />
+
+- After the recon run is complete the summary of the results is shown -
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/sales-register-vs-e-invoice-reconciliation-4.png" width="2880" height="1602" alt="Sales Register vs E-invoice Reconciliation" />
+
+- Invoice count for each bucket is shown along with their invoice value. Document level view for any matching bucket can be accessed by clicking on the "View" button under Actions column
+- To download recon result summary, click on "Actions" and select "Download"
+- Click on "Document" tab to view document level comparison details of each field - SR vs Einvoice
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/sales-register-vs-e-invoice-reconciliation-5.png" width="2880" height="1624" alt="Sales Register vs E-invoice Reconciliation" />
+
+## Purchase Register vs E-invoice Reconciliation
+
+To run a PR vs E-invoice reconciliation -
+
+- On the Purchase Register vs E-invoice reconciliation screen, click on "Actions" and select "Run recon again"
+- Select the TIN and time period for which the recon has to be run and click on "Proceed"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/purchase-register-vs-e-invoice-reconciliation-1.png" width="2880" height="1624" alt="Purchase Register vs E-invoice Reconciliation" />
+
+- For the selected time period, e-invoice data will be pulled from ClearTax systems and the count of invoices will be shown. Verify and click on "Continue"
+- Import the purchase register data in the excel format. If you don't have the required template, it can be downloaded by clicking on "ClearTax Purchase Template"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/purchase-register-vs-e-invoice-reconciliation-2.png" width="2880" height="1626" alt="Purchase Register vs E-invoice Reconciliation" />
+
+- After importing the Purchase register data, the file will be checked for data formats and duplicates. After successful ingestion, click on "Run Reconciliation"
+- The recon algorithm runs and matches each and every invoices
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/purchase-register-vs-e-invoice-reconciliation-3.png" width="2880" height="1628" alt="Purchase Register vs E-invoice Reconciliation" />
+
+- After the recon run is complete the summary of the results is shown -
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/purchase-register-vs-e-invoice-reconciliation-4.png" width="2880" height="1622" alt="Purchase Register vs E-invoice Reconciliation" />
+
+- Invoice count for each bucket is shown along with their invoice value. Document level view for any matching bucket can be accessed by clicking on the "View" button under Actions column
+- To download recon result summary, click on "Actions" and select "Download"
+- Click on "Document" tab to view document level comparison details of each field - SR vs Einvoice
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/reconciliations/purchase-register-vs-e-invoice-reconciliation-5.png" width="2880" height="1616" alt="Purchase Register vs E-invoice Reconciliation" />

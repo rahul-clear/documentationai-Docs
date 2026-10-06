@@ -297,8 +297,54 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Malaysia (Coming Soon)",
-                    "path": "countries/malaysia/coming-soon"
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/malaysia/product-guide/overview"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/malaysia/product-guide/onboarding"
+                      },
+                      {
+                        "title": "B2B Sales Documents",
+                        "path": "countries/malaysia/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/malaysia/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "MIS Dashboard",
+                        "path": "countries/malaysia/product-guide/mis-dashboard"
+                      },
+                      {
+                        "title": "Reconciliations",
+                        "path": "countries/malaysia/product-guide/reconciliations"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/malaysia/product-guide/settings"
+                      },
+                      {
+                        "title": "E-Invoicing Customer Portal",
+                        "path": "countries/malaysia/product-guide/customer-portal"
+                      },
+                      {
+                        "title": "Frequently Asked Questions",
+                        "path": "countries/malaysia/product-guide/faqs"
+                      },
+                      {
+                        "title": "Error Resolution Guide",
+                        "path": "countries/malaysia/product-guide/error-resolution-guide"
+                      },
+                      {
+                        "title": "Add ClearTax as an Intermediary on MyInvois",
+                        "path": "countries/malaysia/product-guide/myinvois-intermediary"
+                      }
+                    ]
                   }
                 ]
               },

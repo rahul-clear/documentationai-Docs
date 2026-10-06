@@ -1,0 +1,150 @@
+---
+title: B2B Sales Documents
+description: 'Importing data, generating individual and consolidated e-invoices, cancellations, rejections, and other document actions'
+---
+## Import your data
+
+- On the E-invoicing home page, you can click on the "Sales documents" tile to start your sales e-invoice generation process.
+- Once done, you will land on the "Sales documents" dashboard page.\
+
+- On the "Sales documents" dashboard page, you can perform all the actions pertaining to your sales documents.
+- To initiate the process of e-invoice generation, click on "Import file" action via the link on the empty dashboard or through the "Import" button on the left-hand panel.
+- When you click on the "Import" action, you will see another right-hand side panel opening in front of you where you can import your file for the purpose of e-invoice generation.
+
+- On the right-hand panel for importing documents, select "Import Sales Documents" for importing your sales data on the ClearTax platform.
+
+- You can select a file to import your data on the ClearTax platform either in the ClearTax excel template or you can create your own custom template and map it to ClearTax headers in the "Settings" section.
+- For more information on custom mapped templates, please refer to the "Settings" section.
+
+- Once you have selected a file to import, for B2B sales data choose the option "Einvoice Malaysia System template" in the "Template to be used" dropdown.
+- You can also create a custom template using the option in the same dropdown. Refer to the "Settings" section for more information on this.
+
+- Once you have successfully selected all the relevant options, click on the "Check file for errors & duplicates" button.
+- This action will run all the ClearTax validations on the ingested data to see if the data complies with LHDN requirements.
+
+- Once all the validations have successfully completed on the ingested file, you will see a "File Summary" screen.
+- This screen will give you a summary of the file in terms of number of rows with errors and number of errors respectively.
+- If there are any validation errors, you will see the summary result on this screen.
+- You can click on the "Review and fix errors" button to review and correct these errors on the ClearTax UI screen itself.
+- You can also correct the errors by "Downloading Error Report", correcting it offline and re-uploading the file.
+
+- You will see an error correction screen for rows with errors highlighted in Red color.
+- You can correct the document with errors by hovering over the error cell and correcting the values in the cells as described in the error body.
+- Once you have corrected the errors highlighted in Red color, you can click on the "Proceed" button to continue with your data importing activity.
+
+- ClearTax will run its validations again on the corrected data entries as part of the error correction flow.
+
+- Once this activity is completed, you will again see the "File Summary" screen.
+- You can click on the "Import rows without errors" button to proceed further.
+
+- Once the import activity is successfully completed, you will see the ingested document rows on the "Sales dashboard" page in "Not generated" state.
+- You can use the imported data for e-invoice generation either individually or by doing bulk selection.
+- Please follow the next sub-module on "Generate e-invoice(s)" for detailed steps on E-invoice generation.
+
+## Generate e-invoice(s)
+
+- For generating e-invoices, select the documents that you want to generate e-invoices on the "Sales dashboard" page.
+- You can select a document row individually and click on the "Generate e-inv" button to generate an e-invoice.
+- Alternatively, you can also bulk select the document rows (adjust the filter options for more refined bulk selection) and click on the "Generate e-inv" button to generate e-invoices in bulk.
+
+- Once the "Generate e-inv" action is completed, you will see the status of the documents change to reflect the e-invoicing status.
+- There can be 4 possible states for these documents
+
+1. Failed – Document is successfully uploaded, initiated a submission to LHDN but failed ClearTax validations or network failure issues on LHDN APIs.
+2. Submitted – Document submission initiated but is in a queue to be processed.
+3. Valid – Status of a successful invoice validation
+4. Invalid – Submitted document failed validations at LHDN
+
+- You can further click on the hyperlinked "Document number" to open the document details.
+- In case of a "Failed" or an "Invalid" document, you can also see the error message and correct the error using the "Edit" button.
+- Once the error is corrected, you can reinitiate the e-invoice generation process via the same page.
+
+## Generate consolidated e-invoice
+
+Consolidation of invoices is allowed by LHDN for reporting of B2B & B2C invoices where e-invoice is not requested by the consumer.
+
+Steps -
+
+- In the "Sales Document" or "Purchase Document" screen, select the invoices that you want to consolidate and click on "Action" and select "Generate Consolidated e-invoice"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/sales-documents/generate-consolidated-e-invoice-1.png" width="2880" height="1598" alt="Generate consolidated e-invoice" />
+
+- The selected invoice will be consolidated using the ClearTax algorithm and all invoice totals and tax totals will be aggregated and send to LHDN
+- The invoice status will change to "Consolidated" and consolidated document number thus generated will be visible in the column "Consolidated Document Number". This document series is auto generated by ClearTax
+- The invoice after consolidation will be visible in the "Consolidates Documents" tab
+- In order to view the consolidated invoice, go to "Consolidates Documents" and find the consolidated document number
+- The invoice series of the consolidated documents can be viewed in the line items section, column - "Description of Product or Service"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/sales-documents/generate-consolidated-e-invoice-2.png" width="2880" height="1592" alt="Generate consolidated e-invoice" />
+
+- The consolidated invoice document series is also available in the invoice print PDF of the consolidated e-invoice
+
+## Audit Trail
+
+Audit trail functionality helps users to track all actions take for an invoice by users on the product.
+
+- On the "Sales Document" and "Purchase Document" screens, audit trail for a document can be accessed by clicking on the icon against an invoice in the "Action" column
+- A side panel open which gives the details of the actions taken on the invoice along with the user and timestamp
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/sales-documents/audit-trail-1.png" width="2880" height="1624" alt="Audit Trail" />
+
+## Delete imported data
+
+- You can choose to delete the imported data on ClearTax platform before e-invoice generation in case you identify any issues with the imported data.
+- Please note that this activity can only be performed on the documents that are in "Not Generated" state.
+- You can bulk select the documents that need to be deleted, click on the "Actions" dropdown and then select the "Delete" option.
+- You will see a modal pop-up screen to validate your action since this action cannot be undone.
+- Once you click on the "Delete" button, the selected and eligible documents will get deleted from the "Sales dashboard" page.
+  - Eligible documents are the ones on which the delete action can be performed such as documents in "Not generated" state only.
+
+## Cancel an e-invoice
+
+- LHDN allows canceling a valid e-invoice within 72 hours of the e-invoice becoming valid.
+- You can cancel an e-invoice through ClearTax platform using the "Cancel e-inv" button in the "Actions" dropdown.
+
+- Once you select an e-invoice to be canceled and click on the "Cancel e-inv" button, you will see a modal window asking for the cancellation reason.
+- You can either select a pre-filled option or choose "Others" and provide a custom reason for cancellation.
+- Click on the "Cancel e-inv" button once you have selected the reason for canceling the e-invoice.
+
+- You will see the status of that document change to "Canceled" on the "Sales dashboard" page.
+
+## View rejection request
+
+- You can view the rejection requests you have received from your buyers for your sales documents under the column "Rejection request status".
+- You can further click on the document number hyperlink to open the document details view and see the rejection request reason that you have received from your buyer.
+- Based on the received rejection request, you can choose to cancel the e-invoice within 72 hours of validation from the ClearTax portal using the "Cancel e-inv" button in the "Actions" dropdown.
+
+## Print e-invoice(s)
+
+- You can bulk select the documents that you want to print and select the "Print" button inside the "Actions" dropdown.
+- You will see a "Print preview" screen open up in front of you where you can choose the print template.
+- Once done, you will see the document ready to be printed or downloaded on your system.
+
+## Download report
+
+- You can download the report from the "Actions" dropdown
+- You can either download "Detailed CSV report" or "Lite CSV report".
+
+- You can see the success notification on the top-right corner of the screen once the reports have been downloaded successfully.
+
+## E-mail invoice
+
+In order to email an invoice PDF, follow below steps -
+
+- Select the invoices from the "Sales Document" or "Purchase Document" screen to be email. Go to "Actions" and select "Email"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/sales-documents/e-mail-invoice-1.png" width="2878" height="1626" alt="E-mail invoice" />
+
+- Enter the recepient emails in "To" cc and bcc.
+- Select the print template in which the PDF file is required.
+- Select the email body template as per the invoice type.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/sales-documents/e-mail-invoice-2.png" width="2880" height="1622" alt="E-mail invoice" />
+
+- Preview the email format and click on "Send"
+
+## Check sales import history
+
+- You can select on the "Import history" button on the left-hand panel and see the import history sorted by the upload date.
+- You can view and fix the errors in your imported file through this page.
+- You can also view the documents that were imported as part of a file uploaded on ClearTax.

@@ -1,0 +1,139 @@
+---
+title: Settings
+description: 'User access management, custom ingestion templates, alerts and communications, and timezone'
+---
+## User access management
+
+You can add & configure different users with 6 types of roles based on your business requirements. Please find below the roles & their respective descriptions below.
+
+| ROLES                   | DESCRIPTIONS                                                                                                                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| E-Invoice User          | This role provides the user access to all actions for both sales & purchase documents within e-invoicing i.e Upload, Generate, View, Cancel, Request for rejection, Download, Print, Email        |
+| Sales E-Invoice User    | This role provides the user access to all actions for only sales documents within e-invoicing i.e Upload, Generate, View, Cancel, Download, Print, Email                                          |
+| Purchase E-Invoice User | This role provides the user access to all actions for only purchase documents within e-invoicing i.e Upload , Generate, View, Cancel, Self-billing, Request for rejection, Download, Print, Email |
+| View Only User          | This role provides access to only view & download both sales & purchase documents. With this role, the user won't be able to take any action or upload any new data in e-Invoicing.               |
+| Sales View Only User    | This role provides access to only view & download only sales documents. With this role, the user won't be able to take any action or upload any new data in e-Invoicing.                          |
+| Purchase View Only User | This role provides access to only view & download only purchase documents. With this role, the user won't be able to take any action or upload any new data in e-Invoicing. |
+
+### Invite new users
+
+- Navigate to the "User access" page via "Settings" option on the left-hand panel
+- Click on the button "Invite new user" to start adding a new user to your workspace.
+
+- Enter user details for adding a new user
+  - Type of user
+  - Name
+  - Email
+  - Product – Select "EInvoice"
+  - Role – Select the role for which you want to give the user the access.
+  - Click on "Continue" after entering the details as expected.
+
+- Once you have invited the user, they will receive an email to accept the invitation on the email address that was mentioned before.
+- The intended recipient can accept the invitation and start using the workspace based on the role access they have configured.
+
+## Custom Ingestion Template
+
+The product provides standard templates in which invoice data can be entered and ingested into the product.
+
+However, if you have a data file with required data but in your own format then you can create a custom ingestion template by mapping the file headers with standard templates and use this to ingest invoice data directly.
+
+The following section explains how to get custom data ingestion mapping done.
+
+### Custom data mapping as part of Ingestion workflow
+
+- Once you have added business, completed onboarding, and have the data file ready, please go to upload file section
+
+- In the upload section, please select whether you want to map purchase data or sales data
+
+- Click on the "Select a file to import" button to choose a file from your system to ingest.
+
+If you do not have the template, you can download the B2B and B2C template using the download option in the bottom right corner
+
+- You can ingest the file that contains the required headers to be mapped with the standard template using the import flow as explained in the earlier section
+
+- In the template selection dropdown, select "Create Custom Template" option and click on "Check file for errors & duplicates"
+
+The file is processed, the processing may take some time depending on the file size
+
+- Once the file is processed and ingested, the custom mapper screen is displayed, in which you can see the column header name from the standard template.
+
+- Map the column header in the standard template with the corresponding column header in the file ingested. Make sure that correct headers are mapped. You can also search the required header using the search bar.
+
+  Bar at the top of the table shows the number of fields - required, mapped, unmapped.
+
+- The required headers are highlighted in red. All the required headers need to be mapped, then only the template can be saved.
+
+  Once all the desired headers from the files have been mapped, you can save the template by clicking on the "Save template" button. Auto filled template name is shown which can be changed if required.
+
+- The newly created custom template is saved and the ingestion process continues with running the validation on the invoice file and checking duplicates.
+
+- This mapped template will now be visible under the templates section once the mapping is done for any future ingestion. You can select this template to upload data in this format going forward
+
+### Custom data mapping via settings section
+
+You can create a custom ingestion template during the ingestion and directly from the settings section as well.
+
+- Go to settings section - you can find it towards the bottom left side on the menu
+
+- Select the type of template you want to create from the Template dropdown, whether it is for B2B or B2C
+
+- Select the business (TIN) for which this template is to be created. The created template would be available only for the selected business
+
+- All the created custom templates will be shown in the table along with other details for the template. You can edit the template by clicking on "Edit" under actions. If you want to delete the template, click on 3 dots on the right side of actions and select "Delete template".
+
+- You can click on "Create Template" and follow the steps mentioned in the "Custom data mapping as part of Ingestion workflow" [section](https://docs.google.com/document/d/1WFDVZMD8tLiiHFAqt1ftq6cZW34X-pzl7MtLGRBpIQw/edit#heading=h.o6mjr6ucmyd9) to create a new template.
+
+### Addition of custom fields
+
+1. Apart from the required fields that are allowed by the government, if you wish to pass additional fields in the invoice data during ingestion, you can set up custom fields using this setting.
+2. The custom fields set up for a template and business will be checked during data import. Only the fields part of standard/custom ingestion template or custom fields will be ingested on the product
+
+Steps to create custom fields -
+
+- Select the type of template for which you want to add the custom fields from the Template dropdown, whether it is for B2B or B2C
+
+- Select the business (TIN) for which this template is to be created. The created custom field would be available only for the selected business
+
+- You can set up line level and document level custom fields. Enter the header name of the custom field column under the "Label for custom field" and click on save.
+- By default 5 custom fields are shown, more can be added by clicking on "Add new custom field". For deleting a custom field, click on 3 dots under actions and click on "Delete custom fields"
+
+## Alerts and Communications
+
+This settings enables the workspace admins to configure the businesses and corresponding recipients for sending alerts via email to customers.
+
+**Steps to configure** -
+
+- Select "Alerts and Communications" settings and click on "Add Recipient"
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/settings/alerts-and-communications-1.png" width="2880" height="1628" alt="Alerts and Communications" />
+
+- Enter the Name and recipient email. All available alert types will be visible in the table below.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/settings/alerts-and-communications-2.png" width="2880" height="1620" alt="Alerts and Communications" />
+
+- Click on the edit icon in the table for which the alert is to be set up. Select the businesses for which the alerts is needed and click on "Save" button
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/settings/alerts-and-communications-3.png" width="2880" height="1626" alt="Alerts and Communications" />
+
+- Once businesses has been configured for all alerts required for a recipient email, click on "Done" button
+- The save configuration will be visible as a new row on the settings screen.
+
+## Timezone
+
+You can choose to send your data to ClearTax in either Malaysia timezone (MYT) or Universal time coordinated (UTC) through a setting change on the ClearTax web portal.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/malaysia/product-guide/settings/timezone-1.png" width="2732" height="1536" alt="Timezone" />
+
+- By default, UTC timezone is selected on the web portal.
+
+- This means whenever you send the e-invoicing data to ClearTax, ClearTax will process the date & time in UTC.
+
+- Additionally, you will see the date & time reported in UTC in your Import History, Document details page, Print and reports.
+
+- You can change the timezone setting to MYT using the above setting.
+
+- Navigate to Settings > Timezone inside the ClearTax webportal.
+
+- Once this selection is made, ClearTax will process the date & time received from you in MYT.
+
+- You will also start seeing the date & time on different surfaces in MYT, such as Import history, print, document details page, reports.

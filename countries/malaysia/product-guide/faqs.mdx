@@ -1,0 +1,59 @@
+---
+title: Frequently Asked Questions
+description: 'Common questions and fixes for e-invoice generation errors from LHDN'
+---
+## Whenever I try to generate an e-invoice via ClearTax platform, I encounter "Unauthorized" error. How can I resolve this and generate LHDN compliant e-invoices?
+
+"**Unauthorized**" error occurs when ClearTax doesn't have the necessary permissions to submit e-invoices for generation on your company's behalf. There can be 4 scenarios in this case:
+
+- **You haven't added ClearTax as an intermediary on your MyInvois portal**
+  - Please follow the instructions mentioned in the guide [Add ClearTax as an intermediary on MyInvois portal](/countries/malaysia/product-guide/myinvois-intermediary) for detailed steps.
+
+- **You have added ClearTax as an intermediary on your MyInvois portal but haven't given the permissions to perform actions on your behalf**
+  - Visit MyInvois portal and edit the intermediary profile to give ClearTax access for interacting with LHDN on your behalf.
+
+- **The TIN registered on the MyInvois portal is different from the TIN you are using via ClearTax platform**
+  - The TIN mentioned on the ClearTax platform and is being used for submitting e-invoices is different from the TIN registered on your MyInvois profile.
+  - Please validate if both the TINs are same.
+
+- **The TIN entered on ClearTax platform is incorrect**
+  - LHDN expects taxpayers to remove any initial zeros that come after the TIN prefix for successful validation.
+  - For example, where the TIN of a taxpayer is 'C01234567890', the zero after the prefix 'C' needs to be excluded, resulting in 'C1234567890'.
+  - Please make sure you have removed any initial zeros from your TIN when registering on the ClearTax platform.
+
+## I am receiving the error "Issuance date time value of the document is too old and cannot be submitted" from LHDN. What actions can I take?
+
+LHDN expects the e-invoice to be generated within 72 hours of document issuance.
+
+- It might happen that you are trying to generate an e-invoice for a document whose date & time falls beyond the 72 hours window. For such cases, adjust the date to ensure it is within 72 hours before submission.
+
+- If you believe that the document submission date & time falls within the 72 hours window from the document issuance date & time, please check your timezone settings.
+  - By default the data that you send to ClearTax platform is processed in UTC given LHDN expects date & time to be in UTC.
+  - If you are sending the data in MYT from your end, please also change the setting on ClearTax portal to process this data in MYT.
+  - Follow the steps mentioned in the "[Set your timezone to MYT](/countries/malaysia/product-guide/settings)" guide for detailed instructions on the same.
+
+## I am receiving the error "Maximum allowed document size 300Kb exceeded" from LHDN for my submission. How do I interpret this error?
+
+As per LHDN guidelines, e-Invoice file size rules are as follows:
+
+1. 5 MB maximum submission size;
+2. 100 maximum e-Invoices per submission; and
+3. 300 KB maximum per e-Invoice.
+
+If you are receiving the above error, you might have already hit the "300KB" file size limit imposed by LHDN.
+
+- ClearTax has implemented minification of the submitted XML os JSON file to ensure your invoice meets the above mentioned limits.
+- However, in our experience we have seen this happening for documents that has line items more than 150.
+- We recommend reducing the number of line items to 150 to ensure you stay under the "300KB' file size limit and are able to successfully submit your e-invoice to LHDN.
+
+## How many decimal points does ClearTax support for various e-invoicing payload fields?
+
+- ClearTax supports upto 15 decimal places for the fields mentioned below:
+
+  - TaxExchangeRate.CalculationRate
+  - InvoiceLine.Price.Value
+  - InvoiceLine.InvoicedQuantity.Quantity
+  - InvoiceLine.TaxTotal.TaxSubtotal.Percent
+  - TaxTotal.TaxSubtotal.TaxCategory.TaxRate
+
+- For all other amount related fields, ClearTax rounds off upto 2 decimal places.
