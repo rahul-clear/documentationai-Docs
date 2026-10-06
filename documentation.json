@@ -481,6 +481,18 @@
                   {
                     "title": "PDF Merge",
                     "path": "sows/platform/pdf-merge"
+                  },
+                  {
+                    "title": "Updates in Mandate",
+                    "path": "sows/platform/mandate-updates"
+                  },
+                  {
+                    "title": "SFTP Lifecycle Support",
+                    "path": "sows/platform/sftp-lifecycle-support"
+                  },
+                  {
+                    "title": "AP Connectors",
+                    "path": "sows/platform/ap-connectors"
                   }
                 ]
               }
