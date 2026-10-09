@@ -1,0 +1,57 @@
+---
+title: Purchase Documents
+description: 'Viewing and downloading supplier invoices fetched from KSeF'
+---
+In Poland, every B2B invoice issued to your NIP sits in KSeF. ClearTax fetches these invoices from KSeF automatically and shows them under Purchase Documents, so you have one place to view, download and reconcile supplier invoices.
+
+- Invoices are fetched where your NIP appears as the buyer (Podmiot2) or as a third party (Podmiot3)
+- KSeF has no buyer accept / reject workflow. Disputes are handled by asking the supplier to issue a corrective invoice.
+
+## Getting to Purchase Documents
+
+Click the Purchase Documents icon in the left sidebar.
+
+## The Purchase Documents list view
+
+Two tiles at the top: **Total** (all received documents matching current filters) and **Received** (documents fetched from KSeF).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/purchase-documents/purchase-documents-list-view.png" width="2048" height="1149" alt="Purchase Documents list view" />
+
+| Column                      | What it shows                                                |
+|-----------------------------|--------------------------------------------------------------|
+| Invoice Number              | Supplier's invoice number (clickable, opens the detail view) |
+| Invoice Status              | Status of the received document                              |
+| Invoice Exchange Date Time  | Date and time the invoice was accepted in KSeF               |
+| KSeF Number                 | Unique KSeF number of the received invoice                   |
+| Invoice Date                | Issue date on the invoice                                    |
+| Invoice Type                | Document type, e.g. Standard VAT                             |
+| Total Document Amount (PLN) | Gross amount including tax                                   |
+| Total VAT Amount            | VAT portion                                                  |
+
+## Filtering
+
+Click Filter to narrow by Invoice Date, Invoice Exchange Date Time, Invoice Number, Seller Tax Identification Number and Seller Name.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/purchase-documents/purchase-documents-filter-panel.png" width="2048" height="1149" alt="Purchase Documents filter panel" />
+
+## Actions
+
+| Action                            | What it does                                                                                                               |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Download XML report               | Downloads the FA(3) XML of the selected document(s)                                                                        |
+| Delete                            | Removes a document                                                                                                         |
+| Print                             | Opens the document(s) in the print dialog. Printed visualisations of accepted invoices carry the KSeF verification QR code |
+| Sync document status              | Refreshes the latest KSeF status of the selected document(s)                                                               |
+| Email                             | Sends the document(s) as an email attachment                                                                               |
+| Download (Lite / Detailed report) | Compact or full export of selected documents                                                                               |
+| Show/Hide Reorder Column          | Choose and reorder the columns shown in the table                                                                          |
+| Sort                              | Sort the table by a column                                                                                                 |
+
+### Download submenu
+
+| Sub-option               | What it contains                                                                 |
+|--------------------------|----------------------------------------------------------------------------------|
+| Download Lite Report     | Compact export with headline fields, good for quick reconciliation               |
+| Download Detailed Report | Full export including line items, tax breakup and KSeF metadata, good for audits |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/purchase-documents/purchase-documents-actions-menu.png" width="2048" height="1149" alt="Purchase Documents actions menu" />

@@ -1,0 +1,175 @@
+---
+title: Sales Documents
+description: 'Managing outbound invoices submitted to KSeF - filtering, actions, the detail view, statuses, and troubleshooting'
+---
+Sales Documents is where you manage all outbound e-invoices: VAT invoices, corrective invoices and advance invoices. It covers:
+
+1. Creating invoices (manually, via bulk import, or via API / ERP integration)
+2. Monitoring their journey through KSeF
+3. Acting on individual or multiple documents (sending, downloading, printing, emailing, deleting)
+
+## Getting to Sales Documents
+
+From the e-Invoicing dashboard, click the Sales documents tile, or the Sales Documents icon in the left sidebar.
+
+## The Sales Documents list view
+
+The list view has four zones: status summary tiles, actions bar, active filter chips, and the document table.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/sales-documents/sales-documents-list-view.jpg" width="1280" height="731" alt="Sales Documents list view" />
+
+### Status summary tiles (top)
+
+| Tile      | Meaning                                            |
+|-----------|----------------------------------------------------|
+| Total     | All documents matching current filters             |
+| Pending   | Awaiting submission to KSeF                        |
+| Failed    | Submission or validation failed. Needs remediation |
+| Submitted | Sent to KSeF and awaiting processing               |
+| Valid     | Accepted by KSeF and assigned a KSeF number        |
+
+### Document table
+
+| Column                      | What it shows                                                                                       |
+|-----------------------------|-----------------------------------------------------------------------------------------------------|
+| Checkbox                    | Select the row for bulk actions                                                                     |
+| Invoice Number              | Your document number (clickable, opens the detail view)                                             |
+| Invoice Status              | ClearTax's view of where the document is                                                            |
+| Invoice Exchange Date Time  | Date and time the invoice was accepted by KSeF (became Valid)                                       |
+| KSeF Number                 | Unique number assigned by KSeF on acceptance                                                        |
+| Invoice Date                | Invoice issue date                                                                                  |
+| Invoice Type                | Document type, e.g. Standard VAT. Maps to the FA(3) types VAT (basic), KOR (corrective)             |
+| Total Document Amount (PLN) | Gross amount including tax. Foreign currency invoices carry an exchange rate up to 4 decimal places |
+| Total VAT Amount            | VAT portion                                                                                         |
+
+## Filtering the list
+
+Click Filter to open the side panel.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/sales-documents/sales-documents-filter-panel.png" width="2048" height="1144" alt="Sales Documents filter panel" />
+
+### Filter groups
+
+- **Document Date Range** - filter by invoice issue date
+- **Invoice Exchange Date Time** - filter by date of acceptance by KSeF
+- **Invoice Number** - free-text search
+- **Buyer Tax Identification Number** - free-text search
+- **Buyer Name** - free-text search
+- **Document Status** - checkbox list matching the status tiles
+- **Invoice Type** - VAT, KOR
+
+### Applying and clearing filters
+
+- **Apply** - applies your selections. Each active filter appears as a chip above the table.
+- **Clear All** - resets every filter.
+- **×** - closes the panel without applying changes.
+
+## Actions on selected documents
+
+Tick one or more rows to enable bulk actions.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/sales-documents/actions-menu.png" width="2048" height="1149" alt="Actions menu" />
+
+| Action                            | What it does                                                                                                               |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Download XML report               | Downloads the FA(3) XML of the selected document(s)                                                                        |
+| Delete                            | Removes a document that hasn't been accepted by KSeF                                                                       |
+| Print                             | Opens the document(s) in the print dialog. Printed visualisations of accepted invoices carry the KSeF verification QR code |
+| Sync document status              | Refreshes the latest KSeF status of the selected document(s)                                                               |
+| Email                             | Sends the document(s) as an email attachment                                                                               |
+| Download (Lite / Detailed report) | Compact or full export of selected documents                                                                               |
+| Show/Hide Reorder Column          | Choose and reorder the columns shown in the table                                                                          |
+| Sort                              | Sort the table by a column                                                                                                 |
+| Send                              | Submits selected documents to KSeF                                                                                         |
+
+### Download submenu
+
+| Sub-option               | What it contains                                                                 |
+|--------------------------|----------------------------------------------------------------------------------|
+| Download Lite Report     | Compact export with headline fields, good for quick reconciliation               |
+| Download Detailed Report | Full export including line items, tax breakup and KSeF metadata, good for audits |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/sales-documents/download-submenu-lite-and-detailed-repor.jpg" width="1280" height="731" alt="Download submenu: Lite and Detailed report" />
+
+### Send
+
+Send is available only for documents in **Pending** or **Failed** state. Once a document is Valid, KSeF makes it available to the buyer directly, so Send is not offered.
+
+- **Bulk:** tick one or more rows and click Send in the actions bar.
+- **Single:** from a document's detail view, click Send Document in the header.
+
+## The document detail view
+
+Click any Invoice Number to open the detail view.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/sales-documents/document-detail-view-pending-document-wi.jpg" width="1280" height="731" alt="Document detail view (Pending document with Send Document and Edit)" />
+
+### Header
+
+- **Invoice Number** and **KSeF Number** (once Valid)
+- **Document Status** pill
+- **Edit** button (top-right), see [Header states](#the-document-detail-view---header-states)
+- **×** - close and return to the list
+
+### Left navigation
+
+| Section                        | What it holds                                                                                                         |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Invoice Details                | Invoice type, number, KSeF number, issue date, status, currency, exchange rate, correction and advance payment fields |
+| Seller Details (Podmiot1)      | Your NIP, name, address and country                                                                                   |
+| Buyer Details (Podmiot2)       | Buyer NIP or other identifier, name, address and country                                                              |
+| Third Party Details (Podmiot3) | Any additional party on the invoice, e.g. payer or recipient                                                          |
+| Authorized Entity Details      | Entity authorised to act on the invoice, where applicable                                                             |
+| Delivery Details               | Delivery date and place                                                                                               |
+| Line Items                     | Descriptions, quantities, units of measure, prices, VAT rates                                                         |
+| Invoice Amount Details         | Totals including and excluding VAT, amount to pay                                                                     |
+| Payment Details                | Payment method, terms, due date, bank account                                                                         |
+| Other Details                  | Any remaining optional FA(3) fields                                                                                   |
+
+## The document detail view - header states
+
+**Accepted document** (Valid) - Send and Edit are hidden. A KSeF invoice cannot be changed or cancelled once accepted. To change it, issue a corrective invoice (KOR).
+
+**Failed document** - Send Document and Edit are shown, with an "Invoice exchange error/warnings" banner at the top.
+
+### Edit mode
+
+Click Edit in the header to switch fields from read-only to editable.
+
+## Creating an invoice manually
+
+Detailed flow will be covered ahead.
+
+## Bulk upload (Import)
+
+See [Importing Documents](/countries/poland/product-guide/importing-documents).
+
+## API and ERP integration
+
+For high-volume issuers, invoices flow into ClearTax directly from the ERP via API or SFTP. See [API](/countries/poland/product-guide/importing-documents#api).
+
+## Understanding statuses
+
+| Status     | What has happened                                                      |
+|------------|------------------------------------------------------------------------|
+| Pending    | Document is in ClearTax, awaiting submission                           |
+| Failed     | Submission or validation failed (ClearTax or KSeF)                     |
+| Submitted  | Sent to KSeF and awaiting processing                                   |
+| Valid      | Accepted by KSeF, KSeF number assigned, available to the buyer in KSeF |
+
+## Troubleshooting
+
+When a document fails, ClearTax shows the errors in two places:
+
+1. On the list view - the row shows Failed under Invoice Status.
+2. Inside the detail view - a red "Invoice exchange error/warnings" banner above Invoice Details.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/sales-documents/invoice-exchange-error-warnings-banner.png" width="2048" height="1149" alt="Invoice exchange error/warnings banner" />
+
+### Reading the error banner
+
+Click View More to expand the full error list. Errors labelled "Errors - Fix to continue" block submission until fixed. Each error follows the format:
+
+`<Source> : [<rule-code>] - <message>`
+
+Example (illustrative): 1. GOVT : Authentication failed - KSeF certificate is invalid or expired

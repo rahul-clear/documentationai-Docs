@@ -1,0 +1,116 @@
+---
+title: Settings
+description: 'Roles, API credentials, print format, business settings, user access, workspace, profile, email configuration, and API clients'
+---
+Click the gear icon at the bottom of the left sidebar to open Settings. It has two groups:
+
+- **Local settings** - apply only to Poland (roles, API credentials, print format).
+- **Global settings** - apply across the workspace (businesses, users, workspace, integrations).
+
+## Local settings
+
+### Roles
+
+| Role                    | What it allows                                                                       |
+|-------------------------|--------------------------------------------------------------------------------------|
+| E-Invoice User          | All actions on Sales and Purchase documents                                          |
+| Sales E-Invoice User    | All actions on Sales documents only (Upload, Generate, View, Download, Print, Email) |
+| Purchase E-Invoice User | All actions on Purchase documents only (View, Download, Print, Email)                |
+| View Only User          | View and download Sales and Purchase documents                                       |
+| Sales View Only User    | View and download Sales documents only                                               |
+| Purchase View Only User | View and download Purchase documents only                                            |
+| Admin                   | Workspace-level administrative access                                                |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/roles.jpg" width="1400" height="796" alt="Roles" />
+
+### API Credentials
+
+API Credentials is where you retrieve the credentials your ERP or middleware uses to authenticate with the ClearTax API. Detailed guidance on generating and rotating credentials is in the ClearTax API documentation - contact your ClearTax point of contact for the current API reference.
+
+### Print format
+
+Controls the filename of invoices when downloaded, printed or emailed. Use the default, or combine up to four fields. The Switch country selector lets you set a separate format for Poland. Click Save to persist.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/print-format.jpg" width="1400" height="798" alt="Print format" />
+
+## Global settings
+
+### Business settings
+
+View and manage all NIPs in your workspace: Add / Switch Country, Search, and Add business.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/business-settings.png" width="2048" height="1149" alt="Business settings" />
+
+| Column     | What it shows                                           |
+|------------|---------------------------------------------------------|
+| Name       | Business or entity name                                 |
+| NIP        | The entity's NIP                                        |
+| Actions    | Edit (modify business metadata) and more via the ⋮ menu |
+
+### User access
+
+Invite team members as a **Regular user** (finance, tax, IT team) or **Guest user** (auditors, consultants, partners).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/user-access-management.jpg" width="1400" height="797" alt="User Access Management" />
+
+| Column       | What it shows                      |
+|--------------|------------------------------------|
+| Name & Email | Display name and login email       |
+| User Type    | Regular or Guest                   |
+| Products     | Clear products the user can access |
+| Role         | One of the [Roles](#roles) above          |
+| Businesses   | NIPs the user can operate under    |
+| Action       | New role, Edit user, Delete        |
+
+Roles are assigned per user, per NIP.
+
+### Workspace
+
+Workspace Details shows workspace name (with Set As Default), Workspace Id (copy for support tickets), Legal Name, Business Address, Workspace type, Location and Created on date. Workspace Security covers **SAML required** and **Allowed User Email Domains**. Click Edit to change.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/workspace-details.jpg" width="1400" height="795" alt="Workspace Details" />
+
+### Profile
+
+Read-only summary of your account. Profile settings are managed on the Clear Accounts page via Go to Profile settings.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/profile.jpg" width="1400" height="797" alt="Profile" />
+
+### Subscriptions
+
+Shows your active plan, seat count, renewal date and add-ons.
+
+### Email configuration
+
+Route outbound emails through your own SMTP server so invoices are sent from your domain. Tick "My SMTP server is accessible from the public internet" to enable the form.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/email-configuration.jpg" width="1400" height="798" alt="Email configuration" />
+
+| Field                    | What to enter                                   |
+|--------------------------|-------------------------------------------------|
+| Email client             | Preset (Gmail, Outlook, custom)                 |
+| SMTP server              | Host or IP, e.g. smtp-mail.domain.com           |
+| SMTP port                | Typically 587 (STARTTLS) or 465 (SSL/TLS)       |
+| SMTP username / password | Account credentials (password stored encrypted) |
+| Sender name              | e.g. "Acme Sp. z o.o. Billing"                  |
+| Sender email             | e.g. billing@acme.pl                            |
+| Test email address       | Where ClearTax sends a test message             |
+
+Click Test Connection, then Save Changes.
+
+### Integrations - API Clients
+
+Create and manage credentials your ERP or middleware uses to call the ClearTax API. Create a separate client per ERP or billing system, so one can be rotated or revoked without affecting others.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/settings/api-clients.jpg" width="1400" height="797" alt="API Clients" />
+
+| Column                  | What it shows                           |
+|-------------------------|-----------------------------------------|
+| Label                   | Client name, e.g. "SAP Production"      |
+| Status                  | Active or Inactive                      |
+| Workspace name          | Workspace the client belongs to         |
+| Products                | Products / scopes the client can access |
+| Created by / Created on | Creator and timestamp                   |
+| Actions                 | Edit, Delete                            |
+
+Credentials are shown once on creation, so copy them immediately. To rotate, create a new client, switch your ERP to it, then delete the old one.

@@ -1,0 +1,138 @@
+---
+title: Onboarding
+description: 'Generating your KSeF certificate and setting up your ClearTax Poland workspace and NIPs'
+---
+Poland's Ministry of Finance, through the National Revenue Administration (KAS), requires VAT-registered businesses to issue structured invoices through **KSeF** (Krajowy System e-Faktur, the National e-Invoicing System). An invoice is legally issued only once KSeF accepts it and assigns a unique **KSeF number**. ClearTax connects directly to KSeF, so your invoices are generated, submitted and cleared automatically, and invoices you receive are pulled back into ClearTax.
+
+| Detail | Information |
+| --- | --- |
+| Tax authority | Ministry of Finance / KAS (Krajowa Administracja Skarbowa) |
+| Invoice platform | KSeF 2.0 |
+| Clearance model | Centralised real-time clearance (KSeF number assigned on acceptance) |
+| Invoice format | Structured XML, logical structure FA(3) |
+| Applies to | B2B and B2G (mandatory). B2C is optional |
+| Mandate timeline | 1 Feb 2026: taxpayers with 2024 sales above PLN 200M<br />1 Apr 2026: all other VAT taxpayers<br />1 Jan 2027: smallest taxpayers (monthly invoiced sales up to PLN 10,000) |
+| Penalties | Deferred until 31 Dec 2026 |
+| Inbound invoices | Supported - received invoices are fetched from KSeF ([Purchase Documents](/countries/poland/product-guide/purchase-documents)) |
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A valid Polish **NIP** (10-digit tax identification number) for each entity you want to onboard
+- Access to the KSeF Taxpayer Application (ap.ksef.mf.gov.pl/web), using a Trusted Profile (Profil Zaufany), e-ID, or a qualified electronic signature / seal
+- A **KSeF authentication certificate** generated for each NIP (see [Before You Begin: Generate Your KSeF Certificate](#before-you-begin-generate-your-ksef-certificate))
+- Contact details of your ClearTax point of contact (POC)
+- Access to the ClearTax Poland URL: [https://app.eu.cleartax.com/new-einvoicing/](https://app.eu.cleartax.com/new-einvoicing/)
+
+## Before You Begin: Generate Your KSeF Certificate
+
+ClearTax connects to KSeF on your behalf using a KSeF **authentication certificate**. You generate it once in the KSeF Taxpayer Application, then share it with your ClearTax POC. It takes about 5 minutes.
+
+### Step 1 - Log in to KSeF
+
+Go to the KSeF Taxpayer Application: [ap.ksef.mf.gov.pl/web](http://ap.ksef.mf.gov.pl/web) and log in. Make sure your user has KSeF permissions for the NIP you want to onboard.
+
+### Step 2 - Generate the private key
+
+1. In the left menu, open **Certificates &gt; Apply for a certificate**.
+2. **Certificate name:** enter a name of 5 to 100 characters. The key and certificate are saved under this name.
+3. **Password:** enter and repeat a password. It must have at least 15 characters, 1 capital letter, 1 lowercase letter, 1 digit and 1 special character, and cannot exceed 32 characters or use Polish characters.
+4. Click **Generate**. The private key is saved to your device.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/ksef-taxpayer-application-certificates-a.jpg" width="1280" height="522" alt="KSeF Taxpayer Application: Certificates > Apply for a certificate" />
+
+### Step 3 - Submit the certificate request
+
+1. Under **Purpose of the certificate**, select **Authentication in the KSeF system**.
+2. Set **Certificate valid from**. The certificate is valid for 2 years from this date.
+3. Click **Submit a certificate request**, then refresh the page to see the confirmation.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/select-authentication-in-the-ksef-system.jpg" width="1280" height="417" alt="Select Authentication in the KSeF system and submit the request" />
+
+### Step 4 - Download the certificate
+
+1. Go to **Certificates &gt; List of certificates**.
+2. Select your certificate and click **Download the certificate**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/list-of-certificates-select-and-download.jpg" width="1280" height="417" alt="List of certificates: select and download" />
+
+### Step 5 - Share with ClearTax
+
+1. Share the following with your ClearTax POC.
+   - Company Legal Name
+   - NIP No.
+   - Digital certificate (.crt)
+   - Private key (.key)
+   - Password
+
+2. Your POC configures it against your NIP and confirms once the KSeF connection is live. Invoices cannot be submitted until then.
+
+<Callout kind="info" collapsed="false">
+**Keep these safe.** KSeF does not store your private key, so it cannot be downloaded again. If you lose the key or password, invalidate the certificate in **List of certificates** and apply for a new one.
+</Callout>
+
+## Set Up ClearTax (First-Time Setup)
+
+The first time you log in, ClearTax walks you through a short setup flow.
+
+### Step 1 - Welcome
+
+Review the product highlights and click Continue.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/first-time-setup-welcome.jpg" width="1600" height="908" alt="First-time setup: Welcome" />
+
+### Step 2 - Select your country
+
+Choose Poland as your primary country, then click Add country.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/select-poland-as-your-country.png" width="2048" height="1149" alt="Select Poland as your country" />
+
+### Step 3 - Create your business profile
+
+Enter your Organisation Identifier (NIP) and Organisation Name exactly as registered with the Polish tax authority, then click Next.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/enter-your-nip-and-organisation-name.png" width="2048" height="1149" alt="Enter your NIP and Organisation Name" />
+
+### Step 4 - KSeF connection
+
+Your KSeF certificate is configured by your ClearTax POC (see [Step 5 - Share with ClearTax](#step-5---share-with-cleartax)), not entered on this screen. Click Continue to Dashboard.
+
+<Callout kind="info" collapsed="false">
+**Testing in a demo account?** Demo workspaces connect to the KSeF test environment, not production. Invoices submitted there have no legal effect.
+</Callout>
+
+## Understanding the Business Hierarchy
+
+| Field            | Description                                                           | Example            |
+|------------------|-----------------------------------------------------------------------|--------------------|
+| Workspace        | Your ClearTax account container                                       | Acme Group         |
+| NIP              | Polish tax identification number of the entity                        | PL1234567890       |
+| KSeF certificate | Authentication certificate generated in the KSeF Taxpayer Application | .crt + private key |
+
+- One NIP needs one active KSeF authentication certificate configured in ClearTax.
+- Multiple NIPs can sit under one workspace.
+
+## Adding More NIPs Later
+
+Everything below is managed from **Settings &gt; Business settings**.
+
+### Add a new NIP
+
+1. On the Business settings page, click Add business.
+2. Choose Add new NIP.
+3. Enter the NIP and Organisation Name, then click Save.
+4. Generate a KSeF certificate for the new NIP and share it with your ClearTax POC (see [Before You Begin: Generate Your KSeF Certificate](#before-you-begin-generate-your-ksef-certificate)).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/add-business-add-new-nip.png" width="2048" height="1149" alt="Add business > Add new NIP" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/onboarding/enter-the-nip-and-organisation-name.png" width="2048" height="1149" alt="Enter the NIP and Organisation Name" />
+
+## Managing KSeF Certificates
+
+- KSeF certificates are valid for 2 years from the chosen start date. Generate a new certificate before expiry and share it with your ClearTax POC to avoid interruptions.
+- If a certificate is compromised, invalidate it in **Certificates &gt; List of certificates** immediately and share a new one with your ClearTax POC.
+
+<Callout kind="info" collapsed="false">
+**Automatic verification.** The connection is verified once the first invoice for that NIP is accepted by KSeF. No separate test step is required.
+</Callout>

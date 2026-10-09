@@ -1,0 +1,132 @@
+---
+title: Importing Documents
+description: 'Bulk upload via the Import UI, Import History, and API integration'
+---
+Documents enter ClearTax Poland through three channels:
+
+- bulk file upload via the Import UI
+- API integration
+- SFTP file drop.
+
+All three land in the same flow: invoices are validated, deduplicated, and made available in Sales Documents for submission to KSeF.
+
+## Bulk upload via Import
+
+### Getting to Import
+
+Click the Import icon in the left sidebar.
+
+### Upload the file
+
+The upload panel accepts .xlsx and .csv files matching the ClearTax Ingestion Template for Poland.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/importing-documents/import-file-panel.jpg" width="1280" height="731" alt="Import file panel" />
+
+- **Drop zone (top)** - click to open the file picker or drag-and-drop your file.
+- **Template link (bottom)** - under "Don't have a file to import?", click ClearTax Ingestion Template to download the Excel template with all required columns.
+
+Using the template is strongly recommended. It has the exact headers and data types the importer expects.
+
+### Confirm file details
+
+| Step                         | What to do                                                                                     |
+|------------------------------|------------------------------------------------------------------------------------------------|
+| 1\. File selected for import | The filename you uploaded, with a trash icon to remove and re-upload                           |
+| 2\. Business                 | Select the NIP the rows belong to, or "File has multiple NIPs" to route rows by the NIP column |
+| 3\. Template to be used      | Select the template to validate against, e.g. "Einvoice Poland - Sales Template"               |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/importing-documents/confirm-file-business-and-template.jpg" width="1600" height="902" alt="Confirm file, business and template" />
+
+Click **Check file for errors & duplicates**. ClearTax runs schema and business-rule validation on every row.
+
+### Review the file summary
+
+**Outcome A - Errors found:** File Details, Summary (Docs, Rows, Errors, No Errors), an Error File download with error columns appended, and a **Review and fix errors** CTA.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/importing-documents/outcome-a-errors-found.jpg" width="416" height="797" alt="Outcome A: errors found" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/importing-documents/outcome-b-no-errors.jpg" width="416" height="796" alt="Outcome B: no errors" />
+
+**Outcome B - No errors:** "No errors in your file. Good job!" with a **Proceed** CTA.
+
+### If your file has errors
+
+The summary breaks down what ClearTax found:
+
+- **File Details** - the filename and size
+- **Branch Summary** - counts of documents, rows, errors (in red) and rows without errors (in green)
+- **Error File** - downloads a copy of your original file with error columns appended
+- **Review and fix errors** - takes you into the guided fix flow
+
+You have two ways forward, and the right one depends on how many errors there are.
+
+**Fix them offline.** Download the Error File, correct everything in Excel, and re-upload the corrected file from the beginning. This suits large error counts and anyone more comfortable working in a spreadsheet.
+
+**Fix them inline.** Click **Review and fix errors** to correct rows directly in ClearTax. This is quicker for a handful of errors and avoids a second upload.
+
+#### Fixing errors inline
+
+Clicking **Review and fix errors** opens the error review page.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/importing-documents/inline-error-review-page.png" width="2048" height="1144" alt="Inline error review page" />
+
+The header confirms what you're working on and tracks your progress:
+
+- The instruction *"Fix the highlighted errors to import these rows"*
+- A **Fixed / Remaining counter** - for example *Fixed: 0, Remaining: 1* - which updates as you work
+- The **Proceed** button, top right
+
+Work through the highlighted fields, correcting each one until the Remaining count reaches zero.
+
+#### Committing the import
+
+Click **Proceed** to commit. Your rows land in the tab you chose at Step 2 - **Sales Documents** - with a starting status of **Pending**, ready to be submitted.
+
+<Callout kind="info" collapsed="false">
+**You don't have to fix everything now.** If you proceed with errors outstanding, the clean rows still import and the file stays in Import History with a **Fix Errors** link, so you can return to the remainder later.
+</Callout>
+
+### Proceed and ingest
+
+Clicking Proceed commits the file. Rows land in Sales Documents as **Pending**, ready to be submitted to KSeF.
+
+## Import History
+
+### Layout
+
+| Column            | What it shows                                                            |
+|-------------------|--------------------------------------------------------------------------|
+| Upload Date (CET) | Timestamp of the upload                                                  |
+| File Name         | Original filename                                                        |
+| Source            | UI, FTP, ERP, API, or JSON\_API                                          |
+| VAT/BRANCH        | NIP the file was routed to (or "Multiple BRANCH" for multi-entity files) |
+| Template          | Ingestion template used                                                  |
+| File Type         | xlsx or csv                                                              |
+| Total sheets      | Number of worksheet tabs                                                 |
+| Rows Processed    | Total rows read                                                          |
+| Rows (No Errors)  | Rows that passed validation                                              |
+| Rows (Errors)     | Rows that failed validation                                              |
+| Actions           | See [Actions on a past import](#actions-on-a-past-import)                                                                |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/importing-documents/import-history-poland.jpg" width="1280" height="731" alt="Import History (Poland)" />
+
+### Filtering
+
+- **Upload Date** - date picker
+- **File Name** - free-text search
+- **Source** - UI, FTP, ERP, API, JSON\_API
+
+### Actions on a past import
+
+| Action link      | When it appears            | What it does                                     |
+|------------------|----------------------------|--------------------------------------------------|
+| Fix Errors (red) | File had unresolved errors | Opens the inline error page to finish the import |
+| View File (blue) | File fully processed       | Read-only view of the file as ingested           |
+
+## API 
+
+If you're pushing high volume from an ERP, the Import UI quickly becomes a bottleneck. ClearTax supports two direct integration channels.
+
+**API.** A direct, real-time integration. Your ERP posts documents to ClearTax as they're raised, and receives status updates back - best where you need invoices moving continuously and want lifecycle statuses reflected in your own systems.
+
+*See the [ClearTax e-Invoicing API documentation](/unified-api/overview) for endpoints, authentication and payload schemas.*

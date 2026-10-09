@@ -1,0 +1,48 @@
+---
+title: Reports
+description: 'The MIS Dashboard - KPI cards, status and daywise breakdowns, and the overview table'
+---
+Reports give you an aggregated view of your e-invoicing activity: volumes, status distribution, day-wise trends and financial totals, across both Sales and Purchase documents.
+
+## Getting to Reports
+
+Click the Reports icon in the left sidebar to land on the MIS Dashboard.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/reports/reports-mis-dashboard-card.jpg" width="1280" height="731" alt="Reports > MIS Dashboard card" />
+
+## The MIS Dashboard
+
+Five zones: tab (Sales), filter controls, KPI cards, charts, and the Overview table. KPI cards show Invoices ingested, Valid invoices, Total valid invoices value (PLN) and Total valid invoices tax amount (PLN).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/reports/mis-dashboard-sales-tab.png" width="2048" height="1149" alt="MIS Dashboard, Sales tab" />
+
+### Filter panel
+
+| Filter group        | Options                                                           |
+|---------------------|-------------------------------------------------------------------|
+| Document date range | Start and end date (DD/MM/YY)                                     |
+| Document status     | Pending, Submitted, Valid, Failed                                 |
+| Mode of generation  | Manual ingestion - Web, API, SFTP                                 |
+| Document type       | Tax invoice, Debit note, Credit note, Pre-payment invoice, Others |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/reports/mis-dashboard-filter-panel.png" width="2048" height="1149" alt="MIS Dashboard filter panel" />
+
+### Status breakdown chart
+
+A half-donut chart of documents by status in the selected window. Hover over a segment to see its count.
+
+### Daywise breakdown chart
+
+A stacked bar chart of daily volume by status. A spike in Failed on a given day usually points to an ERP, integration or KSeF availability issue.
+
+### Overview table
+
+Each row is one entity (Entity Name + NIP). Columns are grouped by status (Total, Pending, Submitted, Valid, Failed), each with:
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/poland/product-guide/reports/overview-table-illustrative-values.png" width="2048" height="206" alt="Overview table (illustrative values)" />
+
+| Sub-column                | Meaning                           |
+|---------------------------|-----------------------------------|
+| Invoice                   | Count of documents in this status |
+| Total invoice value (PLN) | Sum of gross amounts              |
+| Total tax amount (PLN)    | Sum of VAT                        |

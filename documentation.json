@@ -451,8 +451,46 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Poland (Coming Soon)",
-                    "path": "countries/poland/coming-soon"
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/poland/product-guide/overview"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/poland/product-guide/onboarding"
+                      },
+                      {
+                        "title": "Dashboard Walkthrough",
+                        "path": "countries/poland/product-guide/dashboard-walkthrough"
+                      },
+                      {
+                        "title": "Sales Documents",
+                        "path": "countries/poland/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/poland/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "Importing Documents",
+                        "path": "countries/poland/product-guide/importing-documents"
+                      },
+                      {
+                        "title": "Reports",
+                        "path": "countries/poland/product-guide/reports"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/poland/product-guide/settings"
+                      },
+                      {
+                        "title": "Support Desk",
+                        "path": "countries/poland/product-guide/support-desk"
+                      }
+                    ]
                   }
                 ]
               }
