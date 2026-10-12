@@ -1,0 +1,42 @@
+---
+title: Introduction
+description: 'The Norwegian B2B e-invoicing mandate, the Peppol 4-corner model and ClearTax as your Access Point'
+---
+## The Norwegian B2B e-invoicing mandate
+
+Norway already requires e-invoices for sales to the public sector (B2G) through EHF on Peppol. The amended Bookkeeping Act extends this to business-to-business trade.
+
+| Milestone                           | Date                | What it means                                                                                                                   |
+|-------------------------------------|---------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| B2G e-invoicing                     | In force since 2019 | Suppliers to public bodies send EHF invoices over Peppol                                                                        |
+| B2B sending obligation              | 1 January 2027      | Bookkeeping-liable businesses must send structured e-invoices to bookkeeping-liable recipients registered on the Peppol network |
+| B2B receiving + digital bookkeeping | 1 January 2030      | Businesses must be able to receive e-invoices, and accounting systems must support automated processing                         |
+
+A **structured e-invoice** is a machine-readable XML document that can be processed automatically. A PDF sent by email is **not** a compliant e-invoice under the new rules.
+
+<Callout kind="info" collapsed="false">
+**Out of scope:** Consumer (B2C) and cash sales are not covered by the B2B obligation.
+</Callout>
+
+## The Peppol 4-corner model
+
+Norway does not use a government clearance portal. Invoices move directly between trading partners over the Peppol network, through certified Access Points.
+
+| Corner     | Party                            | Role                                               |
+|------------|----------------------------------|----------------------------------------------------|
+| C1         | Seller                           | Creates the invoice in its ERP or in ClearTax      |
+| C2         | Seller's Access Point (ClearTax) | Validates the invoice and transmits it over Peppol |
+| C3         | Buyer's Access Point             | Receives the invoice and passes it on              |
+| C4         | Buyer                            | Receives the invoice in its ERP or AP system       |
+
+Think of it like mobile networks: you can call anyone regardless of their operator, because operators connect to each other. Peppol Access Points work the same way.
+
+## ClearTax as your Access Point
+
+ClearTax acts as your Peppol Access Point (corner 2 for sales, corner 3 for purchases). It:
+
+- Validates every invoice against EHF / Peppol BIS Billing 3.0 rules before sending
+- Looks up the receiver's Peppol ID in the Peppol SMP
+- Transmits documents securely over Peppol (AS4)
+- Receives supplier invoices sent to your Peppol ID and shows them in your Purchase Documents inbox
+- Tracks delivery status end to end, from submission to delivery

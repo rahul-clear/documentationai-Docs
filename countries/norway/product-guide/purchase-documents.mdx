@@ -1,0 +1,70 @@
+---
+title: Purchase Documents
+description: 'Your Peppol inbox, self-billing, additional reference documents and available actions'
+---
+Purchase Documents is your Peppol inbox. It holds e-invoices your suppliers send to your Peppol ID, and the **self-billed invoices** you issue on behalf of your suppliers.
+
+## Receiving supplier invoices
+
+- Once your Peppol ID is registered on Peppol and shared with suppliers, every e-invoice sent to it appears here with status **Received**.
+- Received invoices are validated against Peppol standards automatically.
+- Click an invoice number to open its details.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/purchase-documents/purchase-documents-received-supplier-inv.jpg" width="1400" height="803" alt="Purchase documents: received supplier invoices" />
+
+**Columns:** Invoice Number, Invoice Status, Invoice Date, Invoice Type, Invoice Exchange Date, Download Status, Seller Name, Seller VAT, Additional Document Status, Total Document Amount (kr), Total VAT Amount (kr), Audit Trail.
+
+- **Download Status** shows whether the document has been downloaded (for example Not Downloaded or XML).
+
+## Self-billing (Norway)
+
+In a self-billing arrangement, the **buyer** issues the invoice on the seller's behalf. This is common in Norway for purchases from sellers that are not VAT-registered (they have an organisation number but no MVA number), and can also apply to VAT-registered sellers.
+
+| Document                          | Issued by                  | Received by     | Where it shows                                                     |
+|-----------------------------------|----------------------------|-----------------|--------------------------------------------------------------------|
+| Normal invoice                    | Seller                     | Buyer           | Seller: Sales Documents. Buyer: Purchase Documents as **Received** |
+| Self-billed invoice / credit note | Buyer (on seller's behalf) | Seller          | Buyer: Purchase Documents. Seller: Sales Documents as **Received** |
+
+### Creating self-billed invoices
+
+- Go to **Import &gt; Import Purchase Documents**.
+- Download and fill the **ClearTax Purchase Self-Billing Template**, or use a custom purchase template.
+- Upload the .xlsx file. Rows are checked for errors and duplicates.
+- Select the imported rows and click **Send** to deliver them to the seller over Peppol.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/purchase-documents/import-file-with-the-purchase-self-billi.jpg" width="1400" height="803" alt="Import file with the Purchase Self-Billing Template" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/purchase-documents/self-billed-invoices-and-credit-notes-in.jpg" width="1400" height="803" alt="Self-billed invoices and credit notes in Purchase documents" />
+
+Self-billed documents use invoice types **Self-billed invoice** and **Self billed credit note**, and move through the outbound statuses up to **Delivered to seller**.
+
+### Status cards
+
+The Purchase page shows count cards for both directions:
+
+| Group                            | Cards                                                                                            |
+|----------------------------------|--------------------------------------------------------------------------------------------------|
+| Self-billed (outbound to seller) | Pending, Failed, Submitted to exchange network, Delivered to seller network, Delivered to seller |
+| Supplier invoices (inbound)      | Received                                                                                         |
+
+## Actions on purchase documents
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/purchase-documents/purchase-actions-menu.jpg" width="1400" height="803" alt="Purchase actions menu" />
+
+| Action                                  | What it does                                                                                     |
+|-----------------------------------------|--------------------------------------------------------------------------------------------------|
+| Send                                    | Sends Pending self-billed documents to the seller over Peppol                                    |
+| Download XML report                     | Downloads the XML files exchanged over Peppol as a ZIP                                           |
+| Download Additional Reference Documents | Downloads supporting files attached by the supplier. Only for documents with status **Received** |
+| Print                                   | Generates a PDF using the available template                                                     |
+| Email                                   | Emails the invoice using a selected template                                                     |
+| Download                                | Exports a Lite or Detailed CSV report                                                            |
+| Show/Hide Reorder Column / Sort         | Adjust columns and sort order                                                                    |
+
+If you try to download additional reference documents for a document that is not **Received**, you'll see: *"additional reference PDF downloads are allowed only for documents with status: Received"*.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/purchase-documents/additional-reference-download-restrictio.jpg" width="1400" height="803" alt="Additional reference download restriction" />
+
+Downloads run in the background. Notifications in the top-right corner tell you when a download is in progress, done or failed.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/purchase-documents/download-notifications.jpg" width="1400" height="803" alt="Download notifications" />

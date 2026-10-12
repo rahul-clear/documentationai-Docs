@@ -1,0 +1,162 @@
+---
+title: Settings
+description: 'Business settings, roles, user access, custom templates, print format, email, workspace and API client settings'
+---
+Open **Settings** from the gear icon at the bottom of the left navigation.
+
+| Group                             | Pages                                                                                                                   |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Local settings (per country)      | Roles, Custom Templates, Print format, Auto-Email Trigger, API Credentials                                              |
+| Global settings (whole workspace) | Business settings, User access, Workspace (Details, Security), Profile, Email configuration, Integrations (API Clients) |
+
+## Business settings
+
+Manage the businesses (VAT numbers) and branches in your workspace.
+
+- Use **Add / Switch Country** to pick Norway.
+- **Add business** to add another Norwegian VAT number. Enter Organisation, VAT (NO…MVA) and Organisation Name, then **Save**.
+- **Add Branch** to create branches under a VAT. Select the VAT, enter branch names (use **Add more rows** for several), and save. You'll see "Successfully saved/updated BRANCH(s)".
+- **Edit** to update business details.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/business-settings.jpg" width="1400" height="803" alt="Business settings" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/add-new-vats.jpg" width="1400" height="803" alt="Add new VATs" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/add-branch.jpg" width="1400" height="803" alt="Add Branch" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/branch-saved.jpg" width="1400" height="803" alt="Branch saved" />
+
+## Roles
+
+| Role                    | Access                                                                                                                                                          |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| E-Invoice User          | All actions on sales and purchase documents: Upload, Generate, View, Cancel, Request for rejection, Download, Print, Email                                      |
+| Sales E-Invoice User    | All actions on sales documents only: Upload, Generate, View, Cancel, Download, Print, Email                                                                     |
+| Purchase E-Invoice User | All actions on purchase documents only, including **Self-billing**: Upload, Generate, View, Cancel, Self-billing, Request for rejection, Download, Print, Email |
+| View Only User          | View and download sales and purchase documents. No actions or uploads                                                                                           |
+| Sales View Only User    | View and download sales documents only                                                                                                                          |
+| Purchase View Only User | View and download purchase documents only                                                                                                                       |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/roles.jpg" width="1400" height="803" alt="Roles" />
+
+## User access
+
+**Inviting a new user**
+
+1. Go to **User access** and click **Invite new user**.
+2. Enter **Name**, **Email**, **Platform** (EInvoice), **Product** (EInvoice), **Role** and **Businesses** (choose the workspace, countries and VATs).
+3. Click **Add user**. Repeat to invite several users at once.
+4. Click **Invite added users**. You'll see "User invite sent successfully via email".
+5. The invitee accepts the email invitation and can then work within their role.
+
+Use **Edit user** to change a user's role or businesses, and **New role** to grant an additional role.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/user-access-management.jpg" width="1400" height="803" alt="User Access Management" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/invite-new-user.jpg" width="1400" height="803" alt="Invite new user" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/invite-sent.jpg" width="1400" height="803" alt="Invite sent" />
+
+### User types
+
+Invite team members as a **Regular user** (finance, tax, IT team) or a **Guest user** (auditors, consultants, partners).
+
+| Column       | What it shows                                                 |
+|--------------|---------------------------------------------------------------|
+| Name & Email | Display name and login email                                  |
+| User Type    | Regular or Guest                                              |
+| Products     | Clear products the user can access (e.g. Workspace, EInvoice) |
+| Role         | One of the roles listed under Roles                           |
+| Businesses   | VATs (and branches) the user can operate under                |
+| Action       | New role, Edit user, Delete                                   |
+
+Roles are assigned per user, per business.
+
+## Custom templates
+
+If your invoice data comes in your own file layout, map it once to a ClearTax template and reuse it.
+
+1. Go to **Custom Templates**.
+2. Select **Country** (Norway), **Template Type** (B2B documents or Purchase documents) and **Business** (one or more VATs).
+3. Click **Create Template** and upload a sample .xlsx file. It is checked for errors and duplicates.
+4. Map each standard ClearTax header to a column in your file. Required headers must be mapped before you can save.
+5. Save. The template appears in the Templates list and in the import flow for the selected businesses.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/select-country.jpg" width="1400" height="803" alt="Select country" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/select-template-type.jpg" width="1400" height="803" alt="Select template type" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/select-business.jpg" width="1400" height="803" alt="Select business" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/create-template.jpg" width="1400" height="803" alt="Create Template" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/upload-sample-file.jpg" width="1400" height="803" alt="Upload sample file" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/file-being-processed.jpg" width="1400" height="803" alt="File being processed" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/map-your-file-s-column-headers-to-cleart.png" width="2048" height="1131" alt="Map your file's column headers to ClearTax headers" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/saved-template-in-the-templates-list.png" width="2048" height="1131" alt="Saved template in the Templates list" />
+
+## Print format (file name format)
+
+Control how downloaded invoice PDFs are named.
+
+- **Default:** the standard invoice name format is applied.
+- **Custom:** choose up to four details (for example Invoice date, Invoice number, Buyer VAT) and their order. A live example shows the resulting name.
+- Click **Save**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/name-format.jpg" width="1400" height="803" alt="Name format" />
+
+## Email configuration
+
+Send invoice emails from your own domain by configuring SMTP: email client, SMTP server, port, username, password, sender name, sender email and a test email address. Use **Test Connection** to check the setup, then **Save Changes**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/email-configuration.jpg" width="1400" height="803" alt="Email configuration" />
+
+Tick **My SMTP server is accessible from the public internet** to enable the form, then fill in:
+
+| Field                    | What to enter                                   |
+|--------------------------|-------------------------------------------------|
+| Email client             | Preset (Gmail, Outlook, custom)                 |
+| SMTP server              | Host or IP, e.g. smtp-mail.domain.com           |
+| SMTP port                | Typically 587 (STARTTLS) or 465 (SSL/TLS)       |
+| SMTP username / password | Account credentials (password stored encrypted) |
+| Sender name              | e.g. "Acme AS Billing"                          |
+| Sender email             | e.g. billing@acme.no                            |
+| Test email address       | Where ClearTax sends a test message             |
+
+## Workspace security
+
+Workspace admins can set allowed login methods (Google, Microsoft), username-password login, idle session timeout and two-factor authentication.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/workspace-security.jpg" width="1400" height="803" alt="Workspace security" />
+
+## Workspace details
+
+**Workspace Details** shows the workspace name (with **Set As Default**), Workspace Id (copy it for support tickets), Legal Name, Business Address, Workspace type, Location and Created on date. Click **Edit** to change them.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/workspace-details.jpg" width="1400" height="795" alt="Workspace Details" />
+
+## Profile
+
+A read-only summary of your account: profile picture, name, email, password, phone number, country and language. Profile settings are managed on the Clear Accounts page through **Go to Profile settings**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/profile.jpg" width="1400" height="797" alt="Profile" />
+
+## Integrations: API Clients
+
+Create and manage the credentials your ERP or middleware uses to call the ClearTax API. Create a separate client per ERP or billing system, so one can be rotated or revoked without affecting the others.
+
+| Column                  | What it shows                            |
+|-------------------------|------------------------------------------|
+| Label                   | Client name, e.g. "SAP Production"       |
+| Status                  | Active or Inactive                       |
+| Workspace name          | Workspace the client belongs to          |
+| Products                | Products or scopes the client can access |
+| Created by / Created on | Creator and timestamp                    |
+| Actions                 | Edit, Delete                             |
+
+Credentials are shown once on creation, so copy them immediately. To rotate, create a new client, switch your ERP to it, then delete the old one.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/settings/api-clients.jpg" width="1400" height="797" alt="API Clients" />

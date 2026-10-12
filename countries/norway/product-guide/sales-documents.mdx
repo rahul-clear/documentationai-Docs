@@ -1,0 +1,268 @@
+---
+title: B2B Sales Documents
+description: 'Importing data, sending e-invoices over Peppol, statuses, the detail view, reference files, document actions and import history'
+---
+Sales Documents is where you import invoice data, send e-invoices to buyers over Peppol, and track every document until it is delivered.
+
+## Navigating to Sales Documents
+
+- From the e-Invoicing home page, click the **Sales documents** tile, or use the left navigation.
+- Use the **VAT/Branch** switcher in the top bar to choose the business (and branch) you are working on.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/home-page-with-sales-and-purchase-docume.jpg" width="1400" height="803" alt="Home page with Sales and Purchase document summaries" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/vat-branch-switcher.jpg" width="1400" height="803" alt="VAT / branch switcher" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/left-navigation.jpg" width="1400" height="803" alt="Left navigation" />
+
+## Importing data
+
+**Step 1: Start an import**
+
+- Click **Import** in the left navigation, then select **Import Sales Documents**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/select-documents-to-be-imported.jpg" width="1400" height="803" alt="Select documents to be imported" />
+
+**Step 2: Upload your file**
+
+- Upload an .xlsx file using the ClearTax Norway sales template, or a custom template mapped in **Settings &gt; Custom Templates**.
+- The file is checked for errors and duplicates against Norwegian EHF / Peppol BIS 3.0 rules.
+
+**Step 3: Review and fix errors**
+
+- Review the file summary. Fix errors in the UI, or download the error report, correct it offline and re-upload.
+- Import the rows without errors. Imported rows show up with status **Pending**.
+
+### Confirm file details
+
+After you select the file, confirm three things before the check runs:
+
+| Step                         | What to do                                                                                     |
+|------------------------------|------------------------------------------------------------------------------------------------|
+| 1\. File selected for import | The filename you uploaded, with a trash icon to remove and re-upload                           |
+| 2\. Business                 | Select the VAT the rows belong to, or "File has multiple VATs" to route rows by the VAT column |
+| 3\. Template to be used      | Select the template to validate against, e.g. the Norway sales template or a custom template   |
+
+Click **Check file for errors & duplicates**. ClearTax runs schema and business-rule validation (EHF / Peppol BIS 3.0) on every row.
+
+### Reading the file summary
+
+- **Outcome A, errors found:** you see File Details, a summary (Docs, Rows, Errors, No Errors), an **Error File** download with error columns appended, and a **Review and fix errors** button.
+- **Outcome B, no errors:** you see "No errors in your file. Good job!" with a **Proceed** button.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/file-summary-with-ingestion-errors.jpg" width="1400" height="797" alt="File summary with ingestion errors" />
+
+### Fixing ingestion errors
+
+You have two ways forward, depending on how many errors there are.
+
+- **Fix them offline:** download the **Error File**, correct everything in Excel, and re-upload the corrected file from the start. Best for large error counts.
+- **Fix them inline:** click **Review and fix errors** to correct rows directly in ClearTax. Quicker for a handful of errors and avoids a second upload.
+
+The inline error page shows the instruction "Fix the highlighted errors to import these rows", a **Fixed / Remaining** counter that updates as you work, and a **Proceed** button. Work through the highlighted fields until Remaining reaches zero.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/inline-error-review-page.png" width="2048" height="1144" alt="Inline error review page" />
+
+### Committing the import
+
+Click **Proceed** to commit. Rows land in **Sales Documents** with status **Pending**, ready to send.
+
+<Callout kind="info" collapsed="false">
+**You don't have to fix everything now.** If you proceed with errors outstanding, the clean rows still import and the file stays in Import history with a **Fix Errors** link, so you can return to the rest later.
+</Callout>
+
+## The Sales Documents list
+
+The top of the page shows count cards per status. Click a card to filter the list by that status.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/sales-documents-list.jpg" width="1400" height="803" alt="Sales documents list" />
+
+**Columns:** Invoice Number, Invoice Status, Invoice Date, Invoice Type, Invoice Exchange Date, Buyer Name, Buyer VAT, Email Delivery Status, Total Document Amount (kr), Total VAT Amount (kr), Audit Trail.
+
+### Filters
+
+Click **Filter** to narrow the list by Invoice Date, Invoice Exchange Date, Invoice Number, Buyer VAT, Buyer Name, Invoice Status and Invoice Type.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/filter-by-date-number-and-buyer.jpg" width="1400" height="803" alt="Filter by date, number and buyer" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/filter-by-status-and-type.jpg" width="1400" height="803" alt="Filter by status and type" />
+
+## Generating e-invoices
+
+- Select one or more **Pending** rows and click **Send**. Invoices can be sent one at a time or in bulk.
+- ClearTax validates each invoice, looks up the buyer's Peppol ID, and transmits it over Peppol.
+
+### Document statuses
+
+| Status                        | Meaning                                                                                                                                      |
+|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Pending                       | Imported, not yet sent                                                                                                                       |
+| Failed                        | Rejected during validation or transmission. Open the invoice to see the error, fix it with **Edit**, and resend                              |
+| Submitted to exchange network | Accepted by ClearTax and handed to the Peppol network                                                                                        |
+| Delivered to buyer network    | Received by the buyer's Access Point                                                                                                         |
+| Delivered to buyer            | Delivered to the buyer                                                                                                                       |
+| Received                      | Self-billed invoices or credit notes your buyer issued on your behalf and sent to you over Peppol (see [Self-billing](/countries/norway/product-guide/purchase-documents#self-billing-norway)) |
+
+## The document detail view
+
+Click any **Invoice Number** to open the detail view.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/document-detail-view.png" width="2048" height="1131" alt="Document detail view" />
+
+### Header
+
+- **Invoice Number** and the **Document Status** pill
+- **Send Document** (Pending or Failed documents only)
+- **Edit** (top-right): switches the fields from read-only to editable
+- **×** closes the view and returns to the list
+
+### Left navigation
+
+Use **Jump to a section in the table** on the left to move between sections. Fields marked with \* are mandatory.
+
+| Section                           | What it holds                                                                                                                                  |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Invoice Details                   | Invoice type, number, issue date, status, exchange date and time, invoice and tax currency codes, original e-invoice reference number and date |
+| Seller Details                    | Seller's Peppol ID, name, VAT (NO…MVA), email, address, contact name and number, country, trading name, legal registration and tax identifiers |
+| Buyer Details                     | The same details for the buyer, including the buyer's Peppol ID                                                                                |
+| Line items                        | Item descriptions, quantities, units, prices and VAT category per line                                                                         |
+| Allowances At Document Level      | Discounts applied to the whole invoice                                                                                                         |
+| Charges At Document Level         | Charges applied to the whole invoice, e.g. freight                                                                                             |
+| Tax Totals                        | VAT breakdown by category and rate                                                                                                             |
+| Invoice Amount Details            | Totals with and without VAT, prepaid amount and amount payable                                                                                 |
+| Delivery Party Details            | Delivery party, location and date                                                                                                              |
+| Payment Details                   | Payment means, terms, due date and bank account                                                                                                |
+| Additional Document Details       | Order, contract and other references on the invoice                                                                                            |
+| Invoice Attachments               | Supporting files attached to the invoice                                                                                                       |
+| Seller Tax Representative Details | The seller's tax representative, where one is used                                                                                             |
+| Payee Details                     | The party receiving payment, when different from the seller                                                                                    |
+| Additional Document References    | Other documents the invoice refers to                                                                                                          |
+
+### Header by document state
+
+- **Delivered documents:** Send and Edit are hidden. A delivered e-invoice can't be changed. To correct it, issue a credit note.
+- **Pending/Failed documents:** Send Document and Edit are shown, with an **Invoice exchange error/warnings** banner at the top.
+
+## Troubleshooting failed documents
+
+When a document fails, ClearTax shows the errors in two places:
+
+1. On the list view: the row shows **Failed** under Invoice Status.
+2. Inside the detail view: a red **Invoice exchange error/warnings** banner above Invoice Details.
+
+### Reading the error banner
+
+Click **View More** to expand the full error list. Errors labelled **Errors - Fix to continue** block sending until they are fixed. Each error follows the format:
+
+`<Source> : [<rule-code>] - <message>`
+
+*Example (illustrative):* VALIDATION : \[BR-CO-15\] - Invoice total amount with VAT must equal the total without VAT plus the total VAT amount.
+
+### Fixing and resending
+
+1. Open the failed document and read the errors in the banner.
+2. Click **Edit**, correct the highlighted fields, and save.
+3. Click **Send Document**. The status moves to Submitted to exchange network once Peppol validation passes.
+
+## Audit trail
+
+Click the clock icon in the **Audit Trail** column to see every action taken on an invoice, with the user and timestamp.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/audit-trail.png" width="2048" height="1131" alt="Audit trail" />
+
+## Additional reference files
+
+You can attach supporting documents (for example a credit note justification or delivery order) to an invoice.
+
+- Select the invoice, open **Actions &gt; Manage Reference Files**.
+- Click **Add Files**, enter a **Document reference** (required) and a **Description**, and upload the file.
+- Click **Save & Attach**. You'll see "Reference files updated successfully".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/actions-menu-on-a-pending-invoice.jpg" width="1400" height="803" alt="Actions menu on a Pending invoice" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/manage-additional-reference-files.jpg" width="1400" height="803" alt="Manage additional reference files" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/file-attached.jpg" width="1400" height="803" alt="File attached" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/reference-files-updated.jpg" width="1400" height="803" alt="Reference files updated" />
+
+## Document actions
+
+Select one or more rows and open **Actions**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/actions-menu.jpg" width="1400" height="803" alt="Actions menu" />
+
+| Action                   | What it does                                                                                       |
+|--------------------------|----------------------------------------------------------------------------------------------------|
+| Send                     | Sends Pending invoices over Peppol                                                                 |
+| Download XML report      | Downloads the Peppol XML files as a ZIP. Runs in the background; you are notified when it is ready |
+| Delete                   | Removes documents. This can't be undone                                                            |
+| Print                    | Opens a print preview of the invoice PDF using the selected template                               |
+| Email                    | Emails the invoice PDF to the buyer using an email template                                        |
+| Manage Reference Files   | Attach or update additional reference documents                                                    |
+| Download                 | Exports a **Lite Report** or a **Detailed Report** (CSV)                                           |
+| Show/Hide Reorder Column | Choose and reorder visible columns                                                                 |
+| Sort                     | Sort the list                                                                                      |
+
+### Download report
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/download-lite-or-detailed-report.jpg" width="1400" height="803" alt="Download Lite or Detailed report" />
+
+### Print
+
+The print preview shows the invoice with Norwegian fields such as VAT identifier (NO…MVA), buyer reference, billing period and VAT breakdown by category. Click **Print** to download the PDF.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/print-preview.jpg" width="1400" height="803" alt="Print preview" />
+
+### Email
+
+- Enter recipients in **TO**, with optional Cc and Bcc. The subject and body come from the selected email template.
+- Choose the invoice PDF template with **Select template for invoice** and the email template with **Select email template**.
+- Use **Email preview** to check the message, then click **Send**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/send-emails.jpg" width="1400" height="803" alt="Send emails" />
+
+## Import history
+
+**Import history** lists every uploaded file with upload date, file name, source, VAT/branch, template, rows processed and rows without errors.
+
+- Click **View File** to see the documents a file created.
+- Click **Fix Errors** to correct rows that failed during import.
+- Switch between **Sales** and **Purchase** tabs, and click **Sync** to refresh.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/norway/product-guide/sales-documents/import-history.jpg" width="1400" height="803" alt="Import history" />
+
+### Import history columns
+
+| Column            | What it shows                                                           |
+|-------------------|-------------------------------------------------------------------------|
+| Upload Date (CET) | Timestamp of the upload                                                 |
+| File Name         | Original filename                                                       |
+| Source            | UI, FTP, ERP, API or JSON\_API                                          |
+| VAT/BRANCH        | VAT the file was routed to, or "Multiple BRANCH" for multi-entity files |
+| Template          | Ingestion template used                                                 |
+| File Type         | xlsx or csv                                                             |
+| Total sheets      | Number of worksheet tabs                                                |
+| Rows Processed    | Total rows read                                                         |
+| Rows (No Errors)  | Rows that passed validation                                             |
+| Rows (Errors)     | Rows that failed validation                                             |
+| Actions           | View File or Fix Errors (see below)                                     |
+
+### Filtering import history
+
+- **Upload Date:** date picker
+- **File Name:** free-text search
+- **Source:** UI, FTP, ERP, API, JSON\_API
+
+### Actions on a past import
+
+| Action link      | When it appears            | What it does                                     |
+|------------------|----------------------------|--------------------------------------------------|
+| Fix Errors (red) | File had unresolved errors | Opens the inline error page to finish the import |
+| View File (blue) | File fully processed       | Read-only view of the file as ingested           |
+
+## API integration
+
+If you push high volumes from an ERP, the Import UI quickly becomes a bottleneck. With the **API**, your ERP posts documents to ClearTax as they are raised and receives status updates back, so lifecycle statuses (Submitted, Delivered to buyer network, Delivered to buyer, Failed) are reflected in your own systems.
+
+See the ClearTax e-Invoicing API documentation ([/unified-api/overview](/unified-api/overview)) for endpoints, authentication and payload schemas.
