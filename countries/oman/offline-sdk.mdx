@@ -1,20 +1,21 @@
 ---
 title: Oman - Offline SDK
-description: 'ClearTax Oman B2C e-Invoicing SDK (v1.6.0): offline QR/XML generation for POS integrations'
+description: >-
+  ClearTax Oman B2C e-Invoicing SDK (v1.6.0): offline QR/XML generation for POS
+  integrations
 ---
-
 ## Oman offline B2C e-invoice generation
 
 This SDK is a Java library that validates invoices locally at the point of sale and generates Oman-compliant B2C QR code, the Invoice XML and Seller UUID — fully offline, after a one-time online device onboarding.
 
 Sellers and System Integrator (SI) partners integrate the SDK into a Point-of-Sale (POS) system.
 
-| | |
-| --- | --- |
+|              |                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------ |
 | **Audience** | Sellers and System Integrator (SI) partners integrate the SDK into a Point-of-Sale (POS) system. |
-| **Product** | `com.cleartax.oman:oman-einvoicing-sdk` |
-| **Version** | 1.6.0 |
-| **Requires** | Java 17 or above |
+| **Product**  | `com.cleartax.oman:oman-einvoicing-sdk`                                                          |
+| **Version**  | 1.6.0                                                                                            |
+| **Requires** | Java 17 or above                                                                                 |
 
 <Callout kind="info" collapsed="false">
   **Download** → [Oman Offline SDK v1.6.0 (.zip)](https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/files/oman-sdk/oman-offline-sdk-v1.6.0.zip)
@@ -61,16 +62,16 @@ Sellers and System Integrator (SI) partners integrate the SDK into a Point-of-Sa
 
 ## 2. Key concepts
 
-| Term | Meaning |
-| --- | --- |
-| OTA | Oman Tax Authority — the Omani e-invoicing regulator. |
-| B2C | Business-to-consumer simplified invoice — the scope of this SDK. |
-| Seller UUID (BTOM-004) | A per-invoice UUID v5 the SDK generates and embeds in the QR + PINT XML. |
-| TLV | Tag-Length-Value encoding scheme used for the QR payload. |
-| QR code Invoice type | `STANDARD_B2C` (Type 01) or `PROFIT_MARGIN` (Type 02). |
-| Device onboarding | A one-time online step that licenses one SDK install to one machine. |
-| Device fingerprint | A stable hardware/OS identifier that binds the license to one machine. |
-| `.sig` file | A companion signature file written next to each invoice XML, verified by the backend. |
+| Term                   | Meaning                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| OTA                    | Oman Tax Authority — the Omani e-invoicing regulator.                                 |
+| B2C                    | Business-to-consumer simplified invoice — the scope of this SDK.                      |
+| Seller UUID (BTOM-004) | A per-invoice UUID v5 the SDK generates and embeds in the QR + PINT XML.              |
+| TLV                    | Tag-Length-Value encoding scheme used for the QR payload.                             |
+| QR code Invoice type   | `STANDARD_B2C` (Type 01) or `PROFIT_MARGIN` (Type 02).                                |
+| Device onboarding      | A one-time online step that licenses one SDK install to one machine.                  |
+| Device fingerprint     | A stable hardware/OS identifier that binds the license to one machine.                |
+| `.sig` file            | A companion signature file written next to each invoice XML, verified by the backend. |
 
 ## 3. Installation
 
@@ -121,7 +122,7 @@ The activation code is 16 characters in 4×4 groups, valid 48 hours. `--auth-tok
 
 3. On success:
 
-```
+```typescript
 Device successfully onboarded. Device ID: f1e2d3c4-...
 SDK is ready for offline invoice operations.
 ```
@@ -189,14 +190,14 @@ What each status implies:
 
 ### 6.2 Core methods
 
-| Method | Purpose |
-| --- | --- |
-| `QrResult generateFromJson(String json)` | The full path. Invoice JSON → PINT OM UBL → validate (Stages 1–3) → Seller UUID → TLV QR. On success, and only once the device is onboarded, also persists the invoice XML + `.sig` for deferred reporting. |
-| `QrResult generateQrFromFields(InvoiceFields fields)` | For POS systems that have fields in memory but no UBL XML. Skips XSD/Schematron; still applies field rules, UUID, and QR encoding. |
-| `ValidationResult validate(String invoiceXml)` | Validation only — no QR, no storage/signing side effects. Runs Stages 1–3 and never throws for invalid input. |
-| `ValidationResult validateJson(String json)` | JSON → UBL → validate, no side effects. Malformed JSON returns a typed `MAP_INPUT_INVALID` failure rather than throwing. |
-| `String jsonToUbl(String json)` | Maps the SDK's invoice JSON to PINT OM UBL XML. Does not validate — pair with `validateJson`. |
-| `QrResult generate(String invoiceXml)` | For callers who already hold PINT OM UBL XML. Validates (Stages 1–3), reads the document back into the invoice model, then runs the same derivation as the JSON path → Seller UUID → TLV QR. Persists + signs the reporting copy once onboarded. Accepts an `Invoice` or a `CreditNote` root. |
+| Method                                                | Purpose                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `QrResult generateFromJson(String json)`              | The full path. Invoice JSON → PINT OM UBL → validate (Stages 1–3) → Seller UUID → TLV QR. On success, and only once the device is onboarded, also persists the invoice XML + `.sig` for deferred reporting.                                                                                   |
+| `QrResult generateQrFromFields(InvoiceFields fields)` | For POS systems that have fields in memory but no UBL XML. Skips XSD/Schematron; still applies field rules, UUID, and QR encoding.                                                                                                                                                            |
+| `ValidationResult validate(String invoiceXml)`        | Validation only — no QR, no storage/signing side effects. Runs Stages 1–3 and never throws for invalid input.                                                                                                                                                                                 |
+| `ValidationResult validateJson(String json)`          | JSON → UBL → validate, no side effects. Malformed JSON returns a typed `MAP_INPUT_INVALID` failure rather than throwing.                                                                                                                                                                      |
+| `String jsonToUbl(String json)`                       | Maps the SDK's invoice JSON to PINT OM UBL XML. Does not validate — pair with `validateJson`.                                                                                                                                                                                                 |
+| `QrResult generate(String invoiceXml)`                | For callers who already hold PINT OM UBL XML. Validates (Stages 1–3), reads the document back into the invoice model, then runs the same derivation as the JSON path → Seller UUID → TLV QR. Persists + signs the reporting copy once onboarded. Accepts an `Invoice` or a `CreditNote` root. |
 
 What `generateFromJson()` does, in order: map JSON → UBL → validate (Stage 1 well-formedness → EN16931 PINT Schematron → OTA Oman rules) → generate Seller UUID → encode TLV QR → check length (≤ 700) → generate XML + write `.sig` (once onboarded) → return `QrResult`.
 
@@ -238,7 +239,7 @@ List<Warning> getWarnings();        // e.g. deferred storage/signing issues
 ```
 
 <Callout kind="warning" collapsed="false">
-  **`getInvoiceType()` never tells you it was a credit note.**
+  **`getInvoiceType()`****&#x20;never tells you it was a credit note.**
 
   `InvoiceType` has exactly two constants, and a credit note takes one of them like any other document — `STANDARD_B2C` (01) or `PROFIT_MARGIN` (02), never 381. `QrResult` carries no document-kind assessor at all, because the QR payload itself does not distinguish a refund from a sale (Section 5). Track that on your side from the document you submitted; do not try to recover it from the result.
 </Callout>
@@ -268,18 +269,18 @@ The SDK ships a `sdk` launcher for two kinds of work: setup/support (onboarding,
 
 Note — add `java -jar` before every command.
 
-| Command | Purpose | Key options |
-| --- | --- | --- |
-| `sdk.jar onboard` | One-time device activation | `--vat <VATIN>` (required), `--code <CODE>` (required), `--auth-token <TOKEN>` (required), `--config <path>` |
-| `sdk.jar logs export` | Bundle local logs into a support zip | `--output <path.zip>` (required), `--since <ISO-timestamp>` |
-| `sdk.jar logs clean` | Clear local logs | `--force` (required to delete logs not yet pushed) |
-| `sdk.jar version` | Print installed version; if online, report whether a newer one exists | — |
-| `sdk.jar status` | Run the three startup integrity checks → `READY` / `HALTED<reason>` / `REVOKED` | — |
-| `sdk.jar validate` | Validate one invoice; print each violation | `--in <invoice.(xml\|json)>` (required), `--xml` / `--json` |
-| `sdk.jar generate-xml` | Map the SDK's clean JSON → PINT OM UBL XML | `--in <invoice.json>` (required), `--out <invoice.xml>` (required) |
-| `sdk.jar qr` | JSON → UBL → validate → QR (Base64 + PNG) | `--in <invoice.json>` (required), `--out <qr.png>`, `--print` |
-| `sdk.jar qr` (adds the invoice XML + sig file in the `--config <path>` folder) | JSON → UBL → validate → QR (Base64) → XML + signature file | `--in <invoice.json>` `--json` (required), `--config <path>` |
-| `sdk.jar help [command]` | Usage | — |
+| Command                                                                        | Purpose                                                                         | Key options                                                                                                  |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `sdk.jar onboard`                                                              | One-time device activation                                                      | `--vat <VATIN>` (required), `--code <CODE>` (required), `--auth-token <TOKEN>` (required), `--config <path>` |
+| `sdk.jar logs export`                                                          | Bundle local logs into a support zip                                            | `--output <path.zip>` (required), `--since <ISO-timestamp>`                                                  |
+| `sdk.jar logs clean`                                                           | Clear local logs                                                                | `--force` (required to delete logs not yet pushed)                                                           |
+| `sdk.jar version`                                                              | Print installed version; if online, report whether a newer one exists           | —                                                                                                            |
+| `sdk.jar status`                                                               | Run the three startup integrity checks → `READY` / `HALTED<reason>` / `REVOKED` | —                                                                                                            |
+| `sdk.jar validate`                                                             | Validate one invoice; print each violation                                      | `--in <invoice.(xml\|json)>` (required), `--xml` / `--json`                                                  |
+| `sdk.jar generate-xml`                                                         | Map the SDK's clean JSON → PINT OM UBL XML                                      | `--in <invoice.json>` (required), `--out <invoice.xml>` (required)                                           |
+| `sdk.jar qr`                                                                   | JSON → UBL → validate → QR (Base64 + PNG)                                       | `--in <invoice.json>` (required), `--out <qr.png>`, `--print`                                                |
+| `sdk.jar qr` (adds the invoice XML + sig file in the `--config <path>` folder) | JSON → UBL → validate → QR (Base64) → XML + signature file                      | `--in <invoice.json>` `--json` (required), `--config <path>`                                                 |
+| `sdk.jar help [command]`                                                       | Usage                                                                           | —                                                                                                            |
 
 **Examples**
 
@@ -297,15 +298,15 @@ java -jar sdk.jar qr --in invoice.json --out qr.png --print
 
 **Exit codes**
 
-| Exit | Meaning |
-| --- | --- |
-| 0 | Success |
-| 1 | Generic / unexpected error — incl. invoice `VAL_*` / `QR_*` failures (`sdk validate`, `sdk qr`) |
-| 2 | Invalid arguments / usage |
-| 3 | Onboarding failed (bad / expired / used code, VAT mismatch) |
-| 4 | No connectivity (for commands that require it) |
-| 5 | Integrity check failed / device halted |
-| 6 | Device revoked |
+| Exit | Meaning                                                                                         |
+| ---- | ----------------------------------------------------------------------------------------------- |
+| 0    | Success                                                                                         |
+| 1    | Generic / unexpected error — incl. invoice `VAL_*` / `QR_*` failures (`sdk validate`, `sdk qr`) |
+| 2    | Invalid arguments / usage                                                                       |
+| 3    | Onboarding failed (bad / expired / used code, VAT mismatch)                                     |
+| 4    | No connectivity (for commands that require it)                                                  |
+| 5    | Integrity check failed / device halted                                                          |
+| 6    | Device revoked                                                                                  |
 
 Exit codes map onto the error-code families in Section 9, so scripts and CI can branch on them.
 
@@ -315,22 +316,22 @@ Pass an `SdkConfig` to `initialize(...)`, or rely on defaults (overridable via e
 
 Built with `SdkConfig.builder()`; `SdkConfig.defaults()` resolves everything from environment variables and system properties. Accessors have no `get` prefix.
 
-| Setting | Purpose |
-| --- | --- |
-| `invoiceStorageDir()` | Where invoice XML + `.sig` are written. |
-| `logDir()` | Where JSON logs are written. |
-| `tokenStorePath()` | Encrypted licence token. |
-| `signingCredentialPath()` | Encrypted device private key. |
-| `authTokenPath()` | Sealed seller auth token, persisted at onboarding for background status checks. |
-| `flavorMarkerPath()` | Records the flavor the device was onboarded against. |
-| `revokedFlagPath()` | Local `revoked.flag`; present means the next startup halts. |
-| `flavor()` | `DEV` \| `PROD` — selects the ClearTax key + base URL. Default `PROD`. |
-| `flavorSource()` | Which input selected the flavor (diagnostics). |
-| `clearTaxBaseUrl()` | Portal / activation / push endpoints; defaults to the flavor's URL. Override with `oman.sdk.baseUrl` / `OMAN_SDK_BASE_URL`. |
-| `countryCode()` | Jurisdiction code. |
-| `httpConnectTimeout()` / `httpRequestTimeout()` | Default 5s connect. |
-| `logRetention()` | Default 24h. |
-| `requireOnboarding()` | Default `false`, so a device with no activation token still runs the offline QR and validation paths. Set it to `true` to require an onboarded device; an un-onboarded install then halts with `ONB_NOT_ONBOARDED`. |
+| Setting                                         | Purpose                                                                                                                                                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `invoiceStorageDir()`                           | Where invoice XML + `.sig` are written.                                                                                                                                                                             |
+| `logDir()`                                      | Where JSON logs are written.                                                                                                                                                                                        |
+| `tokenStorePath()`                              | Encrypted licence token.                                                                                                                                                                                            |
+| `signingCredentialPath()`                       | Encrypted device private key.                                                                                                                                                                                       |
+| `authTokenPath()`                               | Sealed seller auth token, persisted at onboarding for background status checks.                                                                                                                                     |
+| `flavorMarkerPath()`                            | Records the flavor the device was onboarded against.                                                                                                                                                                |
+| `revokedFlagPath()`                             | Local `revoked.flag`; present means the next startup halts.                                                                                                                                                         |
+| `flavor()`                                      | `DEV` \| `PROD` — selects the ClearTax key + base URL. Default `PROD`.                                                                                                                                              |
+| `flavorSource()`                                | Which input selected the flavor (diagnostics).                                                                                                                                                                      |
+| `clearTaxBaseUrl()`                             | Portal / activation / push endpoints; defaults to the flavor's URL. Override with `oman.sdk.baseUrl` / `OMAN_SDK_BASE_URL`.                                                                                         |
+| `countryCode()`                                 | Jurisdiction code.                                                                                                                                                                                                  |
+| `httpConnectTimeout()` / `httpRequestTimeout()` | Default 5s connect.                                                                                                                                                                                                 |
+| `logRetention()`                                | Default 24h.                                                                                                                                                                                                        |
+| `requireOnboarding()`                           | Default `false`, so a device with no activation token still runs the offline QR and validation paths. Set it to `true` to require an onboarded device; an un-onboarded install then halts with `ONB_NOT_ONBOARDED`. |
 
 ## 9. Error handling
 
@@ -360,52 +361,52 @@ if (!r.isSuccess()) {
 
 **Onboarding & integrity — halt the SDK (exit codes in parentheses)**
 
-| Code | When | Operator action |
-| --- | --- | --- |
-| `ONB_NOT_ONBOARDED` (5) | A QR/validation entry point called with no licence token, once `requireOnboarding` is enabled | Run `sdk onboard`. |
-| `ONB_CODE_INVALID` (3) | Activation code not found / wrong VAT | Re-issue a code in the portal. |
-| `ONB_CODE_EXPIRED` (3) | Activation code past its validity window | Re-issue a code. |
-| `ONB_CODE_USED` (3) | Activation code already consumed | Re-issue a code. |
-| `ONB_VAT_MISMATCH` (3) | Code exists but was issued for a different VAT | Use the code under its issued VAT, or re-issue. |
-| `ONB_NO_CONNECTIVITY` (4) | Onboarding could not reach ClearTax | Connect to a network and retry. |
-| `INTEG_TOKEN_MISSING` (5) | Token absent / corrupt / undecryptable | Re-onboard the device. |
-| `INTEG_TOKEN_INVALID` (5) | Licence signature invalid | Re-install the official SDK / re-onboard. |
-| `INTEG_FINGERPRINT_MISMATCH` (5) | Token belongs to another machine | Re-onboard this machine. |
-| `INTEG_JAR_TAMPERED` (5) | SDK binary was modified | Re-install the official SDK. |
-| `INTEG_FLAVOR_MISMATCH` (5) | Token was issued for a different flavor (DEV vs PROD) | Re-onboard against the correct environment. |
-| `CFG_FLAVOR_INVALID` (2) | Unrecognized flavor value from config / property / env / CLI | Use `DEV` or `PROD`. |
-| `CFG_FLAVOR_KEY_UNAVAILABLE` (5) | The active flavor's ClearTax key is missing or unreadable | Re-install the official build for that environment. |
-| `LIFE_DEVICE_REVOKED` (6) | Device revoked in the portal | Re-onboard if authorized. |
+| Code                             | When                                                                                          | Operator action                                     |
+| -------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `ONB_NOT_ONBOARDED` (5)          | A QR/validation entry point called with no licence token, once `requireOnboarding` is enabled | Run `sdk onboard`.                                  |
+| `ONB_CODE_INVALID` (3)           | Activation code not found / wrong VAT                                                         | Re-issue a code in the portal.                      |
+| `ONB_CODE_EXPIRED` (3)           | Activation code past its validity window                                                      | Re-issue a code.                                    |
+| `ONB_CODE_USED` (3)              | Activation code already consumed                                                              | Re-issue a code.                                    |
+| `ONB_VAT_MISMATCH` (3)           | Code exists but was issued for a different VAT                                                | Use the code under its issued VAT, or re-issue.     |
+| `ONB_NO_CONNECTIVITY` (4)        | Onboarding could not reach ClearTax                                                           | Connect to a network and retry.                     |
+| `INTEG_TOKEN_MISSING` (5)        | Token absent / corrupt / undecryptable                                                        | Re-onboard the device.                              |
+| `INTEG_TOKEN_INVALID` (5)        | Licence signature invalid                                                                     | Re-install the official SDK / re-onboard.           |
+| `INTEG_FINGERPRINT_MISMATCH` (5) | Token belongs to another machine                                                              | Re-onboard this machine.                            |
+| `INTEG_JAR_TAMPERED` (5)         | SDK binary was modified                                                                       | Re-install the official SDK.                        |
+| `INTEG_FLAVOR_MISMATCH` (5)      | Token was issued for a different flavor (DEV vs PROD)                                         | Re-onboard against the correct environment.         |
+| `CFG_FLAVOR_INVALID` (2)         | Unrecognized flavor value from config / property / env / CLI                                  | Use `DEV` or `PROD`.                                |
+| `CFG_FLAVOR_KEY_UNAVAILABLE` (5) | The active flavor's ClearTax key is missing or unreadable                                     | Re-install the official build for that environment. |
+| `LIFE_DEVICE_REVOKED` (6)        | Device revoked in the portal                                                                  | Re-onboard if authorized.                           |
 
 **Validation — block the QR (fix the invoice and retry)**
 
-| Code | When |
-| --- | --- |
-| `VAL_XSD_FAILED` | UBL 2.1 structural validation failed (violations carry XPath + rule IDs) |
-| `VAL_SCHEMATRON_FAILED` | EN16931 PINT business rule failed (e.g. `BR-CO-10`) |
-| `VAL_OTA_FAILED` | OTA Oman business rule failed |
-| `VAL_MALFORMED_XML` | Input is not parseable XML |
+| Code                    | When                                                                     |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `VAL_XSD_FAILED`        | UBL 2.1 structural validation failed (violations carry XPath + rule IDs) |
+| `VAL_SCHEMATRON_FAILED` | EN16931 PINT business rule failed (e.g. `BR-CO-10`)                      |
+| `VAL_OTA_FAILED`        | OTA Oman business rule failed                                            |
+| `VAL_MALFORMED_XML`     | Input is not parseable XML                                               |
 
 **QR & UUID — block the QR (compliance-critical)**
 
-| Code | When |
-| --- | --- |
-| `QR_PAYLOAD_TOO_LONG` | Base64 TLV > 700 chars — cannot issue receipt; escalate |
-| `QR_VALUE_TOO_LONG` | A single field's UTF-8 value > 255 bytes (usually the seller name) |
-| `QR_FIELD_MISSING` | A required field is null or blank for the invoice type (e.g. `vat`, `timestamp`, `vat_total`) — a typed error, never a crash or a broken QR |
-| `UUID_INPUT_INVALID` | The Seller UUID input string could not be built |
-| `MAP_INPUT_INVALID` | Invoice JSON could not be mapped to UBL, or QR fields could not be derived from the invoice (JSON path) |
+| Code                  | When                                                                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `QR_PAYLOAD_TOO_LONG` | Base64 TLV > 700 chars — cannot issue receipt; escalate                                                                                     |
+| `QR_VALUE_TOO_LONG`   | A single field's UTF-8 value > 255 bytes (usually the seller name)                                                                          |
+| `QR_FIELD_MISSING`    | A required field is null or blank for the invoice type (e.g. `vat`, `timestamp`, `vat_total`) — a typed error, never a crash or a broken QR |
+| `UUID_INPUT_INVALID`  | The Seller UUID input string could not be built                                                                                             |
+| `MAP_INPUT_INVALID`   | Invoice JSON could not be mapped to UBL, or QR fields could not be derived from the invoice (JSON path)                                     |
 
 **Storage, signing & connectivity — warnings (never block the receipt; retried in the background)**
 
-| Code | When |
-| --- | --- |
-| `STORE_WRITE_FAILED` | Invoice XML could not be persisted |
-| `SIGN_FAILED` | `.sig` could not be produced |
-| `STORE_DISK_FULL` | No disk space for the reporting copy |
-| `NET_PUSH_FAILED` | Log / XML push could not reach ClearTax (will retry) |
-| `NET_OFFLINE` | A background online task found no connectivity (deferred) |
-| `LIFE_UPDATE_AVAILABLE` | Informational: a newer SDK version exists (not an error) |
+| Code                    | When                                                      |
+| ----------------------- | --------------------------------------------------------- |
+| `STORE_WRITE_FAILED`    | Invoice XML could not be persisted                        |
+| `SIGN_FAILED`           | `.sig` could not be produced                              |
+| `STORE_DISK_FULL`       | No disk space for the reporting copy                      |
+| `NET_PUSH_FAILED`       | Log / XML push could not reach ClearTax (will retry)      |
+| `NET_OFFLINE`           | A background online task found no connectivity (deferred) |
+| `LIFE_UPDATE_AVAILABLE` | Informational: a newer SDK version exists (not an error)  |
 
 ## 10. Storage, logging & background tasks
 
@@ -454,9 +455,9 @@ Run `sdk status` first — it reports which, if any, startup integrity check fai
 
 **Which entry point should I use?** `generateFromJson(...)` if you can emit the SDK's invoice JSON — it covers mapping, validation, QR, storage and signing in one call. `generate(xml)` if your system already produces PINT OM UBL. `generateQrFromFields(...)` if you hold only the QR fields. All three share one Seller UUID / TLV derivation, so they cannot disagree.
 
-**`generate(xml)` returns `MAP_INPUT_INVALID` for my credit note.** Not since 1.4.0 — credit notes now yield a QR on both paths. If you still see this, you are on 1.3.x or earlier, where the UBL path refused credit notes deliberately; upgrade. On 1.4.0+, a credit note that fails does so for the same reasons an invoice would (`VAL_SCHEMATRON_FAILED` if it does not carry `cbc:CreditNoteTypeCode` 381, `QR_FIELD_MISSING` if it lacks an issue time or a monetary total).
+**`generate(xml)`****&#x20;returns&#x20;****`MAP_INPUT_INVALID`****&#x20;for my credit note.** Not since 1.4.0 — credit notes now yield a QR on both paths. If you still see this, you are on 1.3.x or earlier, where the UBL path refused credit notes deliberately; upgrade. On 1.4.0+, a credit note that fails does so for the same reasons an invoice would (`VAL_SCHEMATRON_FAILED` if it does not carry `cbc:CreditNoteTypeCode` 381, `QR_FIELD_MISSING` if it lacks an issue time or a monetary total).
 
-**QR generation fails with `QR_PAYLOAD_TOO_LONG` / `QR_VALUE_TOO_LONG`.** The TLV length is counted in UTF-8 bytes, not characters — a long Arabic seller name can exceed the 700-char payload limit or the 255-byte per-value limit. Shorten the offending field (usually the seller name).
+**QR generation fails with&#x20;****`QR_PAYLOAD_TOO_LONG`****&#x20;/&#x20;****`QR_VALUE_TOO_LONG`****.** The TLV length is counted in UTF-8 bytes, not characters — a long Arabic seller name can exceed the 700-char payload limit or the 255-byte per-value limit. Shorten the offending field (usually the seller name).
 
 **The SDK halts at startup.** Run `sdk status`. `INTEG_JAR_TAMPERED` means the JAR was modified — re-install the official build. `INTEG_FINGERPRINT_MISMATCH` means the token was issued for a different machine — re-onboard this one.
 
