@@ -111,6 +111,20 @@
                         "path": "countries/uae/product-guide/support-desk"
                       }
                     ]
+                  },
+                  {
+                    "group": "Invoice Lifecycle",
+                    "icon": "refresh-cw",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/uae/invoice-lifecycle/overview"
+                      },
+                      {
+                        "title": "Status Lifecycle",
+                        "path": "countries/uae/invoice-lifecycle/status-lifecycle"
+                      }
+                    ]
                   }
                 ]
               },

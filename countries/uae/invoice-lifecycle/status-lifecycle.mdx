@@ -1,0 +1,142 @@
+---
+title: Status Lifecycle
+description: 'How the Document Status and Government Reporting Status of a UAE invoice change in the happy case and in each failure scenario'
+---
+The tables below show how invoice statuses change in the product in each case. For what each corner (C1-C5) and each status means, see the [Invoice Lifecycle Overview](/countries/uae/invoice-lifecycle/overview).
+
+## Happy Case
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validated by C2 | Submitted to Exchange Network | Not Submitted |
+| 4 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 5 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 6 | Invoice Received by C3 | Delivered to Buyer Network | Not Submitted |
+| 7 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 8 | TDD Received by C5 | Delivered to Buyer Network | Processing |
+| 9 | Invoice Received by C4 | Delivered to Buyer | Processing |
+| 10 | TDD Validated by C5 | Delivered to Buyer | Accepted |
+
+## Invoice Validation Failed at C2
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validation Failed by C2 | Failed | Not Submitted |
+
+**Next steps for the user/taxpayer:**
+
+- Check the failure reason, modify the invoice accordingly and attempt again.
+
+## Invoice Validation Failed at C3
+
+Invoices can fail validation at C3 in the following cases:
+
+- Discrepancies between validation rules at C2 and C3 due to updates from the FTA
+- Invoices sent to C3 get corrupted in transit
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validated by C2 | Submitted to Exchange Network | Not Submitted |
+| 4 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 5 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 6 | Invoice Received by C3 | Delivered to Buyer Network | Not Submitted |
+| 7 | Invoice Validation Failed by C3 | Failed | Not Submitted |
+| 8 | TDD Received by C5 | Failed | Processing |
+| 9 | TDD Validated by C5 | Failed | Accepted |
+| 10 | TDD Withdrawn from C5 | Failed | Withdrawn |
+
+**Next steps for the user/taxpayer:**
+
+- Check the failure reason, modify the invoice accordingly and attempt again.
+
+## C3 is Temporarily Down
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validated by C2 | Submitted to Exchange Network | Not Submitted |
+| 4 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 5 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 6 | Invoice Reception Failure by C3 (1/3 Retry) | Submitted to Exchange Network | Not Submitted |
+| 7 | TDD Received by C5 | Submitted to Exchange Network | Processing |
+| 8 | Invoice Reception Failure by C3 (2/3 Retry) | Submitted to Exchange Network | Processing |
+| 9 | TDD Validated by C5 | Submitted to Exchange Network | Accepted |
+| 10 | Invoice Reception Failure by C3 (3/3 Retry) | Failed | Accepted |
+| 11 | TDD Withdrawn from C5 | Failed | Withdrawn |
+
+**Next steps for the user/taxpayer:**
+
+- Retry the invoice at a later point in time without changing any part of the invoice data.
+- The retry count will be updated after data analysis.
+
+## Invoice Validation Failed at C5
+
+Invoices can fail validation at C5 in the following cases:
+
+- ClearTax makes a mistake in extracting the TDD from the invoice data
+- Invoices sent to C5 get corrupted in transit
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validated by C2 | Submitted to Exchange Network | Not Submitted |
+| 4 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 5 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 6 | Invoice Received by C3 | Delivered to Buyer Network | Not Submitted |
+| 7 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 8 | TDD Received by C5 | Delivered to Buyer Network | Processing |
+| 9 | Invoice Received by C4 | Delivered to Buyer | Processing |
+| 10 | TDD Validation Failed by C5 (ClearTax retries after fixing the TDD rejection reason) | Delivered to Buyer | Processing |
+
+**Next steps for the user/taxpayer:**
+
+- No action is needed from the user. ClearTax will resolve the TDD error and retry submission once the rejection reason is fixed. The SLA for resolution is 24 hours (this does not violate the 15-minute invoice SLA).
+- If the issue is not resolved within 24 hours, automated jobs run by ClearTax will retry sending the invoice at a set frequency until the invoice is accepted.
+
+## C5 is Temporarily Down
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validated by C2 | Submitted to Exchange Network | Not Submitted |
+| 4 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 5 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 6 | Invoice Received by C3 | Delivered to Buyer Network | Not Submitted |
+| 7 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 8 | TDD Reception Failure by C5 (1/3 Retry) | Delivered to Buyer Network | Processing |
+| 9 | Invoice Received by C4 | Delivered to Buyer | Processing |
+| 10 | TDD Reception Failure by C5 (2/3 Retry) | Delivered to Buyer | Processing |
+| 11 | TDD Reception Failure by C5 (3/3 Retry) | Delivered to Buyer | Processing |
+
+**Next steps for the user/taxpayer:**
+
+- ClearTax will retry only the TDD submission for the customer until the **Accepted** status is reached.
+
+## C4 is Permanently Not Reachable
+
+| S.No | Event | Document Status | Government Reporting Status |
+| --- | --- | --- | --- |
+| 1 | Invoice not sent to C2 | Pending | Not Submitted |
+| 2 | Invoice Received by C2 | Submitted to Exchange Network | Not Submitted |
+| 3 | Invoice Validated by C2 | Submitted to Exchange Network | Not Submitted |
+| 4 | Invoice Sent by C2 to C3 | Submitted to Exchange Network | Not Submitted |
+| 5 | TDD Created | Submitted to Exchange Network | Not Submitted |
+| 6 | Invoice Received by C3 | Delivered to Buyer Network | Not Submitted |
+| 7 | Invoice Validated by C3 | Delivered to Buyer Network | Not Submitted |
+| 8 | TDD Received by C5 | Delivered to Buyer Network | Processing |
+| 9 | Invoice Reception Failure by C4 | Failed | Processing |
+| 10 | TDD Validated by C5 | Failed | Accepted |
+| 11 | TDD Withdrawn from C5 | Failed | Withdrawn |
+
+**Next steps for the user/taxpayer:**
+
+- Contact the buyer offline and ask them to share the correct Peppol endpoint that can actively receive invoices. Do not send any fresh invoices to the endpoint that has been marked as permanently unavailable.

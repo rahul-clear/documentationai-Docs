@@ -1,0 +1,61 @@
+---
+title: Overview
+description: 'How UAE invoices move across the 5 Corner Peppol network, and the Document and Government Reporting statuses ClearTax shows for them'
+---
+## 5 Corner Peppol Exchange Network
+
+The UAE has adopted the 5 Corner Peppol model for exchanging invoices. The network is used for:
+
+- Exchanging invoices between Seller and Buyer
+- Reporting invoices to the FTA
+
+The diagram below shows the invoice exchange process and the role of each stakeholder:
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/invoice-lifecycle/five-corner-peppol-model.png" width="1654" height="650" alt="5 Corner Peppol exchange network for the UAE" />
+
+The 5 corners are:
+
+- **C1** - The Seller (Buyer in case of Self-Billing)
+- **C2** - C1's Access Point
+- **C3** - C4's Access Point
+- **C4** - The Buyer (Seller in case of Self-Billing)
+- **C5** - FTA
+
+Reporting to the FTA happens in the form of a **Tax Data Document (TDD)**, which is a subset of the fields of the invoice.
+
+ClearTax can act as either access point, or both, depending on the taxpayers' selection of ASPs.
+
+## Document and Government Reporting Status
+
+The ClearTax e-invoicing product shows two statuses for every invoice:
+
+- **Document Status** - Tracks invoice exchange between sender and recipient
+- **Government Reporting Status** - Tracks reporting of the invoice data (Tax Data Document) to the FTA
+
+### Document Status
+
+| Status | Meaning |
+| --- | --- |
+| **Pending** | The invoice has not been sent to C2 |
+| **Submitted to Exchange Network** | The invoice has been received by C2 |
+| **Delivered to Buyer Network** | The invoice has been received by C3 |
+| **Delivered to Buyer** | The invoice has been received by C4 |
+| **Failed** | The invoice delivery to the buyer has failed |
+
+An invoice can move to **Failed** for any of the following reasons:
+
+- Syntax/Business rule validation failed at C2
+- C3 is down for an extended period, so automatic retries are exhausted
+- Syntax/Business rule validation failed at C3
+- C4 is permanently not reachable
+
+### Government Reporting Status
+
+| Status | Meaning |
+| --- | --- |
+| **Not Submitted** | The TDD has not been sent to C5 |
+| **Processing** | The TDD has been received by C5 |
+| **Accepted** | The TDD has been validated successfully by C5 |
+| **Withdrawn** | The TDD has been withdrawn from C5's records due to failure of invoice exchange |
+
+See [Status Lifecycle](/countries/uae/invoice-lifecycle/status-lifecycle) for how these two statuses change together in each scenario.
