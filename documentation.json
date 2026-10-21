@@ -193,14 +193,6 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "Overview",
-                    "path": "countries/france/overview"
-                  },
-                  {
-                    "title": "Flows",
-                    "path": "countries/france/flows"
-                  },
-                  {
                     "group": "Product Guide",
                     "icon": "book-open",
                     "pages": [
