@@ -207,8 +207,22 @@
                 "icon": "flag",
                 "pages": [
                   {
-                    "title": "End User Onboarding/Offboarding",
-                    "path": "end-user-onboarding/offboarding"
+                    "group": "End User Onboarding/Offboarding",
+                    "icon": "user-check",
+                    "pages": [
+                      {
+                        "title": "Onboarding on ClearTax",
+                        "path": "countries/france/end-user-onboarding/onboarding-on-cleartax"
+                      },
+                      {
+                        "title": "KYC & KYB Verification",
+                        "path": "countries/france/end-user-onboarding/kyc-kyb-verification"
+                      },
+                      {
+                        "title": "Switching Your PA to ClearTax",
+                        "path": "countries/france/end-user-onboarding/switching-pa-to-cleartax"
+                      }
+                    ]
                   },
                   {
                     "group": "Product Guide",

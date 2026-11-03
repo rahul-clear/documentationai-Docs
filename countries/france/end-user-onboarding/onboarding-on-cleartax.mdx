@@ -1,0 +1,81 @@
+---
+title: Onboarding on ClearTax
+description: 'How customers are onboarded on ClearTax, or choose ClearTax as their Approved Platform (PA) in France'
+---
+This page explains the process of customer onboarding on ClearTax (or choosing ClearTax as the PA in France).
+
+## Step 1 - Declaration in the Annuaire and linking to ClearTax as legal PA
+
+**Customer:** Provide the entity's
+
+- Legal Name
+- SIREN / SIRET / Routing Code
+- Peppol ID (if available)
+
+**ClearTax:**
+
+- If a Peppol ID is not available, ClearTax will create one.
+- Once the Peppol ID is available, ClearTax will register itself as the entity's official Partner (PA) in the French directory.
+
+## Step 2 - Sign up and customer workspace creation
+
+The Delivery team will take the customer through account creation, which includes the following.
+
+**Customer:**
+
+- Signup and email verification
+- MFA setup
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/end-user-onboarding/signup-welcome.jpg" width="2048" height="1073" alt="Onboarding welcome screen - Say hello to E-invoicing" />
+
+**ClearTax:**
+
+- SIREN addition
+- Org naming
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/end-user-onboarding/add-business-details.jpg" width="2048" height="1073" alt="Add business details - SIREN Number and Organisation Name" />
+
+**SIREN validation:** Upon entry, the SIREN number undergoes a regex check and is validated against the INSEE API to confirm the organisation's status as Active or Inactive.
+
+Once the above details are added, a workspace will be created.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/end-user-onboarding/workspace-dashboard.jpg" width="2048" height="1073" alt="E-Invoicing dashboard after workspace creation" />
+
+## Step 3 - Business Hierarchy Settings
+
+The customer can set up the complete business hierarchy (3 levels):
+
+- **Level 1:** SIREN
+- **Level 2:** SIRET
+- **Level 3:** Routing Code
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/end-user-onboarding/workspace-details.jpg" width="2048" height="1073" alt="Workspace Details in Settings" />
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/end-user-onboarding/business-settings-hierarchy.jpg" width="2048" height="1073" alt="Business settings showing SIREN, SIRET and Routing Code hierarchy" />
+
+### API client creation
+
+For an API customer, an **API client token can be created via the Integrations section**.
+
+- The customer can set the API token expiration time, as well as any particular IP address they wish to whitelist for using the API.
+- The generated token can be used for authentication for all corresponding APIs.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/france/end-user-onboarding/create-api-client.jpg" width="2048" height="1073" alt="Create API Client - expiration, notification email and IP whitelisting" />
+
+## Step 4 - License creation
+
+- Once all commercial and procedural requirements are fulfilled, the ClearTax Delivery team will generate the license.
+- This step is required to enable e-invoicing exchanges in the production environment.
+
+## Step 5 - Demo workspace provisioning
+
+- Customers may request a Demo workspace to conduct User Acceptance Testing (UAT).
+
+<Callout kind="warning" collapsed="false">
+Data configured or generated within the Demo workspace cannot be migrated to the production environment.
+</Callout>
+
+## Step 6 - KYC & KYB compliance verification
+
+- Prior to initiating live operations in production, all customers must complete mandatory Know Your Customer (KYC) and Know Your Business (KYB) verification with ClearTax.
+- For additional details, see [KYC & KYB Verification](/countries/france/end-user-onboarding/kyc-kyb-verification). The ClearTax Customer Success team will guide you through the process.
