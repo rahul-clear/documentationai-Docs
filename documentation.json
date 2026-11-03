@@ -141,6 +141,10 @@
                     "path": "countries/oman/flows"
                   },
                   {
+                    "title": "Onboarding via Fawtara",
+                    "path": "onboarding-via-fawtara"
+                  },
+                  {
                     "title": "Offline SDK",
                     "path": "countries/oman/offline-sdk"
                   },
