@@ -141,12 +141,18 @@
                     "path": "countries/oman/flows"
                   },
                   {
-                    "title": "End User Onboarding",
-                    "path": "end-user-onboarding"
-                  },
-                  {
-                    "title": "Onboarding via Fawtara",
-                    "path": "onboarding-via-fawtara"
+                    "group": "End User Onboarding",
+                    "icon": "user-check",
+                    "pages": [
+                      {
+                        "title": "Onboarding via Fawtara",
+                        "path": "countries/oman/end-user-onboarding/onboarding-via-fawtara"
+                      },
+                      {
+                        "title": "Onboarding on ClearTax",
+                        "path": "countries/oman/end-user-onboarding/onboarding-on-cleartax"
+                      }
+                    ]
                   },
                   {
                     "title": "Offline SDK",
