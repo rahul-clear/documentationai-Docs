@@ -207,6 +207,10 @@
                 "icon": "flag",
                 "pages": [
                   {
+                    "title": "End User Onboarding/Offboarding",
+                    "path": "end-user-onboarding/offboarding"
+                  },
+                  {
                     "group": "Product Guide",
                     "icon": "book-open",
                     "pages": [
