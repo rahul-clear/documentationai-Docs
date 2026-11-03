@@ -1,0 +1,109 @@
+---
+title: Purchase Documents
+description: 'Your Peppol inbox, download and AP/VIM delivery status, additional reference documents, self-billing and available actions'
+---
+## Navigating the Purchase Dashboard
+
+The "Purchase Documents" section is your inbox for e-invoices received from your suppliers.
+
+This feature is a direct benefit of your Peppol registration. When you complete your onboarding and share your Peppol ID with your suppliers, any e-invoice they send to that ID from their Peppol Access Point appears in your Purchase Dashboard. Self-billed documents that you issue on behalf of your suppliers are also managed from this dashboard.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/purchase-documents/navigating-the-purchase-dashboard.jpg" width="1400" height="765" alt="Navigating the Purchase Dashboard" />
+
+- Detailed View: Clicking on the invoice number, the details of the invoice are shown.
+
+- Validations: All received invoices are automatically validated against EN 16931 and the applicable German format rules.
+
+### Purchase document statuses
+
+- **Received:** The e-invoice has been received from your supplier and is available in your inbox.
+
+- **Pending, Failed, Submitted to exchange network, Delivered to seller network, Delivered to seller:** These statuses apply to self-billed documents that you issue to your suppliers, and follow the same lifecycle as sales documents, with the seller as the recipient.
+
+### Filters and columns on the Purchase Dashboard
+
+- Date, invoice number and status filters work in the same way as on the Sales dashboard. In addition, the purchase filter panel offers:
+
+  - **Download Status:** XML, PDF or Not Downloaded.
+
+  - **AP/VIM Delivery Status:** Delivered, Failed, Pending or Partially Delivered.
+
+- The document table shows Invoice Number, Invoice Status, Invoice Date, Invoice Type, Invoice Exchange Date, Seller Name, Seller VAT, Seller Endpoint Address, Download Status, AP/VIM Delivery Status, Additional Document Status, Total Document Amount (€), Total VAT Amount (€) and Action (audit trail).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/purchase-documents/filters-and-columns-on-the-purchase-dash.jpg" width="1116" height="934" alt="Filters and columns on the Purchase Dashboard" />
+
+### Download status
+
+- The "Download Status" column keeps track of whether the XML or PDF of each purchase document has already been downloaded, so that your team does not miss or double-process an invoice.
+
+  - **XML:** The XML file of the invoice has been downloaded.
+
+  - **PDF:** The PDF of the invoice has been downloaded.
+
+  - **Not Downloaded:** No file has been downloaded yet.
+
+- Use the "Download Status" filter to list, for example, only the invoices that are "Not Downloaded" and still need to be picked up.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/purchase-documents/download-status.jpg" width="1152" height="737" alt="Download status" />
+
+### AP/VIM delivery status
+
+If an AP inbox is set up for your business, ClearTax forwards received purchase invoices by email to your accounts payable (AP) or vendor invoice management (VIM) system. An AP inbox is set up against specific email IDs and routing logic: when an invoice matches a given logic, it is sent to the corresponding inbox.
+
+- The "AP/VIM Delivery Status" column tracks the delivery of each invoice to the configured inbox:
+
+  - **Delivered:** The invoice has been sent to the configured AP/VIM inbox.
+
+  - **Pending:** The invoice is queued for delivery to the AP/VIM inbox.
+
+  - **Failed:** Delivery to the AP/VIM inbox failed.
+
+  - **Partially Delivered:** The invoice was delivered to some, but not all, of the inboxes it is routed to.
+
+- A blank value means the document is not routed to an AP/VIM inbox (for example, self-billed documents that you issue).
+
+- Please contact the ClearTax team to set up or change the AP inbox email IDs and routing logic for your business.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/purchase-documents/ap-vim-delivery-status.jpg" width="1152" height="737" alt="AP/VIM delivery status" />
+
+### Additional document status
+
+- Suppliers can attach additional reference documents to their e-invoices. The "Additional Document Status" column shows "AVAILABLE" when a received invoice carries such documents, and "-" when it has none.
+
+- When you see "AVAILABLE", select the invoice and use "Download Additional Reference Documents" from the "Actions" dropdown to download them.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/purchase-documents/additional-document-status.jpg" width="1152" height="737" alt="Additional document status" />
+
+### Self-billed documents
+
+- Under self-billing, you (the buyer) issue the invoice on behalf of your supplier. Self-billed documents appear on the Purchase dashboard with the invoice types "Self-billed invoice", "Self-billed credit note" and "Self-billed debit note".
+
+- Import self-billed documents in the same way as other documents (see "Import your data"), then select them and click on the "Send" button to deliver them to the supplier, via Peppol or via email when the Seller Endpoint Address starts with "EM:".
+
+- Their status progresses from Pending to Submitted to exchange network, Delivered to seller network and Delivered to seller.
+
+## Actions on Purchase Document
+
+The following are the actions that can be performed on purchase documents in your inbox. Unlike sales documents, purchase documents cannot be deleted, and instead of "Manage Reference Files" you can download the additional reference documents attached by your supplier.
+
+| Action | Description |
+| --- | --- |
+| Send | Available only for self-billed documents in Pending status. Sends the self-billed document to the supplier via Peppol or email. |
+| Download XML report | Downloads a ZIP file containing the XML files of the selected invoices. The download is tracked in the "Download Status" column. |
+| Download Zugferd PDF | Downloads the ZUGFeRD hybrid PDF of the selected invoices. |
+| Download Additional Reference Documents | Downloads the reference documents attached by the supplier (when "Additional Document Status" is "AVAILABLE"). |
+| Print | Generates a PDF of the invoice using the available template. |
+| Email | Send the invoice to the selected email addresses using a selected template. |
+| Download (Lite / Detailed CSV Report) | Downloads the selected lite/detailed CSV report containing the details of the invoice<br />- Lite Report: Contains fewer fields, suitable for quick consumption.<br />- Detailed Report: Contains significantly more fields. |
+| Show/Hide Reorder Column | Shows, hides and reorders the columns basis preference |
+| Sort | Sorts the column basis preference |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/purchase-documents/actions-on-purchase-document.jpg" width="810" height="786" alt="Actions on Purchase Document" />
+
+### Download Additional Reference Documents
+
+- Check the "Additional Document Status" column (or use it to spot invoices marked "AVAILABLE").
+
+- Select the invoice(s), open the "Actions" dropdown and click on "Download Additional Reference Documents".
+
+- The reference documents attached by your supplier are downloaded to your system.

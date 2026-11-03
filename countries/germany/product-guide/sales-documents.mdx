@@ -1,0 +1,278 @@
+---
+title: Sales Documents
+description: 'Importing data, the Sales dashboard, generating e-invoices via Peppol or email, audit trail, document actions and import history'
+---
+## Import your data
+
+You can import data onto the Cleartax platform using the web-based ingestion template if you are not integrated via API or SFTP.
+
+- To initiate the process of e-invoice generation, click on "Import file" action via the link on the empty dashboard or through the "Import" button on the left-hand panel.
+
+- When you click on the "Import" action, you will see another right-hand side panel opening in front of you where you can import your file for the purpose of e-invoice generation.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/import-your-data.jpg" width="1400" height="765" alt="Import your data" />
+
+- You can select a file to import your data on the ClearTax platform either in the ClearTax excel template or you can create your own custom template and map it to ClearTax headers in the "Settings" section.
+
+- For more information on custom mapped templates, please refer to the "Settings" section.
+
+- Once you have successfully imported the file, click on the "Check file for errors & duplicates" button.
+
+- This action will run all the ClearTax validations on the ingested data to see if the data complies with the German e-invoicing requirements (EN 16931, XRechnung and ZUGFeRD rules).
+
+- Once all the validations have successfully completed on the ingested file, you will see a "File Summary" screen.
+
+- This screen will give you a summary of the file in terms of number of rows with errors and number of errors respectively.
+
+- If there are any validation errors, you will see the summary result on this screen.
+
+- You can click on the "Review and fix errors" button to review and correct these errors on the ClearTax UI screen itself.
+
+- You can also correct the errors by "Downloading Error Report", correcting it offline and re-uploading the file.
+
+- You will see an error correction screen for rows with errors highlighted in Red color.
+
+- You can correct the document with errors by hovering over the error cell and correcting the values in the cells as described in the error body.
+
+- Once you have corrected the errors highlighted in Red color, you can click on the "Proceed" button to continue with your data importing activity.
+
+- ClearTax will run its validations again on the corrected data entries as part of the error correction flow.
+
+- Once this activity is completed, you will again see the "File Summary" screen.
+
+- You can click on the "Import rows without errors" button to proceed further.
+
+- Once the import activity is successfully completed, you will see the ingested document rows on the "Sales dashboard" page in "Pending" state.
+
+- You can use the imported data for e-invoice generation either individually or by doing bulk selection.
+
+- Please follow the next sub-module on "Generate e-invoice(s)" for detailed steps on E-invoice generation.
+
+- On the E-invoicing home page, you can click on the "Sales documents" tile to start your sales e-invoice generation process.
+
+- Once done, you will land on the "Sales documents" dashboard page.
+
+## Sales Dashboard
+
+### Navigating the Sales Dashboard
+
+The Sales Dashboard is the central hub for managing all outgoing invoices. It provides an at-a-glance view of all documents and their current status.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/navigating-the-sales-dashboard.jpg" width="1400" height="768" alt="Navigating the Sales Dashboard" />
+
+- On the "Sales documents" dashboard page, you can perform all the actions pertaining to your sales documents.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/navigating-the-sales-dashboard-2.jpg" width="1400" height="765" alt="Navigating the Sales Dashboard" />
+
+### Filters on the Sales Dashboard
+
+- Click the "Filter" button above the document table to open the filter panel on the left. You can also look up a specific filter using "Search Filters".
+
+- **Invoice Date** and **Invoice Exchange Date:** Filter documents by the date on the invoice or the date on which the document was exchanged with the buyer.
+
+- **Invoice Number**, **Buyer VAT** and **Buyer Name:** Search for specific documents or buyers.
+
+- **Invoice Status:** Pending, Failed, Submitted to exchange network, Delivered to buyer network, Delivered to buyer and Received.
+
+- **Invoice Type:** Filter by any of the German invoice types listed in "Invoice types".
+
+- Click "Apply" to apply the filters. Active filters are shown as chips above the table (e.g., "Invoice Date: between 2026-09-22 - 2026-10-22"). Remove a filter with "×" or click "Clear All" to reset.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/filters-on-the-sales-dashboard.jpg" width="1116" height="934" alt="Filters on the Sales Dashboard" />
+
+### Columns on the Sales Dashboard
+
+- The document table shows Invoice Number, Invoice Status, Invoice Date, Invoice Type, Exchange Date, Buyer Name, Buyer VAT, Buyer Endpoint Address, Total Document Amount (€), Total VAT Amount (€) and Action (audit trail). Scroll horizontally to see all columns.
+
+- **Invoice Number:** Click the hyperlinked number to open the detailed document view.
+
+- **Buyer Endpoint Address:** The address the e-invoice is delivered to. A Peppol participant ID (e.g., 9930:DE314159265) means delivery via the Peppol network; an address starting with "EM:" (e.g., EM: abc@gmail.com) means delivery via email.
+
+- Use "Show/Hide Reorder Column" in the "Actions" dropdown to choose which columns are displayed and in which order.
+
+## Generate e-invoice(s)
+
+- For generating e-invoices, select the documents that you want to generate e-invoices on the "Sales dashboard" page.
+
+- You can select a document row individually and click on the "Send" button to generate an e-invoice.
+
+- Alternatively, you can also bulk select the document rows (adjust the filter options for more refined bulk selection) and click on the "Send" button to generate e-invoices in bulk.
+
+- When you click "Send", ClearTax generates the e-invoice in the applicable German format (Peppol BIS 3.0 UBL, XRechnung or ZUGFeRD), validates it, and delivers it to the address in the "Buyer Endpoint Address" column – via Peppol for a Peppol participant ID, or via email for an "EM:" address.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/generate-e-invoice-s.jpg" width="1400" height="765" alt="Generate e-invoice(s)" />
+
+- Once the "Send" action is completed, you will see the status of the documents change to reflect the e-invoicing status.
+
+- There can be 5 possible states for these documents
+
+  - **Pending**: The invoice is saved in ClearTax but has not yet been sent to the buyer (via Peppol or email).
+
+  - **Failed:** The invoice has failed at the Access Point/Buyer validation stage (e.g., a mandatory field is missing). This can also occur if the recipient is not being registered to receive this document type.
+
+  - **Submitted to Exchange Network**: The invoice has passed validation and has been successfully transmitted from ClearTax (Corner 2) to the Peppol network.
+
+  - **Delivered to Buyer Network:** The invoice has been successfully received and acknowledged by the buyer's Access Point (Corner 3). This confirms delivery.
+
+  - **Delivered to Buyer:** The invoice has been successfully received by the buyer's system (Corner 4).
+
+- You can further click on the hyperlinked "Document number" to open the document details. The Detailed Document View allows you to see all invoice, seller, and buyer information. You can edit fields as well.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/generate-e-invoice-s-2.jpg" width="1400" height="753" alt="Generate e-invoice(s)" />
+
+- In case of a "Failed" document, you can also see the error message and correct the error using the "Edit" button.
+
+- Once the error is corrected, you can reinitiate the e-invoice generation process via the same page.
+
+## Send e-invoices via email
+
+Because the German mandate only prescribes the e-invoice format (UBL, XRechnung or ZUGFeRD) and not the transmission channel, ClearTax lets you deliver compliant e-invoices to buyers by email, in addition to the Peppol network. This is useful for buyers who are not yet registered on Peppol.
+
+**How email delivery works**
+
+- The delivery channel is decided by the **Buyer Endpoint Address** of the document. If the address is a Peppol participant ID (e.g., 9930:DE314159265), the invoice is sent over the Peppol network. If it starts with **"EM:"** followed by an email address (e.g., EM: abc@gmail.com), the invoice is sent by email and not over the Peppol network.
+
+- To use email delivery, provide the buyer endpoint scheme as "EM" (the EN 16931 electronic address scheme code for email) and the buyer's email address as the endpoint ID in your import file or API payload.
+
+- The send flow does not change: select the document(s) on the "Sales documents" dashboard and click the "Send" button. ClearTax routes each document to Peppol or email automatically.
+
+- ClearTax generates the e-invoice in the applicable German format and emails it to the buyer's address with the structured e-invoice file attached.
+
+- Once the email has been sent, the document status changes to "Delivered to buyer".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/send-e-invoices-via-email.jpg" width="1400" height="724" alt="Send e-invoices via email" />
+
+**Peppol delivery vs email delivery**
+
+| **Aspect**             | **Peppol**                                                                                | **Email**                                                    |
+|------------------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| Buyer Endpoint Address | Peppol participant ID, e.g., 9930:DE314159265                                             | "EM:" followed by the buyer's email, e.g., EM: abc@gmail.com |
+| Buyer requirement      | Buyer is registered on the Peppol network                                                 | Valid buyer email address                                    |
+| How to send            | "Send" button on the Sales dashboard                                                      | "Send" button on the Sales dashboard (same flow)             |
+| Status flow            | Pending → Submitted to exchange network → Delivered to buyer network → Delivered to buyer | Pending → Delivered to buyer                                 |
+| Compliance             | Compliant, as the format meets the German mandate                                         | Compliant, as the format meets the German mandate            |
+
+- Note: Email delivery is different from the "Email" action in the "Actions" dropdown, which sends a copy of the invoice PDF to recipients you choose (see "E-mail invoice").
+
+## Audit Trail
+
+Audit trail functionality helps users to track all actions taken for an invoice by users on the product.
+
+- On the "Sales Document" and "Purchase Document" screens, audit trail for a document can be accessed by clicking on the icon against an invoice in the "Action" column
+
+- A side panel opens which gives the details of the actions taken on the invoice along with the user and timestamp
+
+## Actions on Sales Document
+
+| Action | Applies to | Description |
+| --- | --- | --- |
+| Send | Pending invoices only | Submits the e-invoice and delivers it to the buyer via Peppol or email, based on the Buyer Endpoint Address. |
+| Delete | Pending invoices only | Permanently removes the document from the UI. An error is shown if the document is past the Pending stage. |
+| Download XML report | Submitted to Exchange Network or later | Downloads a ZIP file containing the XML files of the selected e-invoices. |
+| Download Zugferd PDF | Submitted to Exchange Network or later | Downloads the ZUGFeRD hybrid PDF (PDF/A-3 with embedded XML) of the selected e-invoices. |
+| Print | Submitted to Exchange Network or later | Generates a PDF of the invoice using the available template. |
+| Email | Submitted to Exchange Network or later | Send the invoice to the buyer's email address using a selected template. |
+| Manage Reference Files | Pending invoices | Attach additional reference documents (e.g., delivery orders, timesheets) to an invoice. |
+| Download (Lite / Detailed CSV Report) | All Stages | Downloads the selected lite/detailed CSV report containing the details of the invoice<br />- Lite Report: Contains fewer fields, suitable for quick consumption.<br />- Detailed Report: Contains significantly more fields |
+| Show/Hide Reorder Column | All Stages | Shows, hides and reorders the columns basis preference |
+| Sort | All Stages | Sorts the column basis preference |
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/actions-on-sales-document.jpg" width="1132" height="1308" alt="Actions on Sales Document" />
+
+### Download XML report
+
+- You can download the report from the "Actions" dropdown
+
+- You can click on 'Download XML report'
+
+- It will download a ZIP file containing the XML files of the selected e-invoices.
+
+- You can see the success notification on the top-right corner of the screen once the zip file has been downloaded successfully.
+
+### Download ZUGFeRD PDF
+
+- Select the document(s) and click on "Download Zugferd PDF" from the "Actions" dropdown.
+
+- ClearTax downloads the ZUGFeRD hybrid invoice: a PDF/A-3 file that shows the invoice visually and carries the structured XML embedded inside it.
+
+- The ZUGFeRD PDF is a valid e-invoice in Germany and can be shared with buyers who prefer a human-readable invoice, while their systems can still read the embedded XML.
+
+- You can see the success notification on the top-right corner of the screen once the file has been downloaded successfully.
+
+### Delete imported data
+
+- You can choose to delete the imported data on ClearTax platform before e-invoice generation in case you identify any issues with the imported data.
+
+- Please note that this activity can only be performed on the documents that are in "Pending" state.
+
+- You can bulk select the documents that need to be deleted, click on the "Actions" dropdown and then select the "Delete" option.
+
+- You will see a modal pop-up screen to validate your action since this action cannot be undone.
+
+- Once you click on the "Delete" button, the selected and eligible documents will get deleted from the "Sales dashboard" page.
+
+  - Eligible documents are the ones on which the delete action can be performed such as documents in "Pending" state only.
+
+### Print e-invoice(s)
+
+- You can bulk select the documents that you want to print and select the "Print" button inside the "Actions" dropdown.
+
+- You will see a "Print preview" screen open up in front of you where you can choose the print template.
+
+- Once done, you will see the document ready to be printed or downloaded on your system.
+
+### Download report
+
+- You can download the report from the "Actions" dropdown by hovering on "Download"
+
+- You can either select "Download Detailed Report" or "Download Lite Report".
+
+- You can see the success notification on the top-right corner of the screen once the reports have been downloaded successfully.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/download-report.jpg" width="810" height="786" alt="Download report" />
+
+### E-mail invoice
+
+In order to email an invoice PDF, follow below steps -
+
+- Select the invoices from the "Sales Document" or "Purchase Document" screen to be email. Go to "Actions" and select "Email"
+
+- Enter the recepient emails in "To" cc and bcc.
+
+- Select the print template in which the PDF file is required.
+
+- Select the email body template as per the invoice type.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/e-mail-invoice.jpg" width="1400" height="789" alt="E-mail invoice" />
+
+- Preview the email format and click on "Send"
+
+- This action sends a copy of the invoice to the recipients you choose. It is separate from email delivery of the e-invoice itself, which is driven by an "EM:" Buyer Endpoint Address (see "Send e-invoices via email").
+
+### Manage reference files
+
+Invoices are often accompanied by supporting documents such as delivery orders, purchase orders or timesheets. Using "Manage Reference Files", you can attach these as additional reference documents to an invoice, so that the buyer receives them along with the e-invoice.
+
+- Select the invoice on the "Sales documents" dashboard, open the "Actions" dropdown and click on "Manage Reference Files".
+
+- The "Manage additional reference files" panel opens on the right, with the invoice number shown at the top.
+
+- For each document, enter the **Document reference** (mandatory, e.g., DO-2026-45) and an optional **Description** (e.g., Delivery order for PO12345).
+
+- Click on "Select a file to import" or drag and drop the file into the box.
+
+- Click on "+ Add Files" to attach more documents, or "Delete" to remove a document from the list.
+
+- Click on "Save & Attach" to attach the files to the invoice, or "Cancel" to close the panel without saving.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/manage-reference-files.jpg" width="1400" height="765" alt="Manage reference files" />
+
+## Check sales import history
+
+- You can select on the "Import history" button on the left-hand panel and see the import history sorted by the upload date.
+
+- You can view and fix the errors in your imported file through this page.
+
+- You can also view the documents that were imported as part of a file uploaded on ClearTax.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/sales-documents/check-sales-import-history.jpg" width="1400" height="608" alt="Check sales import history" />

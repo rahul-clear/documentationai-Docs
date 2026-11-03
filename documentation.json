@@ -547,6 +547,50 @@
                     ]
                   }
                 ]
+              },
+              {
+                "group": "Germany",
+                "icon": "flag",
+                "pages": [
+                  {
+                    "group": "Product Guide",
+                    "icon": "book-open",
+                    "pages": [
+                      {
+                        "title": "Overview",
+                        "path": "countries/germany/product-guide/overview"
+                      },
+                      {
+                        "title": "Introduction",
+                        "path": "countries/germany/product-guide/introduction"
+                      },
+                      {
+                        "title": "Onboarding",
+                        "path": "countries/germany/product-guide/onboarding"
+                      },
+                      {
+                        "title": "Dashboard Walkthrough",
+                        "path": "countries/germany/product-guide/dashboard-walkthrough"
+                      },
+                      {
+                        "title": "Sales Documents",
+                        "path": "countries/germany/product-guide/sales-documents"
+                      },
+                      {
+                        "title": "Purchase Documents",
+                        "path": "countries/germany/product-guide/purchase-documents"
+                      },
+                      {
+                        "title": "MIS Dashboard",
+                        "path": "countries/germany/product-guide/mis-dashboard"
+                      },
+                      {
+                        "title": "Settings",
+                        "path": "countries/germany/product-guide/settings"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },

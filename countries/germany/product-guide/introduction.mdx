@@ -1,0 +1,99 @@
+---
+title: Introduction
+description: 'The German B2B e-invoicing mandate, supported formats, the Peppol 4-corner model and email delivery'
+---
+This guide provides a comprehensive overview of the ClearTax E-Invoicing platform for Germany. It details the product's functionalities, which are designed to ensure full compliance with Germany's B2B e-invoicing mandate.
+
+## Understanding the German Mandate
+
+Germany has mandated an e-invoicing model for all domestic business-to-business (B2B) transactions. This mandate is a significant shift from traditional invoicing (paper or PDF).
+
+- **Receiving (from January 1, 2025):** All businesses in Germany must be able to receive structured electronic invoices for their B2B transactions.
+
+- **Issuing (from January 1, 2027 and January 1, 2028):** Businesses with a prior-year turnover above €800,000 must issue structured e-invoices from January 1, 2027. From January 1, 2028, the obligation applies to all businesses. Until then, paper and other electronic formats (e.g., plain PDF) can still be issued with the recipient's consent.
+
+- **What is a "Structured E-Invoice"?** A structured e-invoice is a machine-readable invoice that conforms to the European Standard EN 16931. In Germany, it can be a pure XML file (XRechnung or Peppol BIS) or a hybrid PDF with an embedded XML file (ZUGFeRD). A plain PDF sent by email is not a structured e-invoice.
+
+- **Format, not channel:** The German mandate prescribes the format of the e-invoice, not how it is transmitted. As long as the invoice is in a compliant format, it can be exchanged via Peppol or email as agreed with your trading partner. This is why ClearTax supports both Peppol delivery and email delivery (see "Send e-invoices via email").
+
+## Supported E-Invoice Formats
+
+ClearTax validates and generates e-invoices in all formats accepted under the German mandate. The table below summarises each format.
+
+| **Format**         | **Structure**                                           | **When it is used**                                                                                                    |
+|--------------------|---------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Peppol BIS 3.0     | XML file compliant with EN 16931                        | The standard format exchanged over the Peppol network with buyers registered on Peppol.                                |
+| XRechnung          | XML file; the German national specification of EN 16931 | Mandatory for invoices to German public authorities (B2G, addressed using the Leitweg-ID) and widely accepted for B2B. |
+| ZUGFeRD (Factur-X) | Hybrid PDF/A-3 with an embedded XML file                | For buyers who want a human-readable PDF and a machine-readable XML in one file.                                       |
+
+## Channel 1: Peppol '4 Corner' Model
+
+Peppol is one of the channels ClearTax uses to exchange e-invoices with trading partners who are registered on it. While the German mandate does not mandate Peppol, it is a recommended way to exchange structured e-invoices across software providers and understanding it is essential to understanding the ClearTax solution.
+
+Peppol (Pan-European Public Procurement Online) is not a single platform but a secure, open network designed to exchange electronic business documents, including e-invoices.
+
+It functions similarly to a telecommunications network: just as a customer on one phone network can call a customer on any other network, a business on the Peppol network can transact with any other business registered on the network, regardless of their software or service provider.
+
+This system operates on a 4-Corner Model:
+
+- **Corner 1: The Sender (Your business)**
+
+- **Corner 2: The Sender's Access Point (Your service provider, e.g., ClearTax)**
+
+- **Corner 3: The Receiver's Access Point (Your customer's service provider)**
+
+- **Corner 4: The Receiver (Your customer)**
+
+This decentralized model is fundamentally different from centralized government portal systems. For B2B transactions in Germany, businesses do not upload invoices to a government website and there is no real-time clearance. Instead, structured invoices are exchanged directly with trading partners, either through the secure Peppol network using a certified Access Point, or through another agreed channel such as email.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/germany/product-guide/introduction/peppol-4-corner-model.jpg" width="1400" height="1002" alt="Peppol '4 Corner' Model" />
+
+**Clear Access Point**
+
+The German mandate prescribes the format of the e-invoice (Peppol BIS 3.0, XRechnung or ZUGFeRD), not the channel used to send it. ClearTax supports two delivery channels. The channel for each document is chosen automatically from the **Buyer Endpoint Address**.
+
+A business cannot connect to the Peppol network directly. Connection is only possible through a certified Peppol Access Point (AP), which acts as a secure gateway to the network.
+
+ClearTax is a certified **Peppol Access Point.**
+
+As your certified Access Point, the ClearTax platform handles all the technical complexities of e-invoicing compliance:
+
+- **Format Validation:** Automatically ensures every invoice created or imported adheres to EN 16931 and the applicable German format rules (Peppol BIS 3.0, XRechnung or ZUGFeRD).
+
+- **Secure Transmission:** Manages the secure exchange of documents using required protocols.
+
+- **Peppol Directory (SMP) Lookup:** Before sending, ClearTax automatically looks up the recipient’s Peppol ID in the Service Metadata Publisher (SMP) directory to find their registered Access Point and confirm they can receive the document.
+
+Peppol is used when the Buyer Endpoint Address is a Peppol participant ID (e.g., 9930:DE314159265).
+
+## Channel 2: Exchange via E-mail
+
+Peppol is not the only compliant way to exchange e-invoices in Germany. The German mandate prescribes the format of the e-invoice, not the channel used to send it. An invoice in a structured format that meets EN 16931 (Peppol BIS 3.0, XRechnung or ZUGFeRD) remains a valid e-invoice whether it travels over Peppol or by email.
+
+Unlike the Peppol 4-corner model, email delivery is a direct exchange between you and your buyer. No Access Point sits on the buyer’s side:
+
+- **Corner 1: The Sender (Your business)**
+
+- **Corner 2: ClearTax (validates the invoice, generates the e-invoice file and sends the email)**
+
+- **The Receiver (Your customer’s email inbox)**
+
+**How ClearTax decides to use email**
+
+- The delivery channel is chosen automatically from the **Buyer Endpoint Address** of each document.
+
+- If the address starts with **“EM:”** followed by an email address (e.g., EM: abc@gmail.com), the invoice is sent by email and not over the Peppol network.
+
+- If the address is a Peppol participant ID (e.g., 9930:DE314159265), the invoice is sent over Peppol.
+
+- You can mix both channels in one batch. Select the documents and click “Send”, and ClearTax routes each one to the right channel.
+
+**What ClearTax handles for email delivery**
+
+- **Format Validation:** Every invoice is validated against EN 16931 and the applicable German format rules before it is sent, the same checks as for Peppol.
+
+- **E-invoice Generation:** The invoice is generated in the applicable German format and attached to the email as a structured file (XML or ZUGFeRD hybrid PDF).
+
+- **Delivery to the buyer’s inbox:** The email is sent directly to the address in the Buyer Endpoint Address. No Peppol registration or SMP lookup is needed on the buyer’s side.
+
+- **Status Tracking:** Once the email has been sent, the document status changes from “Pending” to “Delivered to buyer”.
