@@ -15,7 +15,7 @@ Sellers and System Integrator (SI) partners integrate the SDK into a Point-of-Sa
 | **Audience** | Sellers and System Integrator (SI) partners integrate the SDK into a Point-of-Sale (POS) system. |
 | **Product**  | `com.cleartax.oman:oman-einvoicing-sdk`                                                          |
 | **Version**  | 1.6.0                                                                                            |
-| **Requires** | Java 17 or above                                                                                 |
+| **Requires** | Java 8 or above                                                                                  |
 
 <Callout kind="info" collapsed="false">
   **Source PDF** → [SDK Documentation v1.4.0 (.pdf)](https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/files/oman-sdk/oman-offline-sdk-documentation-v1.4.0.pdf)
@@ -100,7 +100,7 @@ implementation 'com.cleartax.oman:oman-einvoicing-sdk:1.4.0'
 
 **Without a build tool.** Put the JAR on the compile and runtime classpath directly (`java -cp sdk.jar:...`).
 
-- Java 17 or newer is required.
+- Java 8 or newer is required.
 - The JAR is shaded: it carries its own dependencies and adds no transitive downloads to your build.
 - Do not repackage, shade, or modify the JAR: the SDK verifies its own integrity at startup, and a modified binary will refuse to run (see Section 11).
 
