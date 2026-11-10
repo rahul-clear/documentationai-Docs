@@ -1,0 +1,61 @@
+---
+title: CTAI Recon Scope
+description: Add-on SKU for Tax Assurance and E-Invoice Assurance (Sales and Purchase) reconciliation on the Clear AI (CTAI) platform
+---
+*Add-on SKU*
+
+## 1. Tax Assurance (GL vs E-Invoice + Tax Return Preparation)
+
+Under the Tax Assurance SKU, Clear reconciles the Customer's General Ledger against e-invoice data and prepares the periodic tax return from GL data on the Clear AI (CTAI) platform.
+
+✓ **Reconciliation:** Clear reconciles GL transactions against e-invoices in both directions. Each item is classified as Matched, Mismatch, Missing in E-Invoice, Missing in GL, or Out of scope, and exceptions are classified against the applicable tax law.
+
+✓ **Tax return preparation:** The draft return is prepared from GL data only: VAT 201 for UAE, the VAT return for KSA, and SST-02 for Malaysia. Reconciliation results are embedded in the tax form for visibility to the finance team performing compliance, but they do not drive the return figures. Clear prepares the return and the Customer files it.
+
+✓ **Data ingestion:** GL data is ingested through Clear's GL Stream integration. E-invoice data is synced automatically from the Clear e-invoicing workspace.
+
+✓ **Scheduled reconciliation:** A daily scheduled reconciliation agent runs for the agreed entities and emails the Customer only when exceptions are found.
+
+✓ **Implementation:** Onboarding is FDE-led over four weeks:
+
+- Week 1: workspace setup and baseline reconciliation run
+- Weeks 2–3: joint collaboration and configuration
+- Week 4: UAT and configuration freeze
+
+## 2. E-Invoice Assurance – Sales (E-Invoice vs AR)
+
+Under the E-Invoice Assurance SKU, Clear reconciles the Customer's Sales register (AR) against issued e-invoices at document level.
+
+✓ **Reconciliation:** Each AR record is matched to its e-invoice, including credit and debit notes. Results are reported as Matched, Mismatch, Missing in E-Invoice, Missing in Register, or Out of scope.
+
+✓ **Lifecycle evidence:** Clear validates the authority status of each e-invoice: ZATCA clearance or reporting for KSA, IRBM validation for Malaysia, and message-level status for UAE.
+
+✓ **Data ingestion:** No development or transformation work is in scope. The Customer pushes AR data through the Clear API endpoint, through SFTP, or by manual upload on the Clear AI portal. E-invoice data is synced from the Clear e-invoicing workspace.
+
+✓ **Scheduled reconciliation:** A daily scheduled reconciliation agent emails the Customer only when exceptions are found.
+
+✓ **Exclusions:** Tax return preparation, tax-box mapping and GL-based tax derivation are out of scope.
+
+## 3. E-Invoice Assurance – Purchase (E-Invoice vs AP)
+
+Under the E-Invoice Assurance SKU, Clear assesses the Customer's Purchase register (AP) against supplier e-invoice evidence where the jurisdiction makes it available.
+
+✓ **Reconciliation:** Where supplier e-invoices are available, each AP record is matched to the supplier e-invoice at document level. Self-billed e-invoices are always matched.
+
+✓ **Jurisdiction handling:**
+
+- UAE: full document-level matching.
+- KSA: ZATCA does not provide supplier e-invoices to buyers, so each AP record is flagged as e-invoice Expected, Not expected, or Undetermined.
+- Malaysia: document-level matching applies only where the entity has opted for inbound e-invoice sync. Otherwise, AP records are flagged as in KSA.
+
+✓ **AP validations:** Clear checks:
+
+- supplier tax registration number presence and format
+- mandatory invoice reference fields
+- duplicate supplier documents
+
+✓ Reverse-charge and import routes, where no supplier e-invoice is expected, are excluded from matching.
+
+✓ **Data ingestion:** No development or transformation work is in scope. The Customer pushes AP data through the Clear API endpoint, through SFTP, or by manual upload on the Clear AI portal.
+
+✓ **Exclusions:** A daily scheduled reconciliation agent emails the Customer only when exceptions are found. Tax return preparation, tax-box mapping and GL-based tax derivation are out of scope.

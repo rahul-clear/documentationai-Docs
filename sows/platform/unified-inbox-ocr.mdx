@@ -1,0 +1,27 @@
+---
+title: Unified Inbox with basic OCR
+description: Add-on SKU for a unified email inbox that processes structured e-invoices and OCRs unstructured PDFs
+---
+*Add-on SKU*
+
+✓ **Email intake:** ClearTax provisions a unique inbound email address for each customer and receives and stores every forwarded message on the email.
+
+✓ **Attachment handling:** The system opens each attachment, detects its true file type from the contents, handles PDF and structured XML (including the ZUGFeRD hybrid), and logs and skips unsupported files.
+
+✓ **Classification:** Each document is classified as either structured (UBL, XRechnung, CII, ZUGFeRD/Factur-X etc) or unstructured (a plain PDF).
+
+✓ **Structured path:** For structured documents the fields are mapped directly from the XML and validated against schema and Schematron, with no OCR.
+
+✓ **Unstructured path:** For unstructured PDFs the system runs OCR, extracts the key fields, records an OCR confidence score, and checks that required fields.
+
+✓ **Status model:** Each document is assigned a status of Processed, Needs Review, Potential Duplicate or Failed, with the reason recorded for processing and validation errors.
+
+✓ **De-duplication:** The system flags close matches as potential duplicates, and never merges them automatically.
+
+✓ **User interface:** The AP team sees the invoices in the Email Inbox list on the Cleartax portal with summary cards, filters etc, and an OCR column is shown for the unstructured documents.
+
+✓ **Correction & actions:** The team can correct the fields of a Needs-Review PDF (if OCR % is low), accept an invoice, refuse it with a captured reason, or mark and unmark it as a duplicate, while structured invoice data remains read-only.
+
+✓ **Exports:** Users can print the PDF, download the XML where one is present, download reports, and download any additional supporting reference document.
+
+✓ **Audit trail:** The system keeps an immutable, per-document audit trail of every system and user event, with actor and timestamp.

@@ -809,6 +809,14 @@
                   {
                     "title": "AP Connectors",
                     "path": "sows/platform/ap-connectors"
+                  },
+                  {
+                    "title": "CTAI Recon Scope",
+                    "path": "sows/platform/ctai-recon-scope"
+                  },
+                  {
+                    "title": "Unified Inbox with basic OCR",
+                    "path": "sows/platform/unified-inbox-ocr"
                   }
                 ]
               }
