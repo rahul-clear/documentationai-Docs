@@ -75,6 +75,16 @@
                     ]
                   },
                   {
+                    "group": "End User Offboarding",
+                    "icon": "user-x",
+                    "pages": [
+                      {
+                        "title": "Offboarding / De-linking via EmaraTax",
+                        "path": "countries/uae/end-user-onboarding/offboarding-delinking"
+                      }
+                    ]
+                  },
+                  {
                     "group": "Product Guide",
                     "icon": "book-open",
                     "pages": [

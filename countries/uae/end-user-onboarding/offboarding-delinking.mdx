@@ -1,0 +1,74 @@
+---
+title: Offboarding / De-linking via EmaraTax
+description: >-
+  Step-by-step flow for a UAE taxpayer de-linking ClearTax as ASP and offboarding
+  from ClearTax, starting from the EmaraTax portal
+---
+A taxpayer that has onboarded ClearTax as ASP can de-link ClearTax from EmaraTax at any time. De-linking removes the taxpayer's Peppol ID from ClearTax and from the FTA directory, and offboards the taxpayer from ClearTax's ASP services. The flow starts on EmaraTax and is completed on ClearTax.
+
+The same page on ClearTax is also used to **re-verify** an existing linkage. This guide covers the de-linking path.
+
+### Step 1: Login to EmaraTax and open e-Invoicing
+
+Admin user of the taxpayer logs in to the EmaraTax portal of FTA-UAE by entering their credentials and captcha, selects **E-Invoicing** from the menu and clicks on "Proceed" - the same as when onboarding (see [Onboarding via EmaraTax](/countries/uae/end-user-onboarding/onboarding-via-emaratax)).
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/product-guide/onboarding/emaratax-e-invoicing-menu.jpg" width="1400" height="698" alt="EmaraTax home with E-INVOICING menu highlighted" />
+
+### Step 2: Open the "Linkage Status with ASP" tab
+
+The e-Invoicing page opens on the "List of ASPs for onboarding" tab. The user clicks on the **Linkage Status with ASP** tab.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/emaratax-list-of-asps.jpg" width="1400" height="699" alt="EmaraTax e-Invoicing page with Linkage Status with ASP tab highlighted" />
+
+### Step 3: Find the linked TIN
+
+The tab lists every linkage of the taxpayer's TINs with ASPs, with its status (**Linked** or **De-Linked**) and status date. The user finds the row for the TIN with ClearTax ("Defmacro Software DMCC (Cleartax)") in **Linked** status and clicks on the three dots under **Action**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/emaratax-linkage-status.jpg" width="1400" height="699" alt="Linkage Status with ASP list with the Action menu of the Linked row highlighted" />
+
+### Step 4: Select "Offboarding/Reverify"
+
+The user clicks on **Offboarding/Reverify**. EmaraTax redirects the user to ClearTax.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/emaratax-offboarding-reverify.jpg" width="1400" height="699" alt="Offboarding/Reverify option in the Action menu" />
+
+### Step 5: Re-verifying/De-linking request on ClearTax
+
+The user lands on the ClearTax "Re-verifying/De-linking Request" page. The TIN is prefilled from EmaraTax, and the action defaults to **Reverify**. To offboard, the user selects **Delinking**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/delinking-request-page.jpg" width="1400" height="699" alt="ClearTax Re-verifying/De-linking Request page with the Delinking option highlighted" />
+
+### Step 6: Verify applicant details
+
+The user enters the registered EmaraTax email address (and optionally the registered mobile number), confirms that **Delinking** is selected and clicks on "Verify applicant details".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/delinking-verify-applicant.jpg" width="1400" height="699" alt="Applicant details entered with Delinking selected and Verify applicant details highlighted" />
+
+### Step 7: Confirm the taxpayer details
+
+Once the details are verified, the taxpayer information as per EmaraTax is displayed: legal type, entity name (English and Arabic), VAT TRN, effective date of registration / joining VAT group and the date of submission. The user checks the details and selects the declaration check box.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/delinking-confirm-details.jpg" width="1400" height="699" alt="Taxpayer details fetched from EmaraTax with the declaration checkbox highlighted" />
+
+### Step 8: Submit the de-linking request
+
+The user scrolls down and clicks on "Submit".
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/delinking-submit.jpg" width="1400" height="699" alt="Submit button on the de-linking request" />
+
+### Step 9: De-linking complete
+
+ClearTax completes the de-linking with EmaraTax and shows an "All done!" confirmation:
+
+- De-linking with EmaraTax is complete.
+- The taxpayer's Peppol ID (0235: followed by the TIN) is de-linked and removed.
+- The Peppol ID is de-linked in the FTA directory.
+- The taxpayer has been offboarded from ClearTax's ASP services.
+
+The user clicks on "Done". Back on EmaraTax, the row for this TIN in **Linkage Status with ASP** now shows **De-Linked**.
+
+<Image src="https://raw.githubusercontent.com/rahul-clear/documentationai-Docs/main/images/countries/uae/end-user-onboarding/offboarding/delinking-all-done.jpg" width="1400" height="699" alt="All done - de-linking and offboarding confirmation on ClearTax" />
+
+<Callout kind="info" collapsed="false">
+As noted on the confirmation screen, the user can download all their data from the documents page on ClearTax.
+</Callout>
